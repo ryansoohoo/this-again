@@ -5,18 +5,63 @@ using UnityEngine.InputSystem;
 #endif
 
 /// <summary>
-/// Infinite grid of 16x16 pixel cells (black square with a single white pixel in the center).
-/// Only cells inside the camera viewport are materialised — the rest sit in an inactive pool.
+/// Cell source: looks up whether a cell exists at (i, j). The renderer asks this for every
+/// candidate index inside the camera viewport. Today the only implementation is
+/// <see cref="LocalBoundedCellSource"/>, which says "every cell inside [0, gridSize) × [0, gridSize)
+/// exists, and they all look the same." Tomorrow this is the seam where a streaming /
+/// networked source plugs in — the renderer never has to change.
+/// </summary>
+public interface ICellSource
+{
+    bool TryGetCell(int i, int j, out CellData cell);
+}
+
+public readonly struct CellData
+{
+    // Placeholder for future per-cell payload (terrain type, sprite variant, owner, etc.).
+    // Today every cell is identical so this is empty.
+    public static readonly CellData Default = default;
+}
+
+/// <summary>
+/// A bounded grid where every cell inside [0, gridSize) × [0, gridSize) exists.
+/// Replace with a streaming source later to fetch cells from disk or network.
+/// </summary>
+public sealed class LocalBoundedCellSource : ICellSource
+{
+    public int GridSize { get; }
+    public LocalBoundedCellSource(int gridSize) { GridSize = gridSize; }
+
+    public bool TryGetCell(int i, int j, out CellData cell)
+    {
+        if (i < 0 || i >= GridSize || j < 0 || j >= GridSize) { cell = default; return false; }
+        cell = CellData.Default;
+        return true;
+    }
+}
+
+/// <summary>
+/// LoL-style 2D camera + bounded-grid renderer for 16×16 pixel cells.
 ///
-/// Camera behaviour (LoL-style):
-///   - Mouse wheel zooms, anchored to the cursor.
-///   - Zoom is clamped by **cell count**: at minimum zoom, at least `minCellsVisible` cells fit
-///     in the SHORTER screen dimension; at maximum zoom, no more than `maxCellsVisible` cells fit
-///     in the LONGER screen dimension. The clamp recomputes on window resize.
+/// Grid model:
+///   - <see cref="gridSize"/> × <see cref="gridSize"/> cells (square).
+///   - Cell (i, j) ∈ [0, gridSize) is centered at world ((i + 0.5 - gridSize/2) * cellWorld, …).
+///     Effect: the whole grid is centered on world origin regardless of size.
+///   - Only cells inside the camera viewport are materialised; the rest live in a pool.
+///   - Cell existence is gated by <see cref="ICellSource"/> so a streaming source can later
+///     swap in without touching the renderer/pool.
+///
+/// Camera:
+///   - Mouse-wheel zoom anchored to the cursor.
+///   - Zoom is clamped so the SHORTER screen dimension always shows between
+///     <see cref="minCellsVisible"/> and <see cref="gridSize"/> cells. At max zoom-out the
+///     whole grid fits in the shorter dim (longer dim shows empty space beyond the grid).
+///   - Camera position is clamped so the viewport rect can never leave the grid bounds. As
+///     you zoom in there is more pan room; at max zoom-out the camera is pinned to origin.
 ///   - Middle / right mouse drag pans. WASD / arrow keys pan (speed scales with zoom).
-///   - Spacebar tweens the camera back to `recenterTarget` (default world origin).
+///   - Spacebar tweens the camera back to origin (ease-out cubic). Manual input cancels.
 ///
-/// Auto-bootstraps on Play: if no GridManager is in the scene, one is spawned.
+/// Auto-bootstraps on Play.
 /// </summary>
 [DefaultExecutionOrder(-100)]
 public class GridManager : MonoBehaviour
@@ -25,16 +70,16 @@ public class GridManager : MonoBehaviour
     [Tooltip("World units per cell = cellSizePixels / pixelsPerUnit. Default 16/16 = 1 unit per cell.")]
     [SerializeField] int pixelsPerUnit = 16;
     [SerializeField] int cellSizePixels = 16;
-    [Tooltip("Extra rings of cells to keep loaded outside the viewport (hides pop-in during pan).")]
+    [Tooltip("Grid is gridSize × gridSize cells, centered on world origin.")]
+    [SerializeField] int gridSize = 30;
+    [Tooltip("Extra rings of cells to keep loaded just outside the viewport (smooths pan).")]
     [SerializeField] int viewPadding = 1;
     [Tooltip("Hard cap on simultaneously active cells. If a frame would exceed this, the spawn step skips.")]
     [SerializeField] int maxActiveCells = 10000;
 
-    [Header("Zoom (cell-count clamps)")]
+    [Header("Zoom")]
     [Tooltip("Most zoomed in: at least this many cells visible in the SHORTER screen dimension.")]
     [SerializeField] int minCellsVisible = 10;
-    [Tooltip("Most zoomed out: at most this many cells visible in the LONGER screen dimension.")]
-    [SerializeField] int maxCellsVisible = 30;
     [Tooltip("Initial cells visible in the shorter dimension when the game starts.")]
     [SerializeField] int startCellsVisible = 16;
     [Tooltip("Multiplicative step per wheel notch (1.2 = 20% per notch).")]
@@ -48,14 +93,13 @@ public class GridManager : MonoBehaviour
     [SerializeField] float keyboardPanSpeed = 20f;
 
     [Header("Recenter (Spacebar)")]
-    [Tooltip("World point Spacebar tweens the camera back to.")]
-    [SerializeField] Vector2 recenterTarget = Vector2.zero;
     [Tooltip("Seconds for the recenter tween. Set <= 0 for instant snap.")]
     [SerializeField] float recenterDuration = 0.25f;
 
     Camera cam;
     Sprite cellSprite;
     Transform cellsRoot;
+    ICellSource source;
 
     readonly Dictionary<Vector2Int, GameObject> active = new();
     readonly Queue<GameObject> pool = new();
@@ -93,17 +137,19 @@ public class GridManager : MonoBehaviour
         cam.backgroundColor = Color.black;
         cam.clearFlags = CameraClearFlags.SolidColor;
         if (cam.transform.position.z >= 0f)
-            cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -10f);
+            cam.transform.position = new Vector3(0f, 0f, -10f);
+        else
+            cam.transform.position = new Vector3(0f, 0f, cam.transform.position.z);
 
+        source = new LocalBoundedCellSource(gridSize);
         cellSprite = BuildCellSprite();
         cellsRoot = new GameObject("Cells").transform;
         cellsRoot.SetParent(transform, false);
 
-        // Snapshot screen size, set initial zoom based on shorter-dimension cell count.
         lastScreenW = Screen.width;
         lastScreenH = Screen.height;
-        cam.orthographicSize = CellsToOrthoSizeShorter(startCellsVisible);
-        cam.orthographicSize = ClampOrthoToCellBounds(cam.orthographicSize);
+        cam.orthographicSize = ClampOrthoToCellBounds(CellsToOrthoSize(startCellsVisible));
+        ClampCameraToGrid();
     }
 
     Sprite BuildCellSprite()
@@ -130,7 +176,7 @@ public class GridManager : MonoBehaviour
 
     void Update()
     {
-        // If the window resized, the aspect changed, so re-clamp ortho.
+        // Window resize → aspect changed → re-clamp zoom + pan.
         if (Screen.width != lastScreenW || Screen.height != lastScreenH)
         {
             lastScreenW = Screen.width;
@@ -147,33 +193,39 @@ public class GridManager : MonoBehaviour
             if (enablePan) HandlePan();
         }
 
+        ClampCameraToGrid();
         UpdateVisibleCells();
     }
 
-    // ---- Zoom / cell-count math ----
+    // ---- Grid geometry ----
 
     float CellWorld => (float)cellSizePixels / pixelsPerUnit;
+    float GridHalfWorld => gridSize * CellWorld * 0.5f; // grid spans [-half, +half] in both axes
 
-    /// <summary>OrthoSize that puts `cells` cells across the SHORTER screen dimension.</summary>
-    float CellsToOrthoSizeShorter(int cells)
+    /// <summary>World-space center of cell (i, j) where (i, j) ∈ [0, gridSize).</summary>
+    Vector3 CellCenterWorld(int i, int j)
+    {
+        float w = CellWorld;
+        return new Vector3((i + 0.5f) * w - GridHalfWorld, (j + 0.5f) * w - GridHalfWorld, 0f);
+    }
+
+    // ---- Zoom math ----
+
+    /// <summary>OrthoSize that fits `cells` cells across the SHORTER screen dimension.</summary>
+    float CellsToOrthoSize(int cells)
     {
         float aspect = Mathf.Max(cam.aspect, 0.0001f);
-        // Shorter dim = vertical when aspect >= 1, horizontal when aspect < 1.
-        // Height count = 2*ortho/cellWorld. Want shorter == cells.
-        // If aspect >= 1: shorter is height, ortho = cells * cellWorld / 2.
-        // If aspect <  1: shorter is width  = height*aspect, so ortho = cells * cellWorld / (2*aspect).
-        float shorterDivisor = Mathf.Min(1f, aspect); // height-equivalent of shorter dimension
-        return cells * CellWorld * 0.5f / shorterDivisor;
+        // Shorter side in world units = 2 * orthoSize * min(1, aspect)
+        return cells * CellWorld * 0.5f / Mathf.Min(1f, aspect);
     }
 
     float ClampOrthoToCellBounds(float ortho)
     {
         float aspect = Mathf.Max(cam.aspect, 0.0001f);
-        // Min ortho: shorter dim must show >= minCells.
-        float orthoMin = minCellsVisible * CellWorld * 0.5f * Mathf.Max(1f, 1f / aspect);
-        // Max ortho: longer dim must show <= maxCells.
-        float orthoMax = maxCellsVisible * CellWorld * 0.5f / Mathf.Max(1f, aspect);
-        if (orthoMin > orthoMax) orthoMax = orthoMin; // pathological: ranges collide → pin to min
+        float aspectAdjust = 1f / Mathf.Min(1f, aspect); // max(1, 1/aspect)
+        float orthoMin = minCellsVisible * CellWorld * 0.5f * aspectAdjust;
+        float orthoMax = gridSize * CellWorld * 0.5f * aspectAdjust;
+        if (orthoMin > orthoMax) orthoMax = orthoMin;
         return Mathf.Clamp(ortho, orthoMin, orthoMax);
     }
 
@@ -240,6 +292,24 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    void ClampCameraToGrid()
+    {
+        float gh = GridHalfWorld;
+        float halfH = cam.orthographicSize;
+        float halfW = halfH * cam.aspect;
+
+        float minX = -gh + halfW;
+        float maxX = gh - halfW;
+        if (minX > maxX) { minX = maxX = 0f; } // viewport wider than grid → pin to center
+
+        float minY = -gh + halfH;
+        float maxY = gh - halfH;
+        if (minY > maxY) { minY = maxY = 0f; }
+
+        var p = cam.transform.position;
+        cam.transform.position = new Vector3(Mathf.Clamp(p.x, minX, maxX), Mathf.Clamp(p.y, minY, maxY), p.z);
+    }
+
     // ---- Recenter ----
 
     void BeginRecenter()
@@ -247,12 +317,11 @@ public class GridManager : MonoBehaviour
         recentering = true;
         recenterT = 0f;
         recenterFrom = cam.transform.position;
-        recenterTo = new Vector3(recenterTarget.x, recenterTarget.y, cam.transform.position.z);
+        recenterTo = new Vector3(0f, 0f, cam.transform.position.z);
     }
 
     void TickRecenter()
     {
-        // If the user starts panning manually, abandon the tween.
         if (GetPanButtonDown() || ReadKeyboardPan().sqrMagnitude > 0f || ReadScroll() != 0f)
         {
             recentering = false;
@@ -378,23 +447,34 @@ public class GridManager : MonoBehaviour
     void UpdateVisibleCells()
     {
         float cw = CellWorld;
+        float gh = GridHalfWorld;
         Vector3 camPos = cam.transform.position;
         float halfH = cam.orthographicSize;
         float halfW = halfH * cam.aspect;
 
-        int xMin = Mathf.FloorToInt((camPos.x - halfW) / cw) - viewPadding;
-        int xMax = Mathf.CeilToInt((camPos.x + halfW) / cw) + viewPadding;
-        int yMin = Mathf.FloorToInt((camPos.y - halfH) / cw) - viewPadding;
-        int yMax = Mathf.CeilToInt((camPos.y + halfH) / cw) + viewPadding;
+        // Convert camera-edge world coords -> cell indices.
+        // Cell i has its left edge at (i * cw - gh). So world x = (i * cw - gh) => i = (x + gh) / cw.
+        int iMin = Mathf.FloorToInt((camPos.x - halfW + gh) / cw) - viewPadding;
+        int iMax = Mathf.CeilToInt((camPos.x + halfW + gh) / cw) + viewPadding;
+        int jMin = Mathf.FloorToInt((camPos.y - halfH + gh) / cw) - viewPadding;
+        int jMax = Mathf.CeilToInt((camPos.y + halfH + gh) / cw) + viewPadding;
 
-        int needed = (xMax - xMin + 1) * (yMax - yMin + 1);
+        // Clip to grid bounds — outside-grid coords are not spawned even if the viewport
+        // extends past the grid (e.g., at max zoom out with a wide aspect ratio).
+        iMin = Mathf.Max(iMin, 0);
+        iMax = Mathf.Min(iMax, gridSize - 1);
+        jMin = Mathf.Max(jMin, 0);
+        jMax = Mathf.Min(jMax, gridSize - 1);
+
+        int needed = Mathf.Max(0, (iMax - iMin + 1) * (jMax - jMin + 1));
         if (needed > maxActiveCells) return;
 
+        // Recycle cells now outside the visible window.
         stale.Clear();
         foreach (var kv in active)
         {
             var c = kv.Key;
-            if (c.x < xMin || c.x > xMax || c.y < yMin || c.y > yMax) stale.Add(c);
+            if (c.x < iMin || c.x > iMax || c.y < jMin || c.y > jMax) stale.Add(c);
         }
         for (int i = 0; i < stale.Count; i++)
         {
@@ -404,12 +484,14 @@ public class GridManager : MonoBehaviour
             active.Remove(stale[i]);
         }
 
-        for (int x = xMin; x <= xMax; x++)
+        // Spawn missing cells, gated by ICellSource so streaming sources can later say "no".
+        for (int i = iMin; i <= iMax; i++)
         {
-            for (int y = yMin; y <= yMax; y++)
+            for (int j = jMin; j <= jMax; j++)
             {
-                var coord = new Vector2Int(x, y);
+                var coord = new Vector2Int(i, j);
                 if (active.ContainsKey(coord)) continue;
+                if (!source.TryGetCell(i, j, out _)) continue;
 
                 GameObject go;
                 if (pool.Count > 0)
@@ -424,7 +506,7 @@ public class GridManager : MonoBehaviour
                     var sr = go.AddComponent<SpriteRenderer>();
                     sr.sprite = cellSprite;
                 }
-                go.transform.localPosition = new Vector3(x * cw, y * cw, 0f);
+                go.transform.localPosition = CellCenterWorld(i, j);
                 active[coord] = go;
             }
         }

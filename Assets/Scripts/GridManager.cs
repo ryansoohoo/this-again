@@ -53,11 +53,14 @@ public sealed class LocalBoundedCellSource : ICellSource
 ///
 /// Camera:
 ///   - Mouse-wheel zoom anchored to the cursor.
-///   - Zoom is clamped so the SHORTER screen dimension always shows between
-///     <see cref="minCellsVisible"/> and <see cref="gridSize"/> cells. At max zoom-out the
-///     whole grid fits in the shorter dim (longer dim shows empty space beyond the grid).
-///   - Camera position is clamped so the viewport rect can never leave the grid bounds. As
-///     you zoom in there is more pan room; at max zoom-out the camera is pinned to origin.
+///   - Zoom is clamped so (a) the SHORTER screen dim shows at least <see cref="minCellsVisible"/>
+///     cells (most-zoomed-in), and (b) the LONGER screen dim shows at most <see cref="gridSize"/>
+///     cells (most-zoomed-out). The LONGER-dim cap guarantees you can never zoom out far enough
+///     to see empty space past the grid edge.
+///   - Camera position is clamped so the viewport rect can never leave the grid bounds. Combined
+///     with the zoom cap, the viewport is always 100% inside the grid — no black ever shows.
+///     At max zoom-out the longer axis is pinned (no pan along it); the shorter axis still has
+///     room to pan.
 ///   - Middle / right mouse drag pans. WASD / arrow keys pan (speed scales with zoom).
 ///   - Spacebar tweens the camera back to origin (ease-out cubic). Manual input cancels.
 ///
@@ -222,10 +225,17 @@ public class GridManager : MonoBehaviour
     float ClampOrthoToCellBounds(float ortho)
     {
         float aspect = Mathf.Max(cam.aspect, 0.0001f);
-        float aspectAdjust = 1f / Mathf.Min(1f, aspect); // max(1, 1/aspect)
-        float orthoMin = minCellsVisible * CellWorld * 0.5f * aspectAdjust;
-        float orthoMax = gridSize * CellWorld * 0.5f * aspectAdjust;
-        if (orthoMin > orthoMax) orthoMax = orthoMin;
+        // Hard ceiling: LONGER screen dim shows at most gridSize cells. This is what makes
+        // sure black-past-the-grid is never visible (combined with the pan clamp).
+        // Longer dim in world = 2*ortho*max(1,aspect). Set <= gridSize*cellWorld.
+        float orthoMax = gridSize * CellWorld * 0.5f / Mathf.Max(1f, aspect);
+        // Soft floor: SHORTER dim shows at least minCellsVisible cells (max zoom-in).
+        // Shorter dim in world = 2*ortho*min(1,aspect). Set >= minCells*cellWorld.
+        float orthoMin = minCellsVisible * CellWorld * 0.5f / Mathf.Min(1f, aspect);
+        // If the grid is too small to fit minCellsVisible in the shorter dim without
+        // exceeding the no-black ceiling, the ceiling wins — user can zoom in further than
+        // minCellsVisible would otherwise allow.
+        if (orthoMin > orthoMax) orthoMin = orthoMax;
         return Mathf.Clamp(ortho, orthoMin, orthoMax);
     }
 

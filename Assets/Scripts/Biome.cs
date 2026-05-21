@@ -48,6 +48,7 @@ public class BiomeSettings
     [Range(0f, 1f)] public float waterDeepLevel = 0.02f;            // deep water brightness (live)
     public int waterDepthCells = 12;                                // shore->deep ramp length (bigger = vaster-looking oceans)
     [Range(0f, 1f)] public float landBackgroundLevel = 0.5f;        // ground = each tile's avg art color x this (0.5 = darken 50%)
+    [Range(1f, 3f)] public float minimapBrightness = 1.6f;          // minimap colors x this (brighter than the in-game map)
     [Range(0f, 1f)] public float coldThreshold = 0.40f;            // temp below -> cold (Stone/Mushroom)
     [Range(0f, 1f)] public float hotThreshold = 0.60f;             // temp above -> hot (Sand/GrassSwamp)
     [Range(0f, 1f)] public float wetThreshold = 0.50f;            // moisture at/above -> wet

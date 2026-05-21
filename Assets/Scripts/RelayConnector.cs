@@ -13,24 +13,20 @@ using UnityEngine;
 public class RelayConnector : MonoBehaviour
 {
     public string JoinCode { get; private set; }
-    public string Status { get; private set; } = "offline";
+
+    string status = "offline";
+    public string Status
+    {
+        get => status;
+        private set { status = value; GameLog.Post(OutputType.System, value); }   // surface relay progress in the chat popup
+    }
 
     UnityTransport transport;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    static void AutoBoot()
-    {
-        if (NetworkManager.Singleton != null) return;
-        var go = new GameObject("Netcode");
-        DontDestroyOnLoad(go);
-        var nm = go.AddComponent<NetworkManager>();
-        var utp = go.AddComponent<UnityTransport>();
-        nm.NetworkConfig = new NetworkConfig { NetworkTransport = utp };
-        go.AddComponent<RelayConnector>();
-        go.AddComponent<RelayTestHUD>();
-    }
-
-    void Awake() => transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+    // NetworkManager/UnityTransport/RelayConnector/RelayTestHUD now live on a scene "Netcode"
+    // GameObject (see SceneNetcodeSetupTool); the runtime AutoBoot was removed when we moved to a
+    // scene-placed NetworkManager so the Player prefab can be assigned in the Inspector.
+    void Awake() => transport = GetComponent<UnityTransport>();
 
     // Host: allocate a Relay server, point the transport at it, start as host. Returns/exposes join code.
     public async Task HostAsync(int maxConnections = 3)

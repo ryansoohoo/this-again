@@ -1,14 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-// Orchestrator: wires server (data) + rig (logic) + renderer (visual). Lives in the scene.
-// Ticks the camera each frame; the biome map rebuilds on demand via Regenerate() (driven by BiomeTuner).
+// Orchestrator for an INFINITE procedural world. Biome cells are generated on demand from noise and
+// cached. The main view renders only a small square VISION window around the local player as one mesh
+// (everything else stays "unloaded" = camera background); the minimap shows a wider, always-revealed
+// overview centered on the player. The camera is unbounded. Lives in the scene.
 [DefaultExecutionOrder(-100)]
 public class GridManager : MonoBehaviour
 {
     [Header("Grid")]
     [SerializeField] int pixelsPerUnit = 16;
     [SerializeField] int cellSizePixels = 16;
-    [SerializeField] int gridSize = 100;
 
     [Header("Biomes")]
     [SerializeField] BiomeSettings biome = new BiomeSettings();   // all live-tunable noise/water knobs (see BiomeSettings)
@@ -17,23 +19,53 @@ public class GridManager : MonoBehaviour
     [Header("Camera")]
     [SerializeField] int minCellsVisible = 10;
     [SerializeField] int startCellsVisible = 16;
-    [SerializeField] float zoomStep = 1.2f;
     [SerializeField] float keyboardPanSpeed = 20f;
     [SerializeField] float recenterDuration = 0.25f;
+
+    [Header("Vision")]
+    [SerializeField] int viewRadius = 80;         // cells loaded/visible around the player (main-view mesh + camera bounds)
+    [SerializeField] int minimapRadius = 40;      // cells of world the minimap overview shows around the player
+    [SerializeField] int meshRebuildStep = 32;    // rebuild the (heavy) world mesh only after the player moves this many cells
 
     CameraRig rig;
 
     public static GridManager Instance { get; private set; }
-    public float HalfExtent { get; private set; }
     public Camera Cam { get; private set; }
-    public Texture2D MinimapTexture { get; private set; }   // one pixel per cell, biome/water-colored; drawn by Minimap
+    public Texture2D MinimapTexture { get; private set; }   // wide overview around the player; drawn by Minimap
 
     // Live-tunable biome knobs; BiomeTuner mutates these in play, then calls Regenerate.
     public BiomeSettings Biome => biome;
+    public float CellWorld => cellWorld;
+
+    // World <-> cell. Cell (cx,cy) spans [cx,cx+1)*cellWorld on each axis; its center sits at +half a cell.
+    public Vector2 CellCenter(int cx, int cy) => new((cx + 0.5f) * cellWorld, (cy + 0.5f) * cellWorld);
+    public Vector2Int WorldToCell(Vector2 world) => new(Mathf.FloorToInt(world.x / cellWorld), Mathf.FloorToInt(world.y / cellWorld));
+
+    // Movement/pathfinding walkability: every biome can be stepped on except open water.
+    // global:: disambiguates the Biome enum from this class's BiomeSettings 'Biome' property.
+    public bool IsWalkable(int cx, int cy) => GenAt(cx, cy) != global::Biome.Water;
+
+    // Minimap overview world bounds, for the HUD to map the camera viewport onto it.
+    public Vector2 MinimapWorldCenter => CellCenter(viewCenter.x, viewCenter.y);
+    public float MinimapWorldExtent => (minimapRadius + 0.5f) * cellWorld;
 
     float cellWorld;
     MeshFilter gridMesh;
     Color32[] biomeAvg;   // each biome tile's average art color (computed once from biomeTextures)
+    BiomeGenerator gen;
+    readonly Dictionary<Vector2Int, Biome> cache = new();   // generated biomes; grows as the player explores
+    Vector2Int viewCenter;     // minimap center (tracks the player every cell)
+    Vector2Int meshCenter;     // world-mesh center (recentered only every meshRebuildStep cells, since the mesh is heavy)
+    bool meshInit;
+
+    Biome GenAt(int cx, int cy)
+    {
+        var key = new Vector2Int(cx, cy);
+        if (cache.TryGetValue(key, out var b)) return b;
+        b = gen.At(cx, cy);
+        cache[key] = b;
+        return b;
+    }
 
     void Awake()
     {
@@ -53,39 +85,72 @@ public class GridManager : MonoBehaviour
         cam.transform.position = new Vector3(0f, 0f, p.z >= 0f ? -10f : p.z);
 
         cellWorld = (float)cellSizePixels / pixelsPerUnit;
-        HalfExtent = gridSize * cellWorld * 0.5f;
 
         rig = new CameraRig(cam, new CameraRig.Config
         {
             minCellsVisible = minCellsVisible,
             startCellsVisible = startCellsVisible,
-            zoomStep = zoomStep,
             keyboardPanSpeed = keyboardPanSpeed,
             recenterDuration = recenterDuration,
-        }, HalfExtent, cellWorld);
+        }, cellWorld);
 
+        gen = new BiomeGenerator(biome);
         ComputeBiomeAverages();
         ApplyPalette();
-        var server = BuildServer();
-        gridMesh = CellRenderer.Build(transform, server.Cells, cellWorld, HalfExtent, biomeTextures, biome.waterDepthCells);
-        MinimapTexture = CellRenderer.BuildMinimapTexture(server.Cells, biome.waterDepthCells);
+        gridMesh = CellRenderer.Build(transform, biomeTextures);
+        viewCenter = meshCenter = Vector2Int.zero;
+        meshInit = true;
+        RebuildMesh();
+        RebuildMinimap();
         gameObject.AddComponent<BiomeTuner>();
     }
 
-    IGridServer BuildServer() => new LocalGridServer(gridSize, new BiomeGenerator(biome));
-
-    // Rebuilds the biome map + mesh from the current noise params (called live by BiomeTuner).
+    // Rebuilds the noise generator + clears the cache so a fresh map streams in (called live by BiomeTuner).
     public void Regenerate()
     {
         if (gridMesh == null) return;
+        gen = new BiomeGenerator(biome);
+        cache.Clear();
         ApplyPalette();
-        var server = BuildServer();
-        var old = gridMesh.sharedMesh;
-        gridMesh.sharedMesh = CellRenderer.BuildMesh(server.Cells, cellWorld, HalfExtent, biomeTextures, biome.waterDepthCells);
-        if (old != null) Destroy(old);
+        RebuildMesh();
+        RebuildMinimap();
+    }
+
+    // The heavy world mesh (radius viewRadius) — rebuilt only every meshRebuildStep cells of movement.
+    void RebuildMesh()
+    {
+        var oldMesh = gridMesh.sharedMesh;
+        gridMesh.sharedMesh = CellRenderer.BuildWindowMesh(GenAt, meshCenter, viewRadius, cellWorld, biomeTextures, biome.waterDepthCells);
+        if (oldMesh != null) Destroy(oldMesh);
+
+        // Clamp the camera to the loaded mesh so it can't pan into the unloaded (black) area.
+        float size = (2 * viewRadius + 1) * cellWorld;
+        if (rig != null) rig.Bounds = new Rect((meshCenter.x - viewRadius) * cellWorld, (meshCenter.y - viewRadius) * cellWorld, size, size);
+    }
+
+    // The minimap overview (same radius) — recentered on the player every cell so it scrolls smoothly.
+    void RebuildMinimap()
+    {
         var oldTex = MinimapTexture;
-        MinimapTexture = CellRenderer.BuildMinimapTexture(server.Cells, biome.waterDepthCells);
+        MinimapTexture = CellRenderer.BuildOverviewMinimap(GenAt, viewCenter, minimapRadius, biome.waterDepthCells, biome.minimapBrightness);
         if (oldTex != null) Destroy(oldTex);
+    }
+
+    // Follows the local player: the minimap recenters every cell; the (much heavier) world mesh only
+    // recenters once the player has moved meshRebuildStep cells from its center. Centers on the origin
+    // before a local player exists (e.g. in the editor without hosting).
+    void UpdateView()
+    {
+        if (gridMesh == null) return;
+        var lp = PlayerController.LocalInstance;
+        Vector2Int c = lp != null ? lp.CurrentCell() : Vector2Int.zero;
+        if (c != viewCenter) { viewCenter = c; RebuildMinimap(); }
+        if (!meshInit || Mathf.Max(Mathf.Abs(c.x - meshCenter.x), Mathf.Abs(c.y - meshCenter.y)) >= meshRebuildStep)
+        {
+            meshCenter = c;
+            meshInit = true;
+            RebuildMesh();
+        }
     }
 
     // Average art color of each biome's floor tile (computed once); ApplyPalette darkens these into ground.
@@ -142,5 +207,12 @@ public class GridManager : MonoBehaviour
         Debug.Log("[GridManager] Saved biome settings cleared (inspector defaults apply next play).");
     }
 
-    void Update() => rig.Tick(Time.unscaledDeltaTime);
+    void Update()
+    {
+        if (rig == null) return;   // e.g. after an edit-during-play domain reload (Awake didn't re-run); a fresh Play fixes it
+        var lp = PlayerController.LocalInstance;
+        rig.FollowTarget = lp != null ? (Vector2?)(Vector2)lp.transform.position : null;
+        rig.Tick(Time.unscaledDeltaTime);
+        UpdateView();
+    }
 }

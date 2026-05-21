@@ -37,6 +37,7 @@ public class BiomeTuner : MonoBehaviour
             F("Water deep", ref b.waterDeepLevel, 0f, 1f, "0.00");
             I("Ocean depth", ref b.waterDepthCells, 1, 40);
             F("Ground bright", ref b.landBackgroundLevel, 0f, 1f, "0.00");
+            F("Minimap bright", ref b.minimapBrightness, 1f, 3f, "0.0");
             F("Cold <", ref b.coldThreshold, 0f, 1f, "0.00");
             F("Hot >", ref b.hotThreshold, 0f, 1f, "0.00");
             F("Wet ≥", ref b.wetThreshold, 0f, 1f, "0.00");

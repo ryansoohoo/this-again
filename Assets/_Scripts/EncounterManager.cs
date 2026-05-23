@@ -24,7 +24,7 @@ public sealed class EncounterManager : MonoBehaviour
 
     void Update()
     {
-        var lp = PlayerMovement.LocalInstance;
+        var lp = LocalPlayer.Instance;
         var world = Game.Instance != null ? Game.Instance.World : null;
         if (lp == null || world == null) return;
 
@@ -47,7 +47,7 @@ public sealed class EncounterManager : MonoBehaviour
         lastCell = cell;
     }
 
-    void Begin(PlayerMovement lp, StructureSite site)
+    void Begin(LocalPlayer lp, StructureSite site)
     {
         Current = site;
         lp.Halt();

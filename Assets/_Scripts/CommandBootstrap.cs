@@ -42,7 +42,7 @@ public static class CommandBootstrap
             Run = _ =>
             {
                 var e = EncounterManager.Instance;
-                var pm = PlayerMovement.LocalInstance;
+                var pm = LocalPlayer.Instance;
                 var site = e != null ? e.Current : null;
                 if (site == null || pm == null) return CommandResult.Bad("There's nothing to enter here.");
                 pm.RequestEnterInstance(site.Cell);   // server teleports us to the site's off-map room
@@ -56,7 +56,7 @@ public static class CommandBootstrap
             Description = "Leave: climb out of the dungeon, or step away from a place.",
             Run = _ =>
             {
-                var pm = PlayerMovement.LocalInstance;
+                var pm = LocalPlayer.Instance;
                 if (pm != null && pm.InInstance)
                 {
                     pm.RequestLeaveInstance();
@@ -89,7 +89,7 @@ public static class CommandBootstrap
             Description = "(debug) Teleport into a shared test dungeon room.",
             Run = _ =>
             {
-                var pm = PlayerMovement.LocalInstance;
+                var pm = LocalPlayer.Instance;
                 if (pm == null) return CommandResult.Bad("No player yet — host or join first.");
                 if (pm.InInstance) return CommandResult.Bad("You're already in a dungeon.");
                 pm.RequestEnterInstance(Vector2Int.zero);   // fixed test room: everyone who runs this shares it
@@ -137,7 +137,7 @@ public static class CommandBootstrap
 
     static string NearestSite()
     {
-        var gm = Game.Instance; var lp = PlayerMovement.LocalInstance;
+        var gm = Game.Instance; var lp = LocalPlayer.Instance;
         if (gm == null || gm.World == null || lp == null) return "No world/player.";
         var c = lp.CurrentCell();
         const int R = 80;

@@ -71,4 +71,24 @@ public class CommandRegistryTests
     {
         Assert.AreEqual("", MakeRegistry().Suggest("a", World));
     }
+
+    [Test]
+    public void Suggest_AmbiguousPrefix_ReturnsEmpty()
+    {
+        var r = MakeRegistry();
+        r.Register(new Command { Keyword = "attune", Scope = CommandScope.Encounter, Arg = ArgMode.None, Run = _ => CommandResult.Ok() });
+        Assert.AreEqual("", r.Suggest("a", Combat));   // "attack" and "attune" both match -> ambiguous
+    }
+
+    [Test]
+    public void Suggest_ExactFullWord_ReturnsEmpty()
+    {
+        Assert.AreEqual("", MakeRegistry().Suggest("attack", Combat));   // already complete
+    }
+
+    [Test]
+    public void Suggest_EmptyInput_ReturnsEmpty()
+    {
+        Assert.AreEqual("", MakeRegistry().Suggest("", Combat));
+    }
 }

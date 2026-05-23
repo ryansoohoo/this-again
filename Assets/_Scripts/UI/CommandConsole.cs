@@ -32,6 +32,7 @@ public sealed class CommandConsole : MonoBehaviour
     int caret, anchor;
 
     bool open;
+    public bool LockOpen { get; set; }   // while true: Esc / click-out / empty-Enter won't close (only a command can)
     Vector2 panelBasePos;
     Color panelBaseColor;
     float shakeUntil, flashUntil;
@@ -80,8 +81,9 @@ public sealed class CommandConsole : MonoBehaviour
             return;
         }
 
-        if (kb.escapeKey.wasPressedThisFrame) { Close(); return; }
+        if (kb.escapeKey.wasPressedThisFrame) { if (!LockOpen) Close(); return; }
         if (EnterPressed(kb)) { Confirm(); return; }
+        if (kb.tabKey.wasPressedThisFrame) { AcceptGhost(); return; }
         if (HandleMouse()) return;       // a click outside closes and returns true
         HandleShortcuts(kb);
         HandleNavigation(kb);
@@ -211,8 +213,8 @@ public sealed class CommandConsole : MonoBehaviour
             Vector2 mp = m.position.ReadValue();
             if (panelRect == null || !RectTransformUtility.RectangleContainsScreenPoint(panelRect, mp, null))
             {
-                Close();
-                return true;
+                if (!LockOpen) { Close(); return true; }
+                return false;   // locked: ignore clicks outside the panel
             }
             if (m.leftButton.wasPressedThisFrame) OnLeftDown(mp);
         }
@@ -253,8 +255,13 @@ public sealed class CommandConsole : MonoBehaviour
         Render();
     }
 
+    // Open the console and trap it open (used by encounters). Only a command that clears LockOpen can close it.
+    public void OpenLocked() { if (!open) Open(); LockOpen = true; }
+    public void Unlock() => LockOpen = false;
+
     void Close()
     {
+        LockOpen = false;
         open = false; InputState.Typing = false;
         text = ""; caret = anchor = 0;
         dragging = false;
@@ -272,7 +279,7 @@ public sealed class CommandConsole : MonoBehaviour
     void Confirm()
     {
         string submitted = Collapse(text);
-        if (submitted.Length == 0) { Close(); return; }   // empty Enter cancels
+        if (submitted.Length == 0) { if (!LockOpen) Close(); return; }   // empty Enter cancels (unless locked)
 
         GameLog.Post(OutputType.Command, "> " + submitted);   // echo the typed line into the chat
         var result = CommandRouter.Instance.Execute(text);
@@ -340,7 +347,9 @@ public sealed class CommandConsole : MonoBehaviour
         {
             bool caretOn = ((int)(Time.unscaledTime / 0.5f) & 1) == 0;
             string caretGlyph = caretOn ? "<color=#FFFFFFFF>|</color>" : "<color=#FFFFFF00>|</color>";
-            label.text = prompt + text.Substring(0, caret) + caretGlyph + text.Substring(caret);
+            string ghost = caret == text.Length ? CommandRouter.Instance.Suggest(text) : "";   // only complete at line end
+            string ghostGlyph = string.IsNullOrEmpty(ghost) ? "" : "<color=#FFFFFF55>" + ghost + "</color>";
+            label.text = prompt + text.Substring(0, caret) + caretGlyph + text.Substring(caret) + ghostGlyph;
             if (highlightRect != null) highlightRect.gameObject.SetActive(false);
         }
     }
@@ -438,9 +447,15 @@ public sealed class CommandConsole : MonoBehaviour
         return i;
     }
 
-    // Autocomplete seam (not yet wired to the UI): the completion suffix for the current input among the
-    // commands active in the current scope, else "". A future MUD autocomplete renders this as a ghost.
+    // Autocomplete: the completion suffix for the current input among the commands active in the current
+    // scope, else "" (empty when the prefix is ambiguous). Rendered inline as a gray ghost; accepted on Tab.
     public string Suggest(string current) => CommandRouter.Instance.Suggest(current);
+
+    void AcceptGhost()
+    {
+        string ghost = CommandRouter.Instance.Suggest(text);
+        if (!string.IsNullOrEmpty(ghost)) { Insert(ghost); Render(); }
+    }
 
     static bool EnterPressed(Keyboard kb) => kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame;
 

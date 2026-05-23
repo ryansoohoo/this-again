@@ -9,18 +9,22 @@ public sealed class WorldConfig
     public GroundSettings ground;
     public Texture2D summerSheet;
     public BiomeTiles grass, forest, rocky, mountain;
+    public StructureSet structures;
+    public StructureSettings structureSettings;
     public Sprite defaultGroundSprite;
     public Color32 defaultGroundColor;
 }
 
-// The terrain pipeline: answers "what is at cell (x,y)?" A pure query layer over two deterministic noise
-// generators + the per-biome tile assets. Same seed -> identical answers on every Netcode client (no
-// replication). Game builds it; WorldView samples it for the mesh/minimap; Player/Pathfinder use IsWalkable.
+// The terrain pipeline: answers "what is at cell (x,y)?" A pure query layer over deterministic noise
+// generators (land/water, ground-cover, structure sites) + the per-biome tile assets. Same seed -> identical
+// answers on every Netcode client (no replication). Game builds it; WorldView samples it for the mesh/minimap;
+// Player/Pathfinder use IsWalkable; EncounterManager uses SiteAt.
 public sealed class World
 {
     readonly WorldConfig cfg;
     BiomeGenerator gen;
     GroundGenerator groundGen;
+    StructureGenerator structureGen;
     readonly Dictionary<Vector2Int, bool> landCache = new();   // generated land(true)/water(false); grows as you explore
     readonly HashSet<Sprite> warnedForeign = new();
 
@@ -31,6 +35,8 @@ public sealed class World
     {
         gen = new BiomeGenerator(cfg.biome);
         groundGen = new GroundGenerator(cfg.biome.seed, cfg.ground);
+        structureGen = new StructureGenerator(cfg.biome.seed, cfg.structureSettings ?? new StructureSettings(),
+                                              cfg.structures, IsLand, (x, y) => groundGen.At(x, y));
         landCache.Clear();
     }
 
@@ -45,19 +51,31 @@ public sealed class World
 
     public bool IsWalkable(int cx, int cy) => IsLand(cx, cy);   // everything but open water is walkable
 
-    // Per-cell interior-land sprite (renderer's all-land case): classify cover, roll coverage, pick a weighted
-    // variant. Null -> the renderer's built-in blank ground tile.
+    // The structure site occupying a cell, or null. Public so the encounter layer can ask "am I on a site?".
+    public StructureSite SiteAt(int cx, int cy) => structureGen != null ? structureGen.SiteAt(cx, cy) : null;
+
+    // Per-cell interior-land sprite (renderer's all-land case): a structure site's tile wins; otherwise
+    // classify cover, roll coverage, pick a weighted biome variant. Null -> the built-in blank ground tile.
     public Sprite LandSprite(int cx, int cy)
     {
+        var site = SiteAt(cx, cy);
+        if (site != null)
+        {
+            var s = PickVariant(site.Def.variants, cx, cy, 7777);
+            if (s != null) return s;
+            // structure art unassigned/foreign -> render as normal ground (the site still triggers encounters)
+        }
         var gt = groundGen.At(cx, cy);
         if (Hash01(cx, cy, cfg.biome.seed, 1009 + (int)gt) >= CoverageFor(gt)) return cfg.defaultGroundSprite;
-        var picked = PickVariant(BiomeFor(gt), cx, cy, (int)gt);
+        var picked = PickVariant(BiomeFor(gt)?.variants, cx, cy, (int)gt);
         return picked != null ? picked : cfg.defaultGroundSprite;
     }
 
-    // Minimap color for a land cell: its cover-biome color, or the blank color when coverage rolls it out.
+    // Minimap color for a land cell: a structure site shows as a marker dot; else its cover-biome color, or
+    // the blank color when coverage rolls it out.
     public Color32 LandColor(int cx, int cy)
     {
+        if (cfg.structureSettings != null && SiteAt(cx, cy) != null) return (Color32)cfg.structureSettings.markerColor;
         var gt = groundGen.At(cx, cy);
         if (Hash01(cx, cy, cfg.biome.seed, 1009 + (int)gt) >= CoverageFor(gt)) return cfg.defaultGroundColor;
         var b = BiomeFor(gt);
@@ -81,20 +99,20 @@ public sealed class World
     };
 
     // Weighted-random variant pick made deterministic by hashing (cell, seed, salt) -> every client agrees.
-    Sprite PickVariant(BiomeTiles b, int cx, int cy, int salt)
+    Sprite PickVariant(BiomeTileVariant[] variants, int cx, int cy, int salt)
     {
-        if (b == null || b.variants == null) return null;
+        if (variants == null) return null;
         float total = 0f;
-        for (int i = 0; i < b.variants.Length; i++) if (IsUsable(b.variants[i])) total += b.variants[i].weight;
+        for (int i = 0; i < variants.Length; i++) if (IsUsable(variants[i])) total += variants[i].weight;
         if (total <= 0f) return null;
         float r = Hash01(cx, cy, cfg.biome.seed, salt) * total;
-        for (int i = 0; i < b.variants.Length; i++)
+        for (int i = 0; i < variants.Length; i++)
         {
-            if (!IsUsable(b.variants[i])) continue;
-            r -= b.variants[i].weight;
-            if (r < 0f) return b.variants[i].sprite;
+            if (!IsUsable(variants[i])) continue;
+            r -= variants[i].weight;
+            if (r < 0f) return variants[i].sprite;
         }
-        for (int i = b.variants.Length - 1; i >= 0; i--) if (IsUsable(b.variants[i])) return b.variants[i].sprite;
+        for (int i = variants.Length - 1; i >= 0; i--) if (IsUsable(variants[i])) return variants[i].sprite;
         return null;
     }
 

@@ -34,25 +34,23 @@ public static class CommandBootstrap
             Description = "Join a Relay lobby by code.", Usage = "join <code>",
             Run = arg => { var n = Net(); if (n != null) _ = n.JoinAsync(arg.ToUpperInvariant()); return CommandResult.Ok(keepOpen: true); },   // stay open; RelayConnector posts join progress
         });
+        // ---- Encounter (entering a structure site; only available while standing in one) ----
         r.Register(new Command
         {
-            Keyword = "fight", Scope = CommandScope.World, Arg = ArgMode.None,
-            Description = "(debug) Start a mock encounter to reveal combat commands.",
-            Run = _ => { CommandRouter.Instance.EnterEncounter(); return CommandResult.Ok("An encounter begins! Try 'attack' or 'flee'.", keepOpen: true, output: OutputType.Encounter); },
-        });
-
-        // ---- Encounter (combat; only available mid-encounter) ----
-        r.Register(new Command
-        {
-            Keyword = "attack", Scope = CommandScope.Encounter, Arg = ArgMode.Optional,
-            Description = "Attack the enemy (or a named target).", Usage = "attack [target]",
-            Run = arg => CommandResult.Ok(string.IsNullOrEmpty(arg) ? "You attack!" : "You attack the " + arg + "!", keepOpen: true, output: OutputType.Encounter),
+            Keyword = "enter", Scope = CommandScope.Encounter, Arg = ArgMode.None,
+            Description = "Enter the place you're standing at.",
+            Run = _ =>
+            {
+                var e = EncounterManager.Instance;
+                string name = e != null && e.Current != null ? e.Current.Name : "the place";
+                return CommandResult.Ok($"A villager greets you to {name}. \"Welcome, traveler.\"", keepOpen: true, output: OutputType.Encounter);
+            },
         });
         r.Register(new Command
         {
-            Keyword = "flee", Scope = CommandScope.Encounter, Arg = ArgMode.None,
-            Description = "Flee the encounter back to the world.",
-            Run = _ => { CommandRouter.Instance.ExitEncounter(); return CommandResult.Ok("You flee back to the world.", output: OutputType.Encounter); },
+            Keyword = "leave", Scope = CommandScope.Encounter, Arg = ArgMode.None,
+            Description = "Leave and return to the world.",
+            Run = _ => { EncounterManager.Instance?.End(); return CommandResult.Ok("You leave.", keepOpen: false, output: OutputType.Encounter); },
         });
 
         // ---- Inventory (available in the world and in combat) ----
@@ -62,6 +60,14 @@ public static class CommandBootstrap
             Description = "Show your inventory.",
             Run = _ => CommandResult.Ok("Your inventory is empty.", keepOpen: true, output: OutputType.Inventory),
         });
+
+        // ---- Debug ----
+        r.Register(new Command
+        {
+            Keyword = "sites", Scope = CommandScope.World, Arg = ArgMode.None,
+            Description = "(debug) Report the nearest structure site to you.",
+            Run = _ => CommandResult.Ok(NearestSite(), keepOpen: true, output: OutputType.System),
+        });
     }
 
     static RelayConnector Net()
@@ -69,6 +75,25 @@ public static class CommandBootstrap
         var n = Object.FindFirstObjectByType<RelayConnector>();
         if (n == null) GameLog.Post(OutputType.System, "No network manager in the scene.");
         return n;
+    }
+
+    static string NearestSite()
+    {
+        var gm = Game.Instance; var lp = PlayerMovement.LocalInstance;
+        if (gm == null || gm.World == null || lp == null) return "No world/player.";
+        var c = lp.CurrentCell();
+        const int R = 80;
+        StructureSite best = null; int bestD = int.MaxValue;
+        for (int dx = -R; dx <= R; dx++)
+        for (int dy = -R; dy <= R; dy++)
+        {
+            var s = gm.World.SiteAt(c.x + dx, c.y + dy);
+            if (s == null) continue;
+            int d = Mathf.Abs(dx) + Mathf.Abs(dy);
+            if (d < bestD) { bestD = d; best = s; }
+        }
+        return best == null ? $"No sites within {R} cells."
+                            : $"Nearest: {best.Name} ({best.Def.label}) at ({best.Cell.x},{best.Cell.y}), {bestD} cells away.";
     }
 
     static string HelpText(CommandRouter router)

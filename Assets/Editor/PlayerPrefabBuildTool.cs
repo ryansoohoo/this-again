@@ -13,7 +13,7 @@ using UnityEngine;
 public static class PlayerPrefabBuildTool
 {
     const string Base = "Assets/_Imported/Minifantasy_Dungeon_v2.3_Commercial_Version/Minifantasy_Dungeon_v2.3_Commercial_Version/Minifantasy_Dungeon_Assets/Characters/Human/";
-    const string PrefabPath = "Assets/Prefabs/Player.prefab";
+    const string PrefabPath = "Assets/_Prefabs/Player.prefab";
     const string MatPath = "Assets/Materials/CharacterUnlit.mat";
     const float PlayerScale = 1f;       // 32px @ 16 PPU = 2 world units; x1 -> ~2 cells (visible char ~1 cell)
 

@@ -12,7 +12,7 @@ using UnityEngine;
 // Run via Tools > Minifantasy > Build Player Prefab.
 public static class PlayerPrefabBuildTool
 {
-    const string Base = "Assets/Minifantasy_Dungeon_v2.3_Commercial_Version/Minifantasy_Dungeon_v2.3_Commercial_Version/Minifantasy_Dungeon_Assets/Characters/Human/";
+    const string Base = "Assets/_Imported/Minifantasy_Dungeon_v2.3_Commercial_Version/Minifantasy_Dungeon_v2.3_Commercial_Version/Minifantasy_Dungeon_Assets/Characters/Human/";
     const string PrefabPath = "Assets/Prefabs/Player.prefab";
     const string MatPath = "Assets/Materials/CharacterUnlit.mat";
     const float PlayerScale = 1f;       // 32px @ 16 PPU = 2 world units; x1 -> ~2 cells (visible char ~1 cell)
@@ -25,7 +25,8 @@ public static class PlayerPrefabBuildTool
         root.transform.localScale = Vector3.one * PlayerScale;
 
         var anim = root.AddComponent<Animator>();
-        anim.runtimeAnimatorController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/Animations/Player.controller");
+        anim.runtimeAnimatorController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/_Anim/Player.controller");
+        if (anim.runtimeAnimatorController == null) Debug.LogError("[PlayerPrefab] Animator controller not found at Assets/_Anim/Player.controller — the player won't animate.");
         anim.applyRootMotion = false;
 
         MakeChild(root, "Shadow", LoadFrame(Base + "_Shadows/Idle.png", 0), "Shadow", 0, mat);

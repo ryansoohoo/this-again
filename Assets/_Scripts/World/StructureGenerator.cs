@@ -38,12 +38,22 @@ public sealed class StructureGenerator
         int sx = bx * blockSize + (int)(Hash01(bx, by, SaltX) * blockSize);
         int sy = by * blockSize + (int)(Hash01(bx, by, SaltY) * blockSize);
         if (sx != cx || sy != cy) return null;
-        if (!isLand(sx, sy)) return null;
+        if (!IsInlandLand(sx, sy)) return null;   // must be land AND not on the coastline
 
         var def = PickDef(groundAt(sx, sy), sx, sy);
         if (def == null) return null;
 
         return new StructureSite(def, new Vector2Int(sx, sy), PickName(sx, sy));
+    }
+
+    // Land that isn't on the coastline: the cell and all 8 neighbours are land, so no coast art touches the
+    // structure tile (the dual-grid renderer draws coast only where a corner's 4 cells are mixed land/water).
+    bool IsInlandLand(int x, int y)
+    {
+        for (int dx = -1; dx <= 1; dx++)
+        for (int dy = -1; dy <= 1; dy++)
+            if (!isLand(x + dx, y + dy)) return false;
+        return true;
     }
 
     StructureDef PickDef(GroundType gt, int x, int y)

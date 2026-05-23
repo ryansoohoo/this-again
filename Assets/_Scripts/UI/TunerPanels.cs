@@ -35,6 +35,7 @@ public sealed class TunerPanels : MonoBehaviour
         new Panel("Water",         WaterBody,  () => gm.ApplyWaterSettings()),
         new Panel("Structures",    StructureBody, () => gm.Regenerate()),
         new Panel("Day/Night",     DayNightBody,  () => {}),
+        new Panel("Replication",   ReplicationBody, () => {}),
     };
 
     void OnGUI()
@@ -157,6 +158,18 @@ public sealed class TunerPanels : MonoBehaviour
         if (GUILayout.Button("Live")) gm.SetTimeOverride(null);
         if (GUILayout.Button("Save")) gm.SaveDayNightSettings();
         if (GUILayout.Button("Reset")) gm.ResetDayNightSettings();
+        GUILayout.EndHorizontal();
+    }
+
+    void ReplicationBody()
+    {
+        var r = gm.ReplicationCfg;
+        F("Show radius", ref r.showRadius, 8f, 200f, "0");
+        F("Hide radius", ref r.hideRadius, 8f, 256f, "0");
+        I("Snapshot Hz", ref r.snapshotHz, 1, 30);
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Save")) gm.SaveReplicationSettings();
+        if (GUILayout.Button("Reset")) gm.ResetReplicationSettings();
         GUILayout.EndHorizontal();
     }
 

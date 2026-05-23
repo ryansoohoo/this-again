@@ -39,24 +39,24 @@ public sealed class LocalPlayer : MonoBehaviour
     {
         if (!Ready) return;
         lastSent = Vector2.zero;
-        ReplicationHub.Instance.SubmitInputServerRpc(Vector2.zero);
-        ReplicationHub.Instance.HaltServerRpc();
+        ReplicationHub.Instance.SubmitInputRpc(Vector2.zero);
+        ReplicationHub.Instance.HaltRpc();
     }
 
     public void RequestEnterInstance(Vector2Int siteCell)
     {
         if (!Ready || InInstance) return;
         lastSent = Vector2.zero;
-        ReplicationHub.Instance.SubmitInputServerRpc(Vector2.zero);
-        ReplicationHub.Instance.EnterInstanceServerRpc(siteCell.x, siteCell.y);
+        ReplicationHub.Instance.SubmitInputRpc(Vector2.zero);
+        ReplicationHub.Instance.EnterInstanceRpc(siteCell.x, siteCell.y);
     }
 
     public void RequestLeaveInstance()
     {
         if (!Ready || !InInstance) return;
         lastSent = Vector2.zero;
-        ReplicationHub.Instance.SubmitInputServerRpc(Vector2.zero);
-        ReplicationHub.Instance.LeaveInstanceServerRpc();
+        ReplicationHub.Instance.SubmitInputRpc(Vector2.zero);
+        ReplicationHub.Instance.LeaveInstanceRpc();
     }
 
     void Update()
@@ -64,7 +64,7 @@ public sealed class LocalPlayer : MonoBehaviour
         if (!Ready) return;
         var cam = Game.Instance != null ? Game.Instance.Cam : Camera.main;
         var intent = input.Read(cam);
-        if (intent.dir != lastSent) { lastSent = intent.dir; ReplicationHub.Instance.SubmitInputServerRpc(intent.dir); }
-        if (intent.hasClickTarget) ReplicationHub.Instance.SetTargetServerRpc(intent.clickWorld);
+        if (intent.dir != lastSent) { lastSent = intent.dir; ReplicationHub.Instance.SubmitInputRpc(intent.dir); }
+        if (intent.hasClickTarget) ReplicationHub.Instance.SetTargetRpc(intent.clickWorld);
     }
 }

@@ -113,27 +113,27 @@ public sealed class ReplicationHub : NetworkBehaviour
     }
 
     // ---- owner -> server intent (RequireOwnership=false; caller = SenderClientId) ----
-    [ServerRpc(RequireOwnership = false)]
-    public void SubmitInputServerRpc(Vector2 dir, ServerRpcParams p = default)
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void SubmitInputRpc(Vector2 dir, RpcParams p = default)
     {
         if (registry.TryGet(p.Receive.SenderClientId, out var sp)) sp.submittedInput = dir;
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void SetTargetServerRpc(Vector2 worldPoint, ServerRpcParams p = default)
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void SetTargetRpc(Vector2 worldPoint, RpcParams p = default)
     {
         if (registry.TryGet(p.Receive.SenderClientId, out var sp))
         { sp.submittedInput = Vector2.zero; PlayerSimSystem.SetTarget(sp, worldPoint, moveSpeed); }
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void HaltServerRpc(ServerRpcParams p = default)
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void HaltRpc(RpcParams p = default)
     {
         if (registry.TryGet(p.Receive.SenderClientId, out var sp)) PlayerSimSystem.Halt(sp);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void EnterInstanceServerRpc(int siteX, int siteY, ServerRpcParams p = default)
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void EnterInstanceRpc(int siteX, int siteY, RpcParams p = default)
     {
         var id = p.Receive.SenderClientId;
         if (!registry.TryGet(id, out var sp) || sp.inInstance) return;
@@ -144,8 +144,8 @@ public sealed class ReplicationHub : NetworkBehaviour
         sp.inInstance = true;
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void LeaveInstanceServerRpc(ServerRpcParams p = default)
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void LeaveInstanceRpc(RpcParams p = default)
     {
         if (!registry.TryGet(p.Receive.SenderClientId, out var sp) || !sp.inInstance) return;
         sp.regionKey = Vector2Int.zero;

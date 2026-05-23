@@ -301,9 +301,9 @@ public sealed class CommandConsole : MonoBehaviour
         }
         else
         {
-            string msg = !string.IsNullOrEmpty(result.Message) ? result.Message
-                       : result.Status == CommandStatus.Unknown ? "Unknown command." : null;
-            if (msg != null) GameLog.Post(OutputType.System, msg);
+            // Unknown commands get only the red shake/flash (Invalid) — no "Unknown command." chat line.
+            // Other failures (Unavailable / BadUsage) still post their explanatory message.
+            if (!string.IsNullOrEmpty(result.Message)) GameLog.Post(OutputType.System, result.Message);
             Invalid();
         }
     }

@@ -73,6 +73,10 @@ public class GridManager : MonoBehaviour
     Vector2Int meshCenter;     // world-mesh center (recentered only every meshRebuildStep cells, since the mesh is heavy)
     bool meshInit;
 
+    readonly JsonPref<BiomeSettings> biomePref = new("biome.json");
+    readonly JsonPref<WaterSettings> waterPref = new("water.json");
+    readonly JsonPref<GroundSettings> groundPref = new("ground.json");
+
     bool GenAt(int cx, int cy)
     {
         var key = new Vector2Int(cx, cy);
@@ -173,9 +177,9 @@ public class GridManager : MonoBehaviour
         Application.targetFrameRate = 120;     // perf target
         Application.runInBackground = true;    // run full speed even when the game view isn't focused
         Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);  // skip costly stack-trace capture on Debug.Log
-        LoadSettings();                        // apply previously-saved biome settings, if any
-        LoadWaterSettings();                   // apply previously-saved water settings, if any
-        LoadGroundSettings();                  // apply previously-saved ground-cover settings, if any
+        biomePref.Load(biome);                 // apply previously-saved settings, if any
+        waterPref.Load(water);
+        groundPref.Load(ground);
         var cam = Camera.main;
         if (cam == null) { Debug.LogError("[GridManager] No Main Camera."); enabled = false; return; }
         Cam = cam;
@@ -269,78 +273,16 @@ public class GridManager : MonoBehaviour
         waterMat.SetFloat("_CellSize", cellWorld);
     }
 
-    // ---- Save / load tuned settings (one PlayerPrefs JSON blob; survives play-stop and editor restarts) ----
-    const string Pref = "biome.json";
+    // ---- Tuned settings: one JSON blob per group via JsonPref (survives play-stop + editor restarts) ----
 
-    public void SaveSettings()
-    {
-        PlayerPrefs.SetString(Pref, JsonUtility.ToJson(biome));
-        PlayerPrefs.Save();
-        Debug.Log("[GridManager] Biome settings saved.");
-    }
+    public void SaveSettings()        { biomePref.Save(biome);  Debug.Log("[GridManager] Biome settings saved."); }
+    public void ResetSavedSettings()  { biomePref.Clear();      Debug.Log("[GridManager] Saved biome settings cleared (inspector defaults apply next play)."); }
 
-    void LoadSettings()
-    {
-        var json = PlayerPrefs.GetString(Pref, "");
-        if (!string.IsNullOrEmpty(json)) JsonUtility.FromJsonOverwrite(json, biome);
-    }
+    public void SaveWaterSettings()   { waterPref.Save(water);  Debug.Log("[GridManager] Water settings saved."); }
+    public void ResetWaterSettings()  { waterPref.Reset(water, new WaterSettings()); ApplyWaterSettings(); Debug.Log("[GridManager] Saved water settings cleared (defaults applied)."); }
 
-    public void ResetSavedSettings()
-    {
-        PlayerPrefs.DeleteKey(Pref);
-        PlayerPrefs.Save();
-        Debug.Log("[GridManager] Saved biome settings cleared (inspector defaults apply next play).");
-    }
-
-    // ---- Save / load tuned WATER settings (separate JSON blob; live-applied) ----
-    const string WaterPref = "water.json";
-
-    public void SaveWaterSettings()
-    {
-        PlayerPrefs.SetString(WaterPref, JsonUtility.ToJson(water));
-        PlayerPrefs.Save();
-        Debug.Log("[GridManager] Water settings saved.");
-    }
-
-    void LoadWaterSettings()
-    {
-        var json = PlayerPrefs.GetString(WaterPref, "");
-        if (!string.IsNullOrEmpty(json)) JsonUtility.FromJsonOverwrite(json, water);
-    }
-
-    public void ResetWaterSettings()
-    {
-        PlayerPrefs.DeleteKey(WaterPref);
-        PlayerPrefs.Save();
-        water = new WaterSettings();
-        ApplyWaterSettings();
-        Debug.Log("[GridManager] Saved water settings cleared (defaults applied).");
-    }
-
-    // ---- Save / load tuned GROUND-COVER settings (separate JSON blob; rebuilds the map on reset) ----
-    const string GroundPref = "ground.json";
-
-    public void SaveGroundSettings()
-    {
-        PlayerPrefs.SetString(GroundPref, JsonUtility.ToJson(ground));
-        PlayerPrefs.Save();
-        Debug.Log("[GridManager] Ground settings saved.");
-    }
-
-    void LoadGroundSettings()
-    {
-        var json = PlayerPrefs.GetString(GroundPref, "");
-        if (!string.IsNullOrEmpty(json)) JsonUtility.FromJsonOverwrite(json, ground);
-    }
-
-    public void ResetGroundSettings()
-    {
-        PlayerPrefs.DeleteKey(GroundPref);
-        PlayerPrefs.Save();
-        ground = new GroundSettings();
-        Regenerate();
-        Debug.Log("[GridManager] Saved ground settings cleared (defaults applied).");
-    }
+    public void SaveGroundSettings()  { groundPref.Save(ground); Debug.Log("[GridManager] Ground settings saved."); }
+    public void ResetGroundSettings() { groundPref.Reset(ground, new GroundSettings()); Regenerate(); Debug.Log("[GridManager] Saved ground settings cleared (defaults applied)."); }
 
     void Update()
     {

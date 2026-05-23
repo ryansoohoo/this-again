@@ -62,6 +62,9 @@ public sealed class ChatPopup : MonoBehaviour
         group.alpha = Mathf.MoveTowards(group.alpha, target, Time.unscaledDeltaTime / Mathf.Max(0.01f, fadeSeconds));
     }
 
+    // Snap to full opacity immediately (used when an encounter opens, so it appears without a fade-in).
+    public void SnapVisible() { if (group != null) group.alpha = 1f; }
+
     static Color ColorFor(OutputType t) => t switch
     {
         OutputType.System    => new Color(1f, 0.78f, 0.27f),    // amber

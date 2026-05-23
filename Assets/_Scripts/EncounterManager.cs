@@ -13,6 +13,7 @@ public sealed class EncounterManager : MonoBehaviour
     public bool InEncounter => Current != null;
 
     CommandConsole console;
+    ChatPopup chatPopup;
     Vector2Int lastCell;
     bool haveLast;
 
@@ -43,6 +44,8 @@ public sealed class EncounterManager : MonoBehaviour
         CommandRouter.Instance.EnterEncounter();
         if (console == null) console = FindFirstObjectByType<CommandConsole>();
         if (console != null) console.OpenLocked();
+        if (chatPopup == null) chatPopup = FindFirstObjectByType<ChatPopup>();
+        if (chatPopup != null) chatPopup.SnapVisible();
         GameLog.Post(OutputType.Encounter, $"You approach {site.Name}, {site.Def.label}. (enter / leave)");
     }
 

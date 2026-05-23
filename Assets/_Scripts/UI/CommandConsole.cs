@@ -256,7 +256,13 @@ public sealed class CommandConsole : MonoBehaviour
     }
 
     // Open the console and trap it open (used by encounters). Only a command that clears LockOpen can close it.
-    public void OpenLocked() { if (!open) Open(); LockOpen = true; }
+    // Snap the panel to full alpha so an encounter appears instantly (no fade-in).
+    public void OpenLocked()
+    {
+        if (!open) Open();
+        LockOpen = true;
+        if (panelGroup != null) panelGroup.alpha = 1f;
+    }
     public void Unlock() => LockOpen = false;
 
     void Close()

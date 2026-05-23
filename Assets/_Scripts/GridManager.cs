@@ -14,7 +14,20 @@ public class GridManager : MonoBehaviour
 
     [Header("Biomes")]
     [SerializeField] BiomeSettings biome = new BiomeSettings();   // all live-tunable noise/water knobs (see BiomeSettings)
-    [SerializeField] Texture2D[] biomeTextures;                   // one floor tile per biome, in Biome enum order
+    [Header("World Map Tiles (art)")]
+    [SerializeField] Texture2D summerSheet;                       // world_map_tiles_SUMMER.png (ground + coastline dual-grid)
+    [SerializeField] Texture2D waterSheet;                        // simple_water_spritesheet.png (animated open water)
+    [SerializeField] WaterSettings water = new WaterSettings();   // live-tunable open-water animation (see TunerPanels)
+    [SerializeField] GroundSettings ground = new GroundSettings(); // Perlin ground-cover variety (grass/forest/rocky/mountain)
+
+    [Header("Biome tiles (ground-cover variation; empty slot = blank/normal ground)")]
+    [SerializeField] BiomeTiles grassBiome;       // lowland-dry
+    [SerializeField] BiomeTiles forestBiome;      // lowland-wet
+    [SerializeField] BiomeTiles rockyBiome;       // foothills
+    [SerializeField] BiomeTiles mountainBiome;    // peaks
+    [SerializeField] Sprite defaultGroundSprite;  // "normal ground" for no-biome cells; null = built-in grass tile
+    [SerializeField] Color defaultGroundColor = new Color(0.6f, 0.54f, 0.42f, 1f);  // minimap color for no-biome (blank) cells
+    [SerializeField] Color waterMinimapColor = new Color(0.1137f, 0.1686f, 0.3255f, 1f);  // flat minimap color for water (matches the water tile navy)
 
     [Header("Camera")]
     [SerializeField] int minCellsVisible = 10;
@@ -33,17 +46,18 @@ public class GridManager : MonoBehaviour
     public Camera Cam { get; private set; }
     public Texture2D MinimapTexture { get; private set; }   // wide overview around the player; drawn by Minimap
 
-    // Live-tunable biome knobs; BiomeTuner mutates these in play, then calls Regenerate.
+    // Live-tunable biome knobs; TunerPanels mutates these in play, then calls Regenerate.
     public BiomeSettings Biome => biome;
+    public WaterSettings Water => water;
+    public GroundSettings Ground => ground;
     public float CellWorld => cellWorld;
 
     // World <-> cell. Cell (cx,cy) spans [cx,cx+1)*cellWorld on each axis; its center sits at +half a cell.
     public Vector2 CellCenter(int cx, int cy) => new((cx + 0.5f) * cellWorld, (cy + 0.5f) * cellWorld);
     public Vector2Int WorldToCell(Vector2 world) => new(Mathf.FloorToInt(world.x / cellWorld), Mathf.FloorToInt(world.y / cellWorld));
 
-    // Movement/pathfinding walkability: every biome can be stepped on except open water.
-    // global:: disambiguates the Biome enum from this class's BiomeSettings 'Biome' property.
-    public bool IsWalkable(int cx, int cy) => GenAt(cx, cy) != global::Biome.Water;
+    // Movement/pathfinding walkability: every land cell is walkable; open water is not.
+    public bool IsWalkable(int cx, int cy) => GenAt(cx, cy);
 
     // Minimap overview world bounds, for the HUD to map the camera viewport onto it.
     public Vector2 MinimapWorldCenter => CellCenter(viewCenter.x, viewCenter.y);
@@ -51,20 +65,105 @@ public class GridManager : MonoBehaviour
 
     float cellWorld;
     MeshFilter gridMesh;
-    Color32[] biomeAvg;   // each biome tile's average art color (computed once from biomeTextures)
+    Material waterMat;   // submesh-1 (water) material; WaterSettings are pushed into it live
     BiomeGenerator gen;
-    readonly Dictionary<Vector2Int, Biome> cache = new();   // generated biomes; grows as the player explores
+    GroundGenerator groundGen;                              // visual ground-cover classifier for interior land
+    readonly Dictionary<Vector2Int, bool> cache = new();    // generated land(true)/water(false); grows as the player explores
     Vector2Int viewCenter;     // minimap center (tracks the player every cell)
     Vector2Int meshCenter;     // world-mesh center (recentered only every meshRebuildStep cells, since the mesh is heavy)
     bool meshInit;
 
-    Biome GenAt(int cx, int cy)
+    bool GenAt(int cx, int cy)
     {
         var key = new Vector2Int(cx, cy);
         if (cache.TryGetValue(key, out var b)) return b;
-        b = gen.At(cx, cy);
+        b = gen.IsLand(cx, cy);
         cache[key] = b;
         return b;
+    }
+
+    // Per-cell interior-land sprite for the renderer's all-land case: classify the cell's ground cover, then
+    // pick one weighted variant from that biome's BiomeTiles asset. Returns null when the cell has no usable
+    // biome -> the renderer falls back to the built-in "normal ground" tile (the blank/default ground).
+    Sprite LandSpriteAt(int cx, int cy)
+    {
+        var gt = groundGen.At(cx, cy);
+        if (Hash01(cx, cy, biome.seed, 1009 + (int)gt) >= CoverageFor(gt))
+            return defaultGroundSprite;          // no biome on this tile -> blank/normal ground
+        var picked = PickVariant(BiomeFor(gt), cx, cy, (int)gt);
+        return picked != null ? picked : defaultGroundSprite;
+    }
+
+    BiomeTiles BiomeFor(GroundType gt) => gt switch
+    {
+        GroundType.Forest   => forestBiome,
+        GroundType.Rocky    => rockyBiome,
+        GroundType.Mountain => mountainBiome,
+        _                   => grassBiome,
+    };
+
+    float CoverageFor(GroundType gt) => gt switch
+    {
+        GroundType.Forest   => ground.forestCoverage,
+        GroundType.Rocky    => ground.rockyCoverage,
+        GroundType.Mountain => ground.mountainCoverage,
+        _                   => ground.grassCoverage,
+    };
+
+    // Minimap color for a LAND cell: its ground-cover biome's color, or the blank color when the cell has no
+    // biome (mirrors LandSpriteAt's classify + coverage roll so the minimap matches the rendered tiles).
+    Color32 LandColorAt(int cx, int cy)
+    {
+        var gt = groundGen.At(cx, cy);
+        if (Hash01(cx, cy, biome.seed, 1009 + (int)gt) >= CoverageFor(gt)) return defaultGroundColor;
+        var b = BiomeFor(gt);
+        return b != null ? (Color32)b.minimapColor : (Color32)defaultGroundColor;
+    }
+
+    // Weighted-random variant pick, made deterministic by hashing the cell + seed, so every Netcode client
+    // resolves the same tile without replication. salt decorrelates different biomes at the same cell.
+    Sprite PickVariant(BiomeTiles b, int cx, int cy, int salt)
+    {
+        if (b == null || b.variants == null) return null;
+        float total = 0f;
+        for (int i = 0; i < b.variants.Length; i++) if (IsUsable(b.variants[i])) total += b.variants[i].weight;
+        if (total <= 0f) return null;
+        float r = Hash01(cx, cy, biome.seed, salt) * total;
+        for (int i = 0; i < b.variants.Length; i++)
+        {
+            if (!IsUsable(b.variants[i])) continue;
+            r -= b.variants[i].weight;
+            if (r < 0f) return b.variants[i].sprite;
+        }
+        for (int i = b.variants.Length - 1; i >= 0; i--) if (IsUsable(b.variants[i])) return b.variants[i].sprite;
+        return null;
+    }
+
+    // A variant is usable only if it has a positive-weight sprite sliced from the terrain (summer) sheet — a
+    // sprite from any other texture would index the wrong atlas on the shared single-material terrain mesh.
+    bool IsUsable(BiomeTileVariant v)
+    {
+        if (v == null || v.sprite == null || v.weight <= 0f) return false;
+        if (summerSheet != null && v.sprite.texture != summerSheet) { WarnForeign(v.sprite); return false; }
+        return true;
+    }
+
+    readonly HashSet<Sprite> warnedForeign = new();
+    void WarnForeign(Sprite s)
+    {
+        if (warnedForeign.Add(s))
+            Debug.LogWarning($"[GridManager] Biome sprite '{s.name}' is not from the summer sheet; ignoring it. Slice biome tiles from world_map_tiles_SUMMER.");
+    }
+
+    // Deterministic 0..1 hash of (cell, seed, salt). Pure function -> identical variant choice on every client.
+    static float Hash01(int x, int y, int seed, int salt)
+    {
+        unchecked
+        {
+            uint h = (uint)(x * 73856093) ^ (uint)(y * 19349663) ^ (uint)(seed * 83492791) ^ (uint)(salt * 2654435761);
+            h ^= h >> 13; h *= 0x85ebca6b; h ^= h >> 16;
+            return (h & 0xFFFFFF) / 16777216f;
+        }
     }
 
     void Awake()
@@ -75,6 +174,8 @@ public class GridManager : MonoBehaviour
         Application.runInBackground = true;    // run full speed even when the game view isn't focused
         Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);  // skip costly stack-trace capture on Debug.Log
         LoadSettings();                        // apply previously-saved biome settings, if any
+        LoadWaterSettings();                   // apply previously-saved water settings, if any
+        LoadGroundSettings();                  // apply previously-saved ground-cover settings, if any
         var cam = Camera.main;
         if (cam == null) { Debug.LogError("[GridManager] No Main Camera."); enabled = false; return; }
         Cam = cam;
@@ -95,23 +196,24 @@ public class GridManager : MonoBehaviour
         }, cellWorld);
 
         gen = new BiomeGenerator(biome);
-        ComputeBiomeAverages();
-        ApplyPalette();
-        gridMesh = CellRenderer.Build(transform, biomeTextures);
+        groundGen = new GroundGenerator(biome.seed, ground);
+        gridMesh = CellRenderer.Build(transform, summerSheet, waterSheet);
+        waterMat = gridMesh.GetComponent<MeshRenderer>().sharedMaterials[1];
+        ApplyWaterSettings();
         viewCenter = meshCenter = Vector2Int.zero;
         meshInit = true;
         RebuildMesh();
         RebuildMinimap();
-        gameObject.AddComponent<BiomeTuner>();
+        gameObject.AddComponent<TunerPanels>();   // one accordion overlay holding the biome/ground/water knob panels
     }
 
-    // Rebuilds the noise generator + clears the cache so a fresh map streams in (called live by BiomeTuner).
+    // Rebuilds the noise generator + clears the cache so a fresh map streams in (called live by TunerPanels).
     public void Regenerate()
     {
         if (gridMesh == null) return;
         gen = new BiomeGenerator(biome);
+        groundGen = new GroundGenerator(biome.seed, ground);
         cache.Clear();
-        ApplyPalette();
         RebuildMesh();
         RebuildMinimap();
     }
@@ -120,7 +222,7 @@ public class GridManager : MonoBehaviour
     void RebuildMesh()
     {
         var oldMesh = gridMesh.sharedMesh;
-        gridMesh.sharedMesh = CellRenderer.BuildWindowMesh(GenAt, meshCenter, viewRadius, cellWorld, biomeTextures, biome.waterDepthCells);
+        gridMesh.sharedMesh = CellRenderer.BuildWindowMesh(GenAt, LandSpriteAt, meshCenter, viewRadius, cellWorld);
         if (oldMesh != null) Destroy(oldMesh);
 
         // Clamp the camera to the loaded mesh so it can't pan into the unloaded (black) area.
@@ -132,7 +234,7 @@ public class GridManager : MonoBehaviour
     void RebuildMinimap()
     {
         var oldTex = MinimapTexture;
-        MinimapTexture = CellRenderer.BuildOverviewMinimap(GenAt, viewCenter, minimapRadius, biome.waterDepthCells, biome.minimapBrightness);
+        MinimapTexture = CellRenderer.BuildOverviewMinimap(GenAt, LandColorAt, viewCenter, minimapRadius, (Color32)waterMinimapColor, biome.minimapBrightness);
         if (oldTex != null) Destroy(oldTex);
     }
 
@@ -153,36 +255,19 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // Average art color of each biome's floor tile (computed once); ApplyPalette darkens these into ground.
-    void ComputeBiomeAverages()
+    // Push the live water-animation knobs into the runtime water material (submesh 1). Called at boot and by
+    // TunerPanels whenever a slider changes. No mesh rebuild — purely material/shader state.
+    public void ApplyWaterSettings()
     {
-        int biomeCount = System.Enum.GetValues(typeof(Biome)).Length;
-        biomeAvg = new Color32[biomeCount];
-        for (int b = 0; b < biomeCount; b++)
-        {
-            var tex = (biomeTextures != null && b < biomeTextures.Length) ? biomeTextures[b] : null;
-            biomeAvg[b] = CellRenderer.AverageColor(tex);
-        }
+        if (waterMat == null) return;
+        waterMat.SetFloat("_AnimSpeed", water.animSpeed);
+        waterMat.SetFloat("_NoiseScale", water.waveFreq);
+        waterMat.SetFloat("_FlowSpeed", water.waveDrift);
+        waterMat.SetFloat("_Calm", water.calm);
+        waterMat.SetVector("_WindDir", new Vector4(water.windX, water.windY, 0f, 0f));
+        waterMat.SetFloat("_StyleRow", water.styleRow);
+        waterMat.SetFloat("_CellSize", cellWorld);
     }
-
-    // Push the live palette (water gradient + per-biome ground = avg tile color x brightness) into the renderer.
-    void ApplyPalette()
-    {
-        Biomes.WaterShallow = Tinted(biome.waterShoreLevel);
-        Biomes.WaterDeep = Tinted(biome.waterDeepLevel);
-        if (biomeAvg != null)
-        {
-            if (Biomes.GroundColors == null || Biomes.GroundColors.Length != biomeAvg.Length)
-                Biomes.GroundColors = new Color32[biomeAvg.Length];
-            float lvl = biome.landBackgroundLevel;
-            for (int b = 0; b < biomeAvg.Length; b++)
-                Biomes.GroundColors[b] = new Color32((byte)(biomeAvg[b].r * lvl),
-                                                     (byte)(biomeAvg[b].g * lvl),
-                                                     (byte)(biomeAvg[b].b * lvl), 255);
-        }
-    }
-
-    Color32 Tinted(float level) => new Color(biome.waterTint.r * level, biome.waterTint.g * level, biome.waterTint.b * level, 1f);
 
     // ---- Save / load tuned settings (one PlayerPrefs JSON blob; survives play-stop and editor restarts) ----
     const string Pref = "biome.json";
@@ -205,6 +290,56 @@ public class GridManager : MonoBehaviour
         PlayerPrefs.DeleteKey(Pref);
         PlayerPrefs.Save();
         Debug.Log("[GridManager] Saved biome settings cleared (inspector defaults apply next play).");
+    }
+
+    // ---- Save / load tuned WATER settings (separate JSON blob; live-applied) ----
+    const string WaterPref = "water.json";
+
+    public void SaveWaterSettings()
+    {
+        PlayerPrefs.SetString(WaterPref, JsonUtility.ToJson(water));
+        PlayerPrefs.Save();
+        Debug.Log("[GridManager] Water settings saved.");
+    }
+
+    void LoadWaterSettings()
+    {
+        var json = PlayerPrefs.GetString(WaterPref, "");
+        if (!string.IsNullOrEmpty(json)) JsonUtility.FromJsonOverwrite(json, water);
+    }
+
+    public void ResetWaterSettings()
+    {
+        PlayerPrefs.DeleteKey(WaterPref);
+        PlayerPrefs.Save();
+        water = new WaterSettings();
+        ApplyWaterSettings();
+        Debug.Log("[GridManager] Saved water settings cleared (defaults applied).");
+    }
+
+    // ---- Save / load tuned GROUND-COVER settings (separate JSON blob; rebuilds the map on reset) ----
+    const string GroundPref = "ground.json";
+
+    public void SaveGroundSettings()
+    {
+        PlayerPrefs.SetString(GroundPref, JsonUtility.ToJson(ground));
+        PlayerPrefs.Save();
+        Debug.Log("[GridManager] Ground settings saved.");
+    }
+
+    void LoadGroundSettings()
+    {
+        var json = PlayerPrefs.GetString(GroundPref, "");
+        if (!string.IsNullOrEmpty(json)) JsonUtility.FromJsonOverwrite(json, ground);
+    }
+
+    public void ResetGroundSettings()
+    {
+        PlayerPrefs.DeleteKey(GroundPref);
+        PlayerPrefs.Save();
+        ground = new GroundSettings();
+        Regenerate();
+        Debug.Log("[GridManager] Saved ground settings cleared (defaults applied).");
     }
 
     void Update()

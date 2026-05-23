@@ -3,130 +3,155 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-// Renders a square WINDOW of the infinite world as ONE mesh under a single MeshRenderer. Cells are
-// generated on demand from a biome function; only the window around the player is built, so everything
-// else stays "unloaded" (camera background). Cells are bucketed into one submesh per biome (its floor
-// tile) plus a ground submesh behind the sparse tiles. Data-oriented: flat arrays uploaded per rebuild.
+// Renders a square WINDOW of the infinite world as ONE mesh under a single MeshRenderer, using DUAL-GRID
+// autotiling on the BINARY land/water field. The display grid is offset half a cell: each display tile sits
+// on a cell CORNER and reads the 4 cells around that corner; the 4-bit land mask (TL=1,TR=2,BL=4,BR=8)
+// picks one of 16 tiles. Interior land (case 15) draws a per-cell biome sprite resolved by GridManager (or a
+// built-in ground tile when a cell has no biome); the 14 mixed cases are the static coastline; open water
+// (case 0) is the water sprite (animated by GridManager via its UV offset).
+// Two submeshes / materials: [0] static summer sheet (ground + coast), [1] water sheet.
 public static class CellRenderer
 {
-    // Creates the "Grid" GameObject (mesh + one material per biome + a ground material). The mesh is
-    // filled later by BuildWindowMesh. Returns the MeshFilter so the caller can swap meshes cheaply.
-    public static MeshFilter Build(Transform parent, Texture2D[] biomeTextures)
+    const int Tile = 16;                       // tile size in px (both sheets)
+    const int SummerW = 112, SummerH = 320;    // world_map_tiles_SUMMER.png  (7 x 20 tiles)
+    const int WaterW = 64, WaterH = 48;        // simple_water_spritesheet.png (4 frames x 3 styles)
+
+    // Dual-grid case -> tile (col,row) in the SUMMER sheet. Index = TL*1 + TR*2 + BL*4 + BR*8 (land bit set;
+    // corners in image space, row 0 = top). Derived by auto-classifying the pack's coast tiles' corners.
+    // Case 0 (all water) is drawn from the WATER sheet, so its entry here is only a fallback.
+    // Cases 1..14 = coastline pieces (from the pack's coast demo, whole-tile analyzed). Case 0 = open water
+    // (drawn from the WATER sheet). Case 15 = solid ground: the coast region has NO water-free tile, so the
+    // ground fill is a dedicated solid land tile (1,0) color-matched to the coast tiles' land.
+    static readonly int[] CaseCol = { 1, 6, 4, 5, 6, 6, 2, 0, 4, 2, 4, 3, 5, 0, 3, 0 };
+    static readonly int[] CaseRow = { 13,14,14,14,12,13,14,15,12,12,13,15,12,18,18, 1 };
+
+    // Built-in "normal ground" tile (col,row) used for the all-land case (15) when a cell resolves to no biome
+    // sprite (no BiomeTiles asset assigned, or it has no usable variants). This is the blank/default ground.
+    const int FallbackGroundCol = 1, FallbackGroundRow = 5;
+
+    // Creates the "Grid" GameObject with two materials: [0] static summer sheet, [1] water sheet.
+    public static MeshFilter Build(Transform parent, Texture2D summerTex, Texture2D waterTex)
     {
-        int biomeCount = Enum.GetValues(typeof(Biome)).Length;
         var go = new GameObject("Grid", typeof(MeshFilter), typeof(MeshRenderer));
         go.transform.SetParent(parent, false);
-
-        var shader = Shader.Find("Sprites/Default");
-        var mats = new Material[biomeCount + 1];
-        mats[0] = new Material(shader);                                  // submesh 0: solid ground behind the tiles (vertex color)
-        for (int b = 0; b < biomeCount; b++)
-            mats[b + 1] = new Material(shader) { mainTexture = TexFor(biomeTextures, b) };
+        var sprite = Shader.Find("Sprites/Default");
+        var waves = Shader.Find("Custom/WaterWaves");           // scrolling-noise wave animation (per-tile frame select)
+        var mats = new Material[2];
+        mats[0] = new Material(sprite) { name = "Terrain", mainTexture = summerTex };
+        mats[1] = new Material(waves != null ? waves : sprite) { name = "Water", mainTexture = waterTex };
         go.GetComponent<MeshRenderer>().sharedMaterials = mats;
         return go.GetComponent<MeshFilter>();
     }
 
-    // Mesh for the square window of cells [center +- radius] (generated via `at`). World position of
-    // cell (cx,cy) is cx*cellWorld (origin-relative; the world is unbounded). Submesh 0 = ground quad
-    // per non-water cell; submeshes 1..N = one tile quad per cell on top.
-    public static Mesh BuildWindowMesh(Func<int, int, Biome> at, Vector2Int center, int radius,
-                                       float cellWorld, Texture2D[] biomeTextures, int waterDepthCells)
+    // Half-texel-inset UV rect of a tile in a sheet (avoids bleeding adjacent tiles). Row 0 = TOP (V flipped).
+    static void TileUV(int col, int row, int w, int h, out float uMin, out float uMax, out float vMin, out float vMax)
     {
-        int biomeCount = Enum.GetValues(typeof(Biome)).Length;
-        int size = 2 * radius + 1;
-        int minX = center.x - radius, minY = center.y - radius;
+        const float inset = 0.5f;
+        uMin = (col * Tile + inset) / w;
+        uMax = ((col + 1) * Tile - inset) / w;
+        vMax = 1f - (row * Tile + inset) / h;          // top edge  (high V)
+        vMin = 1f - ((row + 1) * Tile - inset) / h;    // bottom edge (low V)
+    }
 
-        var biomes = new Biome[size * size];
-        for (int lx = 0; lx < size; lx++)
-        for (int ly = 0; ly < size; ly++)
-            biomes[lx * size + ly] = at(minX + lx, minY + ly);
+    // Half-texel-inset UV rect from a sprite's pixel rect in its sheet (bottom-left origin, no V flip needed).
+    static void RectUV(Rect r, int w, int h, out float uMin, out float uMax, out float vMin, out float vMax)
+    {
+        const float inset = 0.5f;
+        uMin = (r.x + inset) / w;
+        uMax = (r.x + r.width - inset) / w;
+        vMin = (r.y + inset) / h;
+        vMax = (r.y + r.height - inset) / h;
+    }
 
-        var dist = LocalWaterDistance(biomes, size);
-        int n = size * size, landCount = 0;
-        for (int i = 0; i < n; i++) if (biomes[i] != Biome.Water) landCount++;
+    // Dual-grid mesh for the window: display tiles sit on cell corners [center +- radius]. Corner (i,j) reads
+    // cells (i-1..i, j-1..j). Submesh 0 = land+coast (cases 1..15); submesh 1 = open water (case 0).
+    // landSpriteAt(i,j) gives the interior-land (case 15) biome sprite, or null for the built-in ground tile.
+    public static Mesh BuildWindowMesh(Func<int, int, bool> isLand, Func<int, int, Sprite> landSpriteAt, Vector2Int center, int radius, float cellWorld)
+    {
+        int dmin = -radius, dmax = radius + 1;          // corner offsets from center (one extra on the high side)
+        int n = dmax - dmin + 1;                        // display tiles per axis
+        int total = n * n;
 
-        int totalV = n * 4 + landCount * 4;
-        var verts = new Vector3[totalV];
-        var uvs = new Vector2[totalV];
-        var colors = new Color32[totalV];
-        var tris = new List<int>[biomeCount + 1];
-        for (int b = 0; b < biomeCount + 1; b++) tris[b] = new List<int>();
+        var verts = new Vector3[total * 4];
+        var uvs = new Vector2[total * 4];
+        var colors = new Color32[total * 4];
+        var landTris = new List<int>(total * 6);
+        var waterTris = new List<int>(total);
         var white = new Color32(255, 255, 255, 255);
+        float cw = cellWorld, half = 0.5f * cw;
 
-        int v = 0, gv = n * 4;
-        for (int lx = 0; lx < size; lx++)
-        for (int ly = 0; ly < size; ly++)
+        int v = 0;
+        for (int di = dmin; di <= dmax; di++)
+        for (int dj = dmin; dj <= dmax; dj++)
         {
-            Biome b = biomes[lx * size + ly];
-            int bi = (int)b;
-            float x0 = (minX + lx) * cellWorld, y0 = (minY + ly) * cellWorld;
-            float x1 = x0 + cellWorld, y1 = y0 + cellWorld;
-            verts[v] = new Vector3(x0, y0, 0f);
-            verts[v + 1] = new Vector3(x1, y0, 0f);
-            verts[v + 2] = new Vector3(x0, y1, 0f);
-            verts[v + 3] = new Vector3(x1, y1, 0f);
-            uvs[v] = new Vector2(0f, 0f);
-            uvs[v + 1] = new Vector2(1f, 0f);
-            uvs[v + 2] = new Vector2(0f, 1f);
-            uvs[v + 3] = new Vector2(1f, 1f);
-            Color32 col = b == Biome.Water
-                ? WaterColor(dist[lx * size + ly], waterDepthCells)
-                : (TexFor(biomeTextures, bi) != null ? white : Biomes.ColorOf(b));
-            colors[v] = colors[v + 1] = colors[v + 2] = colors[v + 3] = col;
+            int i = center.x + di, j = center.y + dj;
+            bool tl = isLand(i - 1, j);      // top-left  cell (low x, high y)
+            bool tr = isLand(i,     j);      // top-right
+            bool bl = isLand(i - 1, j - 1);  // bottom-left
+            bool br = isLand(i,     j - 1);  // bottom-right
+            int c = (tl ? 1 : 0) | (tr ? 2 : 0) | (bl ? 4 : 0) | (br ? 8 : 0);
 
-            var t = tris[bi + 1];                            // +1: submesh 0 is the ground
-            t.Add(v); t.Add(v + 2); t.Add(v + 1);
-            t.Add(v + 1); t.Add(v + 2); t.Add(v + 3);
+            float cx = i * cw, cy = j * cw;             // display tile centered on the cell corner
+            verts[v]     = new Vector3(cx - half, cy - half, 0f);
+            verts[v + 1] = new Vector3(cx + half, cy - half, 0f);
+            verts[v + 2] = new Vector3(cx - half, cy + half, 0f);
+            verts[v + 3] = new Vector3(cx + half, cy + half, 0f);
 
-            if (b != Biome.Water)
+            float uMin, uMax, vMin, vMax;
+            if (c == 0)
+                TileUV(0, 0, WaterW, WaterH, out uMin, out uMax, out vMin, out vMax);             // open water (animated)
+            else if (c == 15)
             {
-                verts[gv] = verts[v]; verts[gv + 1] = verts[v + 1];
-                verts[gv + 2] = verts[v + 2]; verts[gv + 3] = verts[v + 3];
-                uvs[gv] = uvs[gv + 1] = uvs[gv + 2] = uvs[gv + 3] = Vector2.zero;
-                Color32 gcol = (Biomes.GroundColors != null && bi < Biomes.GroundColors.Length)
-                    ? Biomes.GroundColors[bi] : Biomes.ColorOf(b);
-                colors[gv] = colors[gv + 1] = colors[gv + 2] = colors[gv + 3] = gcol;
-                var gt = tris[0];
-                gt.Add(gv); gt.Add(gv + 2); gt.Add(gv + 1);
-                gt.Add(gv + 1); gt.Add(gv + 2); gt.Add(gv + 3);
-                gv += 4;
+                Sprite s = landSpriteAt(i, j);                                                    // per-cell biome variant (or null)
+                if (s != null)
+                    RectUV(s.textureRect, s.texture.width, s.texture.height, out uMin, out uMax, out vMin, out vMax);
+                else
+                    TileUV(FallbackGroundCol, FallbackGroundRow, SummerW, SummerH, out uMin, out uMax, out vMin, out vMax);  // blank ground
             }
+            else
+                TileUV(CaseCol[c], CaseRow[c], SummerW, SummerH, out uMin, out uMax, out vMin, out vMax);  // coastline
+            uvs[v]     = new Vector2(uMin, vMin);
+            uvs[v + 1] = new Vector2(uMax, vMin);
+            uvs[v + 2] = new Vector2(uMin, vMax);
+            uvs[v + 3] = new Vector2(uMax, vMax);
+            colors[v] = colors[v + 1] = colors[v + 2] = colors[v + 3] = white;
+
+            var tris = (c == 0) ? waterTris : landTris;
+            tris.Add(v); tris.Add(v + 2); tris.Add(v + 1);
+            tris.Add(v + 1); tris.Add(v + 2); tris.Add(v + 3);
             v += 4;
         }
 
-        var mesh = new Mesh { name = "GridWindowMesh", indexFormat = IndexFormat.UInt32 };
+        var mesh = new Mesh { name = "GridDualGridMesh", indexFormat = IndexFormat.UInt32 };
         mesh.SetVertices(verts);
         mesh.SetUVs(0, uvs);
         mesh.SetColors(colors);
-        mesh.subMeshCount = biomeCount + 1;
-        for (int b = 0; b < biomeCount + 1; b++) mesh.SetTriangles(tris[b], b);
+        mesh.subMeshCount = 2;
+        mesh.SetTriangles(landTris, 0);
+        mesh.SetTriangles(waterTris, 1);
         mesh.RecalculateBounds();
         return mesh;
     }
 
-    // Wide overview minimap: a (2*radius+1)^2 texture centered on the player, fully revealed (no fog).
-    public static Texture2D BuildOverviewMinimap(Func<int, int, Biome> at, Vector2Int center, int radius,
-                                                 int waterDepthCells, float brightness)
+    // Wide overview minimap: a (2*radius+1)^2 texture centered on the player, fully revealed (no fog). Land
+    // cells take their ground-cover biome's color via landColorAt(x,y); water cells are a single flat color
+    // (waterColor, matching the water tile). 'at' determines water vs land.
+    public static Texture2D BuildOverviewMinimap(Func<int, int, bool> isLand, Func<int, int, Color32> landColorAt,
+                                                 Vector2Int center, int radius, Color32 waterColor, float brightness)
     {
         int size = 2 * radius + 1;
         int minX = center.x - radius, minY = center.y - radius;
 
-        var biomes = new Biome[size * size];
+        var land = new bool[size * size];
         for (int lx = 0; lx < size; lx++)
         for (int ly = 0; ly < size; ly++)
-            biomes[lx * size + ly] = at(minX + lx, minY + ly);
+            land[lx * size + ly] = isLand(minX + lx, minY + ly);
 
-        var dist = LocalWaterDistance(biomes, size);
         var px = new Color32[size * size];
         for (int lx = 0; lx < size; lx++)
         for (int ly = 0; ly < size; ly++)
         {
-            Biome b = biomes[lx * size + ly];
-            int bi = (int)b;
-            Color32 c = b == Biome.Water
-                ? WaterColor(dist[lx * size + ly], waterDepthCells)
-                : ((Biomes.GroundColors != null && bi < Biomes.GroundColors.Length)
-                    ? Biomes.GroundColors[bi] : Biomes.ColorOf(b));
+            Color32 c = land[lx * size + ly] ? landColorAt(minX + lx, minY + ly) : waterColor;
             px[ly * size + lx] = new Color32(
                 (byte)Mathf.Min(255f, c.r * brightness),
                 (byte)Mathf.Min(255f, c.g * brightness),
@@ -139,61 +164,4 @@ public static class CellRenderer
         return tex;
     }
 
-    // Multi-source BFS: distance from each window cell to the nearest land cell (land = 0). Drives the
-    // shore->deep water gradient. Approximate at the window edge (out-of-window land isn't counted).
-    static int[] LocalWaterDistance(Biome[] biomes, int size)
-    {
-        var dist = new int[size * size];
-        for (int i = 0; i < dist.Length; i++) dist[i] = -1;
-        var q = new Queue<int>();
-        for (int i = 0; i < dist.Length; i++)
-            if (biomes[i] != Biome.Water) { dist[i] = 0; q.Enqueue(i); }
-        while (q.Count > 0)
-        {
-            int cur = q.Dequeue(), cx = cur / size, cy = cur % size, nd = dist[cur] + 1;
-            if (cx > 0 && dist[cur - size] < 0) { dist[cur - size] = nd; q.Enqueue(cur - size); }
-            if (cx < size - 1 && dist[cur + size] < 0) { dist[cur + size] = nd; q.Enqueue(cur + size); }
-            if (cy > 0 && dist[cur - 1] < 0) { dist[cur - 1] = nd; q.Enqueue(cur - 1); }
-            if (cy < size - 1 && dist[cur + 1] < 0) { dist[cur + 1] = nd; q.Enqueue(cur + 1); }
-        }
-        return dist;
-    }
-
-    // Water is always a flat gradient color (no sprite) -> never use a tile texture for it.
-    static Texture2D TexFor(Texture2D[] arr, int i) =>
-        (i == (int)Biome.Water || arr == null || i >= arr.Length) ? null : arr[i];
-
-    // distToLand: cells from shore; maxDepth: cells until water is fully "deep".
-    static Color32 WaterColor(int distToLand, int maxDepth)
-    {
-        float t = distToLand < 0 ? 1f : Mathf.Clamp01((distToLand - 1) / (float)Mathf.Max(maxDepth, 1));
-        return Color32.Lerp(Biomes.WaterShallow, Biomes.WaterDeep, t);
-    }
-
-    // Alpha-weighted average color of a texture's pixels (ignoring transparent areas). GPU blit +
-    // readback so the source texture needn't be Read/Write enabled. Derives each biome's ground color.
-    public static Color32 AverageColor(Texture2D tex)
-    {
-        if (tex == null) return new Color32(128, 128, 128, 255);
-        var prev = RenderTexture.active;                 // capture BEFORE Blit (Blit sets active = rt)
-        var rt = RenderTexture.GetTemporary(tex.width, tex.height, 0, RenderTextureFormat.ARGB32);
-        Graphics.Blit(tex, rt);
-        RenderTexture.active = rt;
-        var tmp = new Texture2D(tex.width, tex.height, TextureFormat.RGBA32, false);
-        tmp.ReadPixels(new Rect(0, 0, tex.width, tex.height), 0, 0);
-        tmp.Apply(false);
-        RenderTexture.active = prev;
-        RenderTexture.ReleaseTemporary(rt);
-        var px = tmp.GetPixels32();
-        UnityEngine.Object.Destroy(tmp);
-
-        double r = 0, g = 0, b = 0, a = 0;
-        for (int i = 0; i < px.Length; i++)
-        {
-            float al = px[i].a;
-            r += px[i].r * al; g += px[i].g * al; b += px[i].b * al; a += al;
-        }
-        if (a <= 0.0) return new Color32(128, 128, 128, 255);   // fully transparent tile -> neutral
-        return new Color32((byte)(r / a), (byte)(g / a), (byte)(b / a), 255);
-    }
 }

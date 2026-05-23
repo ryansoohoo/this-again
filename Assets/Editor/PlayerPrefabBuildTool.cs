@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 // Editor utility: assembles Assets/Prefabs/Player.prefab from authored parts (sliced sprites +
-// Player.controller + PlayerController). Layered children render the character on top of the grid:
+// Player.controller + PlayerMovement/PlayerView). Layered children render the character on top of the grid:
 //   Shadow (Shadow layer) < Body (Entities, drives anim) < Weapon (Entities +10) < Effects (Effects).
 // Weapon/Effects are empty seams for weapons-on-top and shader FX. Sprites use an UNLIT material
 // (Sprites/Default, same as the grid) so they render fullbright regardless of the scene's Light 2D
@@ -42,8 +42,9 @@ public static class PlayerPrefabBuildTool
         nt.InLocalSpace = false;
         nt.Interpolate = true;
 
-        var pc = root.AddComponent<PlayerController>();
-        var so = new SerializedObject(pc);
+        root.AddComponent<PlayerMovement>();                  // logic (server movement) + data (PlayerMotion)
+        var view = root.AddComponent<PlayerView>();            // visual: drives the Animator from the transform
+        var so = new SerializedObject(view);
         so.FindProperty("animator").objectReferenceValue = anim;
         so.ApplyModifiedProperties();
 

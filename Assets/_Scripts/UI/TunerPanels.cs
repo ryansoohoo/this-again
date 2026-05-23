@@ -33,6 +33,7 @@ public sealed class TunerPanels : MonoBehaviour
         new Panel("Biome noise",   BiomeBody,  () => gm.Regenerate()),
         new Panel("Ground biomes", GroundBody, () => gm.Regenerate()),
         new Panel("Water",         WaterBody,  () => gm.ApplyWaterSettings()),
+        new Panel("Structures",    StructureBody, () => gm.Regenerate()),
     };
 
     void OnGUI()
@@ -120,6 +121,18 @@ public sealed class TunerPanels : MonoBehaviour
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Save")) gm.SaveWaterSettings();
         if (GUILayout.Button("Reset")) gm.ResetWaterSettings();
+        GUILayout.EndHorizontal();
+    }
+
+    void StructureBody()
+    {
+        var s = gm.Structure;
+        I("Block size (smaller=denser)", ref s.blockSize, 2, 40);
+        F("Site chance", ref s.siteChance, 0f, 1f, "0.00");
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Save")) gm.SaveStructureSettings();
+        if (GUILayout.Button("Reset")) gm.ResetStructureSettings();
         GUILayout.EndHorizontal();
     }
 

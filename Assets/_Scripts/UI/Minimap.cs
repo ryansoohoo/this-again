@@ -3,7 +3,7 @@ using UnityEngine;
 
 // Local-only minimap HUD (IMGUI). Square = whole grid, rectangle = current camera viewport.
 // Not networked/replicated. Hidden only on a dedicated server (server with no local client).
-// Lives on the "Minimap" prefab (Resources/Minimap), instantiated by GridManager at boot.
+// Lives on the "Minimap" prefab (Resources/Minimap), instantiated by Game at boot.
 public class Minimap : MonoBehaviour
 {
     [SerializeField] float size = 330f;
@@ -22,7 +22,7 @@ public class Minimap : MonoBehaviour
         var nm = NetworkManager.Singleton;
         if (nm != null && nm.IsServer && !nm.IsClient) return;          // dedicated server: no local view
 
-        var gm = GridManager.Instance;
+        var gm = Game.Instance;
         if (gm == null) return;
         var cam = gm.Cam != null ? gm.Cam : Camera.main;
         if (cam == null) return;

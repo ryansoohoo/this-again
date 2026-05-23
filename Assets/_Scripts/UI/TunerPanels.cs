@@ -5,7 +5,7 @@ using UnityEngine;
 // Replaces the old one-MonoBehaviour-per-panel setup (BiomeTuner/GroundTuner/WaterTuner), each of which had its
 // own hand-placed Rect and a copy of the slider helpers. Panels are now data-driven entries in one accordion:
 // stacked vertically from the top in a single column, with only ONE panel expanded at a time. Adding a knob
-// group is one line in Build() plus a body method. Added to the GridManager object at boot.
+// group is one line in Build() plus a body method. Added to the Game object at boot.
 public sealed class TunerPanels : MonoBehaviour
 {
     sealed class Panel
@@ -26,7 +26,7 @@ public sealed class TunerPanels : MonoBehaviour
     int open;            // index of the one expanded panel (-1 = all collapsed); only one open at a time
     bool dirty;          // a slider in the open panel changed this frame
     Vector2 scroll;
-    GridManager gm;      // refreshed each OnGUI; the body/apply delegates read it
+    Game gm;      // refreshed each OnGUI; the body/apply delegates read it
 
     void Build() => panels = new List<Panel>
     {
@@ -37,7 +37,7 @@ public sealed class TunerPanels : MonoBehaviour
 
     void OnGUI()
     {
-        gm = GridManager.Instance;
+        gm = Game.Instance;
         if (gm == null) return;
         if (panels == null) Build();
 

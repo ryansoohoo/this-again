@@ -53,7 +53,7 @@ public class PlayerController : NetworkBehaviour
         lastPos = transform.position;
         if (IsServer)
         {
-            var gm = GridManager.Instance;
+            var gm = Game.Instance;
             if (gm != null)
             {
                 int n = (int)OwnerClientId;
@@ -73,7 +73,7 @@ public class PlayerController : NetworkBehaviour
     // The cell the player visually occupies right now (from the replicated transform).
     public Vector2Int CurrentCell()
     {
-        var gm = GridManager.Instance;
+        var gm = Game.Instance;
         return gm != null ? gm.WorldToCell(transform.position) : Vector2Int.zero;
     }
 
@@ -117,7 +117,7 @@ public class PlayerController : NetworkBehaviour
 
             if (isDouble)
             {
-                var cam = GridManager.Instance != null ? GridManager.Instance.Cam : Camera.main;
+                var cam = Game.Instance != null ? Game.Instance.Cam : Camera.main;
                 if (cam != null)
                 {
                     Vector3 wp = cam.ScreenToWorldPoint(new Vector3(sp.x, sp.y, Mathf.Abs(cam.transform.position.z)));
@@ -130,7 +130,7 @@ public class PlayerController : NetworkBehaviour
     [ServerRpc]
     void SetTargetServerRpc(Vector2 worldPoint)
     {
-        var gm = GridManager.Instance;
+        var gm = Game.Instance;
         if (gm == null) return;
         targetCell = gm.WorldToCell(worldPoint);
         // Route from where we'll be standing (the in-progress step's destination, else the current
@@ -146,7 +146,7 @@ public class PlayerController : NetworkBehaviour
     // ---- Server tile movement (authoritative) ----
     void ServerStep(float dt)
     {
-        var gm = GridManager.Instance;
+        var gm = Game.Instance;
         if (gm == null) return;
 
         if (moving)
@@ -178,7 +178,7 @@ public class PlayerController : NetworkBehaviour
 
     // WASD: step if the destination is walkable. A diagonal needs both orthogonal cells open (so you
     // can't cut a water corner); if the diagonal is blocked, slide along whichever axis is clear.
-    void TryWalkStep(GridManager gm, Vector2Int step)
+    void TryWalkStep(Game gm, Vector2Int step)
     {
         if (step == Vector2Int.zero) return;
         bool diag = step.x != 0 && step.y != 0;
@@ -195,7 +195,7 @@ public class PlayerController : NetworkBehaviour
         else if (sideY) BeginStep(gm, cell, new Vector2Int(cell.x, cell.y + step.y));
     }
 
-    void BeginStep(GridManager gm, Vector2Int from, Vector2Int to)
+    void BeginStep(Game gm, Vector2Int from, Vector2Int to)
     {
         fromPos = gm.CellCenter(from.x, from.y);
         toPos = gm.CellCenter(to.x, to.y);

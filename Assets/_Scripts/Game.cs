@@ -36,6 +36,9 @@ public sealed class Game : MonoBehaviour
     [Header("Day/Night")]
     [SerializeField] DayNightSettings dayNight = new DayNightSettings();
 
+    [Header("Replication")]
+    [SerializeField] ReplicationSettings replication = new ReplicationSettings();
+
     [Header("Camera")]
     [SerializeField] int minCellsVisible = 10;
     [SerializeField] int startCellsVisible = 16;
@@ -60,6 +63,7 @@ public sealed class Game : MonoBehaviour
     public DayNightSettings DayNightCfg => dayNight;
     public float? TimeOverride => dayNightSystem != null ? dayNightSystem.TimeOverride : null;
     public void SetTimeOverride(float? t) { if (dayNightSystem != null) dayNightSystem.TimeOverride = t; }
+    public ReplicationSettings ReplicationCfg => replication;
 
     // Minimap facade (the Minimap HUD reads these).
     public Texture2D MinimapTexture => view != null ? view.MinimapTexture : null;
@@ -87,6 +91,7 @@ public sealed class Game : MonoBehaviour
     readonly JsonPref<WaterSettings> waterPref = new("water.json");
     readonly JsonPref<StructureSettings> structurePref = new("structures.json");
     readonly JsonPref<DayNightSettings> dayNightPref = new("daynight.json");
+    readonly JsonPref<ReplicationSettings> replicationPref = new("replication.json");
 
     void Awake()
     {
@@ -95,6 +100,7 @@ public sealed class Game : MonoBehaviour
 
         biomePref.Load(biome); groundPref.Load(ground); waterPref.Load(water); structurePref.Load(structureSettings);
         dayNightPref.Load(dayNight);
+        replicationPref.Load(replication);
         cellWorld = (float)cellSizePixels / pixelsPerUnit;
 
         cameraState = new CameraState();
@@ -171,6 +177,8 @@ public sealed class Game : MonoBehaviour
     public void ResetStructureSettings() { structurePref.Reset(structureSettings, new StructureSettings()); Regenerate(); Debug.Log("[Game] Saved structure settings cleared (defaults applied)."); }
     public void SaveDayNightSettings()  { dayNightPref.Save(dayNight); Debug.Log("[Game] Day/Night settings saved."); }
     public void ResetDayNightSettings() { dayNightPref.Reset(dayNight, new DayNightSettings()); Debug.Log("[Game] Day/Night settings reset (defaults applied)."); }
+    public void SaveReplicationSettings()  { replicationPref.Save(replication); Debug.Log("[Game] Replication settings saved."); }
+    public void ResetReplicationSettings() { replicationPref.Reset(replication, new ReplicationSettings()); Debug.Log("[Game] Replication settings reset (defaults applied)."); }
 
     void Update()
     {

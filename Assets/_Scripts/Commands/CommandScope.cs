@@ -11,4 +11,5 @@ public enum CommandScope
     World     = 1 << 1,   // free-roam / exploration (connect, travel, look)
     Encounter = 1 << 2,   // active combat (attack, flee, abilities)
     Inventory = 1 << 3,   // item management (available both in the world and in combat)
+    Instance  = 1 << 4,   // inside a dungeon instance (leave, and later in-dungeon actions)
 }

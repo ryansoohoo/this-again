@@ -15,48 +15,67 @@ MonoBehaviour:
   defs:
   - id: forest_village
     label: the village
-    validOn:
-    - 1
+    validOn: 01000000
     spawnWeight: 1
-    variants: []
+    variants:
+    - sprite: {fileID: -1642274300, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
   - id: forest_home
     label: a home
-    validOn:
-    - 1
+    validOn: 01000000
     spawnWeight: 1
-    variants: []
+    variants:
+    - sprite: {fileID: -1488284289, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
   - id: forest_town
     label: the town
-    validOn:
-    - 1
+    validOn: 01000000
     spawnWeight: 1
-    variants: []
+    variants:
+    - sprite: {fileID: 515658809, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
+    - sprite: {fileID: -1411951346, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
   - id: forest_mansion
     label: the mansion
-    validOn:
-    - 1
+    validOn: 01000000
     spawnWeight: 1
-    variants: []
+    variants:
+    - sprite: {fileID: 1654142253, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
   - id: farm
     label: a farm
-    validOn:
-    - 0
+    validOn: 00000000
     spawnWeight: 1
-    variants: []
+    variants:
+    - sprite: {fileID: 1791223157, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
+    - sprite: {fileID: 1203853498, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
   - id: camp
     label: a camp
-    validOn:
-    - 0
-    - 1
+    validOn: 0000000001000000
     spawnWeight: 1
-    variants: []
+    variants:
+    - sprite: {fileID: -738580181, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
+    - sprite: {fileID: 849388378, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
   - id: walled_town
     label: the walled town
-    validOn:
-    - 0
-    - 1
+    validOn: 0000000001000000
     spawnWeight: 1
-    variants: []
+    variants:
+    - sprite: {fileID: -1124533820, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
+    - sprite: {fileID: -224470552, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
+    - sprite: {fileID: -1695364437, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
+    - sprite: {fileID: 1964723126, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
+    - sprite: {fileID: -353255450, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+      weight: 1
   namePool:
   - Oakhollow
   - Mossfen

@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 // Server-authoritative tile movement (LOGIC). The OWNER submits intent (a NetworkVariable dir + a click
@@ -13,6 +14,10 @@ public class PlayerMovement : NetworkBehaviour
     [Header("Movement (server)")]
     [SerializeField] float moveSpeed = 4f;          // world units/sec while crossing a cell
 
+    // Converts a biome's integer extraMoveCost into seconds added per tile. 0.1 => the int counts tenths of
+    // a second (cost 1 = +0.1s, 10 = +1s). A normal tile crosses in CellWorld/moveSpeed (~0.25s).
+    const float SecondsPerCost = 0.1f;
+
     // Owner -> server intent: 8-way step direction, each axis in {-1,0,1}. Owner-writable.
     readonly NetworkVariable<Vector2> moveInput =
         new(Vector2.zero, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -20,8 +25,17 @@ public class PlayerMovement : NetworkBehaviour
     readonly PlayerMotion motion = new();   // server-side movement state (data)
     readonly PlayerInput input = new();      // owner input reader (logic helper)
 
+    // Server -> everyone: is this player currently inside a dungeon instance? Owner reads it to gate commands.
+    readonly NetworkVariable<bool> inInstance =
+        new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    public bool InInstance => inInstance.Value;
+
+    NetworkTransform netTransform;     // snap-teleports without an interpolated slide across the map
+    Vector2Int overworldReturnCell;    // server-only: where to drop the player when they leave
+
     public override void OnNetworkSpawn()
     {
+        netTransform = GetComponent<NetworkTransform>();
         if (IsOwner) LocalInstance = this;
         if (IsServer)
         {
@@ -64,6 +78,56 @@ public class PlayerMovement : NetworkBehaviour
         motion.pathIndex = 0;
     }
 
+    // ---- Dungeon instance teleport (server-authoritative) ----
+    // Owner asks to enter the off-map room a structure site maps to; server teleports them and flips inInstance.
+    public void RequestEnterInstance(Vector2Int siteCell)
+    {
+        if (!IsSpawned || InInstance) return;
+        if (IsOwner) moveInput.Value = Vector2.zero;   // drop any walk intent so we don't drift on arrival
+        EnterInstanceServerRpc(siteCell.x, siteCell.y);
+    }
+
+    public void RequestLeaveInstance()
+    {
+        if (!IsSpawned || !InInstance) return;
+        if (IsOwner) moveInput.Value = Vector2.zero;
+        LeaveInstanceServerRpc();
+    }
+
+    [ServerRpc]
+    void EnterInstanceServerRpc(int siteX, int siteY)
+    {
+        if (inInstance.Value) return;
+        overworldReturnCell = motion.cell;
+        var origin = Underworld.RegionOriginForSite(siteX, siteY);
+        ServerTeleport(Underworld.SpawnCell(origin, (int)OwnerClientId));
+        inInstance.Value = true;
+    }
+
+    [ServerRpc]
+    void LeaveInstanceServerRpc()
+    {
+        if (!inInstance.Value) return;
+        ServerTeleport(overworldReturnCell);
+        inInstance.Value = false;
+    }
+
+    // Snap the authoritative transform to a cell's centre with no interpolated slide, resetting movement so the
+    // next step starts cleanly from the new cell.
+    void ServerTeleport(Vector2Int cell)
+    {
+        var gm = Game.Instance;
+        if (gm == null) return;
+        motion.moving = false;
+        motion.hasTarget = false;
+        motion.path.Clear();
+        motion.pathIndex = 0;
+        motion.cell = cell;
+        Vector3 pos = (Vector3)gm.CellCenter(cell.x, cell.y);
+        if (netTransform != null) netTransform.Teleport(pos, transform.rotation, transform.localScale);
+        else transform.position = pos;
+    }
+
     void Update()
     {
         if (!IsSpawned) return;
@@ -89,9 +153,19 @@ public class PlayerMovement : NetworkBehaviour
         // Route from where we'll be standing (the in-progress step's destination, else the current cell).
         Vector2Int from = motion.moving ? motion.toCell : motion.cell;
         motion.path.Clear();
-        motion.path.AddRange(Pathfinder.FindPath(from, motion.targetCell, gm.IsWalkable));
+        motion.path.AddRange(Pathfinder.FindPath(from, motion.targetCell, gm.IsWalkable, EnterCost(gm)));
         motion.pathIndex = 0;
         motion.hasTarget = motion.path.Count > 0;
+    }
+
+    // A* penalty for ENTERING a cell, in Pathfinder units, from the cell's biome extraMoveCost. One ortho
+    // tile = Pathfinder.Ortho units = (CellWorld/moveSpeed) seconds, so unitsPerSecond = Ortho*speed/CellWorld;
+    // converting the tile's extra seconds into that currency makes A* minimize total travel TIME — it detours
+    // around slow terrain whenever a longer-but-faster route exists.
+    System.Func<int, int, int> EnterCost(Game gm)
+    {
+        float unitsPerSecond = Pathfinder.Ortho * Mathf.Max(moveSpeed, 0.01f) / Mathf.Max(gm.CellWorld, 1e-4f);
+        return (x, y) => Mathf.RoundToInt(gm.MoveCost(x, y) * SecondsPerCost * unitsPerSecond);
     }
 
     // ---- Server tile movement (authoritative) ----
@@ -149,7 +223,9 @@ public class PlayerMovement : NetworkBehaviour
         motion.fromPos = gm.CellCenter(from.x, from.y);
         motion.toPos = gm.CellCenter(to.x, to.y);
         motion.toCell = to;
-        motion.stepDuration = Mathf.Max(Vector2.Distance(motion.fromPos, motion.toPos) / Mathf.Max(moveSpeed, 0.01f), 1e-4f);
+        float baseTime = Vector2.Distance(motion.fromPos, motion.toPos) / Mathf.Max(moveSpeed, 0.01f);
+        float extra = gm.MoveCost(to.x, to.y) * SecondsPerCost;     // biome's flat per-tile slowdown (the tile entered)
+        motion.stepDuration = Mathf.Max(baseTime + extra, 1e-4f);
         motion.moveT = 0f;
         motion.moving = true;
     }

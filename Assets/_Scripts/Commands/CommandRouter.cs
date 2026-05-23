@@ -22,6 +22,10 @@ public sealed class CommandRouter
     public void EnterEncounter() { Deactivate(CommandScope.World); Activate(CommandScope.Encounter); }
     public void ExitEncounter() { Deactivate(CommandScope.Encounter); Activate(CommandScope.World); }
 
+    // Entering a dungeon instance swaps the World/Encounter command sets for the Instance one (leave, etc.).
+    public void EnterInstance() { Deactivate(CommandScope.World); Deactivate(CommandScope.Encounter); Activate(CommandScope.Instance); }
+    public void ExitInstance() { Deactivate(CommandScope.Instance); Activate(CommandScope.World); }
+
     // Restore the default scope set for a fresh play session (the static instance survives domain reloads).
     public void ResetScopes() => Active = DefaultScopes;
 }

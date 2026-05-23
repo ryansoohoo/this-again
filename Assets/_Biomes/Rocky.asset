@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d3be8697afc454ab3a5621a477a3f6, type: 3}
+  m_Name: Rocky
+  m_EditorClassIdentifier: Assembly-CSharp::BiomeTiles
+  minimapColor: {r: 0.509434, g: 0.46390805, b: 0.20906019, a: 1}
+  extraMoveCost: 2
+  variants:
+  - sprite: {fileID: -1668142460, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+    weight: 1
+  - sprite: {fileID: 2070000734, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+    weight: 1
+  - sprite: {fileID: -1311027948, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+    weight: 1

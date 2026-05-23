@@ -38,19 +38,34 @@ public static class CommandBootstrap
         r.Register(new Command
         {
             Keyword = "enter", Scope = CommandScope.Encounter, Arg = ArgMode.None,
-            Description = "Enter the place you're standing at.",
+            Description = "Descend into the dungeon you're standing at.",
             Run = _ =>
             {
                 var e = EncounterManager.Instance;
-                string name = e != null && e.Current != null ? e.Current.Name : "the place";
-                return CommandResult.Ok($"A villager greets you to {name}. \"Welcome, traveler.\"", keepOpen: true, output: OutputType.Encounter);
+                var pm = PlayerMovement.LocalInstance;
+                var site = e != null ? e.Current : null;
+                if (site == null || pm == null) return CommandResult.Bad("There's nothing to enter here.");
+                pm.RequestEnterInstance(site.Cell);   // server teleports us to the site's off-map room
+                e.EnterDungeon();                     // clear the prompt + swap Encounter scope for Instance
+                return CommandResult.Ok($"You descend into {site.Name}.", keepOpen: false, output: OutputType.Encounter);
             },
         });
         r.Register(new Command
         {
-            Keyword = "leave", Scope = CommandScope.Encounter, Arg = ArgMode.None,
-            Description = "Leave and return to the world.",
-            Run = _ => { EncounterManager.Instance?.End(); return CommandResult.Ok("You leave.", keepOpen: false, output: OutputType.Encounter); },
+            Keyword = "leave", Scope = CommandScope.Encounter | CommandScope.Instance, Arg = ArgMode.None,
+            Description = "Leave: climb out of the dungeon, or step away from a place.",
+            Run = _ =>
+            {
+                var pm = PlayerMovement.LocalInstance;
+                if (pm != null && pm.InInstance)
+                {
+                    pm.RequestLeaveInstance();
+                    CommandRouter.Instance.ExitInstance();   // Instance -> World
+                    return CommandResult.Ok("You climb back to the surface.", keepOpen: false, output: OutputType.Encounter);
+                }
+                EncounterManager.Instance?.End();
+                return CommandResult.Ok("You leave.", keepOpen: false, output: OutputType.Encounter);
+            },
         });
 
         // ---- Inventory (available in the world and in combat) ----
@@ -67,6 +82,20 @@ public static class CommandBootstrap
             Keyword = "sites", Scope = CommandScope.World, Arg = ArgMode.None,
             Description = "(debug) Report the nearest structure site to you.",
             Run = _ => CommandResult.Ok(NearestSite(), keepOpen: true, output: OutputType.System),
+        });
+        r.Register(new Command
+        {
+            Keyword = "dungeon", Scope = CommandScope.World, Arg = ArgMode.None,
+            Description = "(debug) Teleport into a shared test dungeon room.",
+            Run = _ =>
+            {
+                var pm = PlayerMovement.LocalInstance;
+                if (pm == null) return CommandResult.Bad("No player yet — host or join first.");
+                if (pm.InInstance) return CommandResult.Bad("You're already in a dungeon.");
+                pm.RequestEnterInstance(Vector2Int.zero);   // fixed test room: everyone who runs this shares it
+                CommandRouter.Instance.EnterInstance();      // World -> Instance (so 'leave' becomes available)
+                return CommandResult.Ok("(debug) Descending into the test dungeon. Type 'leave' to return.", keepOpen: false, output: OutputType.System);
+            },
         });
         r.Register(new Command
         {

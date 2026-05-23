@@ -42,6 +42,7 @@ public sealed class World
 
     public bool IsLand(int cx, int cy)
     {
+        if (Underworld.Contains(cx, cy)) return Underworld.IsGround(cx, cy);   // off-map dungeon rooms: flat plains, water-moat walls
         var key = new Vector2Int(cx, cy);
         if (landCache.TryGetValue(key, out var v)) return v;
         v = gen.IsLand(cx, cy);
@@ -52,12 +53,13 @@ public sealed class World
     public bool IsWalkable(int cx, int cy) => IsLand(cx, cy);   // everything but open water is walkable
 
     // The structure site occupying a cell, or null. Public so the encounter layer can ask "am I on a site?".
-    public StructureSite SiteAt(int cx, int cy) => structureGen != null ? structureGen.SiteAt(cx, cy) : null;
+    public StructureSite SiteAt(int cx, int cy) => !Underworld.Contains(cx, cy) && structureGen != null ? structureGen.SiteAt(cx, cy) : null;
 
     // Per-cell interior-land sprite (renderer's all-land case): a structure site's tile wins; otherwise
     // classify cover, roll coverage, pick a weighted biome variant. Null -> the built-in blank ground tile.
     public Sprite LandSprite(int cx, int cy)
     {
+        if (Underworld.Contains(cx, cy)) return cfg.defaultGroundSprite;   // dungeon plains: the plain ground tile everywhere
         var site = SiteAt(cx, cy);
         if (site != null)
         {
@@ -75,11 +77,27 @@ public sealed class World
     // the blank color when coverage rolls it out.
     public Color32 LandColor(int cx, int cy)
     {
+        if (Underworld.Contains(cx, cy)) return cfg.defaultGroundColor;
         if (cfg.structureSettings != null && SiteAt(cx, cy) != null) return (Color32)cfg.structureSettings.markerColor;
         var gt = groundGen.At(cx, cy);
         if (Hash01(cx, cy, cfg.biome.seed, 1009 + (int)gt) >= CoverageFor(gt)) return cfg.defaultGroundColor;
         var b = BiomeFor(gt);
         return b != null ? (Color32)b.minimapColor : cfg.defaultGroundColor;
+    }
+
+    // Extra movement cost for ENTERING a land cell, in the biome's own int units (tenths of a second).
+    // Mirrors LandSprite/LandColor so cost matches what's rendered: water (not walkable) and a structure-site
+    // cell cost nothing, and a cell whose coverage rolls out (renders blank ground) costs nothing — only an
+    // actual biome tile charges its extraMoveCost. Deterministic, but only the authoritative server queries it.
+    public int MoveCost(int cx, int cy)
+    {
+        if (Underworld.Contains(cx, cy)) return 0;
+        if (!IsLand(cx, cy)) return 0;
+        if (SiteAt(cx, cy) != null) return 0;
+        var gt = groundGen.At(cx, cy);
+        if (Hash01(cx, cy, cfg.biome.seed, 1009 + (int)gt) >= CoverageFor(gt)) return 0;
+        var b = BiomeFor(gt);
+        return b != null ? Mathf.Max(0, b.extraMoveCost) : 0;
     }
 
     BiomeTiles BiomeFor(GroundType gt) => gt switch

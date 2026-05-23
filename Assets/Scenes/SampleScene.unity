@@ -485,9 +485,37 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: grassBiome
+      value: 
+      objectReference: {fileID: 11400000, guid: 845c7c1e04632e348b1539eb7c77c619, type: 2}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: rockyBiome
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ff2afe2df92f634fad7864091319754, type: 2}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: structures
+      value: 
+      objectReference: {fileID: 11400000, guid: 66caf761ab6bcaa44b03aa2cf4f6704b, type: 2}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: waterSheet
+      value: 
+      objectReference: {fileID: 2800000, guid: e7971457fc041874ca60555ee1ab2b16, type: 3}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: forestBiome
+      value: 
+      objectReference: {fileID: 11400000, guid: 4dcbda25540090243a30c9255d9f1efa, type: 2}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: summerSheet
+      value: 
+      objectReference: {fileID: 2800000, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
       propertyPath: minimapRadius
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: mountainBiome
+      value: 
+      objectReference: {fileID: 11400000, guid: 115ff4289957bca4db9e42327eff3d7d, type: 2}
     - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
       propertyPath: minCellsVisible
       value: 6
@@ -495,6 +523,14 @@ PrefabInstance:
     - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
       propertyPath: startCellsVisible
       value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: defaultGroundSprite
+      value: 
+      objectReference: {fileID: -1049981873, guid: 54923318ace79914ca9da91ec5135781, type: 3}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: dayNight.cycleSeconds
+      value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
       propertyPath: biomeTextures.Array.size
@@ -528,6 +564,18 @@ PrefabInstance:
       propertyPath: 'biomeTextures.Array.data[6]'
       value: 
       objectReference: {fileID: 2800000, guid: 7ddf01011f253f14c9bd69ac92e9aa31, type: 3}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: structureSettings.blockSize
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: structureSettings.siteChance
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: structureSettings.shadowOffsetY
+      value: -0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 3926073117119202003, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
       propertyPath: m_Name
       value: GridManager

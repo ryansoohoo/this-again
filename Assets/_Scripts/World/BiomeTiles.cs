@@ -9,6 +9,11 @@ public class BiomeTiles : ScriptableObject
 {
     [Tooltip("Color this biome shows as on the minimap (the tile's representative color)")]
     public Color minimapColor = Color.white;
+
+    [Min(0), Tooltip("Extra time to walk across a tile of this biome, in tenths of a second (0 = normal). " +
+                     "1 = +0.1s, 10 = +1s. A normal tile crosses in ~0.25s. Used by movement + click-to-move routing.")]
+    public int extraMoveCost;
+
     public BiomeTileVariant[] variants;
 }
 

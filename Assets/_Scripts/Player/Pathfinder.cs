@@ -7,9 +7,12 @@ using UnityEngine;
 // matching the player's WASD slide rule. The search is capped by a node budget so an ocean/unreachable
 // target can't spin forever; if the goal can't be reached it returns the route to the closest reachable
 // cell, so clicking on water walks the player to the nearest shore instead of refusing to move.
+// enterCost(x,y) adds a per-cell penalty (same units as Ortho/Diag) for stepping onto a cell, so costly
+// terrain (e.g. mountains) gets routed around when a cheaper path exists. It must be >= 0 so the octile
+// heuristic, which ignores it, stays admissible.
 public static class Pathfinder
 {
-    const int Ortho = 10, Diag = 14;
+    public const int Ortho = 10, Diag = 14;   // base step cost; Ortho units == one orthogonal tile
 
     static readonly Vector2Int[] Dirs =
     {
@@ -20,7 +23,8 @@ public static class Pathfinder
     // Cells to step onto in order (start excluded, goal included when reachable). Empty if already at
     // the goal or boxed in. walkable(x,y) decides which cells may be entered.
     public static List<Vector2Int> FindPath(Vector2Int start, Vector2Int goal,
-                                            Func<int, int, bool> walkable, int maxNodes = 8000)
+                                            Func<int, int, bool> walkable, Func<int, int, int> enterCost,
+                                            int maxNodes = 8000)
     {
         var path = new List<Vector2Int>();
         if (start == goal) return path;
@@ -55,7 +59,7 @@ public static class Pathfinder
                 if (diag && (!walkable(cur.x + d.x, cur.y) || !walkable(cur.x, cur.y + d.y)))
                     continue;                               // don't slip diagonally between two water cells
 
-                int ng = cg + (diag ? Diag : Ortho);
+                int ng = cg + (diag ? Diag : Ortho) + enterCost(nb.x, nb.y);
                 if (g.TryGetValue(nb, out int known) && ng >= known) continue;
                 g[nb] = ng;
                 came[nb] = cur;

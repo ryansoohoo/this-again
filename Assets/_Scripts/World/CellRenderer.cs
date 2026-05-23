@@ -63,24 +63,57 @@ public static class CellRenderer
         vMax = (r.y + r.height - inset) / h;
     }
 
-    // Dual-grid mesh for the window: display tiles sit on cell corners [center +- radius]. Corner (i,j) reads
-    // cells (i-1..i, j-1..j). Submesh 0 = land+coast (cases 1..15); submesh 1 = open water (case 0).
-    // landSpriteAt(i,j) gives the interior-land (case 15) biome sprite, or null for the built-in ground tile.
+    // Window mesh in two passes so the per-cell interior ground lands on CELL CENTERS (where the player stands),
+    // while coast/water keep the dual-grid CORNER phase (which already lines up with cell centers). Pass 1 draws
+    // each land cell's biome sprite as a cell-centered quad; pass 2 draws the dual-grid corners, skipping the
+    // all-land case (15) since pass 1 already filled interiors. Pass-1 ground tris go into the land submesh
+    // BEFORE pass-2 coast tris, so the opaque coast art paints over the ground at shorelines (painter's order).
+    // Submesh 0 = ground + coast (summer sheet); submesh 1 = open water (case 0, animated). landSpriteAt(cx,cy)
+    // gives a cell's biome variant, or null for the built-in ground tile.
     public static Mesh BuildWindowMesh(Func<int, int, bool> isLand, Func<int, int, Sprite> landSpriteAt, Vector2Int center, int radius, float cellWorld)
     {
-        int dmin = -radius, dmax = radius + 1;          // corner offsets from center (one extra on the high side)
-        int n = dmax - dmin + 1;                        // display tiles per axis
-        int total = n * n;
+        int cellSpan = 2 * radius + 3, cornerSpan = 2 * radius + 2;   // cells read by the corner pass; corner quads
+        int maxQuads = cellSpan * cellSpan + cornerSpan * cornerSpan; // upper bound (water cells / case 15 don't emit)
 
-        var verts = new Vector3[total * 4];
-        var uvs = new Vector2[total * 4];
-        var colors = new Color32[total * 4];
-        var landTris = new List<int>(total * 6);
-        var waterTris = new List<int>(total);
+        var verts = new List<Vector3>(maxQuads * 4);
+        var uvs = new List<Vector2>(maxQuads * 4);
+        var colors = new List<Color32>(maxQuads * 4);
+        var landTris = new List<int>(maxQuads * 6);                   // pass 1 ground, then pass 2 coast (order == draw order)
+        var waterTris = new List<int>(cornerSpan * cornerSpan * 6);
         var white = new Color32(255, 255, 255, 255);
         float cw = cellWorld, half = 0.5f * cw;
 
-        int v = 0;
+        // Emit one quad centered at world (wx,wy), spanning +-half, with the given UV rect, into tris.
+        void Quad(float wx, float wy, float uMin, float uMax, float vMin, float vMax, List<int> tris)
+        {
+            int v = verts.Count;
+            verts.Add(new Vector3(wx - half, wy - half, 0f));
+            verts.Add(new Vector3(wx + half, wy - half, 0f));
+            verts.Add(new Vector3(wx - half, wy + half, 0f));
+            verts.Add(new Vector3(wx + half, wy + half, 0f));
+            uvs.Add(new Vector2(uMin, vMin)); uvs.Add(new Vector2(uMax, vMin));
+            uvs.Add(new Vector2(uMin, vMax)); uvs.Add(new Vector2(uMax, vMax));
+            colors.Add(white); colors.Add(white); colors.Add(white); colors.Add(white);
+            tris.Add(v); tris.Add(v + 2); tris.Add(v + 1);
+            tris.Add(v + 1); tris.Add(v + 2); tris.Add(v + 3);
+        }
+
+        // Pass 1: interior ground, one quad per land cell, centered on the cell (== the player's CellCenter).
+        for (int cx = center.x - radius - 1; cx <= center.x + radius + 1; cx++)
+        for (int cy = center.y - radius - 1; cy <= center.y + radius + 1; cy++)
+        {
+            if (!isLand(cx, cy)) continue;
+            float uMin, uMax, vMin, vMax;
+            Sprite s = landSpriteAt(cx, cy);                                                      // per-cell biome variant (or null)
+            if (s != null)
+                RectUV(s.textureRect, s.texture.width, s.texture.height, out uMin, out uMax, out vMin, out vMax);
+            else
+                TileUV(FallbackGroundCol, FallbackGroundRow, SummerW, SummerH, out uMin, out uMax, out vMin, out vMax);  // blank ground
+            Quad((cx + 0.5f) * cw, (cy + 0.5f) * cw, uMin, uMax, vMin, vMax, landTris);
+        }
+
+        // Pass 2: dual-grid coast + open water on cell corners. Corner (i,j) reads cells (i-1..i, j-1..j).
+        int dmin = -radius, dmax = radius + 1;          // one extra corner on the high side
         for (int di = dmin; di <= dmax; di++)
         for (int dj = dmin; dj <= dmax; dj++)
         {
@@ -90,36 +123,19 @@ public static class CellRenderer
             bool bl = isLand(i - 1, j - 1);  // bottom-left
             bool br = isLand(i,     j - 1);  // bottom-right
             int c = (tl ? 1 : 0) | (tr ? 2 : 0) | (bl ? 4 : 0) | (br ? 8 : 0);
-
-            float cx = i * cw, cy = j * cw;             // display tile centered on the cell corner
-            verts[v]     = new Vector3(cx - half, cy - half, 0f);
-            verts[v + 1] = new Vector3(cx + half, cy - half, 0f);
-            verts[v + 2] = new Vector3(cx - half, cy + half, 0f);
-            verts[v + 3] = new Vector3(cx + half, cy + half, 0f);
+            if (c == 15) continue;                                                                // interior: drawn by pass 1
 
             float uMin, uMax, vMin, vMax;
             if (c == 0)
-                TileUV(0, 0, WaterW, WaterH, out uMin, out uMax, out vMin, out vMax);             // open water (animated)
-            else if (c == 15)
             {
-                Sprite s = landSpriteAt(i, j);                                                    // per-cell biome variant (or null)
-                if (s != null)
-                    RectUV(s.textureRect, s.texture.width, s.texture.height, out uMin, out uMax, out vMin, out vMax);
-                else
-                    TileUV(FallbackGroundCol, FallbackGroundRow, SummerW, SummerH, out uMin, out uMax, out vMin, out vMax);  // blank ground
+                TileUV(0, 0, WaterW, WaterH, out uMin, out uMax, out vMin, out vMax);             // open water (animated)
+                Quad(i * cw, j * cw, uMin, uMax, vMin, vMax, waterTris);
             }
             else
+            {
                 TileUV(CaseCol[c], CaseRow[c], SummerW, SummerH, out uMin, out uMax, out vMin, out vMax);  // coastline
-            uvs[v]     = new Vector2(uMin, vMin);
-            uvs[v + 1] = new Vector2(uMax, vMin);
-            uvs[v + 2] = new Vector2(uMin, vMax);
-            uvs[v + 3] = new Vector2(uMax, vMax);
-            colors[v] = colors[v + 1] = colors[v + 2] = colors[v + 3] = white;
-
-            var tris = (c == 0) ? waterTris : landTris;
-            tris.Add(v); tris.Add(v + 2); tris.Add(v + 1);
-            tris.Add(v + 1); tris.Add(v + 2); tris.Add(v + 3);
-            v += 4;
+                Quad(i * cw, j * cw, uMin, uMax, vMin, vMax, landTris);
+            }
         }
 
         var mesh = new Mesh { name = "GridDualGridMesh", indexFormat = IndexFormat.UInt32 };

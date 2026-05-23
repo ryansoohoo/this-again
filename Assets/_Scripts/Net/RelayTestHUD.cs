@@ -16,9 +16,9 @@ public class RelayTestHUD : MonoBehaviour
 
     void OnGUI()
     {
-        if (net.Status != lastStatus) { lastStatus = net.Status; status.text = "Net: " + lastStatus; }
-        if (net.JoinCode != lastCode) { lastCode = net.JoinCode; share.text = "Share code: " + lastCode; }
-        bool hasCode = !string.IsNullOrEmpty(net.JoinCode);
+        if (net.State.status != lastStatus) { lastStatus = net.State.status; status.text = "Net: " + lastStatus; }
+        if (net.State.joinCode != lastCode) { lastCode = net.State.joinCode; share.text = "Share code: " + lastCode; }
+        bool hasCode = !string.IsNullOrEmpty(net.State.joinCode);
 
         GUI.Box(new Rect(10, 10, 280, hasCode ? 134 : 108), GUIContent.none);
         GUI.Label(new Rect(20, 16, 260, 20), status);

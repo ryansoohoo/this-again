@@ -12,14 +12,9 @@ using UnityEngine;
 // allocation and shares a join code; others join with it. Grid stays un-networked (static geometry).
 public class RelayConnector : MonoBehaviour
 {
-    public string JoinCode { get; private set; }
+    public NetState State { get; } = new();   // logic writes this; RelayTestHUD reads it
 
-    string status = "offline";
-    public string Status
-    {
-        get => status;
-        private set { status = value; GameLog.Post(OutputType.System, value); }   // surface relay progress in the chat popup
-    }
+    void SetStatus(string s) { State.status = s; GameLog.Post(OutputType.System, s); }   // surface progress in chat
 
     UnityTransport transport;
 
@@ -33,15 +28,15 @@ public class RelayConnector : MonoBehaviour
     {
         try
         {
-            Status = "hosting…";
+            SetStatus("hosting…");
             await InitAndSignIn();
             Allocation alloc = await RelayService.Instance.CreateAllocationAsync(maxConnections);
-            JoinCode = await RelayService.Instance.GetJoinCodeAsync(alloc.AllocationId);
+            State.joinCode = await RelayService.Instance.GetJoinCodeAsync(alloc.AllocationId);
             transport.SetRelayServerData(new RelayServerData(alloc, "dtls"));
             NetworkManager.Singleton.StartHost();
-            Status = $"host up · code {JoinCode}";
+            SetStatus($"host up · code {State.joinCode}");
         }
-        catch (System.Exception e) { Status = "host failed: " + e.Message; Debug.LogException(e); }
+        catch (System.Exception e) { SetStatus("host failed: " + e.Message); Debug.LogException(e); }
     }
 
     // Client: resolve the join code to a Relay allocation, point transport at it, start as client.
@@ -49,14 +44,14 @@ public class RelayConnector : MonoBehaviour
     {
         try
         {
-            Status = "joining…";
+            SetStatus("joining…");
             await InitAndSignIn();
             JoinAllocation alloc = await RelayService.Instance.JoinAllocationAsync(joinCode);
             transport.SetRelayServerData(new RelayServerData(alloc, "dtls"));
             NetworkManager.Singleton.StartClient();
-            Status = $"client → {joinCode}";
+            SetStatus($"client → {joinCode}");
         }
-        catch (System.Exception e) { Status = "join failed: " + e.Message; Debug.LogException(e); }
+        catch (System.Exception e) { SetStatus("join failed: " + e.Message); Debug.LogException(e); }
     }
 
     static async Task InitAndSignIn()

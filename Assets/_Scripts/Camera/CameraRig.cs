@@ -175,7 +175,7 @@ public sealed class CameraRig
     {
         // Arrow keys only: WASD now drives the player (see PlayerController).
         Vector2 v = Vector2.zero;
-        if (CommandConsole.IsTyping) return v;          // command line open: arrows edit text, not pan
+        if (InputState.Typing) return v;          // command line open: arrows edit text, not pan
         var kb = Keyboard.current;
         if (kb == null) return v;
         if (kb.leftArrowKey.isPressed) v.x -= 1f;
@@ -187,7 +187,7 @@ public sealed class CameraRig
 
     bool SpacePressed()
     {
-        if (CommandConsole.IsTyping) return false;      // command line open: space types a space
+        if (InputState.Typing) return false;      // command line open: space types a space
         var kb = Keyboard.current;
         return kb != null && kb.spaceKey.wasPressedThisFrame;
     }

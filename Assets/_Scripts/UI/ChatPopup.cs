@@ -58,7 +58,7 @@ public sealed class ChatPopup : MonoBehaviour
     void Update()
     {
         if (group == null) return;
-        float target = CommandConsole.IsTyping ? 1f : 0f;
+        float target = InputState.Typing ? 1f : 0f;
         group.alpha = Mathf.MoveTowards(group.alpha, target, Time.unscaledDeltaTime / Mathf.Max(0.01f, fadeSeconds));
     }
 

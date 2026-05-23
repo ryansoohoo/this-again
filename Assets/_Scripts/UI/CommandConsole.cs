@@ -9,11 +9,9 @@ using UnityEngine.UI;
 // drag-select, and double-click word select (double-click an already-selected word selects all). Hidden
 // until Enter opens it; type a command, Enter submits. Valid commands run and close it; invalid ones
 // flash red, shake, clear, and stay open. Commands are data-driven so a future MUD autocomplete can
-// enumerate/prefix-match them (see Suggest). While open, IsTyping suppresses player/camera keyboard input.
+// enumerate/prefix-match them (see Suggest). While open, InputState.Typing suppresses player/camera input.
 public sealed class CommandConsole : MonoBehaviour
 {
-    public static bool IsTyping { get; private set; }
-
     [SerializeField] CanvasGroup panelGroup;      // the box; faded in/out with the console (matches ChatPopup)
     [SerializeField] RectTransform panelRect;     // shaken on an invalid command
     [SerializeField] Image panelImage;            // flashed red on an invalid command
@@ -59,16 +57,14 @@ public sealed class CommandConsole : MonoBehaviour
     {
         if (panelRect != null) panelBasePos = panelRect.anchoredPosition;
         if (panelImage != null) panelBaseColor = panelImage.color;
-        CommandBootstrap.EnsureInstalled();
-        CommandRouter.Instance.ResetScopes();
         if (panelGroup != null) panelGroup.alpha = 0f;
-        IsTyping = false;
+        InputState.Typing = false;
     }
 
     void OnDisable()
     {
         if (subscribedKb != null) { subscribedKb.onTextInput -= OnTextInput; subscribedKb = null; }
-        IsTyping = false;
+        InputState.Typing = false;
     }
 
     void Update()
@@ -250,7 +246,7 @@ public sealed class CommandConsole : MonoBehaviour
 
     void Open()
     {
-        open = true; IsTyping = true;
+        open = true; InputState.Typing = true;
         text = ""; caret = anchor = 0;
         dragging = false; lastClickTime = -1f;
         ResetVisuals();
@@ -259,7 +255,7 @@ public sealed class CommandConsole : MonoBehaviour
 
     void Close()
     {
-        open = false; IsTyping = false;
+        open = false; InputState.Typing = false;
         text = ""; caret = anchor = 0;
         dragging = false;
         ResetVisuals();   // hide any selection box; the panel then fades out via UpdateFade

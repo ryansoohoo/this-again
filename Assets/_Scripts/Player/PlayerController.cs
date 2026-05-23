@@ -88,7 +88,7 @@ public class PlayerController : NetworkBehaviour
     // ---- Owner input ----
     void ReadOwnerInput()
     {
-        if (CommandConsole.IsTyping)        // command line open: don't let typed letters drive movement
+        if (InputState.Typing)              // command line open: don't let typed letters drive movement
         {
             if (moveInput.Value != Vector2.zero) moveInput.Value = Vector2.zero;
             return;

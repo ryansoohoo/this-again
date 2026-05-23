@@ -116,6 +116,7 @@ public sealed class Game : MonoBehaviour
         CommandRouter.Instance.ResetScopes();
 
         gameObject.AddComponent<TunerPanels>();       // one accordion overlay for the biome/ground/water knobs
+        gameObject.AddComponent<EncounterManager>();   // walk-on encounter driver
     }
 
     bool ConfigureApp()

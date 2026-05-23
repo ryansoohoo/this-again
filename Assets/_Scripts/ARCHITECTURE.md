@@ -18,10 +18,12 @@ direction, not ECS. Managers/OOP are fine.
 
 ## System roles
 
-- **Player/** — Data: `PlayerMotion`. Logic: `PlayerInput` (helper) + `PlayerMovement` (NetworkBehaviour).
-  Visual: `PlayerView`. (Server writes the replicated transform = data; `PlayerView` reads it → animator.)
+- **Player/** — Data: `PlayerMotion`. Logic: `PlayerInput` (helper). Visual: `PlayerView`.
+  (Movement is server-simulated in `Net/PlayerSimSystem`; `PlayerView` reads a ghost's transform → animator.)
 - **Camera/** — Data: `CameraState`. Logic: `CameraSystem`. Visual: `CameraView` (sole camera writer).
-- **Net/** — Data: `NetState`. Logic: `RelayConnector`. Visual: `RelayTestHUD`.
+- **Net/** — Data: `NetState`, `PlayerRegistry`/`ServerPlayer`, `SnapshotEntry`, `Aoi/ReplicationSettings`+`AoiPlayer`.
+  Logic: `RelayConnector`, `ReplicationHub` (the only NetworkObject; routes RPCs + AOI snapshots), `PlayerSimSystem`,
+  `Aoi/AreaOfInterestSystem`, `GhostManager`, `LocalPlayer`. Visual: `RelayTestHUD` + the Ghost prefab.
 - **World/** — Data: `*Settings` + `World`'s cache. Logic: `BiomeGenerator`/`GroundGenerator` + `World` queries.
   Visual: `WorldView`/`CellRenderer`/`WaterMaterial`.
 - **Commands/** — Data: `Command`/`CommandResult`/`CommandScope`/`OutputType`. Logic: `CommandRegistry`/

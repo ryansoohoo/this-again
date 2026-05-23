@@ -47,6 +47,23 @@ public class PlayerMovement : NetworkBehaviour
         return gm != null ? gm.WorldToCell(transform.position) : Vector2Int.zero;
     }
 
+    // Stop all movement now (used when an encounter begins): cancel WASD intent and ask the server to drop
+    // any click-to-move path, so the player can't drift off the encounter tile. An in-flight step finishes.
+    public void Halt()
+    {
+        if (!IsSpawned) return;
+        if (IsOwner) moveInput.Value = Vector2.zero;
+        HaltServerRpc();
+    }
+
+    [ServerRpc]
+    void HaltServerRpc()
+    {
+        motion.hasTarget = false;
+        motion.path.Clear();
+        motion.pathIndex = 0;
+    }
+
     void Update()
     {
         if (!IsSpawned) return;

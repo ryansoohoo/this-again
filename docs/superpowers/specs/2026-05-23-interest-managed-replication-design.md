@@ -18,8 +18,10 @@ no `NetworkVariable`**. A player you can't see is never loaded on your machine.
 ### Decisions (Ryan, brainstorming 2026-05-23)
 - **Hand-rolled replication**, not NGO's visibility system. Custom snapshot stream + custom ghosts. (Ryan
   chose this over the lighter "keep NetworkTransform + gate with NGO visibility" option.)
-- **Keep a thin `PlayerLink` `NetworkObject`** per connection for identity + RPC routing (owner→server
-  `SenderClientId`, Relay plumbing). We do **not** go fully NetworkObject-less.
+- **Disable NGO auto-spawn** (`NetworkConfig.PlayerPrefab = none`): **no per-player `NetworkObject`** and
+  **zero NGO visibility API** (no `CheckObjectVisibility`/`NetworkShow`/`NetworkHide`). The *only*
+  `NetworkObject` is the scene `ReplicationHub`; it routes every RPC, and the server identifies the caller
+  from `ServerRpcParams.Receive.SenderClientId`. (Ryan: disable autospawn — fully hand-rolled.)
 - **Ghosts are runtime-`Instantiate`d** from an Inspector-referenced prefab. The systems/managers are
   pre-placed scene objects (honors the "scene objects over runtime instantiation" preference for *systems*;
   per-player visuals are inherently dynamic — NGO already instantiates a player per connection today).
@@ -75,29 +77,31 @@ no `NetworkVariable`**. A player you can't see is never loaded on your machine.
 ```
  OWNER (client)                    SERVER (host)                          OTHER CLIENT
  ───────────                       ───────────                            ────────────
- PlayerLink (owner):               PlayerLink (server, per connection):
-   reads PlayerInput                 PlayerMotion sim (ServerStep)
-   SubmitInputServerRpc ─────────►   regionKey, inInstance, worldPos
-   SetTarget/Halt/Enter/Leave ───►   Pathfinder
+ LocalPlayer (client singleton):   PlayerRegistry  (all players, keyed by clientId)
+   reads PlayerInput               PlayerSimSystem (ServerStep over the registry)
+   Hub.SubmitInputServerRpc ─────► Pathfinder; server reads SenderClientId → player
+   Hub.SetTarget/Halt/Enter/Leave  regionKey, inInstance, worldPos
                                    ReplicationHub.Tick() @ 15 Hz:
                                      AreaOfInterestSystem(viewer):
-                                       regionKey == && dist ≤ radius
-                                       (show/hide hysteresis)
+                                       regionKey == && dist ≤ radius (hysteresis)
                                             │ per client
    GhostManager.Apply(snapshot) ◄──SnapshotClientRpc(self + nearby)──► GhostManager.Apply(snapshot)
      spawn/despawn ghosts (prefab)                                       …interpolate, run PlayerView
      interpolate, drive PlayerView
-     expose self-ghost as LocalPlayer
+   LocalPlayer reads self-ghost → camera / encounter / commands
 ```
 
-Five units, each independently understandable + testable:
+Six units + the Ghost prefab, each independently understandable + testable. **The only `NetworkObject` is
+the scene `ReplicationHub`** — no per-player NetworkObject, no NGO auto-spawn.
 
 | Unit | Side | Kind | Responsibility |
 |------|------|------|----------------|
-| `PlayerLink` | both | `NetworkBehaviour` (per connection) | Owner: read input, send intent RPCs, expose the local-player facade. Server: own the authoritative `PlayerMotion`/`regionKey`/`inInstance`, run the movement sim. |
-| `AreaOfInterestSystem` | server | Logic (pure) | Given all players' `(clientId, pos, regionKey)` + settings + prior visibility, return each client's visible set with hysteresis. |
-| `ReplicationHub` | both | `NetworkBehaviour` (scene singleton) | Server: on a fixed tick, build + send each client its snapshot via a targeted `ClientRpc`. Client: receive + forward to `GhostManager`. |
-| `GhostManager` | client | Logic (scene singleton) | Spawn/despawn ghost GameObjects from snapshots, interpolate them, drive `PlayerView`, expose the self-ghost as the local player. |
+| `ReplicationHub` | both | `NetworkBehaviour` (scene singleton — the **only** NetworkObject) | Owner→server RPCs (input/click/halt/enter/leave, `RequireOwnership=false`, caller = `SenderClientId`); server→client targeted snapshots. |
+| `PlayerRegistry` | server | Data | Authoritative per-player state keyed by clientId; add/remove on connect/disconnect. |
+| `PlayerSimSystem` | server | Logic | Per-frame over the registry: apply input, step `PlayerMotion`, run `Pathfinder`, handle teleport. |
+| `AreaOfInterestSystem` | server | Logic (pure) | Each viewer's visible set: region match + radius + hysteresis. |
+| `GhostManager` | client | Logic (scene singleton) | Spawn/despawn ghosts from snapshots, interpolate, drive `PlayerView`, identify the self-ghost. |
+| `LocalPlayer` | client | Logic (scene singleton) | Read input → Hub RPCs; expose the local-player facade (CurrentCell/InInstance/Halt/Enter/Leave). |
 | Ghost prefab | client | Asset | Visual-only player rig (sprites + Animator + Shadow child + `PlayerView`); **no** NetworkObject/Transform. |
 
 ## 4. Data
@@ -117,77 +121,75 @@ One replicated player: `ulong id; float x; float y; byte facing8; byte flags;`
 - `int snapshotHz = 15` — snapshot send rate. Movement is ~4 tiles/s, so 15 Hz + interpolation is smooth;
   ~3 KB/s per client at ~15 visible players.
 
-### 4.3 Server player state (lives on `PlayerLink`, server-only — no separate registry type)
-The set of spawned `PlayerLink`s (one per connection, from `NetworkManager.ConnectedClients`) **is** the
-registry. Each carries server-only: `PlayerMotion motion` (reused as-is), `Vector2Int regionKey`
-(`(0,0)` = overworld; else the underworld room origin), `bool inInstance`, and the authoritative
-`transform.position`. No data is replicated by these fields directly — only the snapshot stream leaves the
-server.
+### 4.3 `PlayerRegistry` + `ServerPlayer` (`Net/PlayerRegistry.cs`, server-only data)
+`ServerPlayer` = `{ PlayerMotion motion; Vector2Int regionKey; bool inInstance; Vector2 worldPos; byte
+facing8; bool snap; Vector2 submittedInput; }`. `PlayerRegistry` is a `Dictionary<ulong, ServerPlayer>`
+keyed by clientId, populated on client-connect (with the origin-spread spawn cell — the old `OnNetworkSpawn`
+logic) and cleared on disconnect. `regionKey` `(0,0)` = overworld, else the underworld room origin. Nothing
+here is replicated directly — only the snapshot stream leaves the server.
 
 ## 5. Logic
 
-### 5.1 `PlayerLink` (`Net/PlayerLink.cs`, `NetworkBehaviour`, replaces `PlayerMovement`)
-The current Player prefab's `NetworkObject` stays and is still NGO's auto-spawned PlayerObject per
-connection (so ownership + `SenderClientId` + Relay routing are free). `PlayerMovement` is **split**:
+### 5.1 `ReplicationHub` (`Net/ReplicationHub.cs`, `NetworkBehaviour`, scene singleton — the only NetworkObject)
+Scene-placed, observed by all clients (NGO default — **no** `CheckObjectVisibility`/`NetworkShow`/`NetworkHide`
+anywhere). It carries every RPC, both directions:
+- **Owner→server** (`[ServerRpc(RequireOwnership = false)]`; the server identifies the player from
+  `ServerRpcParams.Receive.SenderClientId`): `SubmitInputServerRpc(byte dir8)` (unreliable, on change —
+  replaces the `moveInput` NetworkVariable), `SetTargetServerRpc(Vector2)`, `HaltServerRpc()`,
+  `EnterInstanceServerRpc(int x, int y)`, `LeaveInstanceServerRpc()`. Because every call is keyed by
+  `SenderClientId`, a client can only ever drive its **own** registry entry — no cross-player control.
+- **Server→client**: `SnapshotClientRpc(SnapshotEntry[] entries, ClientRpcParams)` targeted to one client
+  (`Send.TargetClientIds = [clientId]`). One send per client per tick. **Reliable** in v1 (correct
+  enter/leave; tiny payloads).
+- **Server tick** (`1/snapshotHz`): for each connected client, `AreaOfInterestSystem.VisibleFor(...)` over
+  the registry → build that client's entries (self first with its `inInstance` bit, then visible others) →
+  send.
+- **Client:** `SnapshotClientRpc` → `GhostManager.Apply(entries)`.
 
-- **Owner side** (the old owner half): `Update` reads `PlayerInput`; on change, `SubmitInputServerRpc(byte
-  dir8)` (unreliable, sent only on change — replaces the `moveInput` NetworkVariable). Click-to-move,
-  `Halt`, `RequestEnter/LeaveInstance` keep their existing ServerRpcs. Exposes the **local-player facade**
-  (`PlayerLink.LocalInstance`): `CurrentCell()` (reads the self-ghost transform), `InInstance` (from the
-  last self snapshot — replaces the `inInstance` NetworkVariable read), `Halt()`,
-  `RequestEnterInstance(cell)`, etc. — so camera / `EncounterManager` / commands retarget here from
-  `PlayerMovement.LocalInstance`.
-- **Server side** (the old server half, essentially unchanged): owns `PlayerMotion`; `ServerStep` consumes
-  the submitted input, runs `Pathfinder`, and writes `transform.position` (now read by the AOI/Hub, not a
-  NetworkTransform). `EnterInstanceServerRpc` sets `regionKey = packed(Underworld.RegionOriginForSite(...))`
-  + teleports via `SpawnCell`; `LeaveInstanceServerRpc` sets `regionKey = (0,0)` + returns. On teleport it
-  raises a per-player **snap** flag consumed by the next snapshot (so ghosts don't streak across the
-  16k-cell jump). `NetworkTransform.Teleport` calls are removed with the component.
-- **`CheckObjectVisibility = clientId => clientId == OwnerClientId`** (server always observes). This hides
-  the *empty* link object from other clients (saves the spawn message + 100 stray GameObjects per client).
-  It is static (owner-only, never recomputed) — **not** the AOI mechanism; AOI is the custom snapshot.
+### 5.2 `PlayerSimSystem` (`Net/PlayerSimSystem.cs`, server-only logic)
+The old `PlayerMovement.ServerStep`, now run over the whole registry. Each frame, per `ServerPlayer`:
+consume `submittedInput` / click path, step `PlayerMotion` (reused as-is), run `Pathfinder` on a new target,
+write `worldPos`/`facing`. The Hub's enter/leave RPCs set `regionKey` + teleport via `Underworld.SpawnCell`
+(enter) / the saved return cell (leave) and raise the per-player **snap** flag (consumed by the next
+snapshot, so ghosts don't streak across the 16k-cell jump). **Connection lifecycle** lives here (or a tiny
+`NetBootstrap`): `OnClientConnected` → add a `ServerPlayer` with the origin-spread spawn cell (the old
+`OnNetworkSpawn` logic); `OnClientDisconnected` → remove; **add the host explicitly on host start** (some
+NGO versions don't fire the connect callback for the host's own id).
 
-### 5.2 `AreaOfInterestSystem` (`Net/AreaOfInterestSystem.cs`, pure static — unit-testable)
-- `VisibleFor(viewer, allPlayers, settings, priorVisible)` → the set of player ids the viewer should
-  observe: `p.regionKey == viewer.regionKey && dist(p, viewer) ≤ (priorVisible.Contains(p) ? hideRadius :
+### 5.3 `AreaOfInterestSystem` (`Net/AreaOfInterestSystem.cs`, pure static — unit-testable)
+- `VisibleFor(viewer, allPlayers, settings, priorVisible)` → the player ids the viewer should observe:
+  `p.regionKey == viewer.regionKey && dist(p, viewer) ≤ (priorVisible.Contains(p) ? hideRadius :
   showRadius)`. Self is always included.
-- A region-bucketed spatial hash keeps the per-tick cost ~O(n) instead of O(n²): bucket players by
-  `regionKey` first (overworld vs each room), then by a coarse cell grid within a region, and only test
-  players in neighbouring buckets.
-- Pure inputs/outputs → directly unit-testable (region isolation, radius, hysteresis) the way the world-gen
-  code already is.
+- A region-bucketed spatial hash keeps per-tick cost ~O(n): bucket by `regionKey` first (overworld vs each
+  room), then a coarse cell grid within a region; only test neighbouring buckets.
+- Pure in/out → directly unit-testable (region isolation, radius, hysteresis), like the world-gen code.
 
-### 5.3 `ReplicationHub` (`Net/ReplicationHub.cs`, `NetworkBehaviour`, scene singleton on a NetworkObject)
-- Scene-placed, observed by **all** clients (so its `ClientRpc` reaches everyone, including ghosts'
-  owners whose `PlayerLink` is hidden from others).
-- **Server**, every `1/snapshotHz`: gather all `PlayerLink`s' `(clientId, pos, regionKey, facing, moving,
-  snap, inInstance)`; for each connected client, `AreaOfInterestSystem.VisibleFor(...)` → build that
-  client's `SnapshotEntry[]` (self first, with its `inInstance` bit; then visible others) →
-  `SnapshotClientRpc(entries, new ClientRpcParams{ Send = { TargetClientIds = [clientId] }})`. One send per
-  client per tick (payloads differ per client). **Reliable** in v1 (correct enter/leave; tiny payloads).
-- **Client:** `SnapshotClientRpc` runs locally → `GhostManager.Apply(entries)`. Per-player snap bits are
-  cleared after the tick.
-
-### 5.4 `GhostManager` (`Net/GhostManager.cs`, scene singleton, client logic)
+### 5.4 `GhostManager` (`Net/GhostManager.cs`, client scene singleton)
 - Holds a serialized **Ghost prefab** reference (Inspector-wired — no `Resources.Load`).
-- `Apply(entries)`: for each entry, `Instantiate` the ghost on first sight (positioned, no lerp) or update
-  its interpolation target; entries absent from the latest snapshot are despawned (short grace to absorb a
-  dropped tick). `snap`-flagged entries set position directly (no lerp).
-- `Update`: interpolate each ghost between its last two snapshot positions (buffer of 2, `snapshotHz`-paced)
-  → smooth motion at the render rate; `PlayerView` on the ghost derives walk/idle + facing from that motion,
-  exactly as it does today from the replicated transform.
-- Marks the entry whose `id == NetworkManager.LocalClientId` as the **self-ghost**: the camera follows it,
-  `EncounterManager`/commands read it via `PlayerLink.LocalInstance`. (Brief startup gap until the first
-  snapshot — camera defaults to the spawn area.)
+- `Apply(entries)`: `Instantiate` the ghost on first sight (positioned, no lerp) or update its interpolation
+  target; entries absent from the latest snapshot are despawned (short grace to absorb a dropped tick);
+  `snap`-flagged entries set position directly.
+- `Update`: interpolate each ghost between its last two snapshot positions (buffer of 2, `snapshotHz`-paced);
+  `PlayerView` on the ghost derives walk/idle + facing from that motion, exactly as it does today from the
+  replicated transform.
+- Flags the entry whose `id == NetworkManager.LocalClientId` as the **self-ghost** and exposes it to
+  `LocalPlayer`.
+
+### 5.5 `LocalPlayer` (`Net/LocalPlayer.cs`, client scene singleton — the local-player facade)
+Replaces `PlayerMovement.LocalInstance`. `Update` reads `PlayerInput` and, on change, calls the Hub's
+ServerRpcs (movement intent / click). Exposes `CurrentCell()` (from the self-ghost transform), `InInstance`
+(from the last self snapshot — replaces the `inInstance` NetworkVariable), `Halt()`,
+`RequestEnterInstance(cell)`, `RequestLeaveInstance()`. Camera / `EncounterManager` / command-scope gating
+retarget here. (Brief startup gap until the first snapshot — camera defaults to the spawn area.)
 
 ## 6. Visual
 
-- **Ghost prefab** = the current Player prefab's **visual subtree** (SpriteRenderers, Animator, the "Shadow"
-  child + sorting layer, `PlayerView`, body-tint from the day/night work) with **NetworkObject,
-  NetworkTransform, and `PlayerMovement` removed**. Reusing it means **no art/animation rebuild**.
-- **Player (link) prefab** = the current Player prefab with the **visual subtree, Animator, `PlayerView`,
-  and NetworkTransform removed**, and `PlayerMovement` replaced by `PlayerLink`. It is invisible — pure
-  identity/RPC. This stays assigned as `NetworkManager.NetworkConfig.PlayerPrefab`.
+- **Ghost prefab** = the current `Player.prefab` with **NetworkObject, NetworkTransform, and
+  `PlayerMovement` removed**, keeping the visual subtree (SpriteRenderers, Animator, the "Shadow" child +
+  sorting layer, `PlayerView`, day/night body-tint). Reusing it means **no art/animation rebuild**; it is a
+  plain prefab `Instantiate`d by `GhostManager`.
+- **No player/link prefab.** `NetworkManager.NetworkConfig.PlayerPrefab` is set to **none** — auto-spawn is
+  off, so there is no per-connection NetworkObject. (`Player.prefab` is converted into `Ghost.prefab`.)
 - `PlayerView` is unchanged in behavior; it just runs on a ghost instead of the networked player.
 
 ## 7. Underworld (the explicit guarantee)
@@ -216,50 +218,54 @@ so the ghost jumps cleanly.
   Spread-out players ⇒ tiny snapshots; this is the 100+ win.
 - **Server CPU per tick** is ~O(n) via the region-bucketed spatial hash; per-player movement sim is the same
   cost as today (cheap stepping + occasional A* on click). No new O(n²).
-- **No new replicated state**: zero NetworkVariables on players; the only player NetworkObject (`PlayerLink`)
-  is hidden from non-owners and carries no transform/vars. The single always-replicated object is the
-  scene `ReplicationHub`, which broadcasts nothing — it only sends targeted snapshots.
+- **No per-player NetworkObject, no new replicated state**: zero NetworkVariables; NGO auto-spawn is off.
+  The single NetworkObject is the scene `ReplicationHub`, which broadcasts nothing — it only sends targeted
+  snapshots. No `CheckObjectVisibility`/`NetworkShow`/`NetworkHide` anywhere.
 - **Determinism preserved**: terrain + time-of-day remain pure/unreplicated; this change only governs which
   *players* a client loads.
 
 ## 9. File manifest
 
 **New**
-- `Assets/_Scripts/Net/PlayerLink.cs` — owner facade + server sim (replaces `PlayerMovement`).
-- `Assets/_Scripts/Net/ReplicationHub.cs` — per-client snapshot send/receive (`NetworkBehaviour` singleton).
+- `Assets/_Scripts/Net/ReplicationHub.cs` — all RPCs both ways; the only `NetworkObject` (scene singleton).
+- `Assets/_Scripts/Net/PlayerRegistry.cs` — server-only player state + `ServerPlayer` (+ connect/disconnect
+  lifecycle, or a tiny `NetBootstrap`).
+- `Assets/_Scripts/Net/PlayerSimSystem.cs` — server movement sim over the registry (the old `ServerStep`).
 - `Assets/_Scripts/Net/AreaOfInterestSystem.cs` — pure visibility query (region + radius + hysteresis).
-- `Assets/_Scripts/Net/GhostManager.cs` — ghost lifecycle + interpolation + local-player facade.
+- `Assets/_Scripts/Net/GhostManager.cs` — ghost lifecycle + interpolation + self-ghost.
+- `Assets/_Scripts/Net/LocalPlayer.cs` — client input → Hub RPCs + the local-player facade.
 - `Assets/_Scripts/Net/SnapshotEntry.cs` — `INetworkSerializable` per-player snapshot struct.
 - `Assets/_Scripts/Net/ReplicationSettings.cs` — radius/tick settings (`JsonPref`).
-- `Assets/_Prefabs/Ghost.prefab` — visual-only player rig (derived from `Player.prefab`).
-- A `ReplicationHub` + `GhostManager` GameObject pre-placed in `SampleScene` (with the Ghost prefab wired).
+- `Assets/_Prefabs/Ghost.prefab` — visual-only player rig (converted from `Player.prefab`).
+- `ReplicationHub` + `GhostManager` + `LocalPlayer` GameObjects pre-placed in `SampleScene` (Ghost prefab +
+  refs wired).
 
 **Modified**
-- `Assets/_Prefabs/Player.prefab` — strip NetworkTransform + visual subtree + Animator + `PlayerView`;
-  swap `PlayerMovement` → `PlayerLink`. *(Currently uncommitted-modified — see §11.)*
-- `Assets/Scenes/SampleScene.unity` — add the Hub/GhostManager objects; wire references.
-- `Assets/_Scripts/EncounterManager.cs` — retarget `PlayerMovement.LocalInstance` →
-  `PlayerLink.LocalInstance`.
-- The camera-follow component (`Assets/_Scripts/Camera/…`) — follow the self-ghost via
-  `PlayerLink.LocalInstance` instead of the networked player transform.
-- `Assets/_Scripts/CommandBootstrap.cs` / `Commands/CommandScope.cs` consumers — read `InInstance` from the
-  `PlayerLink` facade (no NetworkVariable). *(No new types in the Commands asmdef.)*
-- `Assets/_Scripts/Game.cs` — build/own `ReplicationSettings` (`replication.json` via `JsonPref`); expose
-  the facade; ensure Hub/GhostManager are initialized after the world.
+- `Assets/Scenes/SampleScene.unity` — add the Hub/GhostManager/LocalPlayer objects; wire refs; set
+  `NetworkManager.NetworkConfig.PlayerPrefab = none`.
+- `Assets/_Scripts/EncounterManager.cs` — retarget `PlayerMovement.LocalInstance` → `LocalPlayer.Instance`.
+- The camera-follow component (`Assets/_Scripts/Camera/…`) — follow the self-ghost via `LocalPlayer.Instance`.
+- `Assets/_Scripts/CommandBootstrap.cs` / `Commands/CommandScope.cs` consumers — read `InInstance` from
+  `LocalPlayer` (no NetworkVariable). *(No new types in the Commands asmdef.)*
+- `Assets/_Scripts/Game.cs` — build/own `ReplicationSettings` (`replication.json` via `JsonPref`); init
+  Hub/registry/sim/GhostManager/LocalPlayer after the world; hook server connect/disconnect.
 - `Assets/_Scripts/UI/TunerPanels.cs` — a "Replication" accordion (show/hide radius, snapshot Hz) + save.
 - `Assets/_Scripts/Player/PlayerView.cs` — no logic change; confirmed to run on a ghost (reads its own
   transform).
 
 **Deleted**
-- `Assets/_Scripts/Player/PlayerMovement.cs` (+ `.meta`) — superseded by `PlayerLink` (server sim moves
-  with it; owner API becomes the facade).
+- `Assets/_Scripts/Player/PlayerMovement.cs` (+ `.meta`) — split into `PlayerSimSystem` (server sim),
+  `LocalPlayer` (client facade), and the Hub RPCs.
+- `Assets/_Prefabs/Player.prefab` — converted into `Ghost.prefab` (network components stripped) and removed
+  from `NetworkConfig`. *(Currently uncommitted-modified — see §12.)*
 
 ## 10. Phasing
 
-1. **Server authority without NetworkTransform.** Add `PlayerLink` (server sim + owner input RPC replacing
-   `moveInput`; `inInstance` → server field) and a temporary debug snapshot (send *all* players to *all*
-   clients) + `GhostManager` + Ghost prefab. *Deliverable:* movement + instances work end-to-end with
-   ghosts and **zero NetworkVariables/NetworkTransform**, identical feel to today (still broadcasting).
+1. **Server authority without auto-spawn.** Set `PlayerPrefab = none`; add `ReplicationHub` (input RPCs +
+   a temporary debug snapshot that sends *all* players to *all* clients), `PlayerRegistry`, `PlayerSimSystem`,
+   `GhostManager`, `LocalPlayer`, and the Ghost prefab. *Deliverable:* movement + instances work end-to-end
+   with ghosts and **zero NetworkVariables/NetworkTransform/auto-spawn**, identical feel to today (still
+   broadcasting).
 2. **Area of interest.** Add `AreaOfInterestSystem` + `ReplicationHub` per-client targeted snapshots +
    region keys + hysteresis. *Deliverable:* clients load only players in range/region; far players never
    spawn locally.
@@ -273,9 +279,9 @@ Per the project's unity-mcp flow (`execute_code` is broken; use **refresh `scope
 the camera, **not** IMGUI panels):
 
 - **Phase 1:** host + a second client (manual Host click — MCP can't drive the IMGUI Host button); both
-  move via WASD + click-to-move and see each other as ghosts; enter/leave a dungeon works; console clean of
-  NetworkVariable/NetworkTransform references; profiler shows the player NetworkObject carries no transform
-  sync.
+  move via WASD + click-to-move and see each other as ghosts; enter/leave a dungeon works; the scene has
+  exactly **one** NetworkObject (the Hub) and `NetworkConfig.PlayerPrefab` is none; console clean of
+  NetworkVariable/NetworkTransform references.
 - **Phase 2:** with players placed far apart, a client's hierarchy shows **no ghost** for an out-of-range
   player, and the ghost spawns when they cross `showRadius` and despawns past `hideRadius` (no flicker at the
   boundary).
@@ -288,9 +294,11 @@ the camera, **not** IMGUI panels):
 
 ## 12. Open assumptions & deferred
 
-- **`Player.prefab` is currently uncommitted-modified.** Before editing it, Ryan should commit/stash that
-  WIP so the prefab restructure (strip transform/visuals, swap component) doesn't clobber or bundle it. Same
-  caution for `SampleScene.unity`.
+- **`Player.prefab`, `SampleScene.unity`, and `PlayerMovement.cs` are currently uncommitted-modified.**
+  Commit/stash that WIP before the prefab→`Ghost.prefab` conversion, the scene wiring (`PlayerPrefab =
+  none`), and the `PlayerMovement.cs` deletion, so none of it is clobbered or bundled.
+- **Host self-registration:** the server adds itself to the registry on host start (some NGO versions don't
+  fire the connect callback for the host's own clientId).
 - **Local-player feel** = server round-trip with interpolation (parity with today's server-authoritative
   NetworkTransform). Client-side prediction is deferred.
 - **Reliable full-AOI snapshots** in v1 (simple, correct). Snapshot **deltas**, an **unreliable position +

@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b9f71f8e59dc94980d16cdf08af565, type: 3}
+  m_Name: Structures
+  m_EditorClassIdentifier: Assembly-CSharp::StructureSet
+  defs:
+  - id: forest_village
+    label: the village
+    validOn:
+    - 1
+    spawnWeight: 1
+    variants: []
+  - id: forest_home
+    label: a home
+    validOn:
+    - 1
+    spawnWeight: 1
+    variants: []
+  - id: forest_town
+    label: the town
+    validOn:
+    - 1
+    spawnWeight: 1
+    variants: []
+  - id: forest_mansion
+    label: the mansion
+    validOn:
+    - 1
+    spawnWeight: 1
+    variants: []
+  - id: farm
+    label: a farm
+    validOn:
+    - 0
+    spawnWeight: 1
+    variants: []
+  - id: camp
+    label: a camp
+    validOn:
+    - 0
+    - 1
+    spawnWeight: 1
+    variants: []
+  - id: walled_town
+    label: the walled town
+    validOn:
+    - 0
+    - 1
+    spawnWeight: 1
+    variants: []
+  namePool:
+  - Oakhollow
+  - Mossfen
+  - Thornwood
+  - Elderbrook
+  - Ashvale
+  - Brackenford
+  - Willowmere
+  - Duskwood
+  - Fernhollow
+  - Greystead

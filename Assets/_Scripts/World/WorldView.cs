@@ -17,7 +17,7 @@ public sealed class WorldView
     readonly WorldViewConfig cfg;
     readonly float cellWorld;
     readonly MeshFilter gridMesh;
-    readonly CameraRig rig;
+    readonly CameraState cameraState;
 
     public Material WaterMat { get; }                       // submesh-1 material; WaterMaterial pushes settings into it
     public Texture2D MinimapTexture { get; private set; }
@@ -27,9 +27,9 @@ public sealed class WorldView
     bool meshInit;
 
     public WorldView(World world, WorldViewConfig cfg, float cellWorld, Transform parent,
-                     Texture2D summerSheet, Texture2D waterSheet, CameraRig rig)
+                     Texture2D summerSheet, Texture2D waterSheet, CameraState cameraState)
     {
-        this.world = world; this.cfg = cfg; this.cellWorld = cellWorld; this.rig = rig;
+        this.world = world; this.cfg = cfg; this.cellWorld = cellWorld; this.cameraState = cameraState;
         gridMesh = CellRenderer.Build(parent, summerSheet, waterSheet);
         WaterMat = gridMesh.GetComponent<MeshRenderer>().sharedMaterials[1];
         ViewCenter = meshCenter = Vector2Int.zero;
@@ -60,8 +60,8 @@ public sealed class WorldView
         if (oldMesh != null) Object.Destroy(oldMesh);
 
         float size = (2 * cfg.viewRadius + 1) * cellWorld;
-        if (rig != null) rig.Bounds = new Rect((meshCenter.x - cfg.viewRadius) * cellWorld,
-                                               (meshCenter.y - cfg.viewRadius) * cellWorld, size, size);
+        if (cameraState != null) cameraState.Bounds = new Rect((meshCenter.x - cfg.viewRadius) * cellWorld,
+                                                              (meshCenter.y - cfg.viewRadius) * cellWorld, size, size);
     }
 
     void RebuildMinimap()

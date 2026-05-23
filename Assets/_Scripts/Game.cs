@@ -61,7 +61,9 @@ public sealed class Game : MonoBehaviour
     public Vector2Int WorldToCell(Vector2 w) => new(Mathf.FloorToInt(w.x / cellWorld), Mathf.FloorToInt(w.y / cellWorld));
     public bool IsWalkable(int cx, int cy) => World != null && World.IsWalkable(cx, cy);
 
-    CameraRig rig;
+    CameraState cameraState;
+    CameraSystem cameraSystem;
+    CameraView cameraView;
     WorldView view;
     WaterMaterial waterMat;
 
@@ -77,13 +79,16 @@ public sealed class Game : MonoBehaviour
         biomePref.Load(biome); groundPref.Load(ground); waterPref.Load(water);
         cellWorld = (float)cellSizePixels / pixelsPerUnit;
 
-        rig = new CameraRig(Cam, new CameraRig.Config
+        cameraState = new CameraState();
+        cameraSystem = new CameraSystem(Cam, new CameraSystem.Config
         {
             minCellsVisible = minCellsVisible,
             startCellsVisible = startCellsVisible,
             keyboardPanSpeed = keyboardPanSpeed,
             recenterDuration = recenterDuration,
-        }, cellWorld);
+        }, cellWorld, cameraState);
+        cameraView = new CameraView();
+        cameraView.Apply(Cam, cameraState);
 
         World = new World(new WorldConfig
         {
@@ -96,7 +101,7 @@ public sealed class Game : MonoBehaviour
         {
             viewRadius = viewRadius, minimapRadius = minimapRadius, meshRebuildStep = meshRebuildStep,
             waterMinimapColor = (Color32)waterMinimapColor, minimapBrightness = biome.minimapBrightness,
-        }, cellWorld, transform, summerSheet, waterSheet, rig);
+        }, cellWorld, transform, summerSheet, waterSheet, cameraState);
 
         waterMat = new WaterMaterial(view.WaterMat, water, cellWorld);
 
@@ -143,10 +148,11 @@ public sealed class Game : MonoBehaviour
 
     void Update()
     {
-        if (rig == null) return;   // e.g. after an edit-during-play domain reload; a fresh Play fixes it
+        if (cameraSystem == null) return;   // e.g. after an edit-during-play domain reload; a fresh Play fixes it
         var lp = PlayerController.LocalInstance;
-        rig.FollowTarget = lp != null ? (Vector2?)(Vector2)lp.transform.position : null;
-        rig.Tick(Time.unscaledDeltaTime);
+        cameraState.FollowTarget = lp != null ? (Vector2?)(Vector2)lp.transform.position : null;
+        cameraSystem.Tick(Time.unscaledDeltaTime);
+        cameraView.Apply(Cam, cameraState);
         view.Follow(lp != null ? lp.CurrentCell() : Vector2Int.zero);
     }
 }

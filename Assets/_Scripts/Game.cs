@@ -29,6 +29,10 @@ public sealed class Game : MonoBehaviour
     [SerializeField] Color defaultGroundColor = new Color(0.6f, 0.54f, 0.42f, 1f);
     [SerializeField] Color waterMinimapColor = new Color(0.1137f, 0.1686f, 0.3255f, 1f);
 
+    [Header("Structures")]
+    [SerializeField] StructureSet structures;
+    [SerializeField] StructureSettings structureSettings = new StructureSettings();
+
     [Header("Camera")]
     [SerializeField] int minCellsVisible = 10;
     [SerializeField] int startCellsVisible = 16;
@@ -48,6 +52,7 @@ public sealed class Game : MonoBehaviour
     public BiomeSettings Biome => biome;
     public GroundSettings Ground => ground;
     public WaterSettings Water => water;
+    public StructureSettings Structure => structureSettings;
 
     // Minimap facade (the Minimap HUD reads these).
     public Texture2D MinimapTexture => view != null ? view.MinimapTexture : null;
@@ -70,13 +75,14 @@ public sealed class Game : MonoBehaviour
     readonly JsonPref<BiomeSettings> biomePref = new("biome.json");
     readonly JsonPref<GroundSettings> groundPref = new("ground.json");
     readonly JsonPref<WaterSettings> waterPref = new("water.json");
+    readonly JsonPref<StructureSettings> structurePref = new("structures.json");
 
     void Awake()
     {
         Instance = this;
         if (!ConfigureApp()) return;
 
-        biomePref.Load(biome); groundPref.Load(ground); waterPref.Load(water);
+        biomePref.Load(biome); groundPref.Load(ground); waterPref.Load(water); structurePref.Load(structureSettings);
         cellWorld = (float)cellSizePixels / pixelsPerUnit;
 
         cameraState = new CameraState();
@@ -94,6 +100,7 @@ public sealed class Game : MonoBehaviour
         {
             biome = biome, ground = ground, summerSheet = summerSheet,
             grass = grassBiome, forest = forestBiome, rocky = rockyBiome, mountain = mountainBiome,
+            structures = structures, structureSettings = structureSettings,
             defaultGroundSprite = defaultGroundSprite, defaultGroundColor = (Color32)defaultGroundColor,
         });
 
@@ -145,6 +152,8 @@ public sealed class Game : MonoBehaviour
     public void ResetGroundSettings() { groundPref.Reset(ground, new GroundSettings()); Regenerate(); Debug.Log("[Game] Saved ground settings cleared (defaults applied)."); }
     public void SaveWaterSettings()   { waterPref.Save(water);  Debug.Log("[Game] Water settings saved."); }
     public void ResetWaterSettings()  { waterPref.Reset(water, new WaterSettings()); ApplyWaterSettings(); Debug.Log("[Game] Saved water settings cleared (defaults applied)."); }
+    public void SaveStructureSettings()  { structurePref.Save(structureSettings); Debug.Log("[Game] Structure settings saved."); }
+    public void ResetStructureSettings() { structurePref.Reset(structureSettings, new StructureSettings()); Regenerate(); Debug.Log("[Game] Saved structure settings cleared (defaults applied)."); }
 
     void Update()
     {

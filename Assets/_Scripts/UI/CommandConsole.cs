@@ -26,6 +26,7 @@ public sealed class CommandConsole : MonoBehaviour
     static readonly Color InvalidColor = new(0.62f, 0.12f, 0.12f, 0.92f);
     const float ShakeTime = 0.35f, FlashTime = 0.45f;
     const float DoubleClickTime = 0.3f, DoubleClickPixels = 8f;
+    const float CaretWidth = 2f;
 
     // Edit state: caret in [0, text.Length]; selection is the range [min(caret,anchor), max(...)).
     string text = "";
@@ -35,6 +36,8 @@ public sealed class CommandConsole : MonoBehaviour
     public bool LockOpen { get; set; }   // while true: Esc / click-out / empty-Enter won't close (only a command can)
     Vector2 panelBasePos;
     Color panelBaseColor;
+    Graphic highlightGraphic;   // the highlight rect's graphic; reused for both the selection box and the caret bar
+    Color highlightBaseColor;   // the selection-box color (the caret bar uses white)
     float shakeUntil, flashUntil;
     float nextRepeatBackspace, nextRepeatDelete;
     float lastClickTime = -1f;
@@ -58,6 +61,7 @@ public sealed class CommandConsole : MonoBehaviour
     {
         if (panelRect != null) panelBasePos = panelRect.anchoredPosition;
         if (panelImage != null) panelBaseColor = panelImage.color;
+        if (highlightRect != null) { highlightGraphic = highlightRect.GetComponent<Graphic>(); if (highlightGraphic != null) highlightBaseColor = highlightGraphic.color; }
         if (panelGroup != null) panelGroup.alpha = 0f;
         InputState.Typing = false;
     }
@@ -339,27 +343,40 @@ public sealed class CommandConsole : MonoBehaviour
         if (highlightRect != null) highlightRect.gameObject.SetActive(false);
     }
 
-    // ---- Rendering: caret is an alpha-toggled '|' inside the text (stable width, exact position);
-    // the selection is a box positioned behind the text from the cached glyph boundaries. ----
+    // ---- Rendering: the caret is a thin blinking BAR drawn at the typed-text position (so it never adds
+    // character width between the text and the ghost suggestion); the selection reuses the same rect as a box. ----
     void Render()
     {
         if (label == null) return;
         if (HasSel)
         {
             label.text = prompt + text;
+            if (highlightGraphic != null) highlightGraphic.color = highlightBaseColor;   // selection-box color
             UpdateHighlight();
         }
         else
         {
-            bool caretOn = ((int)(Time.unscaledTime / 0.5f) & 1) == 0;
-            string caretGlyph = caretOn ? "<color=#FFFFFFFF>|</color>" : "<color=#FFFFFF00>|</color>";
             string ghost = caret == text.Length ? CommandRouter.Instance.Suggest(text) : "";   // only complete at line end
-            if (!string.IsNullOrEmpty(ghost))
-                label.text = prompt + text + "<color=#FFFFFF55>" + ghost + "</color>" + caretGlyph;   // ghost flows on as if typed; caret after it
-            else
-                label.text = prompt + text.Substring(0, caret) + caretGlyph + text.Substring(caret);
-            if (highlightRect != null) highlightRect.gameObject.SetActive(false);
+            label.text = string.IsNullOrEmpty(ghost)
+                ? prompt + text
+                : prompt + text + "<color=#FFFFFF55>" + ghost + "</color>";                       // ghost flows on tight; caret drawn separately
+            UpdateCaretBar();
         }
+    }
+
+    // The caret as a thin blinking bar at the typed-text boundary (BoundX of the caret index), reusing the
+    // highlight rect. Keeps the cursor exactly where you're typing without inserting a width-bearing glyph
+    // between the typed text and the ghost suggestion.
+    void UpdateCaretBar()
+    {
+        if (highlightRect == null) return;
+        bool caretOn = ((int)(Time.unscaledTime / 0.5f) & 1) == 0;
+        if (!caretOn) { highlightRect.gameObject.SetActive(false); return; }
+        EnsureBounds();
+        if (highlightGraphic != null) highlightGraphic.color = Color.white;   // caret color
+        highlightRect.gameObject.SetActive(true);
+        highlightRect.anchoredPosition = new Vector2(BoundX(prompt.Length + caret), 0f);
+        highlightRect.sizeDelta = new Vector2(CaretWidth, highlightHeight);
     }
 
     void UpdateHighlight()

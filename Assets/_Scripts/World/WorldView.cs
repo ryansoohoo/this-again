@@ -20,6 +20,7 @@ public sealed class WorldView
     readonly CameraState cameraState;
 
     public Material WaterMat { get; }                       // submesh-1 material; WaterMaterial pushes settings into it
+    public Material TerrainMat { get; }                     // submesh-0 material; DayNightView tints its _Color
     public Texture2D MinimapTexture { get; private set; }
     public Vector2Int ViewCenter { get; private set; }      // minimap center (tracks the player every cell)
 
@@ -31,7 +32,9 @@ public sealed class WorldView
     {
         this.world = world; this.cfg = cfg; this.cellWorld = cellWorld; this.cameraState = cameraState;
         gridMesh = CellRenderer.Build(parent, summerSheet, waterSheet);
-        WaterMat = gridMesh.GetComponent<MeshRenderer>().sharedMaterials[1];
+        var gridMr = gridMesh.GetComponent<MeshRenderer>();
+        WaterMat = gridMr.sharedMaterials[1];
+        TerrainMat = gridMr.sharedMaterials[0];
         ViewCenter = meshCenter = Vector2Int.zero;
         meshInit = true;
         RebuildMesh();

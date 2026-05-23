@@ -33,6 +33,9 @@ public sealed class Game : MonoBehaviour
     [SerializeField] StructureSet structures;
     [SerializeField] StructureSettings structureSettings = new StructureSettings();
 
+    [Header("Day/Night")]
+    [SerializeField] DayNightSettings dayNight = new DayNightSettings();
+
     [Header("Camera")]
     [SerializeField] int minCellsVisible = 10;
     [SerializeField] int startCellsVisible = 16;
@@ -53,6 +56,10 @@ public sealed class Game : MonoBehaviour
     public GroundSettings Ground => ground;
     public WaterSettings Water => water;
     public StructureSettings Structure => structureSettings;
+    public DayNightState DayNight => dayNightSystem != null ? dayNightSystem.State : null;
+    public DayNightSettings DayNightCfg => dayNight;
+    public float? TimeOverride => dayNightSystem != null ? dayNightSystem.TimeOverride : null;
+    public void SetTimeOverride(float? t) { if (dayNightSystem != null) dayNightSystem.TimeOverride = t; }
 
     // Minimap facade (the Minimap HUD reads these).
     public Texture2D MinimapTexture => view != null ? view.MinimapTexture : null;
@@ -65,17 +72,21 @@ public sealed class Game : MonoBehaviour
     public Vector2 CellCenter(int cx, int cy) => new((cx + 0.5f) * cellWorld, (cy + 0.5f) * cellWorld);
     public Vector2Int WorldToCell(Vector2 w) => new(Mathf.FloorToInt(w.x / cellWorld), Mathf.FloorToInt(w.y / cellWorld));
     public bool IsWalkable(int cx, int cy) => World != null && World.IsWalkable(cx, cy);
+    public int MoveCost(int cx, int cy) => World != null ? World.MoveCost(cx, cy) : 0;
 
     CameraState cameraState;
     CameraSystem cameraSystem;
     CameraView cameraView;
     WorldView view;
     WaterMaterial waterMat;
+    DayNightSystem dayNightSystem;
+    DayNightView dayNightView;
 
     readonly JsonPref<BiomeSettings> biomePref = new("biome.json");
     readonly JsonPref<GroundSettings> groundPref = new("ground.json");
     readonly JsonPref<WaterSettings> waterPref = new("water.json");
     readonly JsonPref<StructureSettings> structurePref = new("structures.json");
+    readonly JsonPref<DayNightSettings> dayNightPref = new("daynight.json");
 
     void Awake()
     {
@@ -83,6 +94,7 @@ public sealed class Game : MonoBehaviour
         if (!ConfigureApp()) return;
 
         biomePref.Load(biome); groundPref.Load(ground); waterPref.Load(water); structurePref.Load(structureSettings);
+        dayNightPref.Load(dayNight);
         cellWorld = (float)cellSizePixels / pixelsPerUnit;
 
         cameraState = new CameraState();
@@ -111,6 +123,8 @@ public sealed class Game : MonoBehaviour
         }, cellWorld, transform, summerSheet, waterSheet, cameraState);
 
         waterMat = new WaterMaterial(view.WaterMat, water, cellWorld);
+        dayNightSystem = new DayNightSystem(dayNight);
+        dayNightView = new DayNightView(view.TerrainMat, view.WaterMat);
 
         CommandBootstrap.EnsureInstalled();          // single entry: Game installs commands
         CommandRouter.Instance.ResetScopes();
@@ -155,6 +169,8 @@ public sealed class Game : MonoBehaviour
     public void ResetWaterSettings()  { waterPref.Reset(water, new WaterSettings()); ApplyWaterSettings(); Debug.Log("[Game] Saved water settings cleared (defaults applied)."); }
     public void SaveStructureSettings()  { structurePref.Save(structureSettings); Debug.Log("[Game] Structure settings saved."); }
     public void ResetStructureSettings() { structurePref.Reset(structureSettings, new StructureSettings()); Regenerate(); Debug.Log("[Game] Saved structure settings cleared (defaults applied)."); }
+    public void SaveDayNightSettings()  { dayNightPref.Save(dayNight); Debug.Log("[Game] Day/Night settings saved."); }
+    public void ResetDayNightSettings() { dayNightPref.Reset(dayNight, new DayNightSettings()); Debug.Log("[Game] Day/Night settings reset (defaults applied)."); }
 
     void Update()
     {
@@ -164,5 +180,7 @@ public sealed class Game : MonoBehaviour
         cameraSystem.Tick(Time.unscaledDeltaTime);
         cameraView.Apply(Cam, cameraState);
         view.Follow(lp != null ? lp.CurrentCell() : Vector2Int.zero);
+
+        if (dayNightSystem != null) { dayNightSystem.Tick(); dayNightView.Apply(dayNightSystem.State); }
     }
 }

@@ -6,6 +6,7 @@ public sealed class PlayerView : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
+    SpriteRenderer[] bodyRenderers;                 // all child sprites EXCEPT the "Shadow" child; day/night tints these
     Vector3 lastPos;
     Vector2 facing = new(1f, -1f);                  // default SE (down-right)
     static readonly int SpeedHash = Animator.StringToHash("Speed");
@@ -16,6 +17,11 @@ public sealed class PlayerView : MonoBehaviour
     {
         if (animator == null) animator = GetComponentInChildren<Animator>();
         lastPos = transform.position;
+
+        var all = GetComponentsInChildren<SpriteRenderer>(true);
+        var body = new System.Collections.Generic.List<SpriteRenderer>(all.Length);
+        foreach (var sr in all) if (sr.gameObject.name != "Shadow") body.Add(sr);   // leave the pack shadow untouched
+        bodyRenderers = body.ToArray();
     }
 
     void OnEnable()
@@ -42,6 +48,14 @@ public sealed class PlayerView : MonoBehaviour
                 animator.SetFloat(DirXHash, facing.x);
                 animator.SetFloat(DirYHash, facing.y);
             }
+        }
+
+        var dn = Game.Instance != null ? Game.Instance.DayNight : null;
+        if (dn != null && bodyRenderers != null)
+        {
+            var c = dn.tint;
+            for (int i = 0; i < bodyRenderers.Length; i++)
+                if (bodyRenderers[i] != null) bodyRenderers[i].color = c;
         }
     }
 }

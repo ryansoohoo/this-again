@@ -34,6 +34,7 @@ public sealed class TunerPanels : MonoBehaviour
         new Panel("Ground biomes", GroundBody, () => gm.Regenerate()),
         new Panel("Water",         WaterBody,  () => gm.ApplyWaterSettings()),
         new Panel("Structures",    StructureBody, () => gm.Regenerate()),
+        new Panel("Day/Night",     DayNightBody,  () => {}),
     };
 
     void OnGUI()
@@ -134,6 +135,39 @@ public sealed class TunerPanels : MonoBehaviour
         if (GUILayout.Button("Save")) gm.SaveStructureSettings();
         if (GUILayout.Button("Reset")) gm.ResetStructureSettings();
         GUILayout.EndHorizontal();
+    }
+
+    void DayNightBody()
+    {
+        var d = gm.DayNightCfg;
+        F("Cycle seconds", ref d.cycleSeconds, 5f, 1200f, "0");
+        F("Dawn time", ref d.dawnTime, 0.01f, 0.49f, "0.00");
+        F("Dusk time", ref d.duskTime, 0.51f, 0.99f, "0.00");
+        d.nightColor = ColRGB("Night", d.nightColor);
+        d.dawnColor  = ColRGB("Dawn",  d.dawnColor);
+        d.noonColor  = ColRGB("Noon",  d.noonColor);
+        d.duskColor  = ColRGB("Dusk",  d.duskColor);
+
+        float cur = gm.TimeOverride ?? (gm.DayNight != null ? gm.DayNight.timeOfDay : 0f);
+        GUILayout.Label($"Time of day  {cur:0.00}" + (gm.TimeOverride.HasValue ? "  (frozen)" : ""));
+        float nt = GUILayout.HorizontalSlider(cur, 0f, 1f);
+        if (!Mathf.Approximately(nt, cur)) gm.SetTimeOverride(nt);
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Live")) gm.SetTimeOverride(null);
+        if (GUILayout.Button("Save")) gm.SaveDayNightSettings();
+        if (GUILayout.Button("Reset")) gm.ResetDayNightSettings();
+        GUILayout.EndHorizontal();
+    }
+
+    Color ColRGB(string name, Color c)
+    {
+        GUILayout.Label(name);
+        float r = c.r, g = c.g, b = c.b;
+        F("  R", ref r, 0f, 1f, "0.00");
+        F("  G", ref g, 0f, 1f, "0.00");
+        F("  B", ref b, 0f, 1f, "0.00");
+        return new Color(r, g, b, 1f);
     }
 
     // ---- shared slider helpers (set 'dirty' when the value moves) ----

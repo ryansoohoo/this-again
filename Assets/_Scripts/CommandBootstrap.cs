@@ -68,6 +68,35 @@ public static class CommandBootstrap
             Description = "(debug) Report the nearest structure site to you.",
             Run = _ => CommandResult.Ok(NearestSite(), keepOpen: true, output: OutputType.System),
         });
+        r.Register(new Command
+        {
+            Keyword = "time", Scope = CommandScope.World, Arg = ArgMode.Optional,
+            Description = "(debug) Show, set (0..1), or resume ('off') the day/night clock.", Usage = "time [0..1|off]",
+            Run = arg =>
+            {
+                var gm = Game.Instance;
+                if (gm == null) return CommandResult.Ok("No game.", keepOpen: true, output: OutputType.System);
+                if (arg.Length == 0)
+                {
+                    float now = gm.DayNight != null ? gm.DayNight.timeOfDay : 0f;
+                    return CommandResult.Ok($"Time of day: {now:0.00}" + (gm.TimeOverride.HasValue ? " (frozen)" : ""),
+                                            keepOpen: true, output: OutputType.System);
+                }
+                if (arg.Equals("off", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    gm.SetTimeOverride(null);
+                    return CommandResult.Ok("Time resumed (live clock).", keepOpen: true, output: OutputType.System);
+                }
+                if (float.TryParse(arg, System.Globalization.NumberStyles.Float,
+                                   System.Globalization.CultureInfo.InvariantCulture, out float t))
+                {
+                    float f = Mathf.Repeat(t, 1f);
+                    gm.SetTimeOverride(f);
+                    return CommandResult.Ok($"Time frozen at {f:0.00}.", keepOpen: true, output: OutputType.System);
+                }
+                return CommandResult.Bad("Usage: time [0..1|off]");
+            },
+        });
     }
 
     static RelayConnector Net()

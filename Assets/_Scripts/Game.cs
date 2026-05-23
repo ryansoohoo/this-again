@@ -183,8 +183,8 @@ public sealed class Game : MonoBehaviour
     void Update()
     {
         if (cameraSystem == null) return;   // e.g. after an edit-during-play domain reload; a fresh Play fixes it
-        var lp = PlayerMovement.LocalInstance;
-        cameraState.FollowTarget = lp != null ? (Vector2?)(Vector2)lp.transform.position : null;
+        var lp = LocalPlayer.Instance;
+        cameraState.FollowTarget = lp != null ? lp.SelfWorldPos : null;
         cameraSystem.Tick(Time.unscaledDeltaTime);
         cameraView.Apply(Cam, cameraState);
         view.Follow(lp != null ? lp.CurrentCell() : Vector2Int.zero);

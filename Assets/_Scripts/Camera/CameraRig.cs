@@ -19,11 +19,11 @@ public sealed class CameraRig
     readonly float cellWorld;         // world units per cell, for CellsToOrtho
     const float PixelsPerUnit = 16f;  // art texels per world unit (16px floor tiles per 1-unit cell; 16-PPU character at scale 1)
 
-    // World rect the camera viewport must stay inside (the loaded vision window). Set by GridManager.
+    // World rect the camera viewport must stay inside (the loaded vision window). Set by WorldView.
     public Rect Bounds { private get; set; }
 
     // The local player's world position; the camera follows it so the player can't leave the viewport
-    // (which also keeps the minimap's viewport box centered). Null when there's no local player. Set by GridManager.
+    // (which also keeps the minimap's viewport box centered). Null when there's no local player. Set by Game.
     public Vector2? FollowTarget { private get; set; }
     const float FollowEdgeInset = 0.15f;   // keep the player at least this fraction of the viewport in from the edge
 

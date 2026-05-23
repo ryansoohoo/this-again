@@ -6,9 +6,9 @@ using UnityEngine.Rendering;
 // Renders a square WINDOW of the infinite world as ONE mesh under a single MeshRenderer, using DUAL-GRID
 // autotiling on the BINARY land/water field. The display grid is offset half a cell: each display tile sits
 // on a cell CORNER and reads the 4 cells around that corner; the 4-bit land mask (TL=1,TR=2,BL=4,BR=8)
-// picks one of 16 tiles. Interior land (case 15) draws a per-cell biome sprite resolved by GridManager (or a
+// picks one of 16 tiles. Interior land (case 15) draws a per-cell biome sprite resolved by World (or a
 // built-in ground tile when a cell has no biome); the 14 mixed cases are the static coastline; open water
-// (case 0) is the water sprite (animated by GridManager via its UV offset).
+// (case 0) is the water sprite (animated by the water shader; WaterMaterial pushes its params).
 // Two submeshes / materials: [0] static summer sheet (ground + coast), [1] water sheet.
 public static class CellRenderer
 {

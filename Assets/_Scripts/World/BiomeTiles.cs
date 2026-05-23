@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Data-only asset: the pool of ground-tile sprites a single biome may use, each with a relative weight
-// (rarity). One asset per biome (e.g. Forest, Rocky, Mountain). GridManager picks one variant per land cell
+// (rarity). One asset per biome (e.g. Forest, Rocky, Mountain). World picks one variant per land cell
 // deterministically (hash of cell + seed) so all Netcode clients agree without replication. Holds NO logic —
 // just sprite data. All sprites must be slices of the summer sheet bound to the terrain material.
 [CreateAssetMenu(fileName = "Biome", menuName = "World/Biome Tiles")]

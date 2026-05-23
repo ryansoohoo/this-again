@@ -354,8 +354,10 @@ public sealed class CommandConsole : MonoBehaviour
             bool caretOn = ((int)(Time.unscaledTime / 0.5f) & 1) == 0;
             string caretGlyph = caretOn ? "<color=#FFFFFFFF>|</color>" : "<color=#FFFFFF00>|</color>";
             string ghost = caret == text.Length ? CommandRouter.Instance.Suggest(text) : "";   // only complete at line end
-            string ghostGlyph = string.IsNullOrEmpty(ghost) ? "" : "<color=#FFFFFF55>" + ghost + "</color>";
-            label.text = prompt + text.Substring(0, caret) + caretGlyph + text.Substring(caret) + ghostGlyph;
+            if (!string.IsNullOrEmpty(ghost))
+                label.text = prompt + text + "<color=#FFFFFF55>" + ghost + "</color>" + caretGlyph;   // ghost flows on as if typed; caret after it
+            else
+                label.text = prompt + text.Substring(0, caret) + caretGlyph + text.Substring(caret);
             if (highlightRect != null) highlightRect.gameObject.SetActive(false);
         }
     }

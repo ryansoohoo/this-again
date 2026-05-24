@@ -69,7 +69,7 @@ public sealed class GhostManager : MonoBehaviour
                 g.weaponId = e.weaponId; g.poseByte = e.pose; g.residual = e.residual;
             }
 
-            if (e.id == localId) SelfInInstance = (e.flags & SnapshotEntry.InInstanceBit) != 0;
+            if (e.id == localId) SelfInInstance = (e.flags & SnapshotEntry.SelfBit) != 0;
         }
 
         tmpRemove.Clear();

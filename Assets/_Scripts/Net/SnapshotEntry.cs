@@ -1,22 +1,31 @@
 using Unity.Netcode;
 
-// One player in a client's snapshot: position + flags. Animation/facing are derived on the client from the
-// interpolated ghost motion (like PlayerView does today from the transform), so nothing else is sent.
+// One player in a client's snapshot. flags select optional blocks. The viewer's own entry (SelfBit) carries the
+// full status block (for owner prediction); remote in-instance entries (InstanceBit, not SelfBit) carry a compact
+// effect mask (cosmetic) + HP. Attack block (pose) unchanged. Animation/facing are derived on the client from
+// interpolated motion.
 public struct SnapshotEntry : INetworkSerializable
 {
     public ulong id;
     public float x, y;
-    public byte flags;             // bit0 = snap (teleport: don't interpolate); bit1 = inInstance (self entry); bit2 = attacking
+    public byte flags;             // bit0 snap; bit1 self; bit2 attacking; bit3 inInstance(member)
 
-    // Attack block — only serialized when AttackingBit is set (in-instance attackers). Drives remote rendering and
-    // resyncs a viewer who enters mid-swing. The self entry's selfExtra additionally carries owner-reconcile state.
+    // attack block (AttackingBit)
     public byte weaponId;
     public byte pose;              // AttackPose.Pack(phase, frame, dir)
-    public ushort residual;        // AimQuant of the locked aim (remote weapon tilt + owner reconcile)
-    public byte selfExtra;         // self entry: bit0 windupComplete, bits1-7 quantized cooldown (×20, 0..127)
-    public byte gate;              // self in-instance entry only: GateMod.Pack of the effective action gate
+    public ushort residual;        // AimQuant of the locked aim (remote weapon tilt)
 
-    public const byte SnapBit = 1, InInstanceBit = 2, AttackingBit = 4;
+    // in-instance member block (InstanceBit)
+    public ushort hp;
+    public byte effectMask;        // remotes: one bit per active StatusKind (cosmetic)
+
+    // self status block (SelfBit): authoritative active effects for owner prediction
+    public byte effectCount;
+    public byte[] effDefId;
+    public ushort[] effRemaining;
+    public byte[] effStacks;
+
+    public const byte SnapBit = 1, SelfBit = 2, AttackingBit = 4, InstanceBit = 8;
 
     public void NetworkSerialize<T>(BufferSerializer<T> s) where T : IReaderWriter
     {
@@ -24,13 +33,27 @@ public struct SnapshotEntry : INetworkSerializable
         s.SerializeValue(ref x);
         s.SerializeValue(ref y);
         s.SerializeValue(ref flags);
-        if ((flags & InInstanceBit) != 0) s.SerializeValue(ref gate);   // owner-only; gates are in-instance
+        if ((flags & InstanceBit) != 0) s.SerializeValue(ref hp);
+        if ((flags & SelfBit) != 0)
+        {
+            s.SerializeValue(ref effectCount);
+            if (s.IsReader) { effDefId = new byte[effectCount]; effRemaining = new ushort[effectCount]; effStacks = new byte[effectCount]; }
+            for (int i = 0; i < effectCount; i++)
+            {
+                s.SerializeValue(ref effDefId[i]);
+                s.SerializeValue(ref effRemaining[i]);
+                s.SerializeValue(ref effStacks[i]);
+            }
+        }
+        else if ((flags & InstanceBit) != 0)
+        {
+            s.SerializeValue(ref effectMask);
+        }
         if ((flags & AttackingBit) != 0)
         {
             s.SerializeValue(ref weaponId);
             s.SerializeValue(ref pose);
             s.SerializeValue(ref residual);
-            s.SerializeValue(ref selfExtra);
         }
     }
 }

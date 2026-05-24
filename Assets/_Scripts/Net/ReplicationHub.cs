@@ -103,8 +103,27 @@ public sealed class ReplicationHub : NetworkBehaviour
                 var sp = registry.Players[id];
                 byte flags = 0;
                 if (sp.snap) flags |= SnapshotEntry.SnapBit;
-                if (id == viewer && sp.inInstance) flags |= SnapshotEntry.InInstanceBit;
+                bool self = id == viewer && sp.inInstance;
+                if (self) flags |= SnapshotEntry.SelfBit;
+                if (sp.inInstance) flags |= SnapshotEntry.InstanceBit;
                 var entry = new SnapshotEntry { id = id, x = sp.worldPos.x, y = sp.worldPos.y, flags = flags };
+                if (sp.inInstance) entry.hp = (ushort)Mathf.Max(0, sp.hp);
+                if (self)
+                {
+                    int n = sp.status.count;
+                    entry.effectCount = (byte)n;
+                    entry.effDefId = new byte[n]; entry.effRemaining = new ushort[n]; entry.effStacks = new byte[n];
+                    for (int k = 0; k < n; k++)
+                    {
+                        entry.effDefId[k] = sp.status.effects[k].defId;
+                        entry.effRemaining[k] = (ushort)Mathf.Max(0, sp.status.effects[k].remainingTicks);
+                        entry.effStacks[k] = sp.status.effects[k].stacks;
+                    }
+                }
+                else if (sp.inInstance)
+                {
+                    entry.effectMask = StatusLogic.ActiveMask(sp.status);
+                }
                 if (sp.inInstance && AttackLogic.IsAttacking(sp.attackState.phase))
                 {
                     var st = sp.attackState;
@@ -112,7 +131,6 @@ public sealed class ReplicationHub : NetworkBehaviour
                     entry.weaponId = sp.weaponId;
                     entry.pose = AttackPose.Pack(st.phase, st.frameIndex, st.dirIndex);
                     entry.residual = AimQuant.Encode(st.lockedAim);
-                    entry.selfExtra = (byte)(st.windupComplete ? 1 : 0);   // cooldown is now a status effect; selfExtra carries only windupComplete (Task 10 drops selfExtra entirely)
                 }
                 entryScratch.Add(entry);
             }

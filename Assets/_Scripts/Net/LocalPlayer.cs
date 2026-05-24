@@ -11,6 +11,10 @@ public sealed class LocalPlayer : MonoBehaviour
     readonly PlayerInput input = new();
     Vector2 lastSent = new(float.NaN, float.NaN);
 
+    readonly PredictionSystem prediction = new();
+    public PredictionSystem Prediction => prediction;
+    bool wasInInstance;
+
     void Awake() => Instance = this;
     void OnDestroy() { if (Instance == this) Instance = null; }
 
@@ -66,6 +70,18 @@ public sealed class LocalPlayer : MonoBehaviour
         var intent = input.Read(cam);
         if (intent.dir != lastSent) { lastSent = intent.dir; ReplicationHub.Instance.SubmitInputRpc(intent.dir); }
         if (intent.hasClickTarget) ReplicationHub.Instance.SetTargetRpc(intent.clickWorld);
+    }
+
+    // Drives client-side prediction on the fixed tick while in the underworld: activates on entry (seeding from
+    // the authoritative self position), deactivates on exit, steps prediction each FixedUpdate.
+    void FixedUpdate()
+    {
+        if (!Ready) return;
+        bool inst = InInstance;
+        if (inst && !wasInInstance && SelfWorldPos.HasValue) prediction.Activate(SelfWorldPos.Value);
+        else if (!inst && wasInInstance) prediction.Deactivate();
+        wasInInstance = inst;
+        if (prediction.Active) prediction.FixedTick(Time.fixedDeltaTime);
     }
 
     // Routes the server's authoritative self position + last-processed tick into reconciliation. Fleshed out

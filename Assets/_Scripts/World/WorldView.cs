@@ -4,7 +4,6 @@ using UnityEngine;
 public sealed class WorldViewConfig
 {
     public int viewRadius, meshRebuildStep;
-    public Vector2Int minimapRadius;
     public Color32 waterMinimapColor;
     public float minimapBrightness;
 }
@@ -16,6 +15,7 @@ public sealed class WorldView
 {
     readonly World world;
     readonly WorldViewConfig cfg;
+    readonly ViewSettings vs;
     readonly float cellWorld;
     readonly MeshFilter gridMesh;
     readonly CameraState cameraState;
@@ -28,10 +28,10 @@ public sealed class WorldView
     Vector2Int meshCenter;
     bool meshInit;
 
-    public WorldView(World world, WorldViewConfig cfg, float cellWorld, Transform parent,
+    public WorldView(World world, WorldViewConfig cfg, ViewSettings vs, float cellWorld, Transform parent,
                      Texture2D summerSheet, Texture2D waterSheet, CameraState cameraState)
     {
-        this.world = world; this.cfg = cfg; this.cellWorld = cellWorld; this.cameraState = cameraState;
+        this.world = world; this.cfg = cfg; this.vs = vs; this.cellWorld = cellWorld; this.cameraState = cameraState;
         gridMesh = CellRenderer.Build(parent, summerSheet, waterSheet);
         var gridMr = gridMesh.GetComponent<MeshRenderer>();
         WaterMat = gridMr.sharedMaterials[1];
@@ -72,10 +72,10 @@ public sealed class WorldView
     {
         var oldTex = MinimapTexture;
         MinimapTexture = CellRenderer.BuildOverviewMinimap(world.IsLand, world.LandColor, ViewCenter,
-                                                           cfg.minimapRadius, cfg.waterMinimapColor, cfg.minimapBrightness);
+                                                           vs.minimapRadius, cfg.waterMinimapColor, cfg.minimapBrightness);
         if (oldTex != null) Object.Destroy(oldTex);
     }
 
     public Vector2 MinimapWorldCenter => new((ViewCenter.x + 0.5f) * cellWorld, (ViewCenter.y + 0.5f) * cellWorld);
-    public Vector2 MinimapWorldExtent => new((cfg.minimapRadius.x + 0.5f) * cellWorld, (cfg.minimapRadius.y + 0.5f) * cellWorld);
+    public Vector2 MinimapWorldExtent => new((vs.minimapRadius.x + 0.5f) * cellWorld, (vs.minimapRadius.y + 0.5f) * cellWorld);
 }

@@ -8,15 +8,13 @@ public sealed class CameraSystem
 {
     public struct Config
     {
-        public int minCellsVisible;
-        public int startCellsVisible;
         public float keyboardPanSpeed;
         public float recenterDuration;
-        public Vector2 followEdgeInset;   // per-axis keep-in-view inset (0 = pan to 2x viewport, 1 = locked on player)
     }
 
     readonly Camera cam;
     readonly Config cfg;
+    readonly ViewSettings vs;
     readonly float cellWorld;
     readonly CameraState state;
     const float PixelsPerUnit = 16f;
@@ -28,13 +26,13 @@ public sealed class CameraSystem
     float recenterT;
     int lastScreenW, lastScreenH;
 
-    public CameraSystem(Camera cam, Config cfg, float cellWorld, CameraState state)
+    public CameraSystem(Camera cam, Config cfg, ViewSettings vs, float cellWorld, CameraState state)
     {
-        this.cam = cam; this.cfg = cfg; this.cellWorld = cellWorld; this.state = state;
+        this.cam = cam; this.cfg = cfg; this.vs = vs; this.cellWorld = cellWorld; this.state = state;
         lastScreenW = Screen.width;
         lastScreenH = Screen.height;
         state.Position = cam.transform.position;                       // seed from the camera's boot position
-        state.OrthoSize = ClampOrtho(CellsToOrtho(cfg.startCellsVisible));
+        state.OrthoSize = ClampOrtho(CellsToOrtho(vs.startCellsVisible));
     }
 
     public void Tick(float dt)
@@ -57,19 +55,22 @@ public sealed class CameraSystem
     }
 
     float CellsToOrtho(int cells) => cells * cellWorld * 0.5f / Mathf.Min(1f, Mathf.Max(cam.aspect, 0.0001f));
-    float ClampOrtho(float ortho) => Mathf.Max(ortho, CellsToOrtho(cfg.minCellsVisible));
+    float ClampOrtho(float ortho) => Mathf.Max(ortho, CellsToOrtho(vs.minCellsVisible));
+
+    // Re-apply the viewport zoom from startCellsVisible (called when the View tuner changes it).
+    public void ApplyZoom() => state.OrthoSize = ClampOrtho(CellsToOrtho(vs.startCellsVisible));
 
     // X×Y view extents in cells (read-only), derived from the live ortho + aspect + inset.
     public Vector2 ViewportCells => new(2f * state.OrthoSize * cam.aspect / cellWorld, 2f * state.OrthoSize / cellWorld);
     public Vector2 MaxPanCells
     {
-        get { var v = ViewportCells; return new Vector2(v.x * (2f - cfg.followEdgeInset.x), v.y * (2f - cfg.followEdgeInset.y)); }
+        get { var v = ViewportCells; return new Vector2(v.x * (2f - vs.followEdgeInset.x), v.y * (2f - vs.followEdgeInset.y)); }
     }
 
     void SnapOrthoPixelPerfect()
     {
         float sh = Mathf.Max(1f, Screen.height);
-        float minOrtho = CellsToOrtho(cfg.minCellsVisible);
+        float minOrtho = CellsToOrtho(vs.minCellsVisible);
         float ppt = Mathf.Round(sh / (2f * state.OrthoSize * PixelsPerUnit));
         float pptHi = Mathf.Max(1f, Mathf.Floor(sh / (2f * PixelsPerUnit * minOrtho)));
         ppt = Mathf.Clamp(ppt, 1f, pptHi);
@@ -102,7 +103,7 @@ public sealed class CameraSystem
         if (!state.FollowTarget.HasValue) return;
         Vector2 t = state.FollowTarget.Value;
         float h = state.OrthoSize, w = h * cam.aspect;
-        float ix = w * cfg.followEdgeInset.x, iy = h * cfg.followEdgeInset.y;
+        float ix = w * vs.followEdgeInset.x, iy = h * vs.followEdgeInset.y;
         var p = state.Position;
         p.x = Mathf.Clamp(p.x, t.x - (w - ix), t.x + (w - ix));
         p.y = Mathf.Clamp(p.y, t.y - (h - iy), t.y + (h - iy));

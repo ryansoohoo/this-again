@@ -40,15 +40,14 @@ public sealed class Game : MonoBehaviour
     [SerializeField] ReplicationSettings replication = new ReplicationSettings();
 
     [Header("Camera")]
-    [SerializeField] int minCellsVisible = 10;
-    [SerializeField] int startCellsVisible = 16;
     [SerializeField] float keyboardPanSpeed = 20f;
     [SerializeField] float recenterDuration = 0.25f;
-    [SerializeField] Vector2 followEdgeInset = new Vector2(0.15f, 0.15f);   // per-axis keep-player-in-view inset (0=pan to 2x viewport, 1=locked on player)
+
+    [Header("View (tunable — minimap / viewport / max-pan)")]
+    [SerializeField] ViewSettings viewSettings = new ViewSettings();
 
     [Header("Vision")]
     [SerializeField] int viewRadius = 80;
-    [SerializeField] Vector2Int minimapRadius = new Vector2Int(40, 40);   // minimap half-extent in cells, per axis (total = 2r+1)
     [SerializeField] int meshRebuildStep = 32;
 
     public static Game Instance { get; private set; }
@@ -65,6 +64,7 @@ public sealed class Game : MonoBehaviour
     public float? TimeOverride => dayNightSystem != null ? dayNightSystem.TimeOverride : null;
     public void SetTimeOverride(float? t) { if (dayNightSystem != null) dayNightSystem.TimeOverride = t; }
     public ReplicationSettings ReplicationCfg => replication;
+    public ViewSettings ViewCfg => viewSettings;
 
     // Minimap facade (the Minimap HUD reads these).
     public Texture2D MinimapTexture => view != null ? view.MinimapTexture : null;
@@ -72,7 +72,7 @@ public sealed class Game : MonoBehaviour
     public Vector2 MinimapWorldExtent => view != null ? view.MinimapWorldExtent : Vector2.zero;
 
     // Read-only X×Y view extents in cells — the three view sizes, for inspection/tuning.
-    public Vector2Int MinimapCells => new(2 * minimapRadius.x + 1, 2 * minimapRadius.y + 1);
+    public Vector2Int MinimapCells => new(2 * viewSettings.minimapRadius.x + 1, 2 * viewSettings.minimapRadius.y + 1);
     public Vector2 ViewportCells => cameraSystem != null ? cameraSystem.ViewportCells : Vector2.zero;
     public Vector2 MaxPanCells => cameraSystem != null ? cameraSystem.MaxPanCells : Vector2.zero;
 
@@ -98,6 +98,7 @@ public sealed class Game : MonoBehaviour
     readonly JsonPref<StructureSettings> structurePref = new("structures.json");
     readonly JsonPref<DayNightSettings> dayNightPref = new("daynight.json");
     readonly JsonPref<ReplicationSettings> replicationPref = new("replication.json");
+    readonly JsonPref<ViewSettings> viewPref = new("view.json");
 
     void Awake()
     {
@@ -107,17 +108,15 @@ public sealed class Game : MonoBehaviour
         biomePref.Load(biome); groundPref.Load(ground); waterPref.Load(water); structurePref.Load(structureSettings);
         dayNightPref.Load(dayNight);
         replicationPref.Load(replication);
+        viewPref.Load(viewSettings);
         cellWorld = (float)cellSizePixels / pixelsPerUnit;
 
         cameraState = new CameraState();
         cameraSystem = new CameraSystem(Cam, new CameraSystem.Config
         {
-            minCellsVisible = minCellsVisible,
-            startCellsVisible = startCellsVisible,
             keyboardPanSpeed = keyboardPanSpeed,
             recenterDuration = recenterDuration,
-            followEdgeInset = followEdgeInset,
-        }, cellWorld, cameraState);
+        }, viewSettings, cellWorld, cameraState);
         cameraView = new CameraView();
         cameraView.Apply(Cam, cameraState);
 
@@ -131,9 +130,9 @@ public sealed class Game : MonoBehaviour
 
         view = new WorldView(World, new WorldViewConfig
         {
-            viewRadius = viewRadius, minimapRadius = minimapRadius, meshRebuildStep = meshRebuildStep,
+            viewRadius = viewRadius, meshRebuildStep = meshRebuildStep,
             waterMinimapColor = (Color32)waterMinimapColor, minimapBrightness = biome.minimapBrightness,
-        }, cellWorld, transform, summerSheet, waterSheet, cameraState);
+        }, viewSettings, cellWorld, transform, summerSheet, waterSheet, cameraState);
 
         waterMat = new WaterMaterial(view.WaterMat, water, cellWorld);
         dayNightSystem = new DayNightSystem(dayNight);
@@ -186,6 +185,9 @@ public sealed class Game : MonoBehaviour
     public void ResetDayNightSettings() { dayNightPref.Reset(dayNight, new DayNightSettings()); Debug.Log("[Game] Day/Night settings reset (defaults applied)."); }
     public void SaveReplicationSettings()  { replicationPref.Save(replication); Debug.Log("[Game] Replication settings saved."); }
     public void ResetReplicationSettings() { replicationPref.Reset(replication, new ReplicationSettings()); Debug.Log("[Game] Replication settings reset (defaults applied)."); }
+    public void SaveViewSettings()  { viewPref.Save(viewSettings); Debug.Log("[Game] View settings saved."); }
+    public void ResetViewSettings() { viewPref.Reset(viewSettings, new ViewSettings()); ApplyViewSettings(); Debug.Log("[Game] View settings reset (defaults applied)."); }
+    public void ApplyViewSettings() { if (cameraSystem != null) cameraSystem.ApplyZoom(); if (view != null) view.Refresh(); }
 
     void Update()
     {

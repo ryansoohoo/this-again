@@ -105,7 +105,6 @@ public sealed class ReplicationHub : NetworkBehaviour
                 if (sp.snap) flags |= SnapshotEntry.SnapBit;
                 if (id == viewer && sp.inInstance) flags |= SnapshotEntry.InInstanceBit;
                 var entry = new SnapshotEntry { id = id, x = sp.worldPos.x, y = sp.worldPos.y, flags = flags };
-                if ((flags & SnapshotEntry.InInstanceBit) != 0) entry.gate = GateMod.Pack(sp.gate.Effective);
                 if (sp.inInstance && AttackLogic.IsAttacking(sp.attackState.phase))
                 {
                     var st = sp.attackState;
@@ -218,13 +217,12 @@ public sealed class ReplicationHub : NetworkBehaviour
         sp.inInstance = false;
     }
 
-    // Debug seam (host/server only): the local player's authoritative action gate, for console testing. Null on a
-    // pure client — gates are server-authoritative, so a real client path would set them via an RPC. Returns the
-    // live AbilityGate so the caller can Set/Clear sources directly.
-    public AbilityGate DebugLocalGate()
+    // Debug seam (host/server only): the local player's authoritative StatusState, for console testing. Null on a
+    // pure client — effects are server-authoritative.
+    public StatusState DebugLocalStatus()
     {
         var nm = NetworkManager.Singleton;
         if (!IsServer || nm == null) return null;
-        return registry.TryGet(nm.LocalClientId, out var sp) ? sp.gate : null;
+        return registry.TryGet(nm.LocalClientId, out var sp) ? sp.status : null;
     }
 }

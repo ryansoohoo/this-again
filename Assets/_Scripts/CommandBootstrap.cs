@@ -7,9 +7,6 @@ using UnityEngine;
 // same way (router.Registry.Register(...)) and toggle their scope via the router when they activate.
 public static class CommandBootstrap
 {
-    // Distinct debug gate sources, so the 'gate' command demonstrates overlapping effects + selective clear.
-    const int GateSlow = 101, GateRoot = 102, GateSilence = 103, GateStop = 104;
-
     public static void EnsureInstalled()
     {
         var router = CommandRouter.Instance;
@@ -102,52 +99,35 @@ public static class CommandBootstrap
         });
         r.Register(new Command
         {
-            Keyword = "gate", Scope = CommandScope.Instance, Arg = ArgMode.Optional,
-            Description = "(debug) Disable/slow your move or attack to test status-effect gates.",
-            Usage = "gate [slow <0..1>|root|silence|stop|clear [name]]",
+            Keyword = "effect", Scope = CommandScope.Instance, Arg = ArgMode.Optional,
+            Description = "(debug) Apply/clear a status effect on yourself to test the framework.",
+            Usage = "effect [hitstun|cooldown|poison|freeze|slow|list|clear]",
             Run = arg =>
             {
                 var hub = ReplicationHub.Instance;
-                var g = hub != null ? hub.DebugLocalGate() : null;
-                if (g == null) return CommandResult.Bad("Gates are host-only for now — run this on the host, in a dungeon.");
+                var status = hub != null ? hub.DebugLocalStatus() : null;
+                if (status == null) return CommandResult.Bad("Effects are host-only for now — run this on the host, in a dungeon.");
+                var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
+                if (cat == null) return CommandResult.Bad("No StatusCatalog wired on Game.");
 
                 var parts = arg.Split(new[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
-                string sub = parts.Length > 0 ? parts[0].ToLowerInvariant() : "status";
-                switch (sub)
+                string which = parts.Length > 0 ? parts[0].ToLowerInvariant() : "list";
+                if (which == "list")
                 {
-                    case "status":
-                        var e = g.Effective;
-                        return CommandResult.Ok($"Gate: move={(e.CanMove ? "on" : "OFF")} attack={(e.CanAttack ? "on" : "OFF")} moveScale={e.moveScale:0.00} (sources={g.Count})", keepOpen: true, output: OutputType.System);
-                    case "slow":
-                        float m = 0.5f;
-                        if (parts.Length > 1) float.TryParse(parts[1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out m);
-                        m = Mathf.Clamp01(m);
-                        g.Set(GateSlow, new GateMod { moveScale = m });
-                        return CommandResult.Ok($"Slowed to {m:0.00}x move.", keepOpen: true, output: OutputType.System);
-                    case "root":
-                        g.Set(GateRoot, new GateMod { blocksMove = true, moveScale = 1f });
-                        return CommandResult.Ok("Rooted (no move; can still attack).", keepOpen: true, output: OutputType.System);
-                    case "silence":
-                        g.Set(GateSilence, new GateMod { blocksAttack = true, moveScale = 1f });
-                        return CommandResult.Ok("Silenced (no attack; can still move).", keepOpen: true, output: OutputType.System);
-                    case "stop":
-                    case "paralyze":
-                        g.Set(GateStop, new GateMod { blocksMove = true, blocksAttack = true, moveScale = 0f });
-                        return CommandResult.Ok("Paralyzed (no move, no attack).", keepOpen: true, output: OutputType.System);
-                    case "clear":
-                        if (parts.Length > 1)
-                        {
-                            string which = parts[1].ToLowerInvariant();
-                            int id = which == "slow" ? GateSlow : which == "root" ? GateRoot : which == "silence" ? GateSilence : (which == "stop" || which == "paralyze") ? GateStop : 0;
-                            if (id == 0) return CommandResult.Bad("Usage: gate clear [slow|root|silence|stop]");
-                            g.Clear(id);
-                            return CommandResult.Ok($"Cleared {which}.", keepOpen: true, output: OutputType.System);
-                        }
-                        g.ClearAll();
-                        return CommandResult.Ok("All gates cleared.", keepOpen: true, output: OutputType.System);
-                    default:
-                        return CommandResult.Bad("Usage: gate [slow <0..1>|root|silence|stop|clear [name]]");
+                    var sb = new StringBuilder("Active: ");
+                    for (int i = 0; i < status.count; i++)
+                        sb.Append((StatusKind)status.effects[i].defId).Append('(').Append(status.effects[i].remainingTicks).Append("t x").Append(status.effects[i].stacks).Append(") ");
+                    if (status.count == 0) sb.Append("none");
+                    return CommandResult.Ok(sb.ToString(), keepOpen: true, output: OutputType.System);
                 }
+                if (which == "clear") { status.Clear(); return CommandResult.Ok("Effects cleared.", keepOpen: true, output: OutputType.System); }
+                if (!System.Enum.TryParse<StatusKind>(MapName(which), true, out var kind))
+                    return CommandResult.Bad("Usage: effect [hitstun|cooldown|poison|freeze|slow|list|clear]");
+                int id = (int)kind;
+                if (cat.Defs == null || id >= cat.Defs.Length) return CommandResult.Bad("Catalog missing that effect — run Tools > Combat > Build Status Catalog.");
+                int dur = kind == StatusKind.AttackCooldown ? 30 : -1;   // cooldown has no inherent duration
+                StatusLogic.Apply(status, cat.Defs[id], 0u, self: kind == StatusKind.AttackCooldown, durationOverride: dur);
+                return CommandResult.Ok($"Applied {kind}.", keepOpen: true, output: OutputType.System);
             },
         });
         r.Register(new Command
@@ -190,6 +170,8 @@ public static class CommandBootstrap
             },
         });
     }
+
+    static string MapName(string s) => s == "cooldown" ? "AttackCooldown" : s;
 
     static RelayConnector Net()
     {

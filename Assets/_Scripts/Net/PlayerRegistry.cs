@@ -18,7 +18,6 @@ public sealed class ServerPlayer
     public Vector2 lastInput;             // last applied free-move input (reference/debug)
     public RingBuffer<InputCommand> serverInputs;// received tick-stamped commands (free/in-instance only; lazily created)
 
-    public readonly AbilityGate gate = new();   // source-keyed move/attack gates; only the quantized Effective replicates
     public readonly StatusState status = new(); // active status effects; reduces to the gate the sim consumes
     public int hp;                              // server-authoritative HP; set on instance enter (Task 8)
 

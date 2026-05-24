@@ -99,6 +99,16 @@ public static class CommandBootstrap
         });
         r.Register(new Command
         {
+            Keyword = "colgizmos", Aliases = new[] { "cgz" }, Scope = CommandScope.Global, Arg = ArgMode.None,
+            Description = "(debug) Toggle collision gizmos — player body circles (host; Scene view, or turn on the Game view 'Gizmos' button).",
+            Run = _ =>
+            {
+                ReplicationHub.DrawCollisionGizmos = !ReplicationHub.DrawCollisionGizmos;
+                return CommandResult.Ok($"Collision gizmos {(ReplicationHub.DrawCollisionGizmos ? "ON" : "OFF")}.", keepOpen: true, output: OutputType.System);
+            },
+        });
+        r.Register(new Command
+        {
             Keyword = "time", Scope = CommandScope.World, Arg = ArgMode.Optional,
             Description = "(debug) Show, set (0..1), or resume ('off') the day/night clock.", Usage = "time [0..1|off]",
             Run = arg =>

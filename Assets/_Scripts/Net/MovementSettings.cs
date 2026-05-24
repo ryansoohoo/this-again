@@ -11,6 +11,6 @@ public class MovementSettings
     [Min(0f)]   public float reconcileEpsilon = 0.05f;   // world-unit error below which no correction is applied
     [Min(0.01f)]public float correctionSmoothTime = 0.1f;// seconds to visually absorb a correction
     [Min(8)]    public int   inputBufferCapacity = 128;  // ring size; rounded up to a power of two at use
-    [Min(0.05f)]public float collisionRadius = 0.4f;     // per-player body radius, world units (1 cell == 1 unit)
+    [Min(0.05f)]public float collisionRadius = 0.3f;     // per-player body radius, world units (1 cell == 1 unit)
     [Min(1)]    public int   collisionIterations = 3;    // relaxation passes per room per fixed tick
 }

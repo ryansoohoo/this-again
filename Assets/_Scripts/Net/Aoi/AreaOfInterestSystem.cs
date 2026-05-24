@@ -28,8 +28,9 @@ public static class AreaOfInterestSystem
             var p = players[i];
             if (p.id == viewerId) continue;
             if (p.regionKey != viewer.regionKey) continue;     // hard region isolation (overworld / each room)
+            if (viewer.regionKey != Vector2Int.zero) { result.Add(p.id); continue; }  // in-instance: whole room always sees each other
             float d2 = (p.pos - viewer.pos).sqrMagnitude;
-            float r2 = prior.Contains(p.id) ? hide2 : show2;   // hysteresis
+            float r2 = prior.Contains(p.id) ? hide2 : show2;   // hysteresis (overworld only)
             if (d2 <= r2) result.Add(p.id);
         }
     }

@@ -28,6 +28,9 @@ public sealed class GhostManager : MonoBehaviour
     void Awake() => Instance = this;
     void OnDestroy() { if (Instance == this) Instance = null; }
 
+    // Reliable attack transition events for visible attackers (Phase 3 drives remote rigs + SFX/VFX from these).
+    public void ApplyAttackEvents(AttackEvent[] events, ulong localId) { }
+
     public void Apply(SnapshotEntry[] entries, ulong localId)
     {
         foreach (var g in ghosts.Values) g.seen = false;

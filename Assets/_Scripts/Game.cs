@@ -42,6 +42,9 @@ public sealed class Game : MonoBehaviour
     [Header("Movement (free / prediction)")]
     [SerializeField] MovementSettings movement = new MovementSettings();
 
+    [Header("Combat")]
+    [SerializeField] WeaponCatalog weaponCatalog;   // byte id <-> AttackDefinition; shared by server sim + remote render
+
     [Header("View (tunable — minimap / viewport)")]
     [SerializeField] ViewSettings viewSettings = new ViewSettings();
 
@@ -64,6 +67,7 @@ public sealed class Game : MonoBehaviour
     public void SetTimeOverride(float? t) { if (dayNightSystem != null) dayNightSystem.TimeOverride = t; }
     public ReplicationSettings ReplicationCfg => replication;
     public MovementSettings MovementCfg => movement;
+    public WeaponCatalog WeaponCatalog => weaponCatalog;
     public ViewSettings ViewCfg => viewSettings;
 
     // Minimap facade (the Minimap HUD reads these).

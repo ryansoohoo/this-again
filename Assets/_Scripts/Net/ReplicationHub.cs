@@ -21,6 +21,7 @@ public sealed class ReplicationHub : NetworkBehaviour
     readonly Dictionary<ulong, HashSet<ulong>> visiblePrev = new();   // per viewer: last visible set (hysteresis)
     readonly HashSet<ulong> visibleNow = new();
     readonly List<SnapshotEntry> entryScratch = new();
+    readonly List<AttackEvent> eventScratch = new();
     readonly ulong[] oneTarget = new ulong[1];
     readonly Dictionary<int, SnapshotEntry[]> snapshotBufByLen = new();   // RPC send buffers reused by entry count (args serialize synchronously, so reuse is safe)
 
@@ -79,7 +80,8 @@ public sealed class ReplicationHub : NetworkBehaviour
     {
         if (!IsServer) return;
         var cfg = Game.Instance != null ? Game.Instance.MovementCfg : null;
-        if (cfg != null) PlayerSimSystem.StepInstanceFixed(registry, cfg, Time.fixedDeltaTime);
+        var catalog = Game.Instance != null ? Game.Instance.WeaponCatalog : null;
+        if (cfg != null) AttackSimSystem.StepInstanceFixed(registry, catalog, cfg, Time.fixedDeltaTime);
     }
 
     void SendSnapshots(ReplicationSettings cfg)
@@ -101,7 +103,17 @@ public sealed class ReplicationHub : NetworkBehaviour
                 byte flags = 0;
                 if (sp.snap) flags |= SnapshotEntry.SnapBit;
                 if (id == viewer && sp.inInstance) flags |= SnapshotEntry.InInstanceBit;
-                entryScratch.Add(new SnapshotEntry { id = id, x = sp.worldPos.x, y = sp.worldPos.y, flags = flags });
+                var entry = new SnapshotEntry { id = id, x = sp.worldPos.x, y = sp.worldPos.y, flags = flags };
+                if (sp.inInstance && AttackLogic.IsAttacking(sp.attackState.phase))
+                {
+                    var st = sp.attackState;
+                    entry.flags |= SnapshotEntry.AttackingBit;
+                    entry.weaponId = sp.weaponId;
+                    entry.pose = AttackPose.Pack(st.phase, st.frameIndex, st.dirIndex);
+                    entry.residual = AimQuant.Encode(st.lockedAim);
+                    entry.selfExtra = (byte)((st.windupComplete ? 1 : 0) | (Mathf.Clamp((int)(st.cooldown * 20f), 0, 127) << 1));
+                }
+                entryScratch.Add(entry);
             }
 
             prev.Clear();
@@ -113,9 +125,19 @@ public sealed class ReplicationHub : NetworkBehaviour
             if (!snapshotBufByLen.TryGetValue(len, out var buf)) { buf = new SnapshotEntry[len]; snapshotBufByLen[len] = buf; }
             entryScratch.CopyTo(buf);
             SnapshotClientRpc(buf, registry.Players[viewer].lastProcessedTick, p);
+
+            // Piggyback reliable attack events for visible attackers on the same per-viewer AOI pass.
+            eventScratch.Clear();
+            foreach (var id in visibleNow)
+            {
+                var sp2 = registry.Players[id];
+                if (sp2.pendingEvents == null || sp2.pendingEvents.Count == 0) continue;
+                foreach (var ev in sp2.pendingEvents) eventScratch.Add(ev);
+            }
+            if (eventScratch.Count > 0) AttackEventClientRpc(eventScratch.ToArray(), p);
         }
 
-        foreach (var sp in registry.Players.Values) sp.snap = false;   // snap consumed by this tick's snapshots
+        foreach (var sp in registry.Players.Values) { sp.snap = false; sp.pendingEvents?.Clear(); }   // consumed this tick
     }
 
     [ClientRpc]
@@ -125,6 +147,13 @@ public sealed class ReplicationHub : NetworkBehaviour
             GhostManager.Instance.Apply(entries, NetworkManager.Singleton.LocalClientId);
         if (LocalPlayer.Instance != null)
             LocalPlayer.Instance.OnSnapshot(entries, NetworkManager.Singleton.LocalClientId, ackTick);
+    }
+
+    [ClientRpc]
+    void AttackEventClientRpc(AttackEvent[] events, ClientRpcParams _ = default)
+    {
+        if (GhostManager.Instance != null)
+            GhostManager.Instance.ApplyAttackEvents(events, NetworkManager.Singleton.LocalClientId);
     }
 
     // ---- owner -> server intent (RequireOwnership=false; caller = SenderClientId) ----
@@ -137,13 +166,14 @@ public sealed class ReplicationHub : NetworkBehaviour
     // Tick-stamped free-move input from an in-instance owner (for prediction + reconciliation). Buffered and
     // consumed in tick order by PlayerSimSystem.StepInstanceFixed. Late duplicates (already simulated) drop.
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
-    public void SubmitInputTickRpc(uint tick, Vector2 input, RpcParams p = default)
+    public void SubmitInputTickRpc(InputCommand cmd, RpcParams p = default)
     {
         if (!registry.TryGet(p.Receive.SenderClientId, out var sp)) return;
-        if (tick <= sp.lastProcessedTick) return;                       // already simulated; ignore late dup
-        sp.serverInputs ??= new InputRingBuffer(Mathf.Max(8, Mathf.NextPowerOfTwo(
+        if (cmd.tick <= sp.lastProcessedTick) return;                   // already simulated; ignore late dup
+        sp.weaponId = cmd.weaponId;
+        sp.serverInputs ??= new CommandRingBuffer(Mathf.Max(8, Mathf.NextPowerOfTwo(
             Game.Instance != null ? Game.Instance.MovementCfg.inputBufferCapacity : 128)));
-        sp.serverInputs.Store(new InputFrame { tick = tick, input = input });
+        sp.serverInputs.Store(cmd);
     }
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]

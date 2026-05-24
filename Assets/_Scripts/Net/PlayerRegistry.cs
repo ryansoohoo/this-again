@@ -16,7 +16,14 @@ public sealed class ServerPlayer
 
     public uint lastProcessedTick;        // highest contiguous client tick the server has simulated (free move)
     public Vector2 lastInput;             // last applied free-move input (reference/debug)
-    public InputRingBuffer serverInputs;  // received tick-stamped inputs (free/in-instance only; lazily created)
+    public CommandRingBuffer serverInputs;// received tick-stamped commands (free/in-instance only; lazily created)
+
+    // Authoritative attack state (in-instance only). Stepped by AttackSimSystem via the shared InstanceStep.
+    public AttackState attackState;
+    public PhaseScales attackScales = PhaseScales.One;
+    public byte weaponId;                 // equipped weapon (catalog id), set from each InputCommand
+    public AttackPhase prevAttackPhase;   // for transition detection (events + hit seam)
+    public System.Collections.Generic.Queue<AttackEvent> pendingEvents;  // drained into per-viewer event RPCs each snapshot
 }
 
 // All connected players, keyed by clientId. Server-only.

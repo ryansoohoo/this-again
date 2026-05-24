@@ -46,25 +46,28 @@ public sealed class PredictionSystem
         prevPos = Pos;                                  // remember where we were so the visual can interpolate across the step
         Pos = MovementStep.Step(Pos, input, dt, cfg.moveSpeed, Walkable);
         buffer.Store(new InputFrame { tick = Tick, input = input, predictedPos = Pos });
-        ReplicationHub.Instance.SubmitInputTickRpc(Tick, input);
+        ReplicationHub.Instance.SubmitInputTickRpc(new InputCommand { tick = Tick, rawMove = input });
     }
 
     // In-instance fixed tick with an equipped weapon: step attack + lunge + movement together via the shared
     // InstanceStep (the same function the server and replay use), then send the EFFECTIVE move so the (Phase-1
     // unchanged) server reproduces the identical position. `atk` is stepped in place.
-    public void FixedTickInstance(ref AttackState atk, AttackIntent attack, AttackTimeline tl, PhaseScales scales, float dt)
+    public void FixedTickInstance(ref AttackState atk, AttackIntent attack, byte weaponId, AttackTimeline tl, PhaseScales scales, float dt)
     {
         var cfg = Game.Instance.MovementCfg;
         Vector2 rawMove = SampleInput();
+        ushort aimQ = AimQuant.Encode(attack.aimDir);
+        attack.aimDir = AimQuant.Decode(aimQ);   // predict with the SAME value the server receives (determinism)
         Tick++;
         prevPos = Pos;
         Vector2 p = Pos;
         var ctx = new InstanceCtx { timeline = tl, scales = scales, dt = dt, speed = cfg.moveSpeed, walkable = Walkable };
         InstanceStep.Step(ref atk, ref p, new InstanceInput { rawMove = rawMove, attack = attack }, ctx);
         Pos = p;
-        Vector2 effective = AttackLogic.LungeVelocity(atk, tl) ?? rawMove;
-        buffer.Store(new InputFrame { tick = Tick, input = effective, predictedPos = Pos });
-        ReplicationHub.Instance.SubmitInputTickRpc(Tick, effective);
+        buffer.Store(new InputFrame { tick = Tick, input = AttackLogic.LungeVelocity(atk, tl) ?? rawMove, predictedPos = Pos });
+        byte bits = (byte)((attack.pressed ? InputCommand.Pressed : 0) | (attack.held ? InputCommand.Held : 0)
+                         | (attack.released ? InputCommand.Released : 0) | (attack.feint ? InputCommand.Feint : 0));
+        ReplicationHub.Instance.SubmitInputTickRpc(new InputCommand { tick = Tick, rawMove = rawMove, attackBits = bits, aimAngle = aimQ, weaponId = weaponId });
     }
 
     // Called when a snapshot arrives (Active only). authPos = server authoritative self pos; ackTick = last

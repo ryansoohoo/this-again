@@ -126,7 +126,7 @@ public sealed class LocalPlayer : MonoBehaviour
                 feint = attackFeint, aimDir = attackAim,
             };
             var atk = attack.State;
-            prediction.FixedTickInstance(ref atk, ai, currentAttack.Timeline, attack.Scales, Time.fixedDeltaTime);
+            prediction.FixedTickInstance(ref atk, ai, ResolveWeaponId(), currentAttack.Timeline, attack.Scales, Time.fixedDeltaTime);
             attack.SetState(atk);
         }
         else
@@ -134,6 +134,15 @@ public sealed class LocalPlayer : MonoBehaviour
             prediction.FixedTick(Time.fixedDeltaTime);
         }
         attackPressed = attackReleased = attackFeint = false;
+    }
+
+    // The equipped weapon's catalog id for the wire (server + remotes resolve it identically). 0 if unset.
+    byte ResolveWeaponId()
+    {
+        var cat = Game.Instance != null ? Game.Instance.WeaponCatalog : null;
+        if (cat == null || currentAttack == null) return 0;
+        int i = cat.IndexOf(currentAttack);
+        return (byte)(i < 0 ? 0 : i);
     }
 
     void ResolveAttackView()

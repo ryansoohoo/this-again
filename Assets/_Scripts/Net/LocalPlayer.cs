@@ -106,8 +106,8 @@ public sealed class LocalPlayer : MonoBehaviour
         }
     }
 
-    // Steps the attack state machine AND client-side prediction on the fixed tick (deterministic, reproducible).
-    // Prediction activates on instance entry (seeding from the authoritative self position) and deactivates on exit.
+    // Owner fixed tick: prediction activates on instance entry / deactivates on exit. While active, step attack +
+    // lunge + movement together through the shared InstanceStep (with a weapon equipped) or movement-only (without).
     void FixedUpdate()
     {
         if (!Ready) return;
@@ -116,45 +116,24 @@ public sealed class LocalPlayer : MonoBehaviour
         else if (!inst && wasInInstance) prediction.Deactivate();
         wasInInstance = inst;
 
-        // Consume the latched attack input on the same tick the movement sim runs on, so the lunge it injects via
-        // OverrideInput is deterministic. Edges were OR-accumulated in Update since the last tick; clear them here.
-        var ai = new AttackIntent
-        {
-            pressed = attackPressed,
-            held = attackHeld,
-            released = attackReleased,
-            feint = attackFeint,
-            aimDir = attackAim,
-        };
-        attack.Tick(Time.fixedDeltaTime, ai, currentAttack);
-        attackPressed = attackReleased = attackFeint = false;
-        prediction.OverrideInput = AttackMoveOverride();   // rooted in wind-up; lunge in the locked direction on hit/follow-through
+        if (!prediction.Active) { attackPressed = attackReleased = attackFeint = false; return; }
 
-        if (prediction.Active) prediction.FixedTick(Time.fixedDeltaTime);
-    }
-
-    // Movement input override during an attack: rooted (zero) in wind-up, a lunge in the committed direction
-    // during hit/follow-through (shaped by lungeCurve), null when idle (normal WASD). The direction is the
-    // attack's locked aim (dir + residual, frozen at release) so it can't be steered mid-attack. Fed as input
-    // so the server reproduces it (no rubber-banding) and walls still stop it.
-    Vector2? AttackMoveOverride()
-    {
-        if (currentAttack == null) return null;
-        var s = attack.State;
-        switch (s.phase)
+        if (currentAttack != null)
         {
-            case AttackPhase.Hit:
-            case AttackPhase.FollowThrough:
-                float speed = currentAttack.lungeCurve != null
-                    ? Mathf.Clamp01(currentAttack.lungeCurve.Evaluate(AttackLogic.LungeProgress(s, currentAttack.Timeline)))
-                    : 0f;
-                return s.lockedAim * speed;
-            case AttackPhase.Anticipation:
-            case AttackPhase.TapWindup:
-                return Vector2.zero;   // rooted during the wind-up
-            default:
-                return null;           // idle: normal WASD
+            var ai = new AttackIntent
+            {
+                pressed = attackPressed, held = attackHeld, released = attackReleased,
+                feint = attackFeint, aimDir = attackAim,
+            };
+            var atk = attack.State;
+            prediction.FixedTickInstance(ref atk, ai, currentAttack.Timeline, attack.Scales, Time.fixedDeltaTime);
+            attack.SetState(atk);
         }
+        else
+        {
+            prediction.FixedTick(Time.fixedDeltaTime);
+        }
+        attackPressed = attackReleased = attackFeint = false;
     }
 
     void ResolveAttackView()

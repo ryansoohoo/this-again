@@ -1,7 +1,8 @@
 using UnityEngine;
 
-// Owner-side attack logic, owned + ticked by LocalPlayer on the fixed tick (alongside PredictionSystem). Holds
-// the AttackState and steps the pure AttackLogic; emits a one-shot log when the hit window opens (future: damage).
+// Owner-side attack state holder. The state is stepped by PredictionSystem via the shared InstanceStep (so it
+// stays in lockstep with movement, the server, and replay); this stores the result and emits a one-shot log on
+// the hit-window rising edge (verification hook; the server is authoritative for damage later).
 public sealed class AttackSystem
 {
     AttackState state;
@@ -10,12 +11,11 @@ public sealed class AttackSystem
     public AttackState State => state;
     public PhaseScales Scales = PhaseScales.One;  // future: stats write this
 
-    public void Tick(float dt, AttackIntent intent, AttackDefinition def)
+    public void SetState(AttackState s)
     {
-        if (def == null) return;
-        prevPhase = state.phase;
-        state = AttackLogic.Step(state, intent, def.Timeline, Scales, dt);
-        if (prevPhase != AttackPhase.Hit && state.phase == AttackPhase.Hit)
-            Debug.Log($"[attack] hit window open ({def.attackId})"); // verification hook; replace with damage later
+        if (prevPhase != AttackPhase.Hit && s.phase == AttackPhase.Hit)
+            Debug.Log("[attack] hit window open"); // verification hook; replace with damage later
+        prevPhase = s.phase;
+        state = s;
     }
 }

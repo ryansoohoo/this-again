@@ -11,7 +11,6 @@ public sealed class PredictionSystem
     public bool Active { get; private set; }
     public Vector2 Pos { get; private set; }            // authoritative-predicted logical position
     public uint Tick { get; private set; }
-    public Vector2? OverrideInput;                       // set by LocalPlayer during an attack: zero = rooted (wind-up), vector = forced lunge; null = normal WASD
 
     InputRingBuffer buffer;
     Vector2 smoothOffset;                                // decays to zero so corrections don't snap
@@ -38,16 +37,34 @@ public sealed class PredictionSystem
 
     public void Deactivate() => Active = false;
 
-    // Called from LocalPlayer.FixedUpdate while Active: predict locally and send the tick-stamped input.
+    // Movement-only fixed tick (no weapon equipped): predict locally and send the tick-stamped input.
     public void FixedTick(float dt)
     {
         var cfg = Game.Instance.MovementCfg;
-        Vector2 input = OverrideInput ?? SampleInput();
+        Vector2 input = SampleInput();
         Tick++;
         prevPos = Pos;                                  // remember where we were so the visual can interpolate across the step
         Pos = MovementStep.Step(Pos, input, dt, cfg.moveSpeed, Walkable);
         buffer.Store(new InputFrame { tick = Tick, input = input, predictedPos = Pos });
         ReplicationHub.Instance.SubmitInputTickRpc(Tick, input);
+    }
+
+    // In-instance fixed tick with an equipped weapon: step attack + lunge + movement together via the shared
+    // InstanceStep (the same function the server and replay use), then send the EFFECTIVE move so the (Phase-1
+    // unchanged) server reproduces the identical position. `atk` is stepped in place.
+    public void FixedTickInstance(ref AttackState atk, AttackIntent attack, AttackTimeline tl, PhaseScales scales, float dt)
+    {
+        var cfg = Game.Instance.MovementCfg;
+        Vector2 rawMove = SampleInput();
+        Tick++;
+        prevPos = Pos;
+        Vector2 p = Pos;
+        var ctx = new InstanceCtx { timeline = tl, scales = scales, dt = dt, speed = cfg.moveSpeed, walkable = Walkable };
+        InstanceStep.Step(ref atk, ref p, new InstanceInput { rawMove = rawMove, attack = attack }, ctx);
+        Pos = p;
+        Vector2 effective = AttackLogic.LungeVelocity(atk, tl) ?? rawMove;
+        buffer.Store(new InputFrame { tick = Tick, input = effective, predictedPos = Pos });
+        ReplicationHub.Instance.SubmitInputTickRpc(Tick, effective);
     }
 
     // Called when a snapshot arrives (Active only). authPos = server authoritative self pos; ackTick = last

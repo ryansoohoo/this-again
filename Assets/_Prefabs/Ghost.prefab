@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 5931373043438409634}
   - component: {fileID: 2220973912213728787}
   - component: {fileID: 3798896714570445960}
+  - component: {fileID: 6943726381048882201}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -308,6 +309,18 @@ MonoBehaviour:
   weaponBack: {fileID: 4298291014826253154}
   body: {fileID: 1049689782146622163}
   weaponFront: {fileID: 1704873637994654145}
+--- !u!114 &6943726381048882201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609529860275827209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa748d5d754854845972c28dab1af196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusView
 --- !u!1 &2259386136895132312
 GameObject:
   m_ObjectHideFlags: 0

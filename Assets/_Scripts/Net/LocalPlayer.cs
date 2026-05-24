@@ -104,6 +104,8 @@ public sealed class LocalPlayer : MonoBehaviour
             // Render between fixed ticks so the sprite moves every frame (steady walk animation), not just on the tick.
             float alpha = Time.fixedDeltaTime > 0f ? Mathf.Clamp01((Time.time - Time.fixedTime) / Time.fixedDeltaTime) : 1f;
             GhostManager.Instance.SelfGhost.position = prediction.VisualPos(alpha);
+            var sv = GhostManager.Instance.SelfGhost.GetComponent<StatusView>();
+            if (sv != null) sv.Render(StatusLogic.ActiveMask(prediction.Status));   // self effect tint from the predicted mask
         }
     }
 

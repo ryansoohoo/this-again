@@ -14,7 +14,4 @@ public class ViewSettings
     [Min(2)] public int overworldCellsTall  = 30;   // view height in the overworld
     [Min(2)] public int underworldCellsTall = 20;   // view height inside a dungeon instance
     [Min(2)] public int minCellsVisible     = 10;   // max zoom-in clamp (cells)
-
-    [Header("Max pan — keep player in view (per-axis inset, 0..1)")]
-    public Vector2 followEdgeInset = new Vector2(0.15f, 0.15f);   // 0 = pan to 2x viewport, 1 = locked on player
 }

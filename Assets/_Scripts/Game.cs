@@ -39,11 +39,7 @@ public sealed class Game : MonoBehaviour
     [Header("Replication")]
     [SerializeField] ReplicationSettings replication = new ReplicationSettings();
 
-    [Header("Camera")]
-    [SerializeField] float keyboardPanSpeed = 20f;
-    [SerializeField] float recenterDuration = 0.25f;
-
-    [Header("View (tunable — minimap / viewport / max-pan)")]
+    [Header("View (tunable — minimap / viewport)")]
     [SerializeField] ViewSettings viewSettings = new ViewSettings();
 
     [Header("Vision")]
@@ -74,7 +70,6 @@ public sealed class Game : MonoBehaviour
     // Read-only X×Y view extents in cells — the three view sizes, for inspection/tuning.
     public Vector2Int MinimapCells => new(2 * viewSettings.minimapRadius.x + 1, 2 * viewSettings.minimapRadius.y + 1);
     public Vector2 ViewportCells => cameraSystem != null ? cameraSystem.ViewportCells : Vector2.zero;
-    public Vector2 MaxPanCells => cameraSystem != null ? cameraSystem.MaxPanCells : Vector2.zero;
 
     // World <-> cell geometry (Player/Camera read these).
     float cellWorld;
@@ -113,11 +108,7 @@ public sealed class Game : MonoBehaviour
         cellWorld = (float)cellSizePixels / pixelsPerUnit;
 
         cameraState = new CameraState();
-        cameraSystem = new CameraSystem(Cam, new CameraSystem.Config
-        {
-            keyboardPanSpeed = keyboardPanSpeed,
-            recenterDuration = recenterDuration,
-        }, viewSettings, cellWorld, cameraState);
+        cameraSystem = new CameraSystem(Cam, viewSettings, cellWorld, cameraState);
         cameraView = new CameraView();
         cameraView.Apply(Cam, cameraState);
 
@@ -209,7 +200,7 @@ public sealed class Game : MonoBehaviour
             cameraSystem.ApplyZoom(inst ? viewSettings.underworldCellsTall : viewSettings.overworldCellsTall);
         }
         cameraState.FollowTarget = lp != null ? lp.SelfWorldPos : null;
-        cameraSystem.Tick(Time.unscaledDeltaTime);
+        cameraSystem.Tick();
         cameraView.Apply(Cam, cameraState);
         view.Follow(lp != null ? lp.CurrentCell() : Vector2Int.zero);
 

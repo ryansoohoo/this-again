@@ -188,11 +188,8 @@ public sealed class TunerPanels : MonoBehaviour
         I("Underworld tall", ref r.underworldCellsTall, 4, 80);
         I("Min cells (zoom-in)", ref r.minCellsVisible, 2, 60);
 
-        F("Follow inset X", ref r.followEdgeInset.x, 0f, 0.95f, "0.00");
-        F("Follow inset Y", ref r.followEdgeInset.y, 0f, 0.95f, "0.00");
-
-        var vp = gm.ViewportCells; var mp = gm.MaxPanCells; var mc = gm.MinimapCells;
-        GUILayout.Label($"viewport ≈ {vp.x:0}×{vp.y:0}   max-pan ≈ {mp.x:0}×{mp.y:0}   minimap {mc.x}×{mc.y}");
+        var vp = gm.ViewportCells; var mc = gm.MinimapCells;
+        GUILayout.Label($"viewport ≈ {vp.x:0}×{vp.y:0}   minimap {mc.x}×{mc.y}");
 
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Save")) gm.SaveViewSettings();

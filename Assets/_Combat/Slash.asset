@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595e68e65d54ffb4389989b6b668a6dd, type: 3}
+  m_Name: Slash
+  m_EditorClassIdentifier: Assembly-CSharp::AttackDefinition
+  bodyFrames:
+  - {fileID: 4830879391684598242, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 89886361766520464, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -6369618019527998786, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 3038199681283805741, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 949688405433278908, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -4262309052555359485, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 8472363573911806502, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -582145890519117874, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 5664916389904378406, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -5174348766949961141, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 1538698752103132205, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 5206849816679334331, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -6889379102814704671, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 3195659791478337591, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 5967271409197899800, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 7812878288336373384, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  weaponFrontFrames:
+  - {fileID: -8856380046396690585, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: -4214533609981744155, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: 3556765037724767281, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: 5303524628448658866, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: -8448364821645939574, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: -5070818664823380801, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: 6346826995699654337, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: 3659354252344944306, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: -1964777924, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: 696873566, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: -1875831491, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: -93597077, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: -1493378418, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: -728105617, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: 163971060, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  - {fileID: -1692975292, guid: d717da13a5a821a4aa84b65a39987187, type: 3}
+  weaponBackFrames:
+  - {fileID: -308820812597511980, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: -3252543344925849580, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: 251188471, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: -2055839452, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: -1495077521, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: -339486208, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: 1888972892, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: 1953530962, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: -273727944, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: -114687699, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: -1377471377, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: 640009149, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: -1200201239, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: -386527537, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: 2058645001, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  - {fileID: -1366119868, guid: 71ecc1a9b7eda6447b00d091f763b4f1, type: 3}
+  columnsPerRow: 4
+  anticipation:
+  - column: 0
+    duration: 0.1
+  - column: 1
+    duration: 0.1
+  tapAnticipation:
+  - column: 0
+    duration: 0.08
+  hit:
+  - column: 2
+    duration: 0.1
+  followThrough:
+  - column: 3
+    duration: 0.12
+  feintCooldown: 0.5
+  directions:
+  - canonicalDir: {x: 1, y: 1}
+    row: 0
+  - canonicalDir: {x: -1, y: 1}
+    row: 1
+  - canonicalDir: {x: -1, y: -1}
+    row: 2
+  - canonicalDir: {x: 1, y: -1}
+    row: 3
+  attackId: slash

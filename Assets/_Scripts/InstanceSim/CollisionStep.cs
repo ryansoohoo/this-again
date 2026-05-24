@@ -46,6 +46,20 @@ public static class CollisionStep
                 }
     }
 
+    // Broadphase query seam for the future hitbox layer: fill `results` with indices of bodies whose circle
+    // overlaps the (center,radius) probe; returns the count written. Unused by collision itself — v1 ships it so
+    // the OnStrike hit seam later becomes "Overlap roommates, then pixel-perfect narrowphase" with no rework.
+    public static int Overlap(CollisionBody[] bodies, int count, Vector2 center, float radius, int[] results)
+    {
+        int n = 0;
+        for (int i = 0; i < count && n < results.Length; i++)
+        {
+            float rsum = bodies[i].radius + radius;
+            if ((bodies[i].pos - center).sqrMagnitude < rsum * rsum) results[n++] = i;
+        }
+        return n;
+    }
+
     // Positional correction with the SAME per-axis wall slide as MovementStep: a body pushed toward a wall slides
     // along it instead of entering non-walkable space (walls win over the push).
     static Vector2 SlideClamp(Vector2 from, Vector2 delta, Func<Vector2, bool> walkable)

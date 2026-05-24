@@ -149,4 +149,20 @@ public class CollisionStepTests
         CollisionStep.Resolve(b, 3, Open, 6);
         for (int i = 0; i < 3; i++) { Assert.AreEqual(a[i].id, b[i].id); Assert.AreEqual(a[i].pos, b[i].pos); }
     }
+
+    [Test]
+    public void Overlap_ReturnsOnlyBodiesWithinProbe()
+    {
+        var bodies = new[]
+        {
+            Body(1, new Vector2(0f, 0f), 0f),     // radius 0.5
+            Body(2, new Vector2(0.8f, 0f), 0f),   // radius 0.5
+            Body(3, new Vector2(5f, 0f), 0f),     // far away
+        };
+        var results = new int[8];
+        int n = CollisionStep.Overlap(bodies, 3, new Vector2(0.2f, 0f), 0.3f, results);
+        Assert.AreEqual(2, n);          // body0 (dist 0.2 < 0.8) and body1 (dist 0.6 < 0.8); body2 misses
+        Assert.AreEqual(0, results[0]);
+        Assert.AreEqual(1, results[1]);
+    }
 }

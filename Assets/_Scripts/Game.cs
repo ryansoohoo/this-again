@@ -117,6 +117,9 @@ public sealed class Game : MonoBehaviour
         viewPref.Load(viewSettings);
         cellWorld = (float)cellSizePixels / pixelsPerUnit;
 
+        if (weaponCatalog == null)
+            Debug.LogError("[Game] WeaponCatalog is not assigned — attacks won't replicate (server/clients can't resolve weapons, so the lunge and remote swing animation are dropped). Assign Assets/_Combat/WeaponCatalog.asset to the Game component's Weapon Catalog field.");
+
         cameraState = new CameraState();
         cameraSystem = new CameraSystem(Cam, viewSettings, cellWorld, cameraState);
         cameraView = new CameraView();

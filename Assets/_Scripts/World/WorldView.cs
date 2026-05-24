@@ -3,7 +3,8 @@ using UnityEngine;
 // Construction inputs for WorldView (top-level for symmetry with WorldConfig).
 public sealed class WorldViewConfig
 {
-    public int viewRadius, minimapRadius, meshRebuildStep;
+    public int viewRadius, meshRebuildStep;
+    public Vector2Int minimapRadius;
     public Color32 waterMinimapColor;
     public float minimapBrightness;
 }
@@ -76,5 +77,5 @@ public sealed class WorldView
     }
 
     public Vector2 MinimapWorldCenter => new((ViewCenter.x + 0.5f) * cellWorld, (ViewCenter.y + 0.5f) * cellWorld);
-    public float MinimapWorldExtent => (cfg.minimapRadius + 0.5f) * cellWorld;
+    public Vector2 MinimapWorldExtent => new((cfg.minimapRadius.x + 0.5f) * cellWorld, (cfg.minimapRadius.y + 0.5f) * cellWorld);
 }

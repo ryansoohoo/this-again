@@ -153,27 +153,27 @@ public static class CellRenderer
     // cells take their ground-cover biome's color via landColorAt(x,y); water cells are a single flat color
     // (waterColor, matching the water tile). 'at' determines water vs land.
     public static Texture2D BuildOverviewMinimap(Func<int, int, bool> isLand, Func<int, int, Color32> landColorAt,
-                                                 Vector2Int center, int radius, Color32 waterColor, float brightness)
+                                                 Vector2Int center, Vector2Int radius, Color32 waterColor, float brightness)
     {
-        int size = 2 * radius + 1;
-        int minX = center.x - radius, minY = center.y - radius;
+        int sizeX = 2 * radius.x + 1, sizeY = 2 * radius.y + 1;
+        int minX = center.x - radius.x, minY = center.y - radius.y;
 
-        var land = new bool[size * size];
-        for (int lx = 0; lx < size; lx++)
-        for (int ly = 0; ly < size; ly++)
-            land[lx * size + ly] = isLand(minX + lx, minY + ly);
+        var land = new bool[sizeX * sizeY];
+        for (int lx = 0; lx < sizeX; lx++)
+        for (int ly = 0; ly < sizeY; ly++)
+            land[lx * sizeY + ly] = isLand(minX + lx, minY + ly);
 
-        var px = new Color32[size * size];
-        for (int lx = 0; lx < size; lx++)
-        for (int ly = 0; ly < size; ly++)
+        var px = new Color32[sizeX * sizeY];
+        for (int lx = 0; lx < sizeX; lx++)
+        for (int ly = 0; ly < sizeY; ly++)
         {
-            Color32 c = land[lx * size + ly] ? landColorAt(minX + lx, minY + ly) : waterColor;
-            px[ly * size + lx] = new Color32(
+            Color32 c = land[lx * sizeY + ly] ? landColorAt(minX + lx, minY + ly) : waterColor;
+            px[ly * sizeX + lx] = new Color32(
                 (byte)Mathf.Min(255f, c.r * brightness),
                 (byte)Mathf.Min(255f, c.g * brightness),
                 (byte)Mathf.Min(255f, c.b * brightness), 255);
         }
-        var tex = new Texture2D(size, size, TextureFormat.RGBA32, false)
+        var tex = new Texture2D(sizeX, sizeY, TextureFormat.RGBA32, false)
             { name = "MinimapTex", filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp };
         tex.SetPixels32(px);
         tex.Apply(false, false);

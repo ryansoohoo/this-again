@@ -44,10 +44,11 @@ public sealed class Game : MonoBehaviour
     [SerializeField] int startCellsVisible = 16;
     [SerializeField] float keyboardPanSpeed = 20f;
     [SerializeField] float recenterDuration = 0.25f;
+    [SerializeField] Vector2 followEdgeInset = new Vector2(0.15f, 0.15f);   // per-axis keep-player-in-view inset (0=pan to 2x viewport, 1=locked on player)
 
     [Header("Vision")]
     [SerializeField] int viewRadius = 80;
-    [SerializeField] int minimapRadius = 40;
+    [SerializeField] Vector2Int minimapRadius = new Vector2Int(40, 40);   // minimap half-extent in cells, per axis (total = 2r+1)
     [SerializeField] int meshRebuildStep = 32;
 
     public static Game Instance { get; private set; }
@@ -68,7 +69,12 @@ public sealed class Game : MonoBehaviour
     // Minimap facade (the Minimap HUD reads these).
     public Texture2D MinimapTexture => view != null ? view.MinimapTexture : null;
     public Vector2 MinimapWorldCenter => view != null ? view.MinimapWorldCenter : Vector2.zero;
-    public float MinimapWorldExtent => view != null ? view.MinimapWorldExtent : 0f;
+    public Vector2 MinimapWorldExtent => view != null ? view.MinimapWorldExtent : Vector2.zero;
+
+    // Read-only X×Y view extents in cells — the three view sizes, for inspection/tuning.
+    public Vector2Int MinimapCells => new(2 * minimapRadius.x + 1, 2 * minimapRadius.y + 1);
+    public Vector2 ViewportCells => cameraSystem != null ? cameraSystem.ViewportCells : Vector2.zero;
+    public Vector2 MaxPanCells => cameraSystem != null ? cameraSystem.MaxPanCells : Vector2.zero;
 
     // World <-> cell geometry (Player/Camera read these).
     float cellWorld;
@@ -110,6 +116,7 @@ public sealed class Game : MonoBehaviour
             startCellsVisible = startCellsVisible,
             keyboardPanSpeed = keyboardPanSpeed,
             recenterDuration = recenterDuration,
+            followEdgeInset = followEdgeInset,
         }, cellWorld, cameraState);
         cameraView = new CameraView();
         cameraView.Apply(Cam, cameraState);

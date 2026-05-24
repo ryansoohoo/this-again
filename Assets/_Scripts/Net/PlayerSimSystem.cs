@@ -14,8 +14,38 @@ public static class PlayerSimSystem
         foreach (var sp in reg.Players.Values) Step(gm, sp, moveSpeed, dt);
     }
 
+    // Cached walkability delegate (reads _walkGm from a static field) so the per-FixedUpdate free-step doesn't
+    // allocate a fresh closure each call. Server main-thread, one call at a time — same pattern as _enterCost.
+    static Game _walkGm;
+    static readonly System.Func<Vector2, bool> _walkAt = p =>
+    {
+        var c = _walkGm.WorldToCell(p);
+        return _walkGm.IsWalkable(c.x, c.y);
+    };
+
+    // Fixed-tick authoritative free movement for in-instance players. Drains every buffered input whose tick is
+    // the next contiguous one, stepping deterministically with MovementStep (the same function the client
+    // predicts with). lastProcessedTick = the last tick actually applied — what the snapshot acks.
+    public static void StepInstanceFixed(PlayerRegistry reg, MovementSettings cfg, float dt)
+    {
+        var gm = Game.Instance;
+        if (gm == null) return;
+        _walkGm = gm;
+        foreach (var sp in reg.Players.Values)
+        {
+            if (!sp.inInstance || sp.serverInputs == null) continue;
+            while (sp.serverInputs.TryGet(sp.lastProcessedTick + 1, out var f))
+            {
+                sp.worldPos = MovementStep.Step(sp.worldPos, f.input, dt, cfg.moveSpeed, _walkAt);
+                sp.lastInput = f.input;
+                sp.lastProcessedTick++;
+            }
+        }
+    }
+
     static void Step(Game gm, ServerPlayer sp, float moveSpeed, float dt)
     {
+        if (sp.inInstance) return;   // in-instance players move via the fixed free-step, not the grid step
         var m = sp.motion;
         if (m.moving)
         {

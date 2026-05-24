@@ -75,6 +75,13 @@ public sealed class ReplicationHub : NetworkBehaviour
         if (cfg != null) SendSnapshots(cfg);
     }
 
+    void FixedUpdate()
+    {
+        if (!IsServer) return;
+        var cfg = Game.Instance != null ? Game.Instance.MovementCfg : null;
+        if (cfg != null) PlayerSimSystem.StepInstanceFixed(registry, cfg, Time.fixedDeltaTime);
+    }
+
     void SendSnapshots(ReplicationSettings cfg)
     {
         aoiScratch.Clear();

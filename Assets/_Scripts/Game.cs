@@ -39,6 +39,9 @@ public sealed class Game : MonoBehaviour
     [Header("Replication")]
     [SerializeField] ReplicationSettings replication = new ReplicationSettings();
 
+    [Header("Movement (free / prediction)")]
+    [SerializeField] MovementSettings movement = new MovementSettings();
+
     [Header("View (tunable — minimap / viewport)")]
     [SerializeField] ViewSettings viewSettings = new ViewSettings();
 
@@ -60,6 +63,7 @@ public sealed class Game : MonoBehaviour
     public float? TimeOverride => dayNightSystem != null ? dayNightSystem.TimeOverride : null;
     public void SetTimeOverride(float? t) { if (dayNightSystem != null) dayNightSystem.TimeOverride = t; }
     public ReplicationSettings ReplicationCfg => replication;
+    public MovementSettings MovementCfg => movement;
     public ViewSettings ViewCfg => viewSettings;
 
     // Minimap facade (the Minimap HUD reads these).
@@ -94,6 +98,7 @@ public sealed class Game : MonoBehaviour
     readonly JsonPref<StructureSettings> structurePref = new("structures.json");
     readonly JsonPref<DayNightSettings> dayNightPref = new("daynight.json");
     readonly JsonPref<ReplicationSettings> replicationPref = new("replication.json");
+    readonly JsonPref<MovementSettings> movementPref = new("movement.json");
     readonly JsonPref<ViewSettings> viewPref = new("view.json");
 
     void Awake()
@@ -104,6 +109,7 @@ public sealed class Game : MonoBehaviour
         biomePref.Load(biome); groundPref.Load(ground); waterPref.Load(water); structurePref.Load(structureSettings);
         dayNightPref.Load(dayNight);
         replicationPref.Load(replication);
+        movementPref.Load(movement);
         viewPref.Load(viewSettings);
         cellWorld = (float)cellSizePixels / pixelsPerUnit;
 
@@ -178,6 +184,8 @@ public sealed class Game : MonoBehaviour
     public void ResetDayNightSettings() { dayNightPref.Reset(dayNight, new DayNightSettings()); Debug.Log("[Game] Day/Night settings reset (defaults applied)."); }
     public void SaveReplicationSettings()  { replicationPref.Save(replication); Debug.Log("[Game] Replication settings saved."); }
     public void ResetReplicationSettings() { replicationPref.Reset(replication, new ReplicationSettings()); Debug.Log("[Game] Replication settings reset (defaults applied)."); }
+    public void SaveMovementSettings()  { movementPref.Save(movement); Debug.Log("[Game] Movement settings saved."); }
+    public void ResetMovementSettings() { movementPref.Reset(movement, new MovementSettings()); Debug.Log("[Game] Movement settings reset (defaults applied)."); }
     public void SaveViewSettings()  { viewPref.Save(viewSettings); Debug.Log("[Game] View settings saved."); }
     public void ResetViewSettings() { viewPref.Reset(viewSettings, new ViewSettings()); ApplyViewSettings(); Debug.Log("[Game] View settings reset (defaults applied)."); }
     public void ApplyViewSettings()

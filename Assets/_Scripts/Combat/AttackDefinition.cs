@@ -27,6 +27,12 @@ public sealed class AttackDefinition : ScriptableObject
     public DirectionEntry[] directions;
     public string attackId;
 
+    [Header("On hit")]
+    public int damage = 10;
+    public float hitRange = 1.0f;
+    [Range(0f, 180f)] public float hitArcDegrees = 90f;   // half-arc each side of the locked aim
+    public OnHitEffect[] onHit = new[] { new OnHitEffect { kind = StatusKind.HitStun, magnitude = 1 } };
+
     AttackTimeline _timeline;
     public AttackTimeline Timeline => _timeline ??= BuildTimeline();
 
@@ -47,6 +53,10 @@ public sealed class AttackDefinition : ScriptableObject
             feintCooldownTicks = Mathf.CeilToInt(feintCooldown * 60f),
             aimSnapDegrees = aimSnapDegrees,
             lungeCurve = lungeCurve,
+            damage = damage,
+            hitRange = hitRange,
+            hitArcCos = Mathf.Cos(hitArcDegrees * Mathf.Deg2Rad),
+            onHit = onHit,
         };
     }
 

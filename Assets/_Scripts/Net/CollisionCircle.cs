@@ -42,7 +42,7 @@ public sealed class CollisionCircle : MonoBehaviour
         bool show = Show && GhostManager.Instance != null && GhostManager.Instance.SelfInInstance;
         if (_lr.enabled != show) _lr.enabled = show;
         if (!show) return;
-        float r = (Game.Instance != null && Game.Instance.MovementCfg != null) ? Game.Instance.MovementCfg.collisionRadius : 0.3f;
+        float r = (Game.Instance != null && Game.Instance.MovementCfg != null) ? Game.Instance.MovementCfg.collisionRadius : 0.21f;
         if (!Mathf.Approximately(r, _builtRadius)) Rebuild(r);
     }
 

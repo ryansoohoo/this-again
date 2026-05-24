@@ -71,7 +71,7 @@ public sealed class LocalPlayer : MonoBehaviour
         if (prediction.Active) prediction.Decay(Time.deltaTime);
         var cam = Game.Instance != null ? Game.Instance.Cam : Camera.main;
         var intent = input.Read(cam);
-        if (intent.dir != lastSent) { lastSent = intent.dir; ReplicationHub.Instance.SubmitInputRpc(intent.dir); }
+        if (intent.dir != lastSent) { lastSent = intent.dir; if (!prediction.Active) ReplicationHub.Instance.SubmitInputRpc(intent.dir); }
         if (intent.hasClickTarget) ReplicationHub.Instance.SetTargetRpc(intent.clickWorld);
         if (prediction.Active && GhostManager.Instance != null && GhostManager.Instance.SelfGhost != null)
             GhostManager.Instance.SelfGhost.position = prediction.RenderedPos;
@@ -95,6 +95,10 @@ public sealed class LocalPlayer : MonoBehaviour
         if (!prediction.Active) return;
         for (int i = 0; i < entries.Length; i++)
             if (entries[i].id == localId)
-            { prediction.Reconcile(new Vector2(entries[i].x, entries[i].y), ackTick); return; }
+            {
+                bool snap = (entries[i].flags & SnapshotEntry.SnapBit) != 0;
+                prediction.Reconcile(new Vector2(entries[i].x, entries[i].y), ackTick, snap);
+                return;
+            }
     }
 }

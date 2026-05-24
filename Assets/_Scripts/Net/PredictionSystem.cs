@@ -44,16 +44,34 @@ public sealed class PredictionSystem
     // client tick the server simulated. If our prediction at that tick diverged, snap the logical position to
     // authoritative and replay still-unacked inputs, then push the pre-correction visual delta into
     // smoothOffset so the on-screen correction eases instead of snapping.
-    public void Reconcile(Vector2 authPos, uint ackTick)
+    public void Reconcile(Vector2 authPos, uint ackTick, bool snap)
     {
         if (!Active || ackTick == 0) return;
+
+        // Teleport: jump hard to the authoritative position (continuing from there through any post-ack inputs),
+        // with NO smoothing — the snap flag exists precisely to avoid easing across the jump.
+        if (snap)
+        {
+            if (buffer.TryGet(ackTick, out _)) { ReplayFrom(authPos, ackTick); smoothOffset = Vector2.zero; }
+            else HardSnap(authPos);
+            return;
+        }
+
         if (!buffer.TryGet(ackTick, out var acked)) { HardSnap(authPos); return; }
 
-        var cfg = Game.Instance.MovementCfg;
-        if (Vector2.Distance(acked.predictedPos, authPos) <= cfg.reconcileEpsilon) return;
+        float eps = Game.Instance.MovementCfg.reconcileEpsilon;
+        if ((acked.predictedPos - authPos).sqrMagnitude <= eps * eps) return;   // within tolerance: no correction
 
         Vector2 before = RenderedPos;
-        Vector2 p = authPos;
+        ReplayFrom(authPos, ackTick);
+        smoothOffset = before - Pos;   // keep the visual where it was; ease the gap to zero in Decay()
+    }
+
+    // Re-simulate buffered inputs after ackTick from a known-good position, rewriting their stored predictions.
+    void ReplayFrom(Vector2 fromPos, uint ackTick)
+    {
+        var cfg = Game.Instance.MovementCfg;
+        Vector2 p = fromPos;
         for (uint t = ackTick + 1; t <= Tick; t++)
         {
             if (!buffer.TryGet(t, out var f)) break;
@@ -62,7 +80,6 @@ public sealed class PredictionSystem
             buffer.Store(f);
         }
         Pos = p;
-        smoothOffset = before - Pos;   // keep the visual where it was; ease the gap to zero in Decay()
     }
 
     void HardSnap(Vector2 authPos) { Pos = authPos; smoothOffset = Vector2.zero; }

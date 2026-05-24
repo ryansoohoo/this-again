@@ -200,7 +200,7 @@ public sealed class Game : MonoBehaviour
             cameraSystem.ApplyZoom(inst ? viewSettings.underworldCellsTall : viewSettings.overworldCellsTall);
         }
         cameraState.FollowTarget = lp != null ? lp.SelfWorldPos : null;
-        cameraSystem.Tick();
+        cameraSystem.Tick(Time.unscaledDeltaTime);
         cameraView.Apply(Cam, cameraState);
         view.Follow(lp != null ? lp.CurrentCell() : Vector2Int.zero);
 

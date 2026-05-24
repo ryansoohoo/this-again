@@ -187,6 +187,7 @@ public sealed class TunerPanels : MonoBehaviour
         I("Overworld tall", ref r.overworldCellsTall, 4, 80);
         I("Underworld tall", ref r.underworldCellsTall, 4, 80);
         I("Min cells (zoom-in)", ref r.minCellsVisible, 2, 60);
+        F("Follow smooth", ref r.followSmoothTime, 0f, 0.5f, "0.00");
 
         var vp = gm.ViewportCells; var mc = gm.MinimapCells;
         GUILayout.Label($"viewport ≈ {vp.x:0}×{vp.y:0}   minimap {mc.x}×{mc.y}");

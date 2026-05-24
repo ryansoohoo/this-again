@@ -14,4 +14,7 @@ public class ViewSettings
     [Min(2)] public int overworldCellsTall  = 30;   // view height in the overworld
     [Min(2)] public int underworldCellsTall = 20;   // view height inside a dungeon instance
     [Min(2)] public int minCellsVisible     = 10;   // max zoom-in clamp (cells)
+
+    [Header("Camera follow")]
+    [Range(0f, 0.5f)] public float followSmoothTime = 0.12f;   // SmoothDamp seconds toward the player (0 = instant lock)
 }

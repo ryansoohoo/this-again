@@ -13,6 +13,8 @@ public sealed class CameraSystem
     const float PixelsPerUnit = 16f;
 
     int lastScreenW, lastScreenH;
+    Vector3 smoothPos, followVel;                 // unsnapped smooth-follow source (state.Position is its snapped copy)
+    const float TeleportSnapDist = 30f;           // cells; a jump larger than this is a teleport (snap, don't pan)
 
     public CameraSystem(Camera cam, ViewSettings vs, float cellWorld, CameraState state)
     {
@@ -20,10 +22,11 @@ public sealed class CameraSystem
         lastScreenW = Screen.width;
         lastScreenH = Screen.height;
         state.Position = cam.transform.position;                       // seed from the camera's boot position
+        smoothPos = state.Position;
         state.OrthoSize = ClampOrtho(CellsToOrtho(vs.overworldCellsTall));
     }
 
-    public void Tick()
+    public void Tick(float dt)
     {
         if (Screen.width != lastScreenW || Screen.height != lastScreenH)
         {
@@ -31,10 +34,15 @@ public sealed class CameraSystem
             state.OrthoSize = ClampOrtho(state.OrthoSize);
         }
 
-        if (state.FollowTarget.HasValue)                              // locked on the player
+        if (state.FollowTarget.HasValue)                              // smooth-follow the player
         {
-            var t = state.FollowTarget.Value;
-            state.Position = new Vector3(t.x, t.y, state.Position.z);
+            Vector3 target = new Vector3(state.FollowTarget.Value.x, state.FollowTarget.Value.y, smoothPos.z);
+            if ((target - smoothPos).sqrMagnitude > TeleportSnapDist * TeleportSnapDist)
+            { smoothPos = target; followVel = Vector3.zero; }         // teleport: snap, don't pan across the world
+            else
+                smoothPos = Vector3.SmoothDamp(smoothPos, target, ref followVel,
+                                               Mathf.Max(vs.followSmoothTime, 0f), Mathf.Infinity, Mathf.Max(dt, 1e-5f));
+            state.Position = smoothPos;                               // SnapPosPixelPerfect snaps the rendered copy below
         }
 
         SnapOrthoPixelPerfect();

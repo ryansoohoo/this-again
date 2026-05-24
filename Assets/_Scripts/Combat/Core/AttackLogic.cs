@@ -10,17 +10,16 @@ public static class AttackLogic
     {
         if (!canAttack)
         {
-            // Gated: interrupt any in-progress attack back to Idle (no cooldown), and never start a new one.
+            // Gated: interrupt any in-progress attack back to Idle, and never start a new one.
             if (s.phase != AttackPhase.Idle) return new AttackState { phase = AttackPhase.Idle };
-            if (s.cooldown > 0f) s.cooldown = Mathf.Max(0f, s.cooldown - dt);
             return s;
         }
 
         switch (s.phase)
         {
             case AttackPhase.Idle:
-                if (s.cooldown > 0f) s.cooldown = Mathf.Max(0f, s.cooldown - dt);
-                if (intent.pressed && s.cooldown <= 0f && Has(tl.anticipation))
+                // Attack-start is blocked by the gate (AttackCooldown sets blocksAttack) — no cooldown field here.
+                if (intent.pressed && Has(tl.anticipation))
                 {
                     s.phase = AttackPhase.Anticipation;
                     s.frameIndex = 0; s.phaseElapsed = 0f; s.windupComplete = false;
@@ -31,7 +30,7 @@ public static class AttackLogic
             case AttackPhase.Anticipation:
                 Aim(ref s, tl, intent.aimDir);                      // re-aimable while holding
                 if (intent.feint)
-                    return new AttackState { phase = AttackPhase.Idle, cooldown = tl.feintCooldown };
+                    return new AttackState { phase = AttackPhase.Idle };   // InstanceStep applies the AttackCooldown effect
                 if (intent.released || !intent.held)                // commit; direction stays locked from here
                 {
                     bool tap = !s.windupComplete && Has(tl.tapAnticipation);

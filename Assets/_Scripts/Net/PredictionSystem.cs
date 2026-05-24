@@ -1,6 +1,5 @@
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 // Client-side prediction for the local player while in the underworld. Runs on the fixed tick: sample input,
 // step locally with the same MovementStep the server uses, store the frame in a ring buffer, and send the
@@ -12,8 +11,9 @@ public sealed class PredictionSystem
     public bool Active { get; private set; }
     public Vector2 Pos { get; private set; }            // authoritative-predicted logical position
     public uint Tick { get; private set; }
+    public StatusState Status { get; } = new();         // owner-predicted effects; reduces to the gate, adopted on snapshot (Task 11)
 
-    InputRingBuffer buffer;
+    RingBuffer<InputFrame> buffer;
     Vector2 smoothOffset;                                // decays to zero so corrections don't snap
     Vector2 prevPos;                                     // logical pos before the latest FixedTick step
     ulong localId;                                       // cached on Activate; excludes self + sorts deterministically
@@ -32,24 +32,28 @@ public sealed class PredictionSystem
     public void Activate(Vector2 startPos)
     {
         var cfg = Game.Instance.MovementCfg;
-        buffer = new InputRingBuffer(Mathf.Max(8, Mathf.NextPowerOfTwo(cfg.inputBufferCapacity)));
+        buffer = new RingBuffer<InputFrame>(Mathf.Max(8, Mathf.NextPowerOfTwo(cfg.inputBufferCapacity)));
         localId = NetworkManager.Singleton != null ? NetworkManager.Singleton.LocalClientId : 0;
         Pos = startPos;
         prevPos = startPos;
         smoothOffset = Vector2.zero;
         Tick = 0;
+        Status.Clear();
         Active = true;
     }
 
-    public void Deactivate() => Active = false;
+    public void Deactivate() { Status.Clear(); Active = false; }
+
+    static StatusEffectDef[] Defs() { var c = Game.Instance != null ? Game.Instance.StatusCatalog : null; return c != null ? c.Defs : System.Array.Empty<StatusEffectDef>(); }
 
     // Movement-only fixed tick (no weapon equipped): predict locally and send the tick-stamped input. The wire
     // carries RAW WASD; the server re-applies its own (authoritative) gate. Local prediction + the stored replay
     // frame use the gated vector so reconcile replay reproduces the same motion.
-    public void FixedTick(GateMod gate, float dt)
+    public void FixedTick(float dt)
     {
         var cfg = Game.Instance.MovementCfg;
-        Vector2 raw = SampleInput();
+        GateMod gate = GateMod.Quantize(StatusLogic.Step(Status, Defs(), out _));   // age effects → predicted gate
+        Vector2 raw = WasdInput.Read();
         Vector2 move = InstanceStep.FreeMove(raw, gate);
         Tick++;
         prevPos = Pos;                                  // remember where we were so the visual can interpolate across the step
@@ -62,18 +66,19 @@ public sealed class PredictionSystem
     // In-instance fixed tick with an equipped weapon: step attack + lunge + movement together via the shared
     // InstanceStep (the same function the server and replay use), then send the EFFECTIVE move so the (Phase-1
     // unchanged) server reproduces the identical position. `atk` is stepped in place.
-    public void FixedTickInstance(ref AttackState atk, AttackIntent attack, byte weaponId, AttackTimeline tl, PhaseScales scales, GateMod gate, float dt)
+    public void FixedTickInstance(ref AttackState atk, AttackIntent attack, byte weaponId, AttackTimeline tl, PhaseScales scales, float dt)
     {
         var cfg = Game.Instance.MovementCfg;
-        Vector2 rawMove = SampleInput();
+        Vector2 rawMove = WasdInput.Read();
         ushort aimQ = AimQuant.Encode(attack.aimDir);
         attack.aimDir = AimQuant.Decode(aimQ);   // predict with the SAME value the server receives (determinism)
         Tick++;
         prevPos = Pos;
         Vector2 p = Pos;
-        var ctx = new InstanceCtx { timeline = tl, scales = scales, dt = dt, speed = cfg.moveSpeed, walkable = Walkable, gate = gate };
-        InstanceStep.Step(ref atk, ref p, new InstanceInput { rawMove = rawMove, attack = attack }, ctx);
+        var ctx = new InstanceCtx { timeline = tl, scales = scales, dt = dt, speed = cfg.moveSpeed, walkable = Walkable, defs = Defs() };
+        InstanceStep.Step(ref atk, Status, ref p, new InstanceInput { rawMove = rawMove, attack = attack }, ctx, out _);   // steps Status + derives the gate
         Pos = ResolveSelfCollision(p, prevPos);          // predict push-apart; p includes lunge so invMass mirrors the server
+        GateMod gate = GateMod.Quantize(StatusLogic.Reduce(Status, Defs()));   // read-only: the post-step gate for the stored fallback vector
         buffer.Store(new InputFrame { tick = Tick, input = AttackLogic.LungeVelocity(atk, tl) ?? InstanceStep.FreeMove(rawMove, gate), predictedPos = Pos });
         byte bits = (byte)((attack.pressed ? InputCommand.Pressed : 0) | (attack.held ? InputCommand.Held : 0)
                          | (attack.released ? InputCommand.Released : 0) | (attack.feint ? InputCommand.Feint : 0));
@@ -159,19 +164,6 @@ public sealed class PredictionSystem
         float t = Game.Instance.MovementCfg.correctionSmoothTime;
         smoothOffset = (t <= 0f) ? Vector2.zero : Vector2.Lerp(smoothOffset, Vector2.zero, Mathf.Clamp01(dt / t));
         if (smoothOffset.sqrMagnitude < 1e-6f) smoothOffset = Vector2.zero;
-    }
-
-    static Vector2 SampleInput()
-    {
-        if (InputState.Typing) return Vector2.zero;
-        var kb = Keyboard.current;
-        if (kb == null) return Vector2.zero;
-        Vector2 d = Vector2.zero;
-        if (kb.wKey.isPressed) d.y += 1f;
-        if (kb.sKey.isPressed) d.y -= 1f;
-        if (kb.aKey.isPressed) d.x -= 1f;
-        if (kb.dKey.isPressed) d.x += 1f;
-        return d;
     }
 
     static bool Walkable(Vector2 p)

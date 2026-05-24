@@ -44,6 +44,7 @@ public sealed class AttackDefinition : ScriptableObject
             directions = directions,
             dirs = dirs,
             feintCooldown = feintCooldown,
+            feintCooldownTicks = Mathf.CeilToInt(feintCooldown * 60f),
             aimSnapDegrees = aimSnapDegrees,
             lungeCurve = lungeCurve,
         };

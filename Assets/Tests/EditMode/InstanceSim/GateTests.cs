@@ -1,8 +1,8 @@
 using NUnit.Framework;
 using UnityEngine;
 
-// Action-gate primitive: the source-keyed reduce (overlap / race safety), the wire quantization, the attack
-// interrupt + start-block, and gated movement through the shared InstanceStep.
+// GateMod wire round-trip, AttackLogic start-block + interrupt, and InstanceStep movement gating driven by a
+// StatusState (effects reduce to the gate). AbilityGate reduction is covered by StatusLogicTests now.
 public class GateTests
 {
     // ---- GateMod value + wire ----
@@ -28,47 +28,6 @@ public class GateTests
         Assert.IsTrue(full.CanMove);
         Assert.IsTrue(full.CanAttack);
         Assert.AreEqual(1f, full.moveScale, 1e-4f);
-    }
-
-    // ---- AbilityGate reduce: overlapping sources compose, clearing one keeps the rest ----
-
-    [Test]
-    public void Empty_ReducesToNone()
-    {
-        var e = new AbilityGate().Effective;
-        Assert.IsTrue(e.CanMove);
-        Assert.IsTrue(e.CanAttack);
-        Assert.AreEqual(1f, e.moveScale, 1e-4f);
-    }
-
-    [Test]
-    public void OverlappingSlows_Multiply()
-    {
-        var g = new AbilityGate();
-        g.Set(1, new GateMod { moveScale = 0.5f });
-        g.Set(2, new GateMod { moveScale = 0.5f });
-        Assert.AreEqual(0.25f, g.Effective.moveScale, 1e-4f);
-    }
-
-    [Test]
-    public void IndependentBlocks_Compose()
-    {
-        var g = new AbilityGate();
-        g.Set(1, new GateMod { blocksMove = true, moveScale = 1f });
-        g.Set(2, new GateMod { blocksAttack = true, moveScale = 1f });
-        Assert.IsFalse(g.Effective.CanMove);
-        Assert.IsFalse(g.Effective.CanAttack);
-    }
-
-    [Test]
-    public void ClearingOneSource_LeavesTheOther()
-    {
-        var g = new AbilityGate();
-        g.Set(1, new GateMod { blocksMove = true, moveScale = 1f });
-        g.Set(2, new GateMod { blocksAttack = true, moveScale = 1f });
-        g.Clear(1);
-        Assert.IsTrue(g.Effective.CanMove);     // move re-enabled (its only blocker cleared)
-        Assert.IsFalse(g.Effective.CanAttack);  // attack still blocked by the surviving source
     }
 
     // ---- AttackLogic gating: block new starts, interrupt in-progress ----
@@ -101,14 +60,21 @@ public class GateTests
         Assert.AreEqual(AttackPhase.Anticipation, s.phase);
         s = AttackLogic.Step(s, new AttackIntent { held = true, aimDir = new Vector2(1, 0) }, tl, PhaseScales.One, 0.016f, canAttack: false);
         Assert.AreEqual(AttackPhase.Idle, s.phase);
-        Assert.AreEqual(0f, s.cooldown, 1e-4f);   // interrupt clears cooldown (not a feint)
     }
 
-    // ---- InstanceStep gating: movement scaled/blocked, lunge interrupted ----
+    // ---- InstanceStep gating: the gate is reduced from the player's StatusState ----
 
-    static InstanceCtx Ctx(AttackTimeline tl, GateMod? gate) => new InstanceCtx
+    // Minimal catalog: [0] root+silence, [1] slow 0.5, [2] paralyze (root+silence+0 scale).
+    static StatusEffectDef[] Defs() => new[]
     {
-        timeline = tl, scales = PhaseScales.One, dt = 0.02f, speed = 4f, walkable = _ => true, gate = gate,
+        new StatusEffectDef { id = 0, blocksMove = true, blocksAttack = true, moveScale = 0f, durationTicks = 100, policy = StackPolicy.Refresh, maxStacks = 1 },
+        new StatusEffectDef { id = 1, moveScale = 0.5f, durationTicks = 100, policy = StackPolicy.Refresh, maxStacks = 1 },
+        new StatusEffectDef { id = 2, blocksMove = true, blocksAttack = true, moveScale = 0f, durationTicks = 100, policy = StackPolicy.Refresh, maxStacks = 1 },
+    };
+
+    static InstanceCtx Ctx(AttackTimeline tl) => new InstanceCtx
+    {
+        timeline = tl, scales = PhaseScales.One, dt = 0.02f, speed = 4f, walkable = _ => true, defs = Defs(),
     };
 
     static InstanceInput Move(Vector2 m) => new InstanceInput { rawMove = m, attack = new AttackIntent { aimDir = new Vector2(1, 0) } };
@@ -117,8 +83,9 @@ public class GateTests
     public void BlockedMove_DoesNotWalk()
     {
         var tl = Tl();
-        var atk = default(AttackState); Vector2 pos = Vector2.zero;
-        InstanceStep.Step(ref atk, ref pos, Move(new Vector2(1, 0)), Ctx(tl, new GateMod { blocksMove = true, moveScale = 1f }));
+        var atk = default(AttackState); Vector2 pos = Vector2.zero; var st = new StatusState();
+        StatusLogic.Apply(st, Defs()[0], 0u, false);   // root
+        InstanceStep.Step(ref atk, st, ref pos, Move(new Vector2(1, 0)), Ctx(tl), out _);
         Assert.AreEqual(0f, pos.x, 1e-4f);
     }
 
@@ -127,27 +94,27 @@ public class GateTests
     {
         var tl = Tl();
         var fa = default(AttackState); Vector2 full = Vector2.zero;
-        InstanceStep.Step(ref fa, ref full, Move(new Vector2(1, 0)), Ctx(tl, GateMod.None));
-        var ha = default(AttackState); Vector2 half = Vector2.zero;
-        InstanceStep.Step(ref ha, ref half, Move(new Vector2(1, 0)), Ctx(tl, new GateMod { moveScale = 0.5f }));
-        Assert.AreEqual(full.x * 0.5f, half.x, 1e-4f);
+        InstanceStep.Step(ref fa, new StatusState(), ref full, Move(new Vector2(1, 0)), Ctx(tl), out _);
+        var ha = default(AttackState); Vector2 half = Vector2.zero; var st = new StatusState();
+        StatusLogic.Apply(st, Defs()[1], 0u, false);   // slow 0.5
+        InstanceStep.Step(ref ha, st, ref half, Move(new Vector2(1, 0)), Ctx(tl), out _);
+        Assert.AreEqual(full.x * 0.5f, half.x, 1e-3f);
     }
 
     [Test]
     public void GatedAttack_InterruptsLunge_AndParalyzeRoots()
     {
         var tl = Tl();
-        var atk = default(AttackState); Vector2 pos = Vector2.zero;
-        // Commit a tap so we reach the Hit lunge.
-        InstanceStep.Step(ref atk, ref pos, new InstanceInput { attack = new AttackIntent { pressed = true, held = true, aimDir = new Vector2(1, 0) } }, Ctx(tl, GateMod.None));
-        InstanceStep.Step(ref atk, ref pos, new InstanceInput { attack = new AttackIntent { released = true, aimDir = new Vector2(1, 0) } }, Ctx(tl, GateMod.None));
+        var atk = default(AttackState); Vector2 pos = Vector2.zero; var none = new StatusState();
+        InstanceStep.Step(ref atk, none, ref pos, new InstanceInput { attack = new AttackIntent { pressed = true, held = true, aimDir = new Vector2(1, 0) } }, Ctx(tl), out _);
+        InstanceStep.Step(ref atk, none, ref pos, new InstanceInput { attack = new AttackIntent { released = true, aimDir = new Vector2(1, 0) } }, Ctx(tl), out _);
         for (int i = 0; i < 10 && atk.phase != AttackPhase.Hit; i++)
-            InstanceStep.Step(ref atk, ref pos, Move(Vector2.zero), Ctx(tl, GateMod.None));
+            InstanceStep.Step(ref atk, none, ref pos, Move(Vector2.zero), Ctx(tl), out _);
         Assert.AreEqual(AttackPhase.Hit, atk.phase);
 
         float before = pos.x;
-        var paralyze = new GateMod { blocksMove = true, blocksAttack = true, moveScale = 0f };
-        InstanceStep.Step(ref atk, ref pos, Move(Vector2.zero), Ctx(tl, paralyze));
+        var st = new StatusState(); StatusLogic.Apply(st, Defs()[2], 0u, false);   // paralyze
+        InstanceStep.Step(ref atk, st, ref pos, Move(Vector2.zero), Ctx(tl), out _);
         Assert.AreEqual(AttackPhase.Idle, atk.phase);    // lunge interrupted
         Assert.AreEqual(before, pos.x, 1e-4f);           // and rooted: no lunge displacement
     }

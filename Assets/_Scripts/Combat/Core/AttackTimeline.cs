@@ -10,6 +10,7 @@ public sealed class AttackTimeline
     public DirectionEntry[] directions;
     public Vector2[] dirs;        // cached directions[].canonicalDir for the picker (no per-tick alloc)
     public float feintCooldown;
+    public int feintCooldownTicks;  // feintCooldown converted to ticks (60 Hz); the AttackCooldown effect's duration
     public float aimSnapDegrees;  // 0 = rotate freely to the cursor; 45 = snap the aim to 8 directions
     public AnimationCurve lungeCurve;  // copied from the SO; lets the pure core compute the lunge without an SO ref
 }

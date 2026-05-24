@@ -30,23 +30,8 @@ public class AttackLogicTests
         Assert.AreEqual(1, s.dirIndex); // North
     }
 
-    [Test]
-    public void PressDuringCooldown_StaysIdle()
-    {
-        var tl = MakeTimeline();
-        var s = new AttackState { phase = AttackPhase.Idle, cooldown = 0.3f };
-        s = AttackLogic.Step(s, Press(new Vector2(1, 0)), tl, PhaseScales.One, 0.016f);
-        Assert.AreEqual(AttackPhase.Idle, s.phase);
-    }
-
-    [Test]
-    public void Cooldown_DecrementsInIdle()
-    {
-        var tl = MakeTimeline();
-        var s = new AttackState { phase = AttackPhase.Idle, cooldown = 0.1f };
-        s = AttackLogic.Step(s, Idle(), tl, PhaseScales.One, 0.04f);
-        Assert.AreEqual(0.06f, s.cooldown, 1e-4f);
-    }
+    // (Cooldown-in-AttackLogic tests removed: the feint lockout is now the AttackCooldown status effect — its
+    // duration/decrement is covered by StatusLogicTests, and the gate's start-block by GateTests.)
 
     [Test]
     public void Anticipation_HoldsLastFrame_WhenComplete()
@@ -70,13 +55,12 @@ public class AttackLogicTests
     }
 
     [Test]
-    public void Feint_EntersCooldown_AndIdle()
+    public void Feint_GoesIdle()
     {
         var tl = MakeTimeline();
         var s = AttackLogic.Step(default, Press(new Vector2(1, 0)), tl, PhaseScales.One, 0f);
         s = AttackLogic.Step(s, Feint(new Vector2(1, 0)), tl, PhaseScales.One, 0.016f);
-        Assert.AreEqual(AttackPhase.Idle, s.phase);
-        Assert.AreEqual(0.5f, s.cooldown, 1e-4f);
+        Assert.AreEqual(AttackPhase.Idle, s.phase);   // feint cancels to Idle; the AttackCooldown effect enforces the lockout
     }
 
     [Test]
@@ -122,7 +106,6 @@ public class AttackLogicTests
         }
         Assert.IsTrue(sawHit);
         Assert.AreEqual(AttackPhase.Idle, s.phase);
-        Assert.AreEqual(0f, s.cooldown, 1e-4f); // completed attack: no cooldown
     }
 
     [Test]

@@ -25,6 +25,8 @@ public static class AttackSimSystem
     {
         var gm = Game.Instance; if (gm == null) return;
         _gm = gm;
+        var statusCat = gm.StatusCatalog;
+        var statusDefs = statusCat != null ? statusCat.Defs : System.Array.Empty<StatusEffectDef>();
 
         // ---- Phase A: integrate each in-instance player (attack + lunge + movement vs walls), as before ----
         _pending.Clear();
@@ -32,8 +34,6 @@ public static class AttackSimSystem
         {
             var sp = kv.Value;
             if (!sp.inInstance) continue;
-            // Quantize the effective gate so the server sims with the exact value it ships to the owner.
-            var gate = GateMod.Quantize(sp.gate.Effective);
             Vector2 startPos = sp.worldPos;
             if (sp.serverInputs != null)
             {
@@ -42,15 +42,19 @@ public static class AttackSimSystem
                 {
                     if (def != null)
                     {
-                        var ctx = new InstanceCtx { timeline = def.Timeline, scales = sp.attackScales, dt = dt, speed = cfg.moveSpeed, walkable = _walkAt, gate = gate };
+                        var ctx = new InstanceCtx { timeline = def.Timeline, scales = sp.attackScales, dt = dt, speed = cfg.moveSpeed, walkable = _walkAt, defs = statusDefs };
                         sp.prevAttackPhase = sp.attackState.phase;
                         var atk = sp.attackState; var pos = sp.worldPos;
-                        InstanceStep.Step(ref atk, ref pos, new InstanceInput { rawMove = c.rawMove, attack = ToIntent(c) }, ctx);
+                        InstanceStep.Step(ref atk, sp.status, ref pos, new InstanceInput { rawMove = c.rawMove, attack = ToIntent(c) }, ctx, out var res);
                         sp.attackState = atk; sp.worldPos = pos;
-                        EmitTransitions(kv.Key, sp, def, c.tick);
+                        ApplyDamage(sp, res.periodicDamage);
+                        EmitTransitions(kv.Key, sp, def, c.tick, res.feinted);
                     }
                     else
                     {
+                        // No weapon: still age status so slows/roots/DOT tick, and gate free-move.
+                        var gate = GateMod.Quantize(StatusLogic.Step(sp.status, statusDefs, out int dmg));
+                        ApplyDamage(sp, dmg);
                         sp.worldPos = MovementStep.Step(sp.worldPos, InstanceStep.FreeMove(c.rawMove, gate), dt, cfg.moveSpeed, _walkAt);
                     }
                     sp.lastInput = c.rawMove;
@@ -95,10 +99,10 @@ public static class AttackSimSystem
         aimDir = AimQuant.Decode(c.aimAngle),
     };
 
-    static void EmitTransitions(ulong id, ServerPlayer sp, AttackDefinition def, uint tick)
+    static void EmitTransitions(ulong id, ServerPlayer sp, AttackDefinition def, uint tick, bool feinted)
     {
         var prev = sp.prevAttackPhase; var now = sp.attackState.phase;
-        if (prev == now) return;   // only on a phase change
+        if (prev == now && !feinted) return;   // only on a phase change (or a feint)
         sp.pendingEvents ??= new System.Collections.Generic.Queue<AttackEvent>();
         if (prev == AttackPhase.Idle && now == AttackPhase.Anticipation)
             sp.pendingEvents.Enqueue(Evt(id, AttackEvent.Started, sp, tick));
@@ -107,9 +111,12 @@ public static class AttackSimSystem
             sp.pendingEvents.Enqueue(Evt(id, AttackEvent.Struck, sp, tick));
             OnStrike(id, sp, def, tick);   // the forward hitbox seam
         }
-        if (prev == AttackPhase.Anticipation && now == AttackPhase.Idle && sp.attackState.cooldown > 0f)
+        if (feinted)
             sp.pendingEvents.Enqueue(Evt(id, AttackEvent.Feinted, sp, tick));
     }
+
+    // v1 stub: subtract clamped damage. Task 8 adds the death log; the broadphase hit query (Task 9) calls this.
+    static void ApplyDamage(ServerPlayer sp, int dmg) { if (dmg > 0) sp.hp = Mathf.Max(0, sp.hp - dmg); }
 
     static AttackEvent Evt(ulong id, byte kind, ServerPlayer sp, uint tick) => new AttackEvent
     {

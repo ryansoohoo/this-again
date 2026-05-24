@@ -45,8 +45,7 @@ public sealed class CameraSystem
             state.Position = smoothPos;                               // SnapPosPixelPerfect snaps the rendered copy below
         }
 
-        SnapOrthoPixelPerfect();
-        SnapPosPixelPerfect();
+        if (vs.pixelPerfect) { SnapOrthoPixelPerfect(); SnapPosPixelPerfect(); }   // off: smooth sub-pixel follow (no per-pixel step jitter)
         ClampPos();
     }
 

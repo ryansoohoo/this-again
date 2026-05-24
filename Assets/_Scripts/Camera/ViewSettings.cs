@@ -17,4 +17,9 @@ public class ViewSettings
 
     [Header("Camera follow")]
     [Range(0f, 0.5f)] public float followSmoothTime = 0.12f;   // SmoothDamp seconds toward the player (0 = instant lock)
+
+    // Snap the camera to the texel grid for crisp pixels. Downside: it steps a smoothly-moving follow camera in
+    // whole-pixel jumps, so the sub-pixel player wobbles against it = jitter while moving. Off = smooth sub-pixel
+    // follow (slightly softer moving sprites). For crisp AND smooth, render to a low-res target (pixel-perfect cam).
+    public bool pixelPerfect = false;
 }

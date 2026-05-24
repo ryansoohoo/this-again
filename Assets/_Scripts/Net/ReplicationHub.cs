@@ -67,9 +67,11 @@ public sealed class ReplicationHub : NetworkBehaviour
 
         var cfg = Game.Instance != null ? Game.Instance.ReplicationCfg : null;
         int hz = cfg != null ? Mathf.Max(1, cfg.snapshotHz) : 15;
+        float period = 1f / hz;
         sendAccum += Time.deltaTime;
-        if (sendAccum < 1f / hz) return;
-        sendAccum = 0f;
+        if (sendAccum < period) return;
+        sendAccum -= period;                       // keep the remainder so the cadence stays at exactly hz (matches the client's 1/hz interp window)
+        if (sendAccum > period) sendAccum = 0f;    // fell >1 period behind (low fps): resync instead of spiraling
         if (cfg != null) SendSnapshots(cfg);
     }
 

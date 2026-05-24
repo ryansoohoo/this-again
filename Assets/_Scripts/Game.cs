@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // SINGLE ENTRY POINT. Boots the game as one readable story: configure app -> load settings -> camera ->
-// terrain pipeline (World) -> streaming view (WorldView) -> water material -> commands. Then Update() ticks
+// terrain pipeline (World) -> streaming view (WorldView) -> water material -> commands. Then LateUpdate() ticks
 // the camera and the view's player-follow. Also the facade UI/Player read (Cam, cell<->world geometry,
 // World, minimap). Lives on the scene "Game" object (formerly GridManager).
 [DefaultExecutionOrder(-100)]
@@ -189,7 +189,9 @@ public sealed class Game : MonoBehaviour
         if (view != null) view.Refresh();
     }
 
-    void Update()
+    // LateUpdate (not Update): the camera locks onto the player ghost, which GhostManager repositions in Update.
+    // A follow camera must run AFTER its target has moved this frame, else it tracks last frame's pos (jitter).
+    void LateUpdate()
     {
         if (cameraSystem == null) return;   // e.g. after an edit-during-play domain reload; a fresh Play fixes it
         var lp = LocalPlayer.Instance;

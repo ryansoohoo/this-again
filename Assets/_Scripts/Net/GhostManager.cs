@@ -70,6 +70,8 @@ public sealed class GhostManager : MonoBehaviour
 
     static Vector2 CurrentPos(Ghost g) => Vector2.Lerp(g.fromPos, g.toPos, Mathf.Clamp01(g.t));
 
+    // Interpolate in Update (not LateUpdate): Game.LateUpdate's follow-camera reads these positions, so the
+    // ghosts must already be moved for this frame before any LateUpdate runs.
     void Update()
     {
         float dt = Time.deltaTime;

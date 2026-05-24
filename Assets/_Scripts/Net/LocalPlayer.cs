@@ -13,6 +13,7 @@ public sealed class LocalPlayer : MonoBehaviour
 
     readonly PredictionSystem prediction = new();
     public PredictionSystem Prediction => prediction;
+    public ushort SelfHp { get; private set; }   // server-authoritative HP from the latest snapshot (display only)
     bool wasInInstance;
 
     [SerializeField] AttackDefinition currentAttack;
@@ -160,8 +161,14 @@ public sealed class LocalPlayer : MonoBehaviour
         for (int i = 0; i < entries.Length; i++)
             if (entries[i].id == localId)
             {
-                bool snap = (entries[i].flags & SnapshotEntry.SnapBit) != 0;
-                prediction.Reconcile(new Vector2(entries[i].x, entries[i].y), ackTick, snap);
+                var e = entries[i];
+                if ((e.flags & SnapshotEntry.SelfBit) != 0)
+                {
+                    prediction.AdoptExternal(e.effDefId, e.effRemaining, e.effStacks, e.effectCount);
+                    SelfHp = e.hp;
+                }
+                bool snap = (e.flags & SnapshotEntry.SnapBit) != 0;
+                prediction.Reconcile(new Vector2(e.x, e.y), ackTick, snap);
                 return;
             }
     }

@@ -46,6 +46,31 @@ public sealed class PredictionSystem
 
     static StatusEffectDef[] Defs() { var c = Game.Instance != null ? Game.Instance.StatusCatalog : null; return c != null ? c.Defs : System.Array.Empty<StatusEffectDef>(); }
 
+    // Self-predicted kinds are owner-authoritative-by-construction (derived from our own input); everything else
+    // is server-driven. Keep AttackCooldown (we predict it from our own feint); adopt the rest from the server.
+    static bool SelfPredicted(byte defId) => defId == (byte)StatusKind.AttackCooldown;
+
+    // On each snapshot: drop our external effects, re-add the authoritative ones (re-syncs stun/poison/freeze/slow
+    // timing), and leave self-predicted instances untouched so the cooldown doesn't flicker before the ack catches up.
+    public void AdoptExternal(byte[] defIds, ushort[] remaining, byte[] stacks, int n)
+    {
+        for (int i = 0; i < Status.count; )
+        {
+            if (!SelfPredicted(Status.effects[i].defId)) Status.effects[i] = Status.effects[--Status.count];
+            else i++;
+        }
+        for (int k = 0; k < n; k++)
+        {
+            if (SelfPredicted(defIds[k])) continue;   // server's copy of our cooldown — keep our prediction
+            if (Status.count >= StatusState.Cap) break;
+            Status.effects[Status.count++] = new ActiveEffect
+            {
+                defId = defIds[k], remainingTicks = remaining[k], stacks = stacks[k],
+                sincePeriodTick = 0, appliedTick = 0, selfInflicted = false,
+            };
+        }
+    }
+
     // Movement-only fixed tick (no weapon equipped): predict locally and send the tick-stamped input. The wire
     // carries RAW WASD; the server re-applies its own (authoritative) gate. Local prediction + the stored replay
     // frame use the gated vector so reconcile replay reproduces the same motion.

@@ -85,6 +85,35 @@ public sealed class GhostManager : MonoBehaviour
 
     static Vector2 CurrentPos(Ghost g) => Vector2.Lerp(g.fromPos, g.toPos, Mathf.Clamp01(g.t));
 
+    const float MoveEps = 1e-6f;   // sq-distance below which a ghost is treated as not-moving between snapshots
+
+    // Count of same-room remotes (every ghost except self). In-instance AOI is region-only, so all ghosts are
+    // roommates. The predictor calls this to size its buffer before FillRoommateBodies.
+    public int RoommateCount(ulong selfId)
+    {
+        int n = 0;
+        foreach (var kv in ghosts) if (kv.Key != selfId) n++;
+        return n;
+    }
+
+    // Fill buf[0..RoommateCount) with one CollisionBody per same-room remote, for the owner's collision prediction:
+    //   pos     = CurrentPos(g) — the RENDERED (interpolated, on-screen) position, so you stop when sprites touch
+    //   radius  = the caller's collision radius (uniform, same value the server uses)
+    //   invMass = 1 if the ghost moved between its last two snapshots (a "mover"), else 0 (pinned) — mirrors the
+    //             server's mover-yields weighting symmetrically. Order is arbitrary; ResolveOne id-sorts internally.
+    public void FillRoommateBodies(ulong selfId, float radius, CollisionBody[] buf)
+    {
+        int k = 0;
+        foreach (var kv in ghosts)
+        {
+            if (kv.Key == selfId) continue;
+            if (k >= buf.Length) break;
+            var g = kv.Value;
+            float invMass = (g.toPos - g.fromPos).sqrMagnitude > MoveEps ? 1f : 0f;
+            buf[k++] = new CollisionBody { id = kv.Key, pos = CurrentPos(g), radius = radius, invMass = invMass };
+        }
+    }
+
     // Interpolate in Update (not LateUpdate): Game.LateUpdate's follow-camera reads these positions, so the
     // ghosts must already be moved for this frame before any LateUpdate runs.
     void Update()

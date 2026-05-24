@@ -39,7 +39,6 @@ public struct AttackState
     public int frameIndex;      // index into the current phase's TimedFrame[]
     public float phaseElapsed;  // time accumulated on the current frame
     public bool windupComplete; // anticipation fully played (now holding) -> release = full strike
-    public float cooldown;      // feint lockout remaining
     public Vector2 lockedAim;   // aim direction frozen at commit (dir + residual); drives the lunge, can't be steered
 }
 

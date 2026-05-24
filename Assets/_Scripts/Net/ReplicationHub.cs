@@ -24,6 +24,7 @@ public sealed class ReplicationHub : NetworkBehaviour
     readonly List<AttackEvent> eventScratch = new();
     readonly ulong[] oneTarget = new ulong[1];
     readonly Dictionary<int, SnapshotEntry[]> snapshotBufByLen = new();   // RPC send buffers reused by entry count (args serialize synchronously, so reuse is safe)
+    readonly Dictionary<int, AttackEvent[]> eventBufByLen = new();        // same reuse-by-count for the piggybacked attack-event RPC (was a per-send ToArray)
 
     public override void OnNetworkSpawn()
     {
@@ -112,7 +113,7 @@ public sealed class ReplicationHub : NetworkBehaviour
                     entry.weaponId = sp.weaponId;
                     entry.pose = AttackPose.Pack(st.phase, st.frameIndex, st.dirIndex);
                     entry.residual = AimQuant.Encode(st.lockedAim);
-                    entry.selfExtra = (byte)((st.windupComplete ? 1 : 0) | (Mathf.Clamp((int)(st.cooldown * 20f), 0, 127) << 1));
+                    entry.selfExtra = (byte)(st.windupComplete ? 1 : 0);   // cooldown is now a status effect; selfExtra carries only windupComplete (Task 10 drops selfExtra entirely)
                 }
                 entryScratch.Add(entry);
             }
@@ -135,7 +136,13 @@ public sealed class ReplicationHub : NetworkBehaviour
                 if (sp2.pendingEvents == null || sp2.pendingEvents.Count == 0) continue;
                 foreach (var ev in sp2.pendingEvents) eventScratch.Add(ev);
             }
-            if (eventScratch.Count > 0) AttackEventClientRpc(eventScratch.ToArray(), p);
+            if (eventScratch.Count > 0)
+            {
+                int elen = eventScratch.Count;
+                if (!eventBufByLen.TryGetValue(elen, out var ebuf)) { ebuf = new AttackEvent[elen]; eventBufByLen[elen] = ebuf; }
+                eventScratch.CopyTo(ebuf);
+                AttackEventClientRpc(ebuf, p);
+            }
         }
 
         foreach (var sp in registry.Players.Values) { sp.snap = false; sp.pendingEvents?.Clear(); }   // consumed this tick
@@ -172,7 +179,7 @@ public sealed class ReplicationHub : NetworkBehaviour
         if (!registry.TryGet(p.Receive.SenderClientId, out var sp)) return;
         if (cmd.tick <= sp.lastProcessedTick) return;                   // already simulated; ignore late dup
         sp.weaponId = cmd.weaponId;
-        sp.serverInputs ??= new CommandRingBuffer(Mathf.Max(8, Mathf.NextPowerOfTwo(
+        sp.serverInputs ??= new RingBuffer<InputCommand>(Mathf.Max(8, Mathf.NextPowerOfTwo(
             Game.Instance != null ? Game.Instance.MovementCfg.inputBufferCapacity : 128)));
         sp.serverInputs.Store(cmd);
     }

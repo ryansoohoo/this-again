@@ -44,6 +44,7 @@ public sealed class Game : MonoBehaviour
 
     [Header("Combat")]
     [SerializeField] WeaponCatalog weaponCatalog;   // byte id <-> AttackDefinition; shared by server sim + remote render
+    [SerializeField] StatusCatalog statusCatalog;   // byte id <-> status effect; shared by server sim + owner predict + remote render
 
     [Header("View (tunable — minimap / viewport)")]
     [SerializeField] ViewSettings viewSettings = new ViewSettings();
@@ -68,6 +69,7 @@ public sealed class Game : MonoBehaviour
     public ReplicationSettings ReplicationCfg => replication;
     public MovementSettings MovementCfg => movement;
     public WeaponCatalog WeaponCatalog => weaponCatalog;
+    public StatusCatalog StatusCatalog => statusCatalog;
     public ViewSettings ViewCfg => viewSettings;
 
     // Minimap facade (the Minimap HUD reads these).
@@ -119,6 +121,8 @@ public sealed class Game : MonoBehaviour
 
         if (weaponCatalog == null)
             Debug.LogError("[Game] WeaponCatalog is not assigned — attacks won't replicate (server/clients can't resolve weapons, so the lunge and remote swing animation are dropped). Assign Assets/_Combat/WeaponCatalog.asset to the Game component's Weapon Catalog field.");
+        if (statusCatalog == null)
+            Debug.LogError("[Game] StatusCatalog is unassigned — status effects (hitstun/cooldown/poison/freeze/slow) will not work. Assign Assets/_Combat/StatusCatalog.asset to the Game component's Status Catalog field (GridManager prefab instance).");
 
         cameraState = new CameraState();
         cameraSystem = new CameraSystem(Cam, viewSettings, cellWorld, cameraState);
@@ -178,23 +182,28 @@ public sealed class Game : MonoBehaviour
 
     public void ApplyWaterSettings() { if (waterMat != null) waterMat.Apply(); }
 
-    // ---- Tuned settings: one JSON blob per group via JsonPref ----
-    public void SaveSettings()        { biomePref.Save(biome);  Debug.Log("[Game] Biome settings saved."); }
-    public void ResetSavedSettings()  { biomePref.Clear();      Debug.Log("[Game] Saved biome settings cleared (inspector defaults apply next play)."); }
-    public void SaveGroundSettings()  { groundPref.Save(ground); Debug.Log("[Game] Ground settings saved."); }
-    public void ResetGroundSettings() { groundPref.Reset(ground, new GroundSettings()); Regenerate(); Debug.Log("[Game] Saved ground settings cleared (defaults applied)."); }
-    public void SaveWaterSettings()   { waterPref.Save(water);  Debug.Log("[Game] Water settings saved."); }
-    public void ResetWaterSettings()  { waterPref.Reset(water, new WaterSettings()); ApplyWaterSettings(); Debug.Log("[Game] Saved water settings cleared (defaults applied)."); }
-    public void SaveStructureSettings()  { structurePref.Save(structureSettings); Debug.Log("[Game] Structure settings saved."); }
-    public void ResetStructureSettings() { structurePref.Reset(structureSettings, new StructureSettings()); Regenerate(); Debug.Log("[Game] Saved structure settings cleared (defaults applied)."); }
-    public void SaveDayNightSettings()  { dayNightPref.Save(dayNight); Debug.Log("[Game] Day/Night settings saved."); }
-    public void ResetDayNightSettings() { dayNightPref.Reset(dayNight, new DayNightSettings()); Debug.Log("[Game] Day/Night settings reset (defaults applied)."); }
-    public void SaveReplicationSettings()  { replicationPref.Save(replication); Debug.Log("[Game] Replication settings saved."); }
-    public void ResetReplicationSettings() { replicationPref.Reset(replication, new ReplicationSettings()); Debug.Log("[Game] Replication settings reset (defaults applied)."); }
-    public void SaveMovementSettings()  { movementPref.Save(movement); Debug.Log("[Game] Movement settings saved."); }
-    public void ResetMovementSettings() { movementPref.Reset(movement, new MovementSettings()); Debug.Log("[Game] Movement settings reset (defaults applied)."); }
-    public void SaveViewSettings()  { viewPref.Save(viewSettings); Debug.Log("[Game] View settings saved."); }
-    public void ResetViewSettings() { viewPref.Reset(viewSettings, new ViewSettings()); ApplyViewSettings(); Debug.Log("[Game] View settings reset (defaults applied)."); }
+    // ---- Tuned settings: one JSON blob per group via JsonPref. Save persists the live values; Reset clears the
+    // saved blob, copies fresh defaults into the live object, runs the group's apply step, then logs. (Biome is the
+    // odd one out: it only clears the saved blob so the inspector defaults reappear next play.) ----
+    void SaveTo<T>(JsonPref<T> pref, T value, string label) where T : class { pref.Save(value); Debug.Log($"[Game] {label} settings saved."); }
+    void ResetTo<T>(JsonPref<T> pref, T live, T defaults, System.Action apply, string label) where T : class { pref.Reset(live, defaults); apply?.Invoke(); Debug.Log($"[Game] {label} settings reset (defaults applied)."); }
+
+    public void SaveSettings()        => SaveTo(biomePref, biome, "Biome");
+    public void ResetSavedSettings()  { biomePref.Clear(); Debug.Log("[Game] Saved biome settings cleared (inspector defaults apply next play)."); }
+    public void SaveGroundSettings()  => SaveTo(groundPref, ground, "Ground");
+    public void ResetGroundSettings() => ResetTo(groundPref, ground, new GroundSettings(), Regenerate, "Ground");
+    public void SaveWaterSettings()   => SaveTo(waterPref, water, "Water");
+    public void ResetWaterSettings()  => ResetTo(waterPref, water, new WaterSettings(), ApplyWaterSettings, "Water");
+    public void SaveStructureSettings()  => SaveTo(structurePref, structureSettings, "Structure");
+    public void ResetStructureSettings() => ResetTo(structurePref, structureSettings, new StructureSettings(), Regenerate, "Structure");
+    public void SaveDayNightSettings()  => SaveTo(dayNightPref, dayNight, "Day/Night");
+    public void ResetDayNightSettings() => ResetTo(dayNightPref, dayNight, new DayNightSettings(), null, "Day/Night");
+    public void SaveReplicationSettings()  => SaveTo(replicationPref, replication, "Replication");
+    public void ResetReplicationSettings() => ResetTo(replicationPref, replication, new ReplicationSettings(), null, "Replication");
+    public void SaveMovementSettings()  => SaveTo(movementPref, movement, "Movement");
+    public void ResetMovementSettings() => ResetTo(movementPref, movement, new MovementSettings(), null, "Movement");
+    public void SaveViewSettings()  => SaveTo(viewPref, viewSettings, "View");
+    public void ResetViewSettings() => ResetTo(viewPref, viewSettings, new ViewSettings(), ApplyViewSettings, "View");
     public void ApplyViewSettings()
     {
         if (cameraSystem != null)

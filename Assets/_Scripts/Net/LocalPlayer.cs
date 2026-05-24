@@ -67,4 +67,8 @@ public sealed class LocalPlayer : MonoBehaviour
         if (intent.dir != lastSent) { lastSent = intent.dir; ReplicationHub.Instance.SubmitInputRpc(intent.dir); }
         if (intent.hasClickTarget) ReplicationHub.Instance.SetTargetRpc(intent.clickWorld);
     }
+
+    // Routes the server's authoritative self position + last-processed tick into reconciliation. Fleshed out
+    // in Task 8 (prediction); a stub for now so the Hub's SnapshotClientRpc compiles.
+    public void OnSnapshot(SnapshotEntry[] entries, ulong localId, uint ackTick) { }
 }

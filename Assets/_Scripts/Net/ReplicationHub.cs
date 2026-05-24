@@ -105,17 +105,19 @@ public sealed class ReplicationHub : NetworkBehaviour
             int len = entryScratch.Count;
             if (!snapshotBufByLen.TryGetValue(len, out var buf)) { buf = new SnapshotEntry[len]; snapshotBufByLen[len] = buf; }
             entryScratch.CopyTo(buf);
-            SnapshotClientRpc(buf, p);
+            SnapshotClientRpc(buf, registry.Players[viewer].lastProcessedTick, p);
         }
 
         foreach (var sp in registry.Players.Values) sp.snap = false;   // snap consumed by this tick's snapshots
     }
 
     [ClientRpc]
-    void SnapshotClientRpc(SnapshotEntry[] entries, ClientRpcParams _ = default)
+    void SnapshotClientRpc(SnapshotEntry[] entries, uint ackTick, ClientRpcParams _ = default)
     {
         if (GhostManager.Instance != null)
             GhostManager.Instance.Apply(entries, NetworkManager.Singleton.LocalClientId);
+        if (LocalPlayer.Instance != null)
+            LocalPlayer.Instance.OnSnapshot(entries, NetworkManager.Singleton.LocalClientId, ackTick);
     }
 
     // ---- owner -> server intent (RequireOwnership=false; caller = SenderClientId) ----
@@ -123,6 +125,18 @@ public sealed class ReplicationHub : NetworkBehaviour
     public void SubmitInputRpc(Vector2 dir, RpcParams p = default)
     {
         if (registry.TryGet(p.Receive.SenderClientId, out var sp)) sp.submittedInput = dir;
+    }
+
+    // Tick-stamped free-move input from an in-instance owner (for prediction + reconciliation). Buffered and
+    // consumed in tick order by PlayerSimSystem.StepInstanceFixed. Late duplicates (already simulated) drop.
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void SubmitInputTickRpc(uint tick, Vector2 input, RpcParams p = default)
+    {
+        if (!registry.TryGet(p.Receive.SenderClientId, out var sp)) return;
+        if (tick <= sp.lastProcessedTick) return;                       // already simulated; ignore late dup
+        sp.serverInputs ??= new InputRingBuffer(Mathf.Max(8, Mathf.NextPowerOfTwo(
+            Game.Instance != null ? Game.Instance.MovementCfg.inputBufferCapacity : 128)));
+        sp.serverInputs.Store(new InputFrame { tick = tick, input = input });
     }
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]

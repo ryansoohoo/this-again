@@ -13,6 +13,10 @@ public sealed class ServerPlayer
     public Vector2Int overworldReturnCell;
     public Vector2 submittedInput;        // latest owner intent (replaces the moveInput NetworkVariable)
     public bool snap;                     // set on teleport; cleared after the next snapshot carries it
+
+    public uint lastProcessedTick;        // highest contiguous client tick the server has simulated (free move)
+    public Vector2 lastInput;             // last applied free-move input (reference/debug)
+    public InputRingBuffer serverInputs;  // received tick-stamped inputs (free/in-instance only; lazily created)
 }
 
 // All connected players, keyed by clientId. Server-only.

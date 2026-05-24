@@ -17,6 +17,10 @@ public sealed class GhostManager : MonoBehaviour
         public Vector2 fromPos, toPos;
         public float t, dur;
         public bool seen;
+        public AttackView attackView;   // remote attack rig (the self ghost's is driven by LocalPlayer instead)
+        public bool attacking;
+        public byte weaponId, poseByte;
+        public ushort residual;
     }
 
     readonly Dictionary<ulong, Ghost> ghosts = new();
@@ -28,7 +32,8 @@ public sealed class GhostManager : MonoBehaviour
     void Awake() => Instance = this;
     void OnDestroy() { if (Instance == this) Instance = null; }
 
-    // Reliable attack transition events for visible attackers (Phase 3 drives remote rigs + SFX/VFX from these).
+    // Reliable attack transition events for visible attackers. Remote rigs render from the snapshot pose; these
+    // guarantee no transition is missed and are the SFX/VFX + future-effects seam (Struck especially).
     public void ApplyAttackEvents(AttackEvent[] events, ulong localId) { }
 
     public void Apply(SnapshotEntry[] entries, ulong localId)
@@ -48,7 +53,7 @@ public sealed class GhostManager : MonoBehaviour
             {
                 if (ghostPrefab == null) continue;
                 var go = Instantiate(ghostPrefab, pos, Quaternion.identity);
-                g = new Ghost { tf = go.transform, fromPos = pos, toPos = pos, t = 1f, dur = dur };
+                g = new Ghost { tf = go.transform, fromPos = pos, toPos = pos, t = 1f, dur = dur, attackView = go.GetComponent<AttackView>() };
                 ghosts[e.id] = g;
                 if (e.id == localId) SelfGhost = g.tf;
             }
@@ -58,6 +63,11 @@ public sealed class GhostManager : MonoBehaviour
             else if (snap) { g.fromPos = pos; g.toPos = pos; g.t = 1f; g.tf.position = pos; }
             else { g.fromPos = CurrentPos(g); g.toPos = pos; g.t = 0f; g.dur = dur; }
             g.seen = true;
+            if (e.id != localId)   // remotes render from the replicated pose; the self rig is LocalPlayer's job
+            {
+                g.attacking = (e.flags & SnapshotEntry.AttackingBit) != 0;
+                g.weaponId = e.weaponId; g.poseByte = e.pose; g.residual = e.residual;
+            }
 
             if (e.id == localId) SelfInInstance = (e.flags & SnapshotEntry.InInstanceBit) != 0;
         }
@@ -83,9 +93,31 @@ public sealed class GhostManager : MonoBehaviour
         bool predicting = LocalPlayer.Instance != null && LocalPlayer.Instance.Prediction.Active;
         foreach (var g in ghosts.Values)
         {
-            if (predicting && g.tf == SelfGhost) continue;   // PredictionSystem positions the self-ghost
-            if (g.dur > 1e-5f && g.t < 1f) g.t = Mathf.Min(1f, g.t + dt / g.dur);
-            g.tf.position = CurrentPos(g);
+            bool isSelf = g.tf == SelfGhost;
+            if (!(predicting && isSelf))   // PredictionSystem positions the self-ghost while predicting
+            {
+                if (g.dur > 1e-5f && g.t < 1f) g.t = Mathf.Min(1f, g.t + dt / g.dur);
+                g.tf.position = CurrentPos(g);
+            }
+            if (!isSelf) RenderAttack(g);   // remotes render the replicated attack pose; LocalPlayer drives self
         }
+    }
+
+    // Drive a remote ghost's AttackView from its last replicated pose. Idle -> Render(default, null) hides the rig.
+    void RenderAttack(Ghost g)
+    {
+        if (g.attackView == null) return;
+        if (!g.attacking) { g.attackView.Render(default, null); return; }
+        var cat = Game.Instance != null ? Game.Instance.WeaponCatalog : null;
+        var def = cat != null ? cat.Get(g.weaponId) : null;
+        AttackPose.Unpack(g.poseByte, out var phase, out var frame, out var dir);
+        Vector2 canonical = (def != null && def.directions != null && dir < def.directions.Length)
+            ? def.directions[dir].canonicalDir : Vector2.right;
+        var st = new AttackState
+        {
+            phase = phase, frameIndex = frame, dirIndex = dir,
+            residualDeg = Vector2.SignedAngle(canonical, AimQuant.Decode(g.residual)),
+        };
+        g.attackView.Render(st, def);
     }
 }

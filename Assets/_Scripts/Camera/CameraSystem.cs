@@ -32,7 +32,7 @@ public sealed class CameraSystem
         lastScreenW = Screen.width;
         lastScreenH = Screen.height;
         state.Position = cam.transform.position;                       // seed from the camera's boot position
-        state.OrthoSize = ClampOrtho(CellsToOrtho(vs.startCellsVisible));
+        state.OrthoSize = ClampOrtho(CellsToOrtho(vs.overworldCellsTall));
     }
 
     public void Tick(float dt)
@@ -57,8 +57,8 @@ public sealed class CameraSystem
     float CellsToOrtho(int cells) => cells * cellWorld * 0.5f / Mathf.Min(1f, Mathf.Max(cam.aspect, 0.0001f));
     float ClampOrtho(float ortho) => Mathf.Max(ortho, CellsToOrtho(vs.minCellsVisible));
 
-    // Re-apply the viewport zoom from startCellsVisible (called when the View tuner changes it).
-    public void ApplyZoom() => state.OrthoSize = ClampOrtho(CellsToOrtho(vs.startCellsVisible));
+    // Set the viewport zoom to a given cells-tall (called on region change + when the View tuner changes it).
+    public void ApplyZoom(int cellsTall) => state.OrthoSize = ClampOrtho(CellsToOrtho(cellsTall));
 
     // X×Y view extents in cells (read-only), derived from the live ortho + aspect + inset.
     public Vector2 ViewportCells => new(2f * state.OrthoSize * cam.aspect / cellWorld, 2f * state.OrthoSize / cellWorld);

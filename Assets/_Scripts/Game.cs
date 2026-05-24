@@ -87,6 +87,7 @@ public sealed class Game : MonoBehaviour
     CameraState cameraState;
     CameraSystem cameraSystem;
     CameraView cameraView;
+    bool lastInInstance;   // last-applied region for the viewport-height switch (overworld vs underworld)
     WorldView view;
     WaterMaterial waterMat;
     DayNightSystem dayNightSystem;
@@ -187,12 +188,26 @@ public sealed class Game : MonoBehaviour
     public void ResetReplicationSettings() { replicationPref.Reset(replication, new ReplicationSettings()); Debug.Log("[Game] Replication settings reset (defaults applied)."); }
     public void SaveViewSettings()  { viewPref.Save(viewSettings); Debug.Log("[Game] View settings saved."); }
     public void ResetViewSettings() { viewPref.Reset(viewSettings, new ViewSettings()); ApplyViewSettings(); Debug.Log("[Game] View settings reset (defaults applied)."); }
-    public void ApplyViewSettings() { if (cameraSystem != null) cameraSystem.ApplyZoom(); if (view != null) view.Refresh(); }
+    public void ApplyViewSettings()
+    {
+        if (cameraSystem != null)
+        {
+            var lp = LocalPlayer.Instance;
+            cameraSystem.ApplyZoom(lp != null && lp.InInstance ? viewSettings.underworldCellsTall : viewSettings.overworldCellsTall);
+        }
+        if (view != null) view.Refresh();
+    }
 
     void Update()
     {
         if (cameraSystem == null) return;   // e.g. after an edit-during-play domain reload; a fresh Play fixes it
         var lp = LocalPlayer.Instance;
+        bool inst = lp != null && lp.InInstance;
+        if (inst != lastInInstance)   // entered/left a dungeon: switch viewport height
+        {
+            lastInInstance = inst;
+            cameraSystem.ApplyZoom(inst ? viewSettings.underworldCellsTall : viewSettings.overworldCellsTall);
+        }
         cameraState.FollowTarget = lp != null ? lp.SelfWorldPos : null;
         cameraSystem.Tick(Time.unscaledDeltaTime);
         cameraView.Apply(Cam, cameraState);

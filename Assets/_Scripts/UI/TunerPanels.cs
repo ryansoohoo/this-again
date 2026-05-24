@@ -184,7 +184,8 @@ public sealed class TunerPanels : MonoBehaviour
         I("Minimap radius Y", ref my, 4, 256);
         r.minimapRadius = new Vector2Int(mx, my);
 
-        I("Viewport cells tall", ref r.startCellsVisible, 4, 80);
+        I("Overworld tall", ref r.overworldCellsTall, 4, 80);
+        I("Underworld tall", ref r.underworldCellsTall, 4, 80);
         I("Min cells (zoom-in)", ref r.minCellsVisible, 2, 60);
 
         F("Follow inset X", ref r.followEdgeInset.x, 0f, 0.95f, "0.00");

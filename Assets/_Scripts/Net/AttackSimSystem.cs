@@ -32,6 +32,8 @@ public static class AttackSimSystem
         {
             var sp = kv.Value;
             if (!sp.inInstance) continue;
+            // Quantize the effective gate so the server sims with the exact value it ships to the owner.
+            var gate = GateMod.Quantize(sp.gate.Effective);
             Vector2 startPos = sp.worldPos;
             if (sp.serverInputs != null)
             {
@@ -40,7 +42,7 @@ public static class AttackSimSystem
                 {
                     if (def != null)
                     {
-                        var ctx = new InstanceCtx { timeline = def.Timeline, scales = sp.attackScales, dt = dt, speed = cfg.moveSpeed, walkable = _walkAt };
+                        var ctx = new InstanceCtx { timeline = def.Timeline, scales = sp.attackScales, dt = dt, speed = cfg.moveSpeed, walkable = _walkAt, gate = gate };
                         sp.prevAttackPhase = sp.attackState.phase;
                         var atk = sp.attackState; var pos = sp.worldPos;
                         InstanceStep.Step(ref atk, ref pos, new InstanceInput { rawMove = c.rawMove, attack = ToIntent(c) }, ctx);
@@ -49,7 +51,7 @@ public static class AttackSimSystem
                     }
                     else
                     {
-                        sp.worldPos = MovementStep.Step(sp.worldPos, c.rawMove, dt, cfg.moveSpeed, _walkAt);
+                        sp.worldPos = MovementStep.Step(sp.worldPos, InstanceStep.FreeMove(c.rawMove, gate), dt, cfg.moveSpeed, _walkAt);
                     }
                     sp.lastInput = c.rawMove;
                     sp.lastProcessedTick++;

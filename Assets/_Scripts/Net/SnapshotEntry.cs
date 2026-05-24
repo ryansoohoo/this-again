@@ -14,6 +14,7 @@ public struct SnapshotEntry : INetworkSerializable
     public byte pose;              // AttackPose.Pack(phase, frame, dir)
     public ushort residual;        // AimQuant of the locked aim (remote weapon tilt + owner reconcile)
     public byte selfExtra;         // self entry: bit0 windupComplete, bits1-7 quantized cooldown (×20, 0..127)
+    public byte gate;              // self in-instance entry only: GateMod.Pack of the effective action gate
 
     public const byte SnapBit = 1, InInstanceBit = 2, AttackingBit = 4;
 
@@ -23,6 +24,7 @@ public struct SnapshotEntry : INetworkSerializable
         s.SerializeValue(ref x);
         s.SerializeValue(ref y);
         s.SerializeValue(ref flags);
+        if ((flags & InInstanceBit) != 0) s.SerializeValue(ref gate);   // owner-only; gates are in-instance
         if ((flags & AttackingBit) != 0)
         {
             s.SerializeValue(ref weaponId);

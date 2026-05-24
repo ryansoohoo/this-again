@@ -25,6 +25,8 @@ public sealed class LocalPlayer : MonoBehaviour
     bool attackPressed, attackReleased, attackFeint, attackHeld;
     Vector2 attackAim;
 
+    GateMod currentGate = GateMod.None;   // authoritative effective gate for self, from the latest snapshot
+
     void Awake() => Instance = this;
     void OnDestroy() { if (Instance == this) Instance = null; }
 
@@ -112,8 +114,8 @@ public sealed class LocalPlayer : MonoBehaviour
     {
         if (!Ready) return;
         bool inst = InInstance;
-        if (inst && !wasInInstance && SelfWorldPos.HasValue) prediction.Activate(SelfWorldPos.Value);
-        else if (!inst && wasInInstance) prediction.Deactivate();
+        if (inst && !wasInInstance && SelfWorldPos.HasValue) { prediction.Activate(SelfWorldPos.Value); currentGate = GateMod.None; }
+        else if (!inst && wasInInstance) { prediction.Deactivate(); currentGate = GateMod.None; }
         wasInInstance = inst;
 
         if (!prediction.Active) { attackPressed = attackReleased = attackFeint = false; return; }
@@ -126,12 +128,12 @@ public sealed class LocalPlayer : MonoBehaviour
                 feint = attackFeint, aimDir = attackAim,
             };
             var atk = attack.State;
-            prediction.FixedTickInstance(ref atk, ai, ResolveWeaponId(), currentAttack.Timeline, attack.Scales, Time.fixedDeltaTime);
+            prediction.FixedTickInstance(ref atk, ai, ResolveWeaponId(), currentAttack.Timeline, attack.Scales, currentGate, Time.fixedDeltaTime);
             attack.SetState(atk);
         }
         else
         {
-            prediction.FixedTick(Time.fixedDeltaTime);
+            prediction.FixedTick(currentGate, Time.fixedDeltaTime);
         }
         attackPressed = attackReleased = attackFeint = false;
     }
@@ -160,6 +162,7 @@ public sealed class LocalPlayer : MonoBehaviour
         for (int i = 0; i < entries.Length; i++)
             if (entries[i].id == localId)
             {
+                if ((entries[i].flags & SnapshotEntry.InInstanceBit) != 0) currentGate = GateMod.Unpack(entries[i].gate);
                 bool snap = (entries[i].flags & SnapshotEntry.SnapBit) != 0;
                 prediction.Reconcile(new Vector2(entries[i].x, entries[i].y), ackTick, snap);
                 return;

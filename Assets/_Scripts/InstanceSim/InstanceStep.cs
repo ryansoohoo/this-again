@@ -17,15 +17,29 @@ public struct InstanceCtx
     public float dt;
     public float speed;
     public Func<Vector2, bool> walkable;
+    public GateMod? gate;   // null = ungated (treated as GateMod.None); a set value gates this step
 }
 
 public static class InstanceStep
 {
     public static void Step(ref AttackState atk, ref Vector2 pos, in InstanceInput cmd, in InstanceCtx ctx)
     {
-        atk = AttackLogic.Step(atk, cmd.attack, ctx.timeline, ctx.scales, ctx.dt);
+        GateMod g = ctx.gate ?? GateMod.None;
+        atk = AttackLogic.Step(atk, cmd.attack, ctx.timeline, ctx.scales, ctx.dt, g.CanAttack);
         Vector2? lunge = AttackLogic.LungeVelocity(atk, ctx.timeline);  // null = idle, zero = rooted windup, vec = lunge
-        Vector2 move = lunge ?? cmd.rawMove;                            // lunge overrides WASD
+        Vector2 move = lunge ?? FreeMove(cmd.rawMove, g);               // lunge overrides WASD; gate scales/blocks WASD only
         pos = MovementStep.Step(pos, move, ctx.dt, ctx.speed, ctx.walkable);
+    }
+
+    // The effective free-move vector after gating: zero when movement is blocked, else the (clamped) WASD
+    // direction scaled by moveScale so the magnitude carries the slow. Baking the scale into the vector (rather
+    // than into the speed arg) keeps it identical between the live step and reconcile replay, which re-runs the
+    // stored vector at the plain move speed. When gate == None this returns the same value MovementStep would
+    // have normalized internally, so the ungated path is unchanged.
+    public static Vector2 FreeMove(Vector2 rawMove, in GateMod gate)
+    {
+        if (!gate.CanMove) return Vector2.zero;
+        Vector2 dir = rawMove.sqrMagnitude > 1f ? rawMove.normalized : rawMove;
+        return dir * gate.moveScale;
     }
 }

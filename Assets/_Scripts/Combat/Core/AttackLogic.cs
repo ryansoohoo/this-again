@@ -6,8 +6,16 @@ public static class AttackLogic
     public static bool IsAttacking(AttackPhase p) => p != AttackPhase.Idle;
     public static bool InHitWindow(AttackPhase p) => p == AttackPhase.Hit;
 
-    public static AttackState Step(AttackState s, AttackIntent intent, AttackTimeline tl, PhaseScales scales, float dt)
+    public static AttackState Step(AttackState s, AttackIntent intent, AttackTimeline tl, PhaseScales scales, float dt, bool canAttack = true)
     {
+        if (!canAttack)
+        {
+            // Gated: interrupt any in-progress attack back to Idle (no cooldown), and never start a new one.
+            if (s.phase != AttackPhase.Idle) return new AttackState { phase = AttackPhase.Idle };
+            if (s.cooldown > 0f) s.cooldown = Mathf.Max(0f, s.cooldown - dt);
+            return s;
+        }
+
         switch (s.phase)
         {
             case AttackPhase.Idle:

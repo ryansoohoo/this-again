@@ -18,6 +18,8 @@ public sealed class ServerPlayer
     public Vector2 lastInput;             // last applied free-move input (reference/debug)
     public CommandRingBuffer serverInputs;// received tick-stamped commands (free/in-instance only; lazily created)
 
+    public readonly AbilityGate gate = new();   // source-keyed move/attack gates; only the quantized Effective replicates
+
     // Authoritative attack state (in-instance only). Stepped by AttackSimSystem via the shared InstanceStep.
     public AttackState attackState;
     public PhaseScales attackScales = PhaseScales.One;

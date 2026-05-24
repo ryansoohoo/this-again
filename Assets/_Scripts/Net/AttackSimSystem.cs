@@ -7,6 +7,7 @@ using UnityEngine;
 public static class AttackSimSystem
 {
     static Game _gm;
+    static PlayerRegistry _reg;   // set each StepInstanceFixed so OnStrike can sweep same-room players
     static readonly System.Func<Vector2, bool> _walkAt = p => { var c = _gm.WorldToCell(p); return _gm.IsWalkable(c.x, c.y); };
 
     const float MovedEps = 1e-6f;   // sq-distance below which a player is "pinned" (didn't move this tick)
@@ -25,6 +26,7 @@ public static class AttackSimSystem
     {
         var gm = Game.Instance; if (gm == null) return;
         _gm = gm;
+        _reg = reg;
         var statusCat = gm.StatusCatalog;
         var statusDefs = statusCat != null ? statusCat.Defs : System.Array.Empty<StatusEffectDef>();
 
@@ -128,10 +130,35 @@ public static class AttackSimSystem
         attackerId = id, kind = kind, weaponId = sp.weaponId, tick = tick, aimAngle = AimQuant.Encode(sp.attackState.lockedAim),
     };
 
-    // Hit seam. v1: log. Later: sweep same-regionKey players within a weapon-derived volume (the server holds
-    // every position) and route to a damage spec — no wire/client change needed to add it.
+    // Broadphase hit query (PLACEHOLDER for the deferred pixel narrowphase): same-region players within the
+    // weapon's range + forward arc (from lockedAim) take damage + the weapon's on-hit effects. Server-only.
     static void OnStrike(ulong id, ServerPlayer sp, AttackDefinition def, uint tick)
     {
-        Debug.Log($"[attack] STRIKE id={id} weapon={def.attackId} tick={tick} pos={sp.worldPos}");
+        if (_reg == null) return;
+        var tl = def.Timeline;
+        var statusCat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
+        var defs = statusCat != null ? statusCat.Defs : null;
+        Vector2 origin = sp.worldPos;
+        Vector2 aim = sp.attackState.lockedAim.sqrMagnitude > 1e-6f ? sp.attackState.lockedAim.normalized : Vector2.right;
+        float range2 = tl.hitRange * tl.hitRange;
+        foreach (var kv in _reg.Players)
+        {
+            if (kv.Key == id) continue;
+            var victim = kv.Value;
+            if (!victim.inInstance || victim.regionKey != sp.regionKey) continue;
+            Vector2 to = victim.worldPos - origin;
+            if (to.sqrMagnitude > range2 || to.sqrMagnitude < 1e-6f) continue;
+            if (Vector2.Dot(to.normalized, aim) < tl.hitArcCos) continue;     // outside the forward arc
+            ApplyDamage(victim, tl.damage);
+            if (defs != null && tl.onHit != null)
+                foreach (var oh in tl.onHit)
+                {
+                    int idx = (int)oh.kind;
+                    if (idx < defs.Length)
+                        StatusLogic.Apply(victim.status, defs[idx], tick, self: false,
+                                          durationOverride: oh.kind == StatusKind.AttackCooldown ? 30 : -1);
+                }
+            Debug.Log($"[attack] HIT {id} -> {kv.Key} dmg={tl.damage} hp={victim.hp} effects={(tl.onHit != null ? tl.onHit.Length : 0)}");
+        }
     }
 }

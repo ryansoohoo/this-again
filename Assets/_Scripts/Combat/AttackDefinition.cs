@@ -1,0 +1,46 @@
+using UnityEngine;
+
+// Authoring asset for one attack. Holds the three sliced sheets + columnsPerRow, the four timed-frame phase
+// lists, the feint cooldown, and the per-direction vectors. Builds/caches a render-agnostic AttackTimeline.
+[CreateAssetMenu(menuName = "Minifantasy/Attack Definition", fileName = "Attack")]
+public sealed class AttackDefinition : ScriptableObject
+{
+    [Header("Sliced sheets (row-major)")]
+    public Sprite[] bodyFrames;
+    public Sprite[] weaponFrontFrames;
+    public Sprite[] weaponBackFrames;
+    public int columnsPerRow = 4;
+
+    [Header("Phases - (column, duration seconds)")]
+    public TimedFrame[] anticipation;
+    public TimedFrame[] tapAnticipation;
+    public TimedFrame[] hit;
+    public TimedFrame[] followThrough;
+
+    [Header("Rules")]
+    public float feintCooldown = 0.5f;
+    public DirectionEntry[] directions;
+    public string attackId;
+
+    AttackTimeline _timeline;
+    public AttackTimeline Timeline => _timeline ??= BuildTimeline();
+
+    public AttackTimeline BuildTimeline()
+    {
+        int n = directions != null ? directions.Length : 0;
+        var dirs = new Vector2[n];
+        for (int i = 0; i < n; i++) dirs[i] = directions[i].canonicalDir;
+        return new AttackTimeline
+        {
+            anticipation = anticipation,
+            tapAnticipation = tapAnticipation,
+            hit = hit,
+            followThrough = followThrough,
+            directions = directions,
+            dirs = dirs,
+            feintCooldown = feintCooldown,
+        };
+    }
+
+    void OnValidate() => _timeline = null; // rebuild after edits in the Inspector
+}

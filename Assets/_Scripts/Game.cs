@@ -141,6 +141,7 @@ public sealed class Game : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;               // was capping fps at the monitor refresh
         Application.targetFrameRate = 120;
+        Time.fixedDeltaTime = 1f / 60f;               // 60 Hz sim/prediction tick (was 0.02 = 50 Hz)
         Application.runInBackground = true;           // run full speed even when the game view isn't focused
         Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);   // skip costly stack-trace capture
         var cam = Camera.main;

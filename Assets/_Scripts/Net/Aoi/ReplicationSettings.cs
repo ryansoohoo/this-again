@@ -9,5 +9,5 @@ public class ReplicationSettings
 {
     [Min(1f)]      public float showRadius = 96f;    // start observing a player within this many cells
     [Min(1f)]      public float hideRadius = 128f;   // stop observing past this many cells (hysteresis: hide > show)
-    [Range(1, 30)] public int   snapshotHz = 15;     // server -> client snapshot send rate
+    [Range(1, 30)] public int   snapshotHz = 30;     // server -> client snapshot send rate
 }

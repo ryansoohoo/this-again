@@ -50,7 +50,9 @@ public sealed class GhostManager : MonoBehaviour
                 if (e.id == localId) SelfGhost = g.tf;
             }
 
-            if (snap) { g.fromPos = pos; g.toPos = pos; g.t = 1f; g.tf.position = pos; }
+            bool predictedSelf = e.id == localId && LocalPlayer.Instance != null && LocalPlayer.Instance.Prediction.Active;
+            if (predictedSelf) { /* PredictionSystem drives the self transform; ignore snapshot interp for self */ }
+            else if (snap) { g.fromPos = pos; g.toPos = pos; g.t = 1f; g.tf.position = pos; }
             else { g.fromPos = CurrentPos(g); g.toPos = pos; g.t = 0f; g.dur = dur; }
             g.seen = true;
 
@@ -75,8 +77,10 @@ public sealed class GhostManager : MonoBehaviour
     void Update()
     {
         float dt = Time.deltaTime;
+        bool predicting = LocalPlayer.Instance != null && LocalPlayer.Instance.Prediction.Active;
         foreach (var g in ghosts.Values)
         {
+            if (predicting && g.tf == SelfGhost) continue;   // PredictionSystem positions the self-ghost
             if (g.dur > 1e-5f && g.t < 1f) g.t = Mathf.Min(1f, g.t + dt / g.dur);
             g.tf.position = CurrentPos(g);
         }

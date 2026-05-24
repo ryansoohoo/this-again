@@ -26,6 +26,7 @@ public sealed class LocalPlayer : MonoBehaviour
     {
         get
         {
+            if (prediction.Active) return prediction.RenderedPos;
             var self = GhostManager.Instance != null ? GhostManager.Instance.SelfGhost : null;
             return self != null ? (Vector2?)(Vector2)self.position : null;
         }
@@ -34,9 +35,10 @@ public sealed class LocalPlayer : MonoBehaviour
     public Vector2Int CurrentCell()
     {
         var gm = Game.Instance;
+        if (gm == null) return Vector2Int.zero;
+        if (prediction.Active) return gm.WorldToCell(prediction.RenderedPos);
         var self = GhostManager.Instance != null ? GhostManager.Instance.SelfGhost : null;
-        if (gm == null || self == null) return Vector2Int.zero;
-        return gm.WorldToCell(self.position);
+        return self != null ? gm.WorldToCell(self.position) : Vector2Int.zero;
     }
 
     public void Halt()
@@ -66,10 +68,13 @@ public sealed class LocalPlayer : MonoBehaviour
     void Update()
     {
         if (!Ready) return;
+        if (prediction.Active) prediction.Decay(Time.deltaTime);
         var cam = Game.Instance != null ? Game.Instance.Cam : Camera.main;
         var intent = input.Read(cam);
         if (intent.dir != lastSent) { lastSent = intent.dir; ReplicationHub.Instance.SubmitInputRpc(intent.dir); }
         if (intent.hasClickTarget) ReplicationHub.Instance.SetTargetRpc(intent.clickWorld);
+        if (prediction.Active && GhostManager.Instance != null && GhostManager.Instance.SelfGhost != null)
+            GhostManager.Instance.SelfGhost.position = prediction.RenderedPos;
     }
 
     // Drives client-side prediction on the fixed tick while in the underworld: activates on entry (seeding from
@@ -84,7 +89,12 @@ public sealed class LocalPlayer : MonoBehaviour
         if (prediction.Active) prediction.FixedTick(Time.fixedDeltaTime);
     }
 
-    // Routes the server's authoritative self position + last-processed tick into reconciliation. Fleshed out
-    // in Task 8 (prediction); a stub for now so the Hub's SnapshotClientRpc compiles.
-    public void OnSnapshot(SnapshotEntry[] entries, ulong localId, uint ackTick) { }
+    // Routes the server's authoritative self position + last-processed tick into reconciliation.
+    public void OnSnapshot(SnapshotEntry[] entries, ulong localId, uint ackTick)
+    {
+        if (!prediction.Active) return;
+        for (int i = 0; i < entries.Length; i++)
+            if (entries[i].id == localId)
+            { prediction.Reconcile(new Vector2(entries[i].x, entries[i].y), ackTick); return; }
+    }
 }

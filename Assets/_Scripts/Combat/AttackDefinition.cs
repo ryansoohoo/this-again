@@ -45,6 +45,7 @@ public sealed class AttackDefinition : ScriptableObject
             dirs = dirs,
             feintCooldown = feintCooldown,
             aimSnapDegrees = aimSnapDegrees,
+            lungeCurve = lungeCurve,
         };
     }
 

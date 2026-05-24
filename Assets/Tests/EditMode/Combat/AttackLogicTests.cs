@@ -202,4 +202,44 @@ public class AttackLogicTests
         Assert.AreEqual(expected.x, s.lockedAim.x, 1e-3f);
         Assert.AreEqual(expected.y, s.lockedAim.y, 1e-3f);
     }
+
+    static AttackTimeline TimelineWithCurve(AnimationCurve c)
+    {
+        var tl = MakeTimeline();
+        tl.lungeCurve = c;
+        return tl;
+    }
+
+    [Test]
+    public void LungeVelocity_NullOutsideHitWindow()
+    {
+        var tl = TimelineWithCurve(AnimationCurve.Constant(0, 1, 1f));
+        Assert.IsNull(AttackLogic.LungeVelocity(new AttackState { phase = AttackPhase.Idle }, tl));
+    }
+
+    [Test]
+    public void LungeVelocity_ZeroDuringWindup()
+    {
+        var tl = TimelineWithCurve(AnimationCurve.Constant(0, 1, 1f));
+        Assert.AreEqual(Vector2.zero, AttackLogic.LungeVelocity(new AttackState { phase = AttackPhase.Anticipation }, tl));
+        Assert.AreEqual(Vector2.zero, AttackLogic.LungeVelocity(new AttackState { phase = AttackPhase.TapWindup }, tl));
+    }
+
+    [Test]
+    public void LungeVelocity_InHit_IsLockedAimTimesCurve()
+    {
+        var tl = TimelineWithCurve(AnimationCurve.Constant(0, 1, 1f)); // curve = 1 everywhere
+        var s = new AttackState { phase = AttackPhase.Hit, phaseElapsed = 0f, lockedAim = new Vector2(1, 0) };
+        var v = AttackLogic.LungeVelocity(s, tl).Value;
+        Assert.AreEqual(1f, v.x, 1e-3f);
+        Assert.AreEqual(0f, v.y, 1e-3f);
+    }
+
+    [Test]
+    public void LungeVelocity_NullCurve_IsZeroVector()
+    {
+        var tl = MakeTimeline(); // lungeCurve null
+        var s = new AttackState { phase = AttackPhase.Hit, lockedAim = new Vector2(1, 0) };
+        Assert.AreEqual(Vector2.zero, AttackLogic.LungeVelocity(s, tl).Value);
+    }
 }

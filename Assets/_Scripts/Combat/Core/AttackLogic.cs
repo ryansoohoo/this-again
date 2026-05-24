@@ -93,6 +93,24 @@ public static class AttackLogic
         return Mathf.Clamp01(elapsed / dur);
     }
 
+    // The movement override an attack imposes: null outside an attack (normal WASD), zero during the wind-up
+    // (rooted), and the lunge vector during hit/follow-through (lockedAim * curve(progress)). Pure.
+    public static Vector2? LungeVelocity(AttackState s, AttackTimeline tl)
+    {
+        switch (s.phase)
+        {
+            case AttackPhase.Hit:
+            case AttackPhase.FollowThrough:
+                float speed = tl.lungeCurve != null ? Mathf.Clamp01(tl.lungeCurve.Evaluate(LungeProgress(s, tl))) : 0f;
+                return s.lockedAim * speed;
+            case AttackPhase.Anticipation:
+            case AttackPhase.TapWindup:
+                return Vector2.zero;
+            default:
+                return null;
+        }
+    }
+
     static void Enter(ref AttackState s, AttackPhase phase) { s.phase = phase; s.frameIndex = 0; s.phaseElapsed = 0f; }
 
     static void Aim(ref AttackState s, AttackTimeline tl, Vector2 aim)

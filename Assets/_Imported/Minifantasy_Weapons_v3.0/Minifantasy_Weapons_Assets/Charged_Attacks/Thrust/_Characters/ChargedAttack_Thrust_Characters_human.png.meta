@@ -1,0 +1,1053 @@
+fileFormatVersion: 2
+guid: 12b70d4e4bb2ed54594707c49accb279
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6793519628969652006
+    second: ChargedAttack_Thrust_Characters_human_0
+  - first:
+      213: 7856472488975563784
+    second: ChargedAttack_Thrust_Characters_human_1
+  - first:
+      213: -3087825279637275599
+    second: ChargedAttack_Thrust_Characters_human_2
+  - first:
+      213: -8910388432197401470
+    second: ChargedAttack_Thrust_Characters_human_3
+  - first:
+      213: 8245806947923098383
+    second: ChargedAttack_Thrust_Characters_human_4
+  - first:
+      213: -671762702789681800
+    second: ChargedAttack_Thrust_Characters_human_5
+  - first:
+      213: 343054083374683709
+    second: ChargedAttack_Thrust_Characters_human_6
+  - first:
+      213: -5303239710205383095
+    second: ChargedAttack_Thrust_Characters_human_7
+  - first:
+      213: -1915805884130013695
+    second: ChargedAttack_Thrust_Characters_human_8
+  - first:
+      213: -5264072683584905181
+    second: ChargedAttack_Thrust_Characters_human_9
+  - first:
+      213: -847904727150118187
+    second: ChargedAttack_Thrust_Characters_human_10
+  - first:
+      213: -7407313414309038400
+    second: ChargedAttack_Thrust_Characters_human_11
+  - first:
+      213: -24546331067104110
+    second: ChargedAttack_Thrust_Characters_human_12
+  - first:
+      213: -5723215324779224696
+    second: ChargedAttack_Thrust_Characters_human_13
+  - first:
+      213: 5646880522844354686
+    second: ChargedAttack_Thrust_Characters_human_14
+  - first:
+      213: 8337987451905256891
+    second: ChargedAttack_Thrust_Characters_human_15
+  - first:
+      213: -4949014188701470732
+    second: ChargedAttack_Thrust_Characters_human_16
+  - first:
+      213: 343378093573544466
+    second: ChargedAttack_Thrust_Characters_human_17
+  - first:
+      213: 5063983423411403779
+    second: ChargedAttack_Thrust_Characters_human_18
+  - first:
+      213: -8733575478328563298
+    second: ChargedAttack_Thrust_Characters_human_19
+  - first:
+      213: 7629031257223521266
+    second: ChargedAttack_Thrust_Characters_human_20
+  - first:
+      213: -4659262135536021982
+    second: ChargedAttack_Thrust_Characters_human_21
+  - first:
+      213: -3118813761693039012
+    second: ChargedAttack_Thrust_Characters_human_22
+  - first:
+      213: 8040827442170952424
+    second: ChargedAttack_Thrust_Characters_human_23
+  - first:
+      213: -5371342459696721647
+    second: ChargedAttack_Thrust_Characters_human_24
+  - first:
+      213: 4978044877891308584
+    second: ChargedAttack_Thrust_Characters_human_25
+  - first:
+      213: -2151197360168856932
+    second: ChargedAttack_Thrust_Characters_human_26
+  - first:
+      213: 1773138874449954194
+    second: ChargedAttack_Thrust_Characters_human_27
+  - first:
+      213: -5814797851996132726
+    second: ChargedAttack_Thrust_Characters_human_28
+  - first:
+      213: 3865442764349642717
+    second: ChargedAttack_Thrust_Characters_human_29
+  - first:
+      213: -5839061646675552329
+    second: ChargedAttack_Thrust_Characters_human_30
+  - first:
+      213: 8294451720139962888
+    second: ChargedAttack_Thrust_Characters_human_31
+  - first:
+      213: 2611747697031832860
+    second: ChargedAttack_Thrust_Characters_human_32
+  - first:
+      213: -1249810292032008499
+    second: ChargedAttack_Thrust_Characters_human_33
+  - first:
+      213: -8225318411960926954
+    second: ChargedAttack_Thrust_Characters_human_34
+  - first:
+      213: 8061079858580954008
+    second: ChargedAttack_Thrust_Characters_human_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92df3605829116d44b044eae15ad54a0
+      internalID: 6793519628969652006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1211171c9415f0c49b4887469b260151
+      internalID: 7856472488975563784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b8649b437163b341a3d4411eec409e4
+      internalID: -3087825279637275599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccded43e39fd2274cb4632ecf34bb8e9
+      internalID: -8910388432197401470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad16c0f4d8e25cf4da8cd4cd0df82c67
+      internalID: 8245806947923098383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da2412c8c8c6b37428f92caa93138478
+      internalID: -671762702789681800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d293b8fab74e384ea95946a8ba0d665
+      internalID: 343054083374683709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918584ec0474cc54c8e1d4101c3ba0de
+      internalID: -5303239710205383095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0266d3f3d00e5df47bc84e4e5aabd837
+      internalID: -1915805884130013695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0845e5a124202ea4c91741f7089c1fdb
+      internalID: -5264072683584905181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83195cf7ba5f3f9409834888fa94466d
+      internalID: -847904727150118187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 486ece77098dbae4da69941bc76ee792
+      internalID: -7407313414309038400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_12
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c02655d023d9f9746afd7bb0dfe4b8e0
+      internalID: -24546331067104110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_13
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb5080dc345c7484f860ee36c6589782
+      internalID: -5723215324779224696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_14
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67c532692ecc74d438905b8cc88ecd2a
+      internalID: 5646880522844354686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_15
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d192bf2e354fa9419790dbff935c2c4
+      internalID: 8337987451905256891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_16
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f19cbe565f81804d90a01555dd8f789
+      internalID: -4949014188701470732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_17
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 044d9d9ceab232b46804541946945cab
+      internalID: 343378093573544466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f05d5c9d3dda1034abea28e3d3a0db10
+      internalID: 5063983423411403779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ab381bdb078272469d2c0b2b241d032
+      internalID: -8733575478328563298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_20
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe2e12120cb9cce4dab886dd4d22b4a7
+      internalID: 7629031257223521266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_21
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb7f6730d23db494eb8c85d78d9ba8d8
+      internalID: -4659262135536021982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_22
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a152984e4b6e9244997959ee100cdb34
+      internalID: -3118813761693039012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d558b3fdf8d277f4caff7dfd65f7a761
+      internalID: 8040827442170952424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_24
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7f40f5972e8ec0459b5de6a7f1bc19e
+      internalID: -5371342459696721647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_25
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e07fc6c0a9b2e4947b104c96100b31bb
+      internalID: 4978044877891308584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_26
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e95446b1b1f8468499ce8483c22b65bf
+      internalID: -2151197360168856932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7417e953b80a694b9635115af3e8db7
+      internalID: 1773138874449954194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_28
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62348f42b7274ab42b3bf931d6848023
+      internalID: -5814797851996132726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_29
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4437cbcbaf3f9b49b298956e7f67db1
+      internalID: 3865442764349642717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_30
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 386d15d45e2c01c489f77943c9aaad75
+      internalID: -5839061646675552329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_31
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 222241dcaed546642bbb2c3d266cbf23
+      internalID: 8294451720139962888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_32
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a1faa53bc172624898ab330f0994d13
+      internalID: 2611747697031832860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_33
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16a9c73ad3ad0e14b9f389c918d1580e
+      internalID: -1249810292032008499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_34
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9696e7a41009acf4bb17e298a250002c
+      internalID: -8225318411960926954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_Thrust_Characters_human_35
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5977be77a4ee5a40b9ebbd024af5ab2
+      internalID: 8061079858580954008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7bf54d93816b69b4ab02ac40350f1b84
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ChargedAttack_Thrust_Characters_human_0: 6793519628969652006
+      ChargedAttack_Thrust_Characters_human_1: 7856472488975563784
+      ChargedAttack_Thrust_Characters_human_10: -847904727150118187
+      ChargedAttack_Thrust_Characters_human_11: -7407313414309038400
+      ChargedAttack_Thrust_Characters_human_12: -24546331067104110
+      ChargedAttack_Thrust_Characters_human_13: -5723215324779224696
+      ChargedAttack_Thrust_Characters_human_14: 5646880522844354686
+      ChargedAttack_Thrust_Characters_human_15: 8337987451905256891
+      ChargedAttack_Thrust_Characters_human_16: -4949014188701470732
+      ChargedAttack_Thrust_Characters_human_17: 343378093573544466
+      ChargedAttack_Thrust_Characters_human_18: 5063983423411403779
+      ChargedAttack_Thrust_Characters_human_19: -8733575478328563298
+      ChargedAttack_Thrust_Characters_human_2: -3087825279637275599
+      ChargedAttack_Thrust_Characters_human_20: 7629031257223521266
+      ChargedAttack_Thrust_Characters_human_21: -4659262135536021982
+      ChargedAttack_Thrust_Characters_human_22: -3118813761693039012
+      ChargedAttack_Thrust_Characters_human_23: 8040827442170952424
+      ChargedAttack_Thrust_Characters_human_24: -5371342459696721647
+      ChargedAttack_Thrust_Characters_human_25: 4978044877891308584
+      ChargedAttack_Thrust_Characters_human_26: -2151197360168856932
+      ChargedAttack_Thrust_Characters_human_27: 1773138874449954194
+      ChargedAttack_Thrust_Characters_human_28: -5814797851996132726
+      ChargedAttack_Thrust_Characters_human_29: 3865442764349642717
+      ChargedAttack_Thrust_Characters_human_3: -8910388432197401470
+      ChargedAttack_Thrust_Characters_human_30: -5839061646675552329
+      ChargedAttack_Thrust_Characters_human_31: 8294451720139962888
+      ChargedAttack_Thrust_Characters_human_32: 2611747697031832860
+      ChargedAttack_Thrust_Characters_human_33: -1249810292032008499
+      ChargedAttack_Thrust_Characters_human_34: -8225318411960926954
+      ChargedAttack_Thrust_Characters_human_35: 8061079858580954008
+      ChargedAttack_Thrust_Characters_human_4: 8245806947923098383
+      ChargedAttack_Thrust_Characters_human_5: -671762702789681800
+      ChargedAttack_Thrust_Characters_human_6: 343054083374683709
+      ChargedAttack_Thrust_Characters_human_7: -5303239710205383095
+      ChargedAttack_Thrust_Characters_human_8: -1915805884130013695
+      ChargedAttack_Thrust_Characters_human_9: -5264072683584905181
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

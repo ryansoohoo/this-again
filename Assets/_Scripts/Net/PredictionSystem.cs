@@ -14,14 +14,22 @@ public sealed class PredictionSystem
 
     InputRingBuffer buffer;
     Vector2 smoothOffset;                                // decays to zero so corrections don't snap
+    Vector2 prevPos;                                     // logical pos before the latest FixedTick step
 
     public Vector2 RenderedPos => Pos + smoothOffset;
+
+    // Visual position for rendering BETWEEN fixed ticks: interpolate prev->current by the fixed-step alpha, then
+    // add the (separately decaying) correction offset. Pos only changes on the fixed tick, so without this the
+    // sprite is piecewise-constant across render frames and PlayerView's delta-derived Speed collapses to zero
+    // on every inter-tick frame, flickering Walk<->Idle. alpha is clamped, so it is safe to pass anything.
+    public Vector2 VisualPos(float alpha) => Vector2.Lerp(prevPos, Pos, Mathf.Clamp01(alpha)) + smoothOffset;
 
     public void Activate(Vector2 startPos)
     {
         var cfg = Game.Instance.MovementCfg;
         buffer = new InputRingBuffer(Mathf.Max(8, Mathf.NextPowerOfTwo(cfg.inputBufferCapacity)));
         Pos = startPos;
+        prevPos = startPos;
         smoothOffset = Vector2.zero;
         Tick = 0;
         Active = true;
@@ -35,6 +43,7 @@ public sealed class PredictionSystem
         var cfg = Game.Instance.MovementCfg;
         Vector2 input = SampleInput();
         Tick++;
+        prevPos = Pos;                                  // remember where we were so the visual can interpolate across the step
         Pos = MovementStep.Step(Pos, input, dt, cfg.moveSpeed, Walkable);
         buffer.Store(new InputFrame { tick = Tick, input = input, predictedPos = Pos });
         ReplicationHub.Instance.SubmitInputTickRpc(Tick, input);
@@ -80,9 +89,10 @@ public sealed class PredictionSystem
             buffer.Store(f);
         }
         Pos = p;
+        prevPos = Pos;   // a correction jumps the logical pos; smoothOffset eases the visual, so don't also interp across it
     }
 
-    void HardSnap(Vector2 authPos) { Pos = authPos; smoothOffset = Vector2.zero; }
+    void HardSnap(Vector2 authPos) { Pos = authPos; prevPos = authPos; smoothOffset = Vector2.zero; }
 
     // Called every frame from LocalPlayer.Update to ease smoothOffset toward zero over correctionSmoothTime.
     public void Decay(float dt)

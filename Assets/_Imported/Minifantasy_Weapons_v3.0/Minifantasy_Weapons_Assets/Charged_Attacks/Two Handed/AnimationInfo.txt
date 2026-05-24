@@ -1,0 +1,9 @@
+*Frame size* 
+
+- 32x32px For all the animations, except for the frames of the Shockwave Effect animation which are 64x64px
+
+
+*Frame Duration*
+
+- 100ms: For all the animations.
+

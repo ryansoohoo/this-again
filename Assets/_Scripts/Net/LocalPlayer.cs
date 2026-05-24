@@ -74,7 +74,11 @@ public sealed class LocalPlayer : MonoBehaviour
         if (intent.dir != lastSent) { lastSent = intent.dir; if (!prediction.Active) ReplicationHub.Instance.SubmitInputRpc(intent.dir); }
         if (intent.hasClickTarget) ReplicationHub.Instance.SetTargetRpc(intent.clickWorld);
         if (prediction.Active && GhostManager.Instance != null && GhostManager.Instance.SelfGhost != null)
-            GhostManager.Instance.SelfGhost.position = prediction.RenderedPos;
+        {
+            // Render between fixed ticks so the sprite moves every frame (steady walk animation), not just on the tick.
+            float alpha = Time.fixedDeltaTime > 0f ? Mathf.Clamp01((Time.time - Time.fixedTime) / Time.fixedDeltaTime) : 1f;
+            GhostManager.Instance.SelfGhost.position = prediction.VisualPos(alpha);
+        }
     }
 
     // Drives client-side prediction on the fixed tick while in the underworld: activates on entry (seeding from

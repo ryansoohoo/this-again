@@ -1,0 +1,1124 @@
+fileFormatVersion: 2
+guid: 66a21f019b78d8c4fb1f3186894caaa0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1210585318433124246
+    second: ChargedAttack_TwoHanded_waraxe_f_0
+  - first:
+      213: -3104443121175801709
+    second: ChargedAttack_TwoHanded_waraxe_f_1
+  - first:
+      213: 1011406775558489378
+    second: ChargedAttack_TwoHanded_waraxe_f_2
+  - first:
+      213: 1849684744022515951
+    second: ChargedAttack_TwoHanded_waraxe_f_3
+  - first:
+      213: 6247297986696928127
+    second: ChargedAttack_TwoHanded_waraxe_f_4
+  - first:
+      213: 8417121769381946917
+    second: ChargedAttack_TwoHanded_waraxe_f_5
+  - first:
+      213: 4613372459479735388
+    second: ChargedAttack_TwoHanded_waraxe_f_6
+  - first:
+      213: 5734892047001761254
+    second: ChargedAttack_TwoHanded_waraxe_f_7
+  - first:
+      213: -3789349832732402149
+    second: ChargedAttack_TwoHanded_waraxe_f_8
+  - first:
+      213: 414545674271753800
+    second: ChargedAttack_TwoHanded_waraxe_f_9
+  - first:
+      213: -7667941063317413048
+    second: ChargedAttack_TwoHanded_waraxe_f_10
+  - first:
+      213: -3594655813928595134
+    second: ChargedAttack_TwoHanded_waraxe_f_11
+  - first:
+      213: -443787131265615196
+    second: ChargedAttack_TwoHanded_waraxe_f_12
+  - first:
+      213: -8319629045972167277
+    second: ChargedAttack_TwoHanded_waraxe_f_13
+  - first:
+      213: 5193387912585165041
+    second: ChargedAttack_TwoHanded_waraxe_f_14
+  - first:
+      213: -324311479553408527
+    second: ChargedAttack_TwoHanded_waraxe_f_15
+  - first:
+      213: -2470257323930489616
+    second: ChargedAttack_TwoHanded_waraxe_f_16
+  - first:
+      213: 6480113878825216380
+    second: ChargedAttack_TwoHanded_waraxe_f_17
+  - first:
+      213: -4023223239755799105
+    second: ChargedAttack_TwoHanded_waraxe_f_18
+  - first:
+      213: 5278015475061144129
+    second: ChargedAttack_TwoHanded_waraxe_f_19
+  - first:
+      213: -1496062234421859798
+    second: ChargedAttack_TwoHanded_waraxe_f_20
+  - first:
+      213: -8764037224674830284
+    second: ChargedAttack_TwoHanded_waraxe_f_21
+  - first:
+      213: -5238953772309269391
+    second: ChargedAttack_TwoHanded_waraxe_f_22
+  - first:
+      213: 7913378514441055675
+    second: ChargedAttack_TwoHanded_waraxe_f_23
+  - first:
+      213: -7619680301591056867
+    second: ChargedAttack_TwoHanded_waraxe_f_24
+  - first:
+      213: -8075830201686878184
+    second: ChargedAttack_TwoHanded_waraxe_f_25
+  - first:
+      213: -5695670963823916202
+    second: ChargedAttack_TwoHanded_waraxe_f_26
+  - first:
+      213: 134979374768933188
+    second: ChargedAttack_TwoHanded_waraxe_f_27
+  - first:
+      213: -8685296474565409593
+    second: ChargedAttack_TwoHanded_waraxe_f_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c01a0edca629dbc45a7541fdab5524ef
+      internalID: -1210585318433124246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 380bf4891b1d27144b325530a0c7dc49
+      internalID: -3104443121175801709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 319a08843d8c229429b1f7a090a7a639
+      internalID: 1011406775558489378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 984b581e612ddd44783558230c2272d6
+      internalID: 1849684744022515951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff29ef541b4fd9c419978dfef3bc2efa
+      internalID: 6247297986696928127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 609d47c582affe2438c9f87610198ca8
+      internalID: 8417121769381946917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b0c842e46e4be945bcbb46e5cbb4ed1
+      internalID: 4613372459479735388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf53e7761873adb4dad4bcdcaab51871
+      internalID: 5734892047001761254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 030006c0252d24840bae8164e0283b09
+      internalID: -3789349832732402149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2ca529658791a94ca76d022cc194218
+      internalID: 414545674271753800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eda20078e5e361346af7eec46a18ebf7
+      internalID: -7667941063317413048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b4096d5d57b52c48a4d0cc6af32df0f
+      internalID: -3594655813928595134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f8ca62417e918342bd4302333e834a6
+      internalID: -443787131265615196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8da6b3209c985cf4e843e761dd8b3fcd
+      internalID: -8319629045972167277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 921b2f200dd674043828d5a3bf3d41b5
+      internalID: 5193387912585165041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_15
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: debbcf07256ae1943b97015552fad9a7
+      internalID: -324311479553408527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_16
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f79e6f3c14e35c468e11d5178b005d3
+      internalID: -2470257323930489616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_17
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a31e5c64d99031f43b73f1c817b29931
+      internalID: 6480113878825216380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1b3922ff190d5e47ba0e12feb9c4e6e
+      internalID: -4023223239755799105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_19
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec9bfce0b8ca645488816fdb1433c26a
+      internalID: 5278015475061144129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad99986581936df43a45c041cf97c339
+      internalID: -1496062234421859798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_21
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f646eab849735e942bd322a41a47fa4a
+      internalID: -8764037224674830284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25c661416c8959e4cbf7574f348f3fd5
+      internalID: -5238953772309269391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_23
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28f618bbc2ac43b46937f9797317732d
+      internalID: 7913378514441055675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_24
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a8401e83c7982446a5e1b4ba1abfa30
+      internalID: -7619680301591056867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_25
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f561558ac7b02134194ca442ca6e825e
+      internalID: -8075830201686878184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_26
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 295d510539c2d6340a57c0837bc5fd8a
+      internalID: -5695670963823916202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_27
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21083a9af7f981d4eb848b2c13d3f53a
+      internalID: 134979374768933188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_28
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ceab54adf1db6749b318b4a4f196b57
+      internalID: -8685296474565409593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_29
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1a251bc01ed66c4a869725ac39f2932
+      internalID: 1485150514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb1e9c05b1a698e41964ba92c0e71333
+      internalID: 1913360612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_31
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58859795f0421b344bca0ee2ee58f175
+      internalID: 943204788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_32
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a77ea48c8a1b7d48aa1f0458eae18c6
+      internalID: -1522656958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_33
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43f4b4148922e474081ec1ef8a9adeb5
+      internalID: -561860172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_34
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea67f0f074fa0d04ca7fa21f0883f7f0
+      internalID: -291754307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_35
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 017d3a67b43b7fe4780510289ff83795
+      internalID: 275853569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_36
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1612cd3e0fbf6e64b91ec9ecf91e3c81
+      internalID: 866214373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_37
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c368b98f4a501414e95cbca01afad037
+      internalID: 1787435711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_38
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da9c7be9d4443894fa14eadfe0ad76f1
+      internalID: 910417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_waraxe_f_39
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3e726aa12b39b5438230c6035174fb1
+      internalID: -687276852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2c661ff234832c645b8ffb0aaebdccce
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ChargedAttack_TwoHanded_waraxe_f_0: -1210585318433124246
+      ChargedAttack_TwoHanded_waraxe_f_1: -3104443121175801709
+      ChargedAttack_TwoHanded_waraxe_f_10: -7667941063317413048
+      ChargedAttack_TwoHanded_waraxe_f_11: -3594655813928595134
+      ChargedAttack_TwoHanded_waraxe_f_12: -443787131265615196
+      ChargedAttack_TwoHanded_waraxe_f_13: -8319629045972167277
+      ChargedAttack_TwoHanded_waraxe_f_14: 5193387912585165041
+      ChargedAttack_TwoHanded_waraxe_f_15: -324311479553408527
+      ChargedAttack_TwoHanded_waraxe_f_16: -2470257323930489616
+      ChargedAttack_TwoHanded_waraxe_f_17: 6480113878825216380
+      ChargedAttack_TwoHanded_waraxe_f_18: -4023223239755799105
+      ChargedAttack_TwoHanded_waraxe_f_19: 5278015475061144129
+      ChargedAttack_TwoHanded_waraxe_f_2: 1011406775558489378
+      ChargedAttack_TwoHanded_waraxe_f_20: -1496062234421859798
+      ChargedAttack_TwoHanded_waraxe_f_21: -8764037224674830284
+      ChargedAttack_TwoHanded_waraxe_f_22: -5238953772309269391
+      ChargedAttack_TwoHanded_waraxe_f_23: 7913378514441055675
+      ChargedAttack_TwoHanded_waraxe_f_24: -7619680301591056867
+      ChargedAttack_TwoHanded_waraxe_f_25: -8075830201686878184
+      ChargedAttack_TwoHanded_waraxe_f_26: -5695670963823916202
+      ChargedAttack_TwoHanded_waraxe_f_27: 134979374768933188
+      ChargedAttack_TwoHanded_waraxe_f_28: -8685296474565409593
+      ChargedAttack_TwoHanded_waraxe_f_29: 1485150514
+      ChargedAttack_TwoHanded_waraxe_f_3: 1849684744022515951
+      ChargedAttack_TwoHanded_waraxe_f_30: 1913360612
+      ChargedAttack_TwoHanded_waraxe_f_31: 943204788
+      ChargedAttack_TwoHanded_waraxe_f_32: -1522656958
+      ChargedAttack_TwoHanded_waraxe_f_33: -561860172
+      ChargedAttack_TwoHanded_waraxe_f_34: -291754307
+      ChargedAttack_TwoHanded_waraxe_f_35: 275853569
+      ChargedAttack_TwoHanded_waraxe_f_36: 866214373
+      ChargedAttack_TwoHanded_waraxe_f_37: 1787435711
+      ChargedAttack_TwoHanded_waraxe_f_38: 910417
+      ChargedAttack_TwoHanded_waraxe_f_39: -687276852
+      ChargedAttack_TwoHanded_waraxe_f_4: 6247297986696928127
+      ChargedAttack_TwoHanded_waraxe_f_5: 8417121769381946917
+      ChargedAttack_TwoHanded_waraxe_f_6: 4613372459479735388
+      ChargedAttack_TwoHanded_waraxe_f_7: 5734892047001761254
+      ChargedAttack_TwoHanded_waraxe_f_8: -3789349832732402149
+      ChargedAttack_TwoHanded_waraxe_f_9: 414545674271753800
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,1157 @@
+fileFormatVersion: 2
+guid: cb2e327ae848dc143bc4ea6f6a98ad92
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7931019472230253181
+    second: ChargedAttack_TwoHanded_Characters_human_0
+  - first:
+      213: -2523167421421777125
+    second: ChargedAttack_TwoHanded_Characters_human_1
+  - first:
+      213: 8575340846265284199
+    second: ChargedAttack_TwoHanded_Characters_human_2
+  - first:
+      213: 8919313880620498430
+    second: ChargedAttack_TwoHanded_Characters_human_3
+  - first:
+      213: -236322697427033900
+    second: ChargedAttack_TwoHanded_Characters_human_4
+  - first:
+      213: -6744493286704478546
+    second: ChargedAttack_TwoHanded_Characters_human_5
+  - first:
+      213: 8714752899150711057
+    second: ChargedAttack_TwoHanded_Characters_human_6
+  - first:
+      213: -2459838045586366504
+    second: ChargedAttack_TwoHanded_Characters_human_7
+  - first:
+      213: 4154926568901963209
+    second: ChargedAttack_TwoHanded_Characters_human_8
+  - first:
+      213: 3549539469151711482
+    second: ChargedAttack_TwoHanded_Characters_human_9
+  - first:
+      213: 5765830792520089497
+    second: ChargedAttack_TwoHanded_Characters_human_10
+  - first:
+      213: -2244339541270766588
+    second: ChargedAttack_TwoHanded_Characters_human_11
+  - first:
+      213: -8331882793189429811
+    second: ChargedAttack_TwoHanded_Characters_human_12
+  - first:
+      213: 469887592273530827
+    second: ChargedAttack_TwoHanded_Characters_human_13
+  - first:
+      213: -5683959775637514427
+    second: ChargedAttack_TwoHanded_Characters_human_14
+  - first:
+      213: -6133952897704048633
+    second: ChargedAttack_TwoHanded_Characters_human_15
+  - first:
+      213: -6728252643387487707
+    second: ChargedAttack_TwoHanded_Characters_human_16
+  - first:
+      213: 2023500122711813828
+    second: ChargedAttack_TwoHanded_Characters_human_17
+  - first:
+      213: 4644297754193694260
+    second: ChargedAttack_TwoHanded_Characters_human_18
+  - first:
+      213: -7335867713045127993
+    second: ChargedAttack_TwoHanded_Characters_human_19
+  - first:
+      213: -6371160568706108635
+    second: ChargedAttack_TwoHanded_Characters_human_20
+  - first:
+      213: -8587472680076254010
+    second: ChargedAttack_TwoHanded_Characters_human_21
+  - first:
+      213: 5968815877477575154
+    second: ChargedAttack_TwoHanded_Characters_human_22
+  - first:
+      213: -1585817172313283706
+    second: ChargedAttack_TwoHanded_Characters_human_23
+  - first:
+      213: 3389884697028425280
+    second: ChargedAttack_TwoHanded_Characters_human_24
+  - first:
+      213: -8406983119530505260
+    second: ChargedAttack_TwoHanded_Characters_human_25
+  - first:
+      213: 4845006220663821233
+    second: ChargedAttack_TwoHanded_Characters_human_26
+  - first:
+      213: -6796220621491748077
+    second: ChargedAttack_TwoHanded_Characters_human_27
+  - first:
+      213: -6458898062075454192
+    second: ChargedAttack_TwoHanded_Characters_human_28
+  - first:
+      213: 3904849855575360166
+    second: ChargedAttack_TwoHanded_Characters_human_29
+  - first:
+      213: 3337754496166160135
+    second: ChargedAttack_TwoHanded_Characters_human_30
+  - first:
+      213: -265232657389533503
+    second: ChargedAttack_TwoHanded_Characters_human_31
+  - first:
+      213: 6611643465326695321
+    second: ChargedAttack_TwoHanded_Characters_human_32
+  - first:
+      213: 4987768239524835173
+    second: ChargedAttack_TwoHanded_Characters_human_33
+  - first:
+      213: 1267036329529904922
+    second: ChargedAttack_TwoHanded_Characters_human_34
+  - first:
+      213: -7651174697853573306
+    second: ChargedAttack_TwoHanded_Characters_human_35
+  - first:
+      213: -2712185603898286518
+    second: ChargedAttack_TwoHanded_Characters_human_36
+  - first:
+      213: -8102922790145579658
+    second: ChargedAttack_TwoHanded_Characters_human_37
+  - first:
+      213: 4920555329612803464
+    second: ChargedAttack_TwoHanded_Characters_human_38
+  - first:
+      213: -118252037841069805
+    second: ChargedAttack_TwoHanded_Characters_human_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00f22576dc54cd94a95e64ffcc6260cd
+      internalID: 7931019472230253181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9132cd97620ba3744bb124bcbe112f50
+      internalID: -2523167421421777125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe00d4d8e190e7c409154599348853f7
+      internalID: 8575340846265284199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffc70a9b22f60d348935902f814990db
+      internalID: 8919313880620498430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acb60f17d8aee2b4ba7debaa9996d14a
+      internalID: -236322697427033900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5296f6c4f6d994a44afe9588a68745d3
+      internalID: -6744493286704478546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f21120b1844e264786b2c4772ebaf38
+      internalID: 8714752899150711057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89beec4a15710a349b55253a0da1b31e
+      internalID: -2459838045586366504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c0f815c783c64a4982eaf8fbaac231c
+      internalID: 4154926568901963209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dede2ec88f68764492d411b10361fa4
+      internalID: 3549539469151711482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e586b2a828aefed43b65d65fe17cb4bc
+      internalID: 5765830792520089497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bf70d2653d73704c92b3ca056f9ab44
+      internalID: -2244339541270766588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3170139696bfbe4bbd18af63e741bd0
+      internalID: -8331882793189429811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b89591e5adeab4c49a76eab7c60542a9
+      internalID: 469887592273530827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 155946c0c5c7e684a89615af1bdaecca
+      internalID: -5683959775637514427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_15
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9816f57e5887e664c81d872daf48fc92
+      internalID: -6133952897704048633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_16
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a683f0d3d5f37fd41b22e8478f3fe3cd
+      internalID: -6728252643387487707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_17
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcd8eca1956454143889cc290d6fbd81
+      internalID: 2023500122711813828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0bbc0408d13c5747850d87d644d05a6
+      internalID: 4644297754193694260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_19
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4c4ee6b06b969c4f9173832ad00dd45
+      internalID: -7335867713045127993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a193fdd42b8db947943c4dbf0f652c4
+      internalID: -6371160568706108635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_21
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a475434973e7d440ada98b5703c9841
+      internalID: -8587472680076254010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61c9146e4285663409596383b61d7d84
+      internalID: 5968815877477575154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_23
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2be8898c69a47974498e4aad4e057bda
+      internalID: -1585817172313283706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_24
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 142f3c4290058f7468adfeb955133848
+      internalID: 3389884697028425280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_25
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce539d326b416ce418b79c588c1594dc
+      internalID: -8406983119530505260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_26
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 758fbf10729bf81438e17d128437542a
+      internalID: 4845006220663821233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_27
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f153871c164c5b4a823e9e4f6533b7f
+      internalID: -6796220621491748077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_28
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c576867e80b5b524c9b1bc33fc2743a3
+      internalID: -6458898062075454192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_29
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36f075d140600a54db00fa78984bae24
+      internalID: 3904849855575360166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43b948b91cc05d943a74e0cf70e42ce6
+      internalID: 3337754496166160135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_31
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6be6086ac8aac024fb598f419f7a6c82
+      internalID: -265232657389533503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_32
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72651e9de79ac7843a902e594760e123
+      internalID: 6611643465326695321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_33
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dabc78a9d564e7f45b1ea8256fc4b07d
+      internalID: 4987768239524835173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_34
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea9a9fffa96fbad4082792f1bc448e16
+      internalID: 1267036329529904922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_35
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42ffa1b8e23999f49adf4c8496035a50
+      internalID: -7651174697853573306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_36
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b63b709c64cd2954ca126381271e74ce
+      internalID: -2712185603898286518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_37
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc26eff5dcd9e8b46981ccf04078019d
+      internalID: -8102922790145579658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_38
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df70d7206b977554a87921c466709060
+      internalID: 4920555329612803464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChargedAttack_TwoHanded_Characters_human_39
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4388a00f152bd2045a0dac6578f1df9c
+      internalID: -118252037841069805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 23e19b598ee5799478065c9215998c61
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ChargedAttack_TwoHanded_Characters_human_0: 7931019472230253181
+      ChargedAttack_TwoHanded_Characters_human_1: -2523167421421777125
+      ChargedAttack_TwoHanded_Characters_human_10: 5765830792520089497
+      ChargedAttack_TwoHanded_Characters_human_11: -2244339541270766588
+      ChargedAttack_TwoHanded_Characters_human_12: -8331882793189429811
+      ChargedAttack_TwoHanded_Characters_human_13: 469887592273530827
+      ChargedAttack_TwoHanded_Characters_human_14: -5683959775637514427
+      ChargedAttack_TwoHanded_Characters_human_15: -6133952897704048633
+      ChargedAttack_TwoHanded_Characters_human_16: -6728252643387487707
+      ChargedAttack_TwoHanded_Characters_human_17: 2023500122711813828
+      ChargedAttack_TwoHanded_Characters_human_18: 4644297754193694260
+      ChargedAttack_TwoHanded_Characters_human_19: -7335867713045127993
+      ChargedAttack_TwoHanded_Characters_human_2: 8575340846265284199
+      ChargedAttack_TwoHanded_Characters_human_20: -6371160568706108635
+      ChargedAttack_TwoHanded_Characters_human_21: -8587472680076254010
+      ChargedAttack_TwoHanded_Characters_human_22: 5968815877477575154
+      ChargedAttack_TwoHanded_Characters_human_23: -1585817172313283706
+      ChargedAttack_TwoHanded_Characters_human_24: 3389884697028425280
+      ChargedAttack_TwoHanded_Characters_human_25: -8406983119530505260
+      ChargedAttack_TwoHanded_Characters_human_26: 4845006220663821233
+      ChargedAttack_TwoHanded_Characters_human_27: -6796220621491748077
+      ChargedAttack_TwoHanded_Characters_human_28: -6458898062075454192
+      ChargedAttack_TwoHanded_Characters_human_29: 3904849855575360166
+      ChargedAttack_TwoHanded_Characters_human_3: 8919313880620498430
+      ChargedAttack_TwoHanded_Characters_human_30: 3337754496166160135
+      ChargedAttack_TwoHanded_Characters_human_31: -265232657389533503
+      ChargedAttack_TwoHanded_Characters_human_32: 6611643465326695321
+      ChargedAttack_TwoHanded_Characters_human_33: 4987768239524835173
+      ChargedAttack_TwoHanded_Characters_human_34: 1267036329529904922
+      ChargedAttack_TwoHanded_Characters_human_35: -7651174697853573306
+      ChargedAttack_TwoHanded_Characters_human_36: -2712185603898286518
+      ChargedAttack_TwoHanded_Characters_human_37: -8102922790145579658
+      ChargedAttack_TwoHanded_Characters_human_38: 4920555329612803464
+      ChargedAttack_TwoHanded_Characters_human_39: -118252037841069805
+      ChargedAttack_TwoHanded_Characters_human_4: -236322697427033900
+      ChargedAttack_TwoHanded_Characters_human_5: -6744493286704478546
+      ChargedAttack_TwoHanded_Characters_human_6: 8714752899150711057
+      ChargedAttack_TwoHanded_Characters_human_7: -2459838045586366504
+      ChargedAttack_TwoHanded_Characters_human_8: 4154926568901963209
+      ChargedAttack_TwoHanded_Characters_human_9: 3549539469151711482
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

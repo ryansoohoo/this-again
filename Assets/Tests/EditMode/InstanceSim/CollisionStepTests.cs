@@ -165,4 +165,65 @@ public class CollisionStepTests
         Assert.AreEqual(0, results[0]);
         Assert.AreEqual(1, results[1]);
     }
+
+    // --- ResolveOne: focal-body resolve for client prediction (id-sort + read back self only) ---
+
+    [Test]
+    public void ResolveOne_SelfMoverIntoPinned_ReturnsSelfPushedOut()
+    {
+        var self = Body(2, new Vector2(0.6f, 0f), 1f);          // mover, overlapping a pinned other (0.6 < 1.0 radii sum)
+        var others = new[] { Body(1, Vector2.zero, 0f) };       // pinned
+        var scratch = new CollisionBody[4];
+        Vector2 p = CollisionStep.ResolveOne(self, others, 1, Open, 4, scratch);
+        Assert.AreEqual(1.0f, p.x, 1e-3f);                      // self pushed out to exactly touching
+        Assert.AreEqual(0f, p.y, 1e-3f);
+    }
+
+    [Test]
+    public void ResolveOne_BothMovers_SelfGetsItsHalf()
+    {
+        var self = Body(2, new Vector2(0.3f, 0f), 1f);
+        var others = new[] { Body(1, new Vector2(-0.3f, 0f), 1f) };   // also a mover -> 50/50 split
+        var scratch = new CollisionBody[4];
+        Vector2 p = CollisionStep.ResolveOne(self, others, 1, Open, 4, scratch);
+        Assert.AreEqual(0.5f, p.x, 1e-3f);                     // self moved its half: 0.3 -> 0.5 (gap opens to 1.0)
+        Assert.AreEqual(0f, p.y, 1e-3f);
+    }
+
+    [Test]
+    public void ResolveOne_OrderIndependent_SameSelfResult()
+    {
+        var self = Body(2, new Vector2(0.3f, 0.1f), 1f);
+        var a = new[] { Body(1, Vector2.zero, 0f),            Body(3, new Vector2(0.7f, 0f), 0f) };
+        var b = new[] { Body(3, new Vector2(0.7f, 0f), 0f),   Body(1, Vector2.zero, 0f) };   // reversed input order
+        Vector2 p1 = CollisionStep.ResolveOne(self, a, 2, Open, 6, new CollisionBody[4]);
+        Vector2 p2 = CollisionStep.ResolveOne(self, b, 2, Open, 6, new CollisionBody[4]);
+        Assert.AreEqual(p1, p2);   // internal id-sort makes the self result independent of caller array order
+    }
+
+    [Test]
+    public void ResolveOne_NoOthers_ReturnsSelfUnchanged()
+    {
+        var self = Body(2, new Vector2(1f, 2f), 1f);
+        Vector2 p = CollisionStep.ResolveOne(self, new CollisionBody[0], 0, Open, 4, new CollisionBody[2]);
+        Assert.AreEqual(new Vector2(1f, 2f), p);
+    }
+
+    [Test]
+    public void ResolveOne_PinnedSelf_StandingStill_NotPushedByMover()
+    {
+        var self = Body(2, Vector2.zero, 0f);                   // self standing still (pinned)
+        var others = new[] { Body(1, new Vector2(0.6f, 0f), 1f) };  // a mover overlapping self
+        Vector2 p = CollisionStep.ResolveOne(self, others, 1, Open, 4, new CollisionBody[4]);
+        Assert.AreEqual(Vector2.zero, p);                      // mover yields; standing self holds ground (matches server)
+    }
+
+    [Test]
+    public void ResolveOne_DoesNotMutateCallerOthersArray()
+    {
+        var self = Body(2, new Vector2(0.6f, 0f), 1f);
+        var others = new[] { Body(1, Vector2.zero, 0f) };
+        CollisionStep.ResolveOne(self, others, 1, Open, 4, new CollisionBody[4]);
+        Assert.AreEqual(Vector2.zero, others[0].pos);         // others copied into scratch; caller's array untouched
+    }
 }

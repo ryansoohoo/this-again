@@ -46,6 +46,35 @@ public static class CollisionStep
                 }
     }
 
+    // Resolve a single focal body against `others[0..count)` and return ONLY the focal body's resolved position.
+    // The client uses this for collision prediction: self is the focal body; `others` are same-room ghosts whose
+    // server-owned positions are discarded. `scratch` must hold at least count+1 bodies and is overwritten; the
+    // caller's `others` array is NOT mutated (it is copied in). Bodies are id-sorted internally so the order — and
+    // thus the result — matches the server's id-sorted room resolve. No-op (returns self.pos) when count == 0.
+    public static Vector2 ResolveOne(CollisionBody self, CollisionBody[] others, int count, Func<Vector2, bool> walkable, int iterations, CollisionBody[] scratch)
+    {
+        for (int i = 0; i < count; i++) scratch[i] = others[i];
+        scratch[count] = self;
+        int n = count + 1;
+        SortById(scratch, n);
+        Resolve(scratch, n, walkable, iterations);
+        for (int i = 0; i < n; i++) if (scratch[i].id == self.id) return scratch[i].pos;
+        return self.pos;   // unreachable (self is always present)
+    }
+
+    // Insertion sort by id (n is tiny: roommates + 1). Allocation-free; gives the same deterministic order the
+    // server gets from sorting its per-room bodies by id.
+    static void SortById(CollisionBody[] a, int n)
+    {
+        for (int i = 1; i < n; i++)
+        {
+            var key = a[i];
+            int j = i - 1;
+            while (j >= 0 && a[j].id > key.id) { a[j + 1] = a[j]; j--; }
+            a[j + 1] = key;
+        }
+    }
+
     // Broadphase query seam for the future hitbox layer: fill `results` with indices of bodies whose circle
     // overlaps the (center,radius) probe; returns the count written. Unused by collision itself — v1 ships it so
     // the OnStrike hit seam later becomes "Overlap roommates, then pixel-perfect narrowphase" with no rework.

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-// Owner-side attack logic, owned + ticked by LocalPlayer (mirrors PredictionSystem). Holds the AttackState and
-// steps the pure AttackLogic each frame; emits a one-shot log when the hit window opens (future: damage).
+// Owner-side attack logic, owned + ticked by LocalPlayer on the fixed tick (alongside PredictionSystem). Holds
+// the AttackState and steps the pure AttackLogic; emits a one-shot log when the hit window opens (future: damage).
 public sealed class AttackSystem
 {
     AttackState state;

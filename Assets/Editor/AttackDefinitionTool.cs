@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,48 +22,28 @@ public sealed class AttackDefinitionTool : Editor
         if (GUILayout.Button("Populate Sprite[] + columnsPerRow"))
         {
             Undo.RecordObject(def, "Populate attack frames");
-            def.bodyFrames = LoadSprites(bodySheet);
-            def.weaponFrontFrames = LoadSprites(frontSheet);
-            def.weaponBackFrames = LoadSprites(backSheet);
-            def.columnsPerRow = ColumnsOf(bodySheet);
+            def.bodyFrames = WeaponSheet.LoadSprites(bodySheet);
+            def.weaponFrontFrames = WeaponSheet.LoadSprites(frontSheet);
+            def.weaponBackFrames = WeaponSheet.LoadSprites(backSheet);
+            def.columnsPerRow = WeaponSheet.Columns(bodySheet);
             EditorUtility.SetDirty(def);
         }
 
         EditorGUILayout.Space();
-        if (GUILayout.Button("Fill directions: Cardinal (E,N,W,S)"))
-            SetDirs(def, new[] { new Vector2(1, 0), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(0, -1) });
-        if (GUILayout.Button("Fill directions: Diagonal (NE,NW,SW,SE)"))
-            SetDirs(def, new[] { new Vector2(1, 1), new Vector2(-1, 1), new Vector2(-1, -1), new Vector2(1, -1) });
+        if (GUILayout.Button("Fill directions: Cardinal (E,W,S,N)"))
+            SetDirs(def, AttackDirections.Cardinal);
+        if (GUILayout.Button("Fill directions: Diagonal (SE,SW,NE,NW)"))
+            SetDirs(def, AttackDirections.Diagonal);
 
         EditorGUILayout.Space();
         if (GUILayout.Button("Validate"))
             Validate(def);
     }
 
-    static Sprite[] LoadSprites(Texture2D tex)
-    {
-        if (tex == null) return new Sprite[0];
-        string path = AssetDatabase.GetAssetPath(tex);
-        var subs = AssetDatabase.LoadAllAssetsAtPath(path);
-        var list = new List<Sprite>();
-        foreach (var o in subs) if (o is Sprite s) list.Add(s);
-        list.Sort((a, b) => SliceIndex(a.name).CompareTo(SliceIndex(b.name))); // SpriteGridSliceTool names "{base}_{idx}"
-        return list.ToArray();
-    }
-
-    static int SliceIndex(string name)
-    {
-        int u = name.LastIndexOf('_');
-        return (u >= 0 && int.TryParse(name.Substring(u + 1), out int n)) ? n : 0;
-    }
-
-    static int ColumnsOf(Texture2D tex) => tex == null ? 4 : Mathf.Max(1, tex.width / 32);
-
     static void SetDirs(AttackDefinition def, Vector2[] dirs)
     {
         Undo.RecordObject(def, "Fill directions");
-        def.directions = new DirectionEntry[dirs.Length];
-        for (int i = 0; i < dirs.Length; i++) def.directions[i] = new DirectionEntry { canonicalDir = dirs[i], row = i };
+        def.directions = AttackDirections.Entries(dirs);
         EditorUtility.SetDirty(def);
         Debug.Log("[AttackDef] filled directions; confirm each entry's row matches the sheet.");
     }

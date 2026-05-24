@@ -10,4 +10,5 @@ public sealed class AttackTimeline
     public DirectionEntry[] directions;
     public Vector2[] dirs;        // cached directions[].canonicalDir for the picker (no per-tick alloc)
     public float feintCooldown;
+    public float aimSnapDegrees;  // 0 = rotate freely to the cursor; 45 = snap the aim to 8 directions
 }

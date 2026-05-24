@@ -19,6 +19,11 @@ public sealed class AttackDefinition : ScriptableObject
 
     [Header("Rules")]
     public float feintCooldown = 0.5f;
+    public bool rotateToAim = true;   // tilt the rig the residual degrees to aim exactly at the cursor; off = snap to nearest direction
+    public float aimSnapDegrees = 0f; // 0 = rotate freely to the cursor; 45 = snap the aim to 8 directions (used with rotateToAim)
+    // Forward lunge speed (fraction of moveSpeed, Y) over normalized hit+follow-through time (X 0..1).
+    // Default: ease-out impulse (full at the strike, decaying to 0). Flat 0 = no lunge.
+    public AnimationCurve lungeCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
     public DirectionEntry[] directions;
     public string attackId;
 
@@ -39,6 +44,7 @@ public sealed class AttackDefinition : ScriptableObject
             directions = directions,
             dirs = dirs,
             feintCooldown = feintCooldown,
+            aimSnapDegrees = aimSnapDegrees,
         };
     }
 

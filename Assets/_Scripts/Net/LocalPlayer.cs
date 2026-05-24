@@ -15,6 +15,16 @@ public sealed class LocalPlayer : MonoBehaviour
     public PredictionSystem Prediction => prediction;
     bool wasInInstance;
 
+    [SerializeField] AttackDefinition currentAttack;
+    [SerializeField] AttackDefinition[] weapons;   // number keys 1-9,0 select these
+    readonly AttackSystem attack = new();
+    Transform attackViewGhost;
+    AttackView attackView;
+
+    // Attack input latched each render frame (button edges only fire on the render frame), consumed on the fixed tick.
+    bool attackPressed, attackReleased, attackFeint, attackHeld;
+    Vector2 attackAim;
+
     void Awake() => Instance = this;
     void OnDestroy() { if (Instance == this) Instance = null; }
 
@@ -72,7 +82,22 @@ public sealed class LocalPlayer : MonoBehaviour
         var cam = Game.Instance != null ? Game.Instance.Cam : Camera.main;
         var intent = input.Read(cam);
         if (intent.dir != lastSent) { lastSent = intent.dir; if (!prediction.Active) ReplicationHub.Instance.SubmitInputRpc(intent.dir); }
-        if (intent.hasClickTarget) ReplicationHub.Instance.SetTargetRpc(intent.clickWorld);
+
+        if (intent.weaponSlot >= 0 && weapons != null && intent.weaponSlot < weapons.Length
+            && weapons[intent.weaponSlot] != null && !AttackLogic.IsAttacking(attack.State.phase))
+            currentAttack = weapons[intent.weaponSlot];   // swap equipped weapon (not mid-attack)
+
+        // Latch attack input for the next fixed tick (button edges fire on the render frame; the sim eats them there).
+        bool canAttack = InInstance && SelfWorldPos.HasValue;   // combat is underworld-only
+        attackPressed |= canAttack && intent.lmbDown;
+        attackReleased |= canAttack && intent.lmbUp;
+        attackFeint |= canAttack && intent.rmbDown;
+        attackHeld = canAttack && intent.lmbHeld;
+        if (SelfWorldPos.HasValue) attackAim = intent.cursorWorld - SelfWorldPos.Value;   // aim at the mouse cursor
+
+        ResolveAttackView();
+        if (attackView != null) attackView.Render(attack.State, currentAttack);   // render the rig every frame from current state
+
         if (prediction.Active && GhostManager.Instance != null && GhostManager.Instance.SelfGhost != null)
         {
             // Render between fixed ticks so the sprite moves every frame (steady walk animation), not just on the tick.
@@ -81,8 +106,8 @@ public sealed class LocalPlayer : MonoBehaviour
         }
     }
 
-    // Drives client-side prediction on the fixed tick while in the underworld: activates on entry (seeding from
-    // the authoritative self position), deactivates on exit, steps prediction each FixedUpdate.
+    // Steps the attack state machine AND client-side prediction on the fixed tick (deterministic, reproducible).
+    // Prediction activates on instance entry (seeding from the authoritative self position) and deactivates on exit.
     void FixedUpdate()
     {
         if (!Ready) return;
@@ -90,7 +115,54 @@ public sealed class LocalPlayer : MonoBehaviour
         if (inst && !wasInInstance && SelfWorldPos.HasValue) prediction.Activate(SelfWorldPos.Value);
         else if (!inst && wasInInstance) prediction.Deactivate();
         wasInInstance = inst;
+
+        // Consume the latched attack input on the same tick the movement sim runs on, so the lunge it injects via
+        // OverrideInput is deterministic. Edges were OR-accumulated in Update since the last tick; clear them here.
+        var ai = new AttackIntent
+        {
+            pressed = attackPressed,
+            held = attackHeld,
+            released = attackReleased,
+            feint = attackFeint,
+            aimDir = attackAim,
+        };
+        attack.Tick(Time.fixedDeltaTime, ai, currentAttack);
+        attackPressed = attackReleased = attackFeint = false;
+        prediction.OverrideInput = AttackMoveOverride();   // rooted in wind-up; lunge in the locked direction on hit/follow-through
+
         if (prediction.Active) prediction.FixedTick(Time.fixedDeltaTime);
+    }
+
+    // Movement input override during an attack: rooted (zero) in wind-up, a lunge in the committed direction
+    // during hit/follow-through (shaped by lungeCurve), null when idle (normal WASD). The direction is the
+    // attack's locked aim (dir + residual, frozen at release) so it can't be steered mid-attack. Fed as input
+    // so the server reproduces it (no rubber-banding) and walls still stop it.
+    Vector2? AttackMoveOverride()
+    {
+        if (currentAttack == null) return null;
+        var s = attack.State;
+        switch (s.phase)
+        {
+            case AttackPhase.Hit:
+            case AttackPhase.FollowThrough:
+                float speed = currentAttack.lungeCurve != null
+                    ? Mathf.Clamp01(currentAttack.lungeCurve.Evaluate(AttackLogic.LungeProgress(s, currentAttack.Timeline)))
+                    : 0f;
+                return s.lockedAim * speed;
+            case AttackPhase.Anticipation:
+            case AttackPhase.TapWindup:
+                return Vector2.zero;   // rooted during the wind-up
+            default:
+                return null;           // idle: normal WASD
+        }
+    }
+
+    void ResolveAttackView()
+    {
+        var ghost = GhostManager.Instance != null ? GhostManager.Instance.SelfGhost : null;
+        if (ghost == attackViewGhost) return;          // re-resolve only when the self-ghost changes
+        attackViewGhost = ghost;
+        attackView = ghost != null ? ghost.GetComponent<AttackView>() : null;
     }
 
     // Routes the server's authoritative self position + last-processed tick into reconciliation.

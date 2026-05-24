@@ -67,8 +67,6 @@ MonoBehaviour:
   anticipation:
   - column: 0
     duration: 0.1
-  - column: 1
-    duration: 0.1
   tapAnticipation:
   - column: 0
     duration: 0.08
@@ -79,13 +77,15 @@ MonoBehaviour:
   - column: 3
     duration: 0.12
   feintCooldown: 0.5
+  rotateToAim: 0
+  lungeDistance: 0.8
   directions:
-  - canonicalDir: {x: 1, y: 1}
-    row: 0
-  - canonicalDir: {x: -1, y: 1}
-    row: 1
-  - canonicalDir: {x: -1, y: -1}
-    row: 2
   - canonicalDir: {x: 1, y: -1}
+    row: 0
+  - canonicalDir: {x: -1, y: -1}
+    row: 1
+  - canonicalDir: {x: 1, y: 1}
+    row: 2
+  - canonicalDir: {x: -1, y: 1}
     row: 3
   attackId: slash

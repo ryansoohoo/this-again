@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595e68e65d54ffb4389989b6b668a6dd, type: 3}
+  m_Name: Axe
+  m_EditorClassIdentifier: Assembly-CSharp::AttackDefinition
+  bodyFrames:
+  - {fileID: 4830879391684598242, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 89886361766520464, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -6369618019527998786, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 3038199681283805741, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 949688405433278908, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -4262309052555359485, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 8472363573911806502, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -582145890519117874, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 5664916389904378406, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -5174348766949961141, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 1538698752103132205, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 5206849816679334331, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -6889379102814704671, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 3195659791478337591, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 5967271409197899800, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 7812878288336373384, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  weaponFrontFrames:
+  - {fileID: -8598505857979295293, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: -3277469787732363427, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: -1733782085473908285, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: 4441336165572296566, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: -8296274512700775261, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: 6427175592191997179, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: -59672984943649043, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: 726954875003314203, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: 7266405821445874382, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: 8141972288618946578, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: -1719722847, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: 243784811, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: 32740458, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: 1154772664, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: 1235279327, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  - {fileID: -1651137769, guid: d76c4bb7ab4751e4c8a56090d3af932d, type: 3}
+  weaponBackFrames:
+  - {fileID: -4715160250798442602, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: -5677335919004575848, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: -1626497180, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: 1049056923, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: -957449312, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: -1362970055, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: 1920671265, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: 1650531171, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: 2096490165, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: 1982892781, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: 167140166, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: -1177773977, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: -1101416738, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: -629258309, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: 1934105562, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  - {fileID: -232476433, guid: 80d328166dfbd8245a16588f73d3c178, type: 3}
+  columnsPerRow: 4
+  anticipation:
+  - column: 0
+    duration: 0.1
+  tapAnticipation:
+  - column: 0
+    duration: 0.08
+  hit:
+  - column: 2
+    duration: 0.1
+  followThrough:
+  - column: 3
+    duration: 0.12
+  feintCooldown: 0.5
+  rotateToAim: 0
+  lungeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  directions:
+  - canonicalDir: {x: 1, y: -1}
+    row: 0
+  - canonicalDir: {x: -1, y: -1}
+    row: 1
+  - canonicalDir: {x: 1, y: 1}
+    row: 2
+  - canonicalDir: {x: -1, y: 1}
+    row: 3
+  attackId: axe

@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595e68e65d54ffb4389989b6b668a6dd, type: 3}
+  m_Name: Spear
+  m_EditorClassIdentifier: Assembly-CSharp::AttackDefinition
+  bodyFrames:
+  - {fileID: -4880361842119070335, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  - {fileID: -3809631534842951258, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  - {fileID: 6550915810776903476, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  - {fileID: 274433002367596019, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  - {fileID: -4292286300443688337, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  - {fileID: 4401159595355207815, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  - {fileID: -6949922582907759861, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  - {fileID: -7593626143176615743, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  - {fileID: 9150783357061237, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  - {fileID: 4784424329913665306, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  - {fileID: 6269944507372825258, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  - {fileID: 5373960518812885382, guid: cedcc55a364d51f4493e6013c152ae65, type: 3}
+  weaponFrontFrames:
+  - {fileID: 3620258173975122665, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  - {fileID: -1534696350, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  - {fileID: 1995764025, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  - {fileID: -1783206367, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  - {fileID: -1598636735, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  - {fileID: 984445256, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  - {fileID: 1513331562, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  - {fileID: -1393229600, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  - {fileID: 977384226, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  - {fileID: 362708206, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  - {fileID: -2071665759, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  - {fileID: -213567718, guid: 3d88e30713112de44951df8530227f2a, type: 3}
+  weaponBackFrames:
+  - {fileID: -3823836894519496937, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  - {fileID: -164010032, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  - {fileID: -1765445974, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  - {fileID: -415889940, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  - {fileID: -2146207680, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  - {fileID: -564391603, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  - {fileID: -1252782853, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  - {fileID: 389789962, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  - {fileID: -487273204, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  - {fileID: 1254752722, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  - {fileID: 980135364, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  - {fileID: 1421463999, guid: 1239491d9b845914ab04a11c98add5e6, type: 3}
+  columnsPerRow: 3
+  anticipation:
+  - column: 0
+    duration: 0.1
+  tapAnticipation:
+  - column: 0
+    duration: 0.08
+  hit:
+  - column: 1
+    duration: 0.1
+  followThrough:
+  - column: 2
+    duration: 0.12
+  feintCooldown: 0.5
+  rotateToAim: 1
+  aimSnapDegrees: 45
+  lungeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  directions:
+  - canonicalDir: {x: 1, y: 0}
+    row: 0
+  - canonicalDir: {x: -1, y: 0}
+    row: 1
+  - canonicalDir: {x: 0, y: -1}
+    row: 2
+  - canonicalDir: {x: 0, y: 1}
+    row: 3
+  attackId: spear

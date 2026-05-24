@@ -11,6 +11,7 @@ public sealed class PredictionSystem
     public bool Active { get; private set; }
     public Vector2 Pos { get; private set; }            // authoritative-predicted logical position
     public uint Tick { get; private set; }
+    public Vector2? OverrideInput;                       // set by LocalPlayer during an attack: zero = rooted (wind-up), vector = forced lunge; null = normal WASD
 
     InputRingBuffer buffer;
     Vector2 smoothOffset;                                // decays to zero so corrections don't snap
@@ -41,7 +42,7 @@ public sealed class PredictionSystem
     public void FixedTick(float dt)
     {
         var cfg = Game.Instance.MovementCfg;
-        Vector2 input = SampleInput();
+        Vector2 input = OverrideInput ?? SampleInput();
         Tick++;
         prevPos = Pos;                                  // remember where we were so the visual can interpolate across the step
         Pos = MovementStep.Step(Pos, input, dt, cfg.moveSpeed, Walkable);

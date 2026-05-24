@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595e68e65d54ffb4389989b6b668a6dd, type: 3}
+  m_Name: Dagger
+  m_EditorClassIdentifier: Assembly-CSharp::AttackDefinition
+  bodyFrames:
+  - {fileID: 4830879391684598242, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 89886361766520464, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -6369618019527998786, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 3038199681283805741, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 949688405433278908, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -4262309052555359485, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 8472363573911806502, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -582145890519117874, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 5664916389904378406, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -5174348766949961141, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 1538698752103132205, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 5206849816679334331, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: -6889379102814704671, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 3195659791478337591, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 5967271409197899800, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  - {fileID: 7812878288336373384, guid: dfe407262b53787459d1db33efb1e17d, type: 3}
+  weaponFrontFrames:
+  - {fileID: -4886287106385324261, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: 7937446143143458740, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: 5645406219428235136, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: 956651959705394590, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: 464245835, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: -1600192964, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: -555799987, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: 1372593616, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: -1972199597, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: 626736745, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: 1821562498, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: -825978711, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: -1410258917, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: 2052454255, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: 1390435424, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  - {fileID: 2113213946, guid: 2efddc31865fd704f99d017e510d8e07, type: 3}
+  weaponBackFrames:
+  - {fileID: 7354400220343117447, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: -754651298, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: -1435376624, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: 1404759744, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: 1388455970, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: 913174259, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: -1586135455, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: -179737773, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: 333862525, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: 656224661, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: 1084788435, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: 2021148702, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: 462103005, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: -1209891115, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: -198482143, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  - {fileID: 1649006869, guid: 81dd4a53e8d050f45ba13e4554a34cb1, type: 3}
+  columnsPerRow: 4
+  anticipation:
+  - column: 0
+    duration: 0.1
+  tapAnticipation:
+  - column: 0
+    duration: 0.08
+  hit:
+  - column: 2
+    duration: 0.1
+  followThrough:
+  - column: 3
+    duration: 0.12
+  feintCooldown: 0.5
+  rotateToAim: 0
+  lungeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  directions:
+  - canonicalDir: {x: 1, y: -1}
+    row: 0
+  - canonicalDir: {x: -1, y: -1}
+    row: 1
+  - canonicalDir: {x: 1, y: 1}
+    row: 2
+  - canonicalDir: {x: -1, y: 1}
+    row: 3
+  attackId: dagger

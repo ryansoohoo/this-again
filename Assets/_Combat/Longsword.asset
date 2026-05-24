@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595e68e65d54ffb4389989b6b668a6dd, type: 3}
+  m_Name: Longsword
+  m_EditorClassIdentifier: Assembly-CSharp::AttackDefinition
+  bodyFrames:
+  - {fileID: -1993651847775902395, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: 7453267052468970058, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -3929310284909107477, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -6600157543100535274, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: 8162387028924252071, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -7674679591959989021, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -8708912380017749897, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: 1798132818495783908, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -7168413792939949511, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: 694584088188552045, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -324936320829810622, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: 5579393091965400638, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: 5487842439087845334, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: 8149831562957709812, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: 4705108925072603632, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: 7838843625404645167, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: 290961109790737256, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -3576141395592172259, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -4264526593112915043, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -5112897715917986738, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -3747613389790206923, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -7521151202388260820, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: 8767550160429145839, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  - {fileID: -1587650287702245, guid: 1f2f9179487b6f84ca5eb546f74f6160, type: 3}
+  weaponFrontFrames:
+  - {fileID: 7867563663766316055, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: 8875927821312850205, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: 8817836381354490912, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: 9119305451310418449, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -1453707991747285107, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -2872753717396764868, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -744275547606138590, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -8627592784252480300, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: 1090950821740088279, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -7501178318458519634, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -1692779697, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: 1584299043, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: 465760540, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: 1028380469, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -1222499503, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: 1930105964, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -516312790, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -102889600, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -599741424, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -1555195529, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: 1249517098, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: 919242407, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: -1950157658, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  - {fileID: 1499727717, guid: d2de7ee2c68546b459097c94a8908886, type: 3}
+  weaponBackFrames:
+  - {fileID: -7212437444795986697, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -7476309409312187363, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: 8805279492452309748, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -6118956010018523174, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -6898535572559052292, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: 9085632809754269789, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -8042378136248227042, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: 4185490502731907158, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -2739327234611086137, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -702741540963066016, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: 2117282158, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -925290655, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: 502710643, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -783751158, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -2043512254, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: 916699732, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: 730576669, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -66599919, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: 648533965, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: 198751233, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -652460951, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: -1585194572, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: 698049939, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  - {fileID: 1028970422, guid: 639a4d6cd72097c47bca70b26e0eb5eb, type: 3}
+  columnsPerRow: 6
+  anticipation:
+  - column: 1
+    duration: 0.1
+  - column: 2
+    duration: 0.1
+  tapAnticipation:
+  - column: 0
+    duration: 0.08
+  hit:
+  - column: 4
+    duration: 0.1
+  followThrough:
+  - column: 5
+    duration: 0.12
+  feintCooldown: 0.5
+  rotateToAim: 0
+  lungeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  directions:
+  - canonicalDir: {x: 1, y: -1}
+    row: 0
+  - canonicalDir: {x: -1, y: -1}
+    row: 1
+  - canonicalDir: {x: 1, y: 1}
+    row: 2
+  - canonicalDir: {x: -1, y: 1}
+    row: 3
+  attackId: longsword

@@ -34,7 +34,11 @@ public sealed class AttackView : MonoBehaviour
         SetFrame(body, def.bodyFrames, i);
         SetFrame(weaponFront, def.weaponFrontFrames, i);
         SetFrame(weaponBack, def.weaponBackFrames, i);
-        if (pivot != null) pivot.localEulerAngles = new Vector3(0f, 0f, state.residualDeg);
+        // Rotate only the weapon layers toward the aim; the character body stays upright.
+        float rot = def.rotateToAim ? state.residualDeg : 0f;
+        if (pivot != null) pivot.localEulerAngles = Vector3.zero;
+        if (weaponBack != null) weaponBack.transform.localEulerAngles = new Vector3(0f, 0f, rot);
+        if (weaponFront != null) weaponFront.transform.localEulerAngles = new Vector3(0f, 0f, rot);
         Tint();
     }
 

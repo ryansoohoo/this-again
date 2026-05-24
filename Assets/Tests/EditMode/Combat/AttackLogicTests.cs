@@ -157,4 +157,49 @@ public class AttackLogicTests
         Assert.AreEqual(0.2f, AttackLogic.TimeToHit(tl, tapped: true, new PhaseScales { anticipation = 2f, hit = 1f, followThrough = 1f }), 1e-4f);
         Assert.AreEqual(0f, AttackLogic.TimeToHit(tl, tapped: false, PhaseScales.One), 1e-4f);
     }
+
+    [Test]
+    public void LungeDuration_SumsHitAndFollowThrough()
+    {
+        var tl = MakeTimeline(); // hit 0.1 + followThrough 0.1
+        Assert.AreEqual(0.2f, AttackLogic.LungeDuration(tl), 1e-4f);
+    }
+
+    [Test]
+    public void LungeProgress_ZeroOutsideHitWindow()
+    {
+        var tl = MakeTimeline();
+        Assert.AreEqual(0f, AttackLogic.LungeProgress(new AttackState { phase = AttackPhase.Idle }, tl), 1e-4f);
+        Assert.AreEqual(0f, AttackLogic.LungeProgress(new AttackState { phase = AttackPhase.Anticipation }, tl), 1e-4f);
+    }
+
+    [Test]
+    public void LungeProgress_RampsAcrossHitThenFollowThrough()
+    {
+        var tl = MakeTimeline(); // hit 0.1, followThrough 0.1, total 0.2
+        Assert.AreEqual(0f, AttackLogic.LungeProgress(new AttackState { phase = AttackPhase.Hit, phaseElapsed = 0f }, tl), 1e-4f);
+        Assert.AreEqual(0.25f, AttackLogic.LungeProgress(new AttackState { phase = AttackPhase.Hit, phaseElapsed = 0.05f }, tl), 1e-4f);
+        Assert.AreEqual(0.75f, AttackLogic.LungeProgress(new AttackState { phase = AttackPhase.FollowThrough, phaseElapsed = 0.05f }, tl), 1e-4f);
+    }
+
+    [Test]
+    public void LockedAim_SetAtCommit_ToAimDirection()
+    {
+        var tl = MakeTimeline();
+        var s = AttackLogic.Step(default, Press(new Vector2(1, 0)), tl, PhaseScales.One, 0f);
+        s = AttackLogic.Step(s, Release(new Vector2(0, 1)), tl, PhaseScales.One, 0f); // commit aiming North
+        Assert.AreEqual(0f, s.lockedAim.x, 1e-3f);
+        Assert.AreEqual(1f, s.lockedAim.y, 1e-3f);
+    }
+
+    [Test]
+    public void LockedAim_IncludesResidualRotation()
+    {
+        var tl = MakeTimeline(); // dirs East (1,0), North (0,1)
+        var s = AttackLogic.Step(default, Press(new Vector2(1, 0)), tl, PhaseScales.One, 0f);
+        s = AttackLogic.Step(s, Release(new Vector2(1, 1)), tl, PhaseScales.One, 0f); // commit aiming NE: 45 deg off East
+        var expected = new Vector2(1, 1).normalized;
+        Assert.AreEqual(expected.x, s.lockedAim.x, 1e-3f);
+        Assert.AreEqual(expected.y, s.lockedAim.y, 1e-3f);
+    }
 }

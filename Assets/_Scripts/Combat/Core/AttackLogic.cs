@@ -29,6 +29,7 @@ public static class AttackLogic
                     bool tap = !s.windupComplete && Has(tl.tapAnticipation);
                     s.phase = tap ? AttackPhase.TapWindup : AttackPhase.Hit;
                     s.frameIndex = 0; s.phaseElapsed = 0f;
+                    s.lockedAim = AimVector(s, tl);                  // freeze the aim vector for the lunge
                     return s;
                 }
                 if (!s.windupComplete && Advance(ref s, tl.anticipation, scales.anticipation, dt))
@@ -77,13 +78,47 @@ public static class AttackLogic
         return sum * scales.anticipation;
     }
 
+    // Total seconds of the hit + follow-through phases (base durations) — the lunge window.
+    public static float LungeDuration(AttackTimeline tl) => SumDur(tl.hit) + SumDur(tl.followThrough);
+
+    // Normalized 0..1 progress through the lunge window (hit then follow-through); 0 outside those phases.
+    public static float LungeProgress(AttackState s, AttackTimeline tl)
+    {
+        float dur = LungeDuration(tl);
+        if (dur <= 0f) return 1f;
+        float elapsed;
+        if (s.phase == AttackPhase.Hit) elapsed = SumBefore(tl.hit, s.frameIndex) + s.phaseElapsed;
+        else if (s.phase == AttackPhase.FollowThrough) elapsed = SumDur(tl.hit) + SumBefore(tl.followThrough, s.frameIndex) + s.phaseElapsed;
+        else return 0f;
+        return Mathf.Clamp01(elapsed / dur);
+    }
+
     static void Enter(ref AttackState s, AttackPhase phase) { s.phase = phase; s.frameIndex = 0; s.phaseElapsed = 0f; }
 
     static void Aim(ref AttackState s, AttackTimeline tl, Vector2 aim)
     {
         var (idx, residual) = AttackDirections.Pick(tl.dirs, aim);
+        if (tl.aimSnapDegrees > 0f) residual = Mathf.Round(residual / tl.aimSnapDegrees) * tl.aimSnapDegrees;
         s.dirIndex = idx; s.residualDeg = residual;
     }
+
+    // The committed aim direction: the chosen canonical direction rotated by the residual, so it points exactly
+    // where the cursor was at release (including any snapping already baked into residualDeg).
+    static Vector2 AimVector(AttackState s, AttackTimeline tl)
+    {
+        if (tl.dirs == null || tl.dirs.Length == 0) return Vector2.zero;
+        int i = Mathf.Clamp(s.dirIndex, 0, tl.dirs.Length - 1);
+        return Rotate(tl.dirs[i].normalized, s.residualDeg);
+    }
+
+    static Vector2 Rotate(Vector2 v, float deg)
+    {
+        float r = deg * Mathf.Deg2Rad, c = Mathf.Cos(r), sn = Mathf.Sin(r);
+        return new Vector2(v.x * c - v.y * sn, v.x * sn + v.y * c);
+    }
+
+    static float SumDur(TimedFrame[] list) { float t = 0f; if (list != null) for (int i = 0; i < list.Length; i++) t += list[i].duration; return t; }
+    static float SumBefore(TimedFrame[] list, int idx) { float t = 0f; if (list != null) for (int i = 0; i < idx && i < list.Length; i++) t += list[i].duration; return t; }
 
     // Advance through a timed list by dt*scale; returns true once the cursor runs past the last frame.
     static bool Advance(ref AttackState s, TimedFrame[] list, float scale, float dt)

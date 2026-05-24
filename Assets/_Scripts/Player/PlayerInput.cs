@@ -1,25 +1,26 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Logic helper: reads the owning client's devices and returns movement intent. Holds only double-click
-// timing state. Writes nothing itself — PlayerMovement applies the intent to the networked state.
+// Logic helper: reads the owning client's devices into a per-frame Intent (movement + attack edges + cursor).
+// No state. LocalPlayer turns this into movement input and an AttackIntent.
 public sealed class PlayerInput
 {
     public struct Intent
     {
-        public Vector2 dir;           // raw 8-way WASD direction (each axis -1/0/1); zero while typing
-        public bool hasClickTarget;   // true on a double-left-click
-        public Vector2 clickWorld;    // world point of the double-click
+        public Vector2 dir;        // raw 8-way WASD (each axis -1/0/1); zero while typing
+        public bool lmbDown;       // attack press edge
+        public bool lmbHeld;       // attack held
+        public bool lmbUp;         // attack release edge
+        public bool rmbDown;       // feint edge
+        public Vector2 cursorWorld;// mouse position in world space
+        public int weaponSlot;     // 0-9 if a number key was pressed this frame, else -1
     }
-
-    float lastClickTime = -1f;
-    Vector2 lastClickPos;
-    const float DoubleClickTime = 0.3f, DoubleClickPixels = 24f;
 
     public Intent Read(Camera cam)
     {
         var result = new Intent();
-        if (InputState.Typing) return result;          // command line open: no movement, no clicks
+        result.weaponSlot = -1;
+        if (InputState.Typing) return result;          // command line open: no input
 
         var kb = Keyboard.current;
         if (kb != null)
@@ -28,21 +29,24 @@ public sealed class PlayerInput
             if (kb.sKey.isPressed) result.dir.y -= 1f;
             if (kb.aKey.isPressed) result.dir.x -= 1f;
             if (kb.dKey.isPressed) result.dir.x += 1f;
+
+            for (int i = 0; i < 9; i++)
+                if (kb[(Key)((int)Key.Digit1 + i)].wasPressedThisFrame) { result.weaponSlot = i; break; }
+            if (result.weaponSlot < 0 && kb.digit0Key.wasPressedThisFrame) result.weaponSlot = 9;
         }
 
         var mouse = Mouse.current;
-        if (mouse != null && mouse.leftButton.wasPressedThisFrame)
+        if (mouse != null)
         {
-            float now = Time.unscaledTime;
-            Vector2 sp = mouse.position.ReadValue();
-            bool isDouble = now - lastClickTime <= DoubleClickTime && Vector2.Distance(sp, lastClickPos) <= DoubleClickPixels;
-            lastClickTime = isDouble ? -1f : now;       // reset after a double so a 3rd click starts fresh
-            lastClickPos = sp;
-            if (isDouble && cam != null)
+            result.lmbDown = mouse.leftButton.wasPressedThisFrame;
+            result.lmbHeld = mouse.leftButton.isPressed;
+            result.lmbUp = mouse.leftButton.wasReleasedThisFrame;
+            result.rmbDown = mouse.rightButton.wasPressedThisFrame;
+            if (cam != null)
             {
+                Vector2 sp = mouse.position.ReadValue();
                 Vector3 wp = cam.ScreenToWorldPoint(new Vector3(sp.x, sp.y, Mathf.Abs(cam.transform.position.z)));
-                result.hasClickTarget = true;
-                result.clickWorld = new Vector2(wp.x, wp.y);
+                result.cursorWorld = new Vector2(wp.x, wp.y);
             }
         }
         return result;

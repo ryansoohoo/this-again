@@ -25,7 +25,8 @@ public sealed class World
     BiomeGenerator gen;
     GroundGenerator groundGen;
     StructureGenerator structureGen;
-    readonly Dictionary<Vector2Int, bool> landCache = new();   // generated land(true)/water(false); grows as you explore
+    const int MaxLandCacheEntries = 1 << 17;                    // ~131k cells; bound the memo cache over a long session
+    readonly Dictionary<Vector2Int, bool> landCache = new();   // generated land(true)/water(false); flushed at the cap
     readonly HashSet<Sprite> warnedForeign = new();
 
     public World(WorldConfig cfg) { this.cfg = cfg; Rebuild(); }
@@ -46,6 +47,7 @@ public sealed class World
         var key = new Vector2Int(cx, cy);
         if (landCache.TryGetValue(key, out var v)) return v;
         v = gen.IsLand(cx, cy);
+        if (landCache.Count >= MaxLandCacheEntries) landCache.Clear();         // deterministic memo: safe to flush + refill
         landCache[key] = v;
         return v;
     }

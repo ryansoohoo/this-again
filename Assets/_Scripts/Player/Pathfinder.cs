@@ -20,6 +20,13 @@ public static class Pathfinder
         new(1, 1), new(1, -1), new(-1, 1), new(-1, -1),   // diagonal
     };
 
+    // Reused working sets (server-side, one search at a time on the main thread) so a click-to-move query
+    // doesn't allocate the heap/dictionaries/closed-set each call. Only the returned `path` is freshly allocated.
+    static readonly MinHeap _open = new();
+    static readonly Dictionary<Vector2Int, Vector2Int> _came = new();
+    static readonly Dictionary<Vector2Int, int> _g = new();
+    static readonly HashSet<Vector2Int> _closed = new();
+
     // Cells to step onto in order (start excluded, goal included when reachable). Empty if already at
     // the goal or boxed in. walkable(x,y) decides which cells may be entered.
     public static List<Vector2Int> FindPath(Vector2Int start, Vector2Int goal,
@@ -29,10 +36,10 @@ public static class Pathfinder
         var path = new List<Vector2Int>();
         if (start == goal) return path;
 
-        var open = new MinHeap();
-        var came = new Dictionary<Vector2Int, Vector2Int>();
-        var g = new Dictionary<Vector2Int, int> { [start] = 0 };
-        var closed = new HashSet<Vector2Int>();
+        var open = _open; open.Clear();
+        var came = _came; came.Clear();
+        var g = _g; g.Clear(); g[start] = 0;
+        var closed = _closed; closed.Clear();
 
         open.Push(start, Heuristic(start, goal));
         Vector2Int best = start;                            // closest cell reached, for the unreachable case
@@ -88,6 +95,7 @@ public static class Pathfinder
         readonly List<Vector2Int> items = new();
         readonly List<int> prio = new();
         public int Count => items.Count;
+        public void Clear() { items.Clear(); prio.Clear(); }
 
         public void Push(Vector2Int item, int priority)
         {

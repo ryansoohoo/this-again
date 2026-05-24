@@ -29,6 +29,16 @@ public static class CellRenderer
     // sprite (no BiomeTiles asset assigned, or it has no usable variants). This is the blank/default ground.
     const int FallbackGroundCol = 1, FallbackGroundRow = 5;
 
+    // Reused CPU scratch (main thread; there is a single window mesh + single minimap). Cleared/refilled each
+    // rebuild so steady-state movement allocates nothing — WorldView owns the persistent Mesh / Texture2D.
+    static readonly List<Vector3> _verts = new();
+    static readonly List<Vector2> _uvs = new();
+    static readonly List<Color32> _colors = new();
+    static readonly List<int> _landTris = new();
+    static readonly List<int> _waterTris = new();
+    static bool[] _minimapLand;
+    static Color32[] _minimapPx;
+
     // Creates the "Grid" GameObject with two materials: [0] static summer sheet, [1] water sheet.
     public static MeshFilter Build(Transform parent, Texture2D summerTex, Texture2D waterTex)
     {
@@ -70,16 +80,16 @@ public static class CellRenderer
     // BEFORE pass-2 coast tris, so the opaque coast art paints over the ground at shorelines (painter's order).
     // Submesh 0 = ground + coast (summer sheet); submesh 1 = open water (case 0, animated). landSpriteAt(cx,cy)
     // gives a cell's biome variant, or null for the built-in ground tile.
-    public static Mesh BuildWindowMesh(Func<int, int, bool> isLand, Func<int, int, Sprite> landSpriteAt, Vector2Int center, int radius, float cellWorld)
+    public static Mesh FillWindowMesh(Mesh mesh, Func<int, int, bool> isLand, Func<int, int, Sprite> landSpriteAt, Vector2Int center, int radius, float cellWorld)
     {
-        int cellSpan = 2 * radius + 3, cornerSpan = 2 * radius + 2;   // cells read by the corner pass; corner quads
-        int maxQuads = cellSpan * cellSpan + cornerSpan * cornerSpan; // upper bound (water cells / case 15 don't emit)
+        if (mesh == null)
+        {
+            mesh = new Mesh { name = "GridDualGridMesh", indexFormat = IndexFormat.UInt32 };
+            mesh.MarkDynamic();                                       // refilled every meshRebuildStep cells; keep a CPU copy
+        }
 
-        var verts = new List<Vector3>(maxQuads * 4);
-        var uvs = new List<Vector2>(maxQuads * 4);
-        var colors = new List<Color32>(maxQuads * 4);
-        var landTris = new List<int>(maxQuads * 6);                   // pass 1 ground, then pass 2 coast (order == draw order)
-        var waterTris = new List<int>(cornerSpan * cornerSpan * 6);
+        var verts = _verts; var uvs = _uvs; var colors = _colors; var landTris = _landTris; var waterTris = _waterTris;
+        verts.Clear(); uvs.Clear(); colors.Clear(); landTris.Clear(); waterTris.Clear();
         var white = new Color32(255, 255, 255, 255);
         float cw = cellWorld, half = 0.5f * cw;
 
@@ -138,7 +148,7 @@ public static class CellRenderer
             }
         }
 
-        var mesh = new Mesh { name = "GridDualGridMesh", indexFormat = IndexFormat.UInt32 };
+        mesh.Clear();
         mesh.SetVertices(verts);
         mesh.SetUVs(0, uvs);
         mesh.SetColors(colors);
@@ -152,18 +162,20 @@ public static class CellRenderer
     // Wide overview minimap: a (2*radius+1)^2 texture centered on the player, fully revealed (no fog). Land
     // cells take their ground-cover biome's color via landColorAt(x,y); water cells are a single flat color
     // (waterColor, matching the water tile). 'at' determines water vs land.
-    public static Texture2D BuildOverviewMinimap(Func<int, int, bool> isLand, Func<int, int, Color32> landColorAt,
-                                                 Vector2Int center, Vector2Int radius, Color32 waterColor, float brightness)
+    public static Texture2D FillOverviewMinimap(Texture2D tex, Func<int, int, bool> isLand, Func<int, int, Color32> landColorAt,
+                                                Vector2Int center, Vector2Int radius, Color32 waterColor, float brightness)
     {
         int sizeX = 2 * radius.x + 1, sizeY = 2 * radius.y + 1;
         int minX = center.x - radius.x, minY = center.y - radius.y;
 
-        var land = new bool[sizeX * sizeY];
+        int n = sizeX * sizeY;                                          // reused scratch; realloc only when the radius changes
+        if (_minimapLand == null || _minimapLand.Length != n) { _minimapLand = new bool[n]; _minimapPx = new Color32[n]; }
+        var land = _minimapLand; var px = _minimapPx;
+
         for (int lx = 0; lx < sizeX; lx++)
         for (int ly = 0; ly < sizeY; ly++)
             land[lx * sizeY + ly] = isLand(minX + lx, minY + ly);
 
-        var px = new Color32[sizeX * sizeY];
         for (int lx = 0; lx < sizeX; lx++)
         for (int ly = 0; ly < sizeY; ly++)
         {
@@ -173,8 +185,13 @@ public static class CellRenderer
                 (byte)Mathf.Min(255f, c.g * brightness),
                 (byte)Mathf.Min(255f, c.b * brightness), 255);
         }
-        var tex = new Texture2D(sizeX, sizeY, TextureFormat.RGBA32, false)
-            { name = "MinimapTex", filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp };
+
+        if (tex == null || tex.width != sizeX || tex.height != sizeY)   // first build or the radius changed
+        {
+            if (tex != null) UnityEngine.Object.Destroy(tex);
+            tex = new Texture2D(sizeX, sizeY, TextureFormat.RGBA32, false)
+                { name = "MinimapTex", filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp };
+        }
         tex.SetPixels32(px);
         tex.Apply(false, false);
         return tex;

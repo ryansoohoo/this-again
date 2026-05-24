@@ -22,6 +22,7 @@ public sealed class ReplicationHub : NetworkBehaviour
     readonly HashSet<ulong> visibleNow = new();
     readonly List<SnapshotEntry> entryScratch = new();
     readonly ulong[] oneTarget = new ulong[1];
+    readonly Dictionary<int, SnapshotEntry[]> snapshotBufByLen = new();   // RPC send buffers reused by entry count (args serialize synchronously, so reuse is safe)
 
     public override void OnNetworkSpawn()
     {
@@ -99,7 +100,10 @@ public sealed class ReplicationHub : NetworkBehaviour
 
             oneTarget[0] = viewer;
             var p = new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = oneTarget } };
-            SnapshotClientRpc(entryScratch.ToArray(), p);
+            int len = entryScratch.Count;
+            if (!snapshotBufByLen.TryGetValue(len, out var buf)) { buf = new SnapshotEntry[len]; snapshotBufByLen[len] = buf; }
+            entryScratch.CopyTo(buf);
+            SnapshotClientRpc(buf, p);
         }
 
         foreach (var sp in registry.Players.Values) sp.snap = false;   // snap consumed by this tick's snapshots

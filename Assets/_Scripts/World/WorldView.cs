@@ -27,6 +27,7 @@ public sealed class WorldView
 
     Vector2Int meshCenter;
     bool meshInit;
+    Mesh windowMesh;        // persistent: refilled in place each rebuild (no per-rebuild Mesh alloc/Destroy)
 
     public WorldView(World world, WorldViewConfig cfg, ViewSettings vs, float cellWorld, Transform parent,
                      Texture2D summerSheet, Texture2D waterSheet, CameraState cameraState)
@@ -59,9 +60,8 @@ public sealed class WorldView
 
     void RebuildMesh()
     {
-        var oldMesh = gridMesh.sharedMesh;
-        gridMesh.sharedMesh = CellRenderer.BuildWindowMesh(world.IsLand, world.LandSprite, meshCenter, cfg.viewRadius, cellWorld);
-        if (oldMesh != null) Object.Destroy(oldMesh);
+        windowMesh = CellRenderer.FillWindowMesh(windowMesh, world.IsLand, world.LandSprite, meshCenter, cfg.viewRadius, cellWorld);
+        if (gridMesh.sharedMesh != windowMesh) gridMesh.sharedMesh = windowMesh;
 
         float size = (2 * cfg.viewRadius + 1) * cellWorld;
         if (cameraState != null) cameraState.Bounds = new Rect((meshCenter.x - cfg.viewRadius) * cellWorld,
@@ -70,10 +70,8 @@ public sealed class WorldView
 
     void RebuildMinimap()
     {
-        var oldTex = MinimapTexture;
-        MinimapTexture = CellRenderer.BuildOverviewMinimap(world.IsLand, world.LandColor, ViewCenter,
-                                                           vs.minimapRadius, cfg.waterMinimapColor, cfg.minimapBrightness);
-        if (oldTex != null) Object.Destroy(oldTex);
+        MinimapTexture = CellRenderer.FillOverviewMinimap(MinimapTexture, world.IsLand, world.LandColor, ViewCenter,
+                                                          vs.minimapRadius, cfg.waterMinimapColor, cfg.minimapBrightness);
     }
 
     public Vector2 MinimapWorldCenter => new((ViewCenter.x + 0.5f) * cellWorld, (ViewCenter.y + 0.5f) * cellWorld);

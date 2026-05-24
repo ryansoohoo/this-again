@@ -99,10 +99,18 @@ public static class PlayerSimSystem
         m.moving = true;
     }
 
+    // Cached enter-cost delegate: created once and reused, reading the per-call inputs from static fields, so a
+    // click-to-move query doesn't allocate a fresh closure + delegate each time. Main-thread, one query at a time.
+    static Game _enterGm;
+    static float _enterUnitsPerSecond;
+    static readonly System.Func<int, int, int> _enterCost =
+        (x, y) => Mathf.RoundToInt(_enterGm.MoveCost(x, y) * SecondsPerCost * _enterUnitsPerSecond);
+
     static System.Func<int, int, int> EnterCost(Game gm, float moveSpeed)
     {
-        float unitsPerSecond = Pathfinder.Ortho * Mathf.Max(moveSpeed, 0.01f) / Mathf.Max(gm.CellWorld, 1e-4f);
-        return (x, y) => Mathf.RoundToInt(gm.MoveCost(x, y) * SecondsPerCost * unitsPerSecond);
+        _enterGm = gm;
+        _enterUnitsPerSecond = Pathfinder.Ortho * Mathf.Max(moveSpeed, 0.01f) / Mathf.Max(gm.CellWorld, 1e-4f);
+        return _enterCost;
     }
 
     static int StepSign(float v) => v > 0.001f ? 1 : (v < -0.001f ? -1 : 0);

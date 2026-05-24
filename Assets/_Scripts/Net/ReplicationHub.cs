@@ -206,6 +206,9 @@ public sealed class ReplicationHub : NetworkBehaviour
         sp.regionKey = origin;
         PlayerSimSystem.Teleport(sp, Underworld.SpawnCell(origin, (int)id));
         sp.inInstance = true;
+        var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
+        sp.hp = cat != null ? cat.maxHp : 100;   // full HP each run
+        sp.status.Clear();                        // no effects carried in from a previous run
     }
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
@@ -215,6 +218,7 @@ public sealed class ReplicationHub : NetworkBehaviour
         sp.regionKey = Vector2Int.zero;
         PlayerSimSystem.Teleport(sp, sp.overworldReturnCell);
         sp.inInstance = false;
+        sp.status.Clear();   // effects don't persist to the overworld
     }
 
     // Debug seam (host/server only): the local player's authoritative StatusState, for console testing. Null on a

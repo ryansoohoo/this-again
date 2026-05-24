@@ -115,8 +115,13 @@ public static class AttackSimSystem
             sp.pendingEvents.Enqueue(Evt(id, AttackEvent.Feinted, sp, tick));
     }
 
-    // v1 stub: subtract clamped damage. Task 8 adds the death log; the broadphase hit query (Task 9) calls this.
-    static void ApplyDamage(ServerPlayer sp, int dmg) { if (dmg > 0) sp.hp = Mathf.Max(0, sp.hp - dmg); }
+    // Server-authoritative damage: clamp at 0, log once on reaching 0 (no death/respawn in v1).
+    static void ApplyDamage(ServerPlayer sp, int dmg)
+    {
+        if (dmg <= 0 || sp.hp <= 0) return;
+        sp.hp = Mathf.Max(0, sp.hp - dmg);
+        if (sp.hp == 0) Debug.Log("[combat] player reached 0 HP (no death/respawn yet)");
+    }
 
     static AttackEvent Evt(ulong id, byte kind, ServerPlayer sp, uint tick) => new AttackEvent
     {

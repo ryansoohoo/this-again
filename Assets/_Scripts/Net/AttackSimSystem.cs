@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // Server authoritative in-instance step: drain contiguous InputCommands, run the shared InstanceStep (attack +
@@ -8,33 +9,78 @@ public static class AttackSimSystem
     static Game _gm;
     static readonly System.Func<Vector2, bool> _walkAt = p => { var c = _gm.WorldToCell(p); return _gm.IsWalkable(c.x, c.y); };
 
+    const float MovedEps = 1e-6f;   // sq-distance below which a player is "pinned" (didn't move this tick)
+
+    struct Pending { public ulong id; public ServerPlayer sp; public Vector2Int region; public float invMass; }
+    static readonly List<Pending> _pending = new();
+    static CollisionBody[] _bodies = new CollisionBody[8];
+    static readonly System.Comparison<Pending> _byRegionThenId = (a, b) =>
+    {
+        int c = a.region.x.CompareTo(b.region.x); if (c != 0) return c;
+        c = a.region.y.CompareTo(b.region.y);     if (c != 0) return c;
+        return a.id.CompareTo(b.id);
+    };
+
     public static void StepInstanceFixed(PlayerRegistry reg, WeaponCatalog catalog, MovementSettings cfg, float dt)
     {
         var gm = Game.Instance; if (gm == null) return;
         _gm = gm;
+
+        // ---- Phase A: integrate each in-instance player (attack + lunge + movement vs walls), as before ----
+        _pending.Clear();
         foreach (var kv in reg.Players)
         {
             var sp = kv.Value;
-            if (!sp.inInstance || sp.serverInputs == null) continue;
-            var def = catalog != null ? catalog.Get(sp.weaponId) : null;
-            while (sp.serverInputs.TryGet(sp.lastProcessedTick + 1, out var c))
+            if (!sp.inInstance) continue;
+            Vector2 startPos = sp.worldPos;
+            if (sp.serverInputs != null)
             {
-                if (def != null)
+                var def = catalog != null ? catalog.Get(sp.weaponId) : null;
+                while (sp.serverInputs.TryGet(sp.lastProcessedTick + 1, out var c))
                 {
-                    var ctx = new InstanceCtx { timeline = def.Timeline, scales = sp.attackScales, dt = dt, speed = cfg.moveSpeed, walkable = _walkAt };
-                    sp.prevAttackPhase = sp.attackState.phase;
-                    var atk = sp.attackState; var pos = sp.worldPos;
-                    InstanceStep.Step(ref atk, ref pos, new InstanceInput { rawMove = c.rawMove, attack = ToIntent(c) }, ctx);
-                    sp.attackState = atk; sp.worldPos = pos;
-                    EmitTransitions(kv.Key, sp, def, c.tick);
+                    if (def != null)
+                    {
+                        var ctx = new InstanceCtx { timeline = def.Timeline, scales = sp.attackScales, dt = dt, speed = cfg.moveSpeed, walkable = _walkAt };
+                        sp.prevAttackPhase = sp.attackState.phase;
+                        var atk = sp.attackState; var pos = sp.worldPos;
+                        InstanceStep.Step(ref atk, ref pos, new InstanceInput { rawMove = c.rawMove, attack = ToIntent(c) }, ctx);
+                        sp.attackState = atk; sp.worldPos = pos;
+                        EmitTransitions(kv.Key, sp, def, c.tick);
+                    }
+                    else
+                    {
+                        sp.worldPos = MovementStep.Step(sp.worldPos, c.rawMove, dt, cfg.moveSpeed, _walkAt);
+                    }
+                    sp.lastInput = c.rawMove;
+                    sp.lastProcessedTick++;
                 }
-                else
-                {
-                    sp.worldPos = MovementStep.Step(sp.worldPos, c.rawMove, dt, cfg.moveSpeed, _walkAt);
-                }
-                sp.lastInput = c.rawMove;
-                sp.lastProcessedTick++;
             }
+            // mover-yields weighting: moved this tick -> mover (1), otherwise pinned (0, holds ground)
+            float invMass = (sp.worldPos - startPos).sqrMagnitude > MovedEps ? 1f : 0f;
+            _pending.Add(new Pending { id = kv.Key, sp = sp, region = sp.regionKey, invMass = invMass });
+        }
+
+        // ---- Phase B: resolve player-vs-player overlaps per room (deterministic: sorted by region then id) ----
+        if (_pending.Count < 2) return;
+        _pending.Sort(_byRegionThenId);
+        int start = 0;
+        while (start < _pending.Count)
+        {
+            int end = start + 1;
+            while (end < _pending.Count && _pending[end].region == _pending[start].region) end++;
+            int n = end - start;
+            if (n > 1)
+            {
+                if (_bodies.Length < n) _bodies = new CollisionBody[Mathf.NextPowerOfTwo(n)];
+                for (int k = 0; k < n; k++)
+                {
+                    var pp = _pending[start + k];
+                    _bodies[k] = new CollisionBody { id = pp.id, pos = pp.sp.worldPos, radius = cfg.collisionRadius, invMass = pp.invMass };
+                }
+                CollisionStep.Resolve(_bodies, n, _walkAt, cfg.collisionIterations);
+                for (int k = 0; k < n; k++) _pending[start + k].sp.worldPos = _bodies[k].pos;
+            }
+            start = end;
         }
     }
 

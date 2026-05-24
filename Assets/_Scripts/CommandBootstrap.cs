@@ -100,11 +100,11 @@ public static class CommandBootstrap
         r.Register(new Command
         {
             Keyword = "colgizmos", Aliases = new[] { "cgz" }, Scope = CommandScope.Global, Arg = ArgMode.None,
-            Description = "(debug) Toggle collision gizmos — player body circles (host; Scene view, or turn on the Game view 'Gizmos' button).",
+            Description = "(debug) Toggle collision rings — player body circles drawn in-game (works in builds; underworld only).",
             Run = _ =>
             {
-                ReplicationHub.DrawCollisionGizmos = !ReplicationHub.DrawCollisionGizmos;
-                return CommandResult.Ok($"Collision gizmos {(ReplicationHub.DrawCollisionGizmos ? "ON" : "OFF")}.", keepOpen: true, output: OutputType.System);
+                CollisionCircle.Show = !CollisionCircle.Show;
+                return CommandResult.Ok($"Collision rings {(CollisionCircle.Show ? "ON" : "OFF")}.", keepOpen: true, output: OutputType.System);
             },
         });
         r.Register(new Command

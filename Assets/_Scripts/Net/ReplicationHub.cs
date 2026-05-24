@@ -13,9 +13,6 @@ public sealed class ReplicationHub : NetworkBehaviour
 
     [SerializeField] float moveSpeed = 4f;
 
-    // Debug: flipped by the 'colgizmos' command; when on, OnDrawGizmos draws each in-instance body circle (host).
-    public static bool DrawCollisionGizmos;
-
     readonly PlayerRegistry registry = new();
     float sendAccum;
 
@@ -212,32 +209,4 @@ public sealed class ReplicationHub : NetworkBehaviour
         PlayerSimSystem.Teleport(sp, sp.overworldReturnCell);
         sp.inInstance = false;
     }
-
-#if UNITY_EDITOR
-    // Debug viz (host only): draw each in-instance player's authoritative collision circle. Shows in the Scene
-    // view always, and in the Game view when its 'Gizmos' toggle is on. Toggled by the 'colgizmos' command.
-    void OnDrawGizmos()
-    {
-        if (!DrawCollisionGizmos || !Application.isPlaying || !IsServer) return;
-        var gm = Game.Instance;
-        if (gm == null || gm.MovementCfg == null) return;
-        float r = gm.MovementCfg.collisionRadius;
-        Gizmos.color = new Color(0.2f, 1f, 1f, 0.9f);
-        foreach (var sp in registry.Players.Values)
-            if (sp.inInstance) DrawWireCircle(sp.worldPos, r);
-    }
-
-    static void DrawWireCircle(Vector2 center, float r)
-    {
-        const int seg = 28;
-        Vector3 prev = new Vector3(center.x + r, center.y, 0f);
-        for (int i = 1; i <= seg; i++)
-        {
-            float a = i / (float)seg * Mathf.PI * 2f;
-            Vector3 next = new Vector3(center.x + Mathf.Cos(a) * r, center.y + Mathf.Sin(a) * r, 0f);
-            Gizmos.DrawLine(prev, next);
-            prev = next;
-        }
-    }
-#endif
 }

@@ -20,7 +20,8 @@ public sealed class PlayerView : MonoBehaviour
 
         var all = GetComponentsInChildren<SpriteRenderer>(true);
         var body = new System.Collections.Generic.List<SpriteRenderer>(all.Length);
-        foreach (var sr in all) if (sr.gameObject.name != "Shadow") body.Add(sr);   // leave the pack shadow untouched
+        foreach (var sr in all)
+            if (sr.gameObject.name != "Shadow" && !IsUnderAttackRig(sr.transform)) body.Add(sr);   // leave the pack shadow + attack rig untouched
         bodyRenderers = body.ToArray();
     }
 
@@ -57,5 +58,19 @@ public sealed class PlayerView : MonoBehaviour
             for (int i = 0; i < bodyRenderers.Length; i++)
                 if (bodyRenderers[i] != null) bodyRenderers[i].color = c;
         }
+    }
+
+    static bool IsUnderAttackRig(Transform t)
+    {
+        for (var p = t; p != null; p = p.parent) if (p.name == "AttackRig") return true;
+        return false;
+    }
+
+    // Lets AttackView hide the idle/walk body during an attack (the Animator keeps running underneath).
+    public void SetBodyVisible(bool visible)
+    {
+        if (bodyRenderers == null) return;
+        for (int i = 0; i < bodyRenderers.Length; i++)
+            if (bodyRenderers[i] != null) bodyRenderers[i].enabled = visible;
     }
 }

@@ -53,8 +53,8 @@ MonoBehaviour:
   - column: 2
     duration: 0.12
   feintCooldown: 0.5
-  rotateToAim: 0
-  aimSnapDegrees: 0
+  rotateToAim: 1
+  aimSnapDegrees: 45
   lungeCurve:
     serializedVersion: 2
     m_Curve:

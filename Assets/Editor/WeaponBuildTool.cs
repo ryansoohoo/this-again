@@ -24,9 +24,9 @@ public static class WeaponBuildTool
         // Thrust (cardinal, 3 cols) — rotates to the cursor (8-way).
         new Cfg{ id="Spear",     body="Thrust_Attacks/_Characters/Thrust_Characters_human.png", front="Thrust_Attacks/Spear/Thrust_spear_f.png",         back="Thrust_Attacks/Spear/Thrust_spear_b.png",         conv=Conv.Cardinal, rotate=true },
         new Cfg{ id="Pitchfork", body="Thrust_Attacks/_Characters/Thrust_Characters_human.png", front="Thrust_Attacks/Pitchfork/Thrust_pitchfork_f.png", back="Thrust_Attacks/Pitchfork/Thrust_pitchfork_b.png", conv=Conv.Cardinal, rotate=true },
-        // Swing (cardinal, 3 cols) — single weapon sheet, no back layer; snaps (no rotate).
-        new Cfg{ id="Flail", body="Swing_Attacks/_Characters/Swing_Characters_human.png", front="Swing_Attacks/Swing_flail.png", back=null, conv=Conv.Cardinal, rotate=false },
-        new Cfg{ id="Whip",  body="Swing_Attacks/_Characters/Swing_Characters_human.png", front="Swing_Attacks/Swing_whip.png",  back=null, conv=Conv.Cardinal, rotate=false },
+        // Swing (cardinal, 3 cols) — single weapon sheet, no back layer; rotates the cardinal swing to the cursor (8-way, incl. diagonals).
+        new Cfg{ id="Flail", body="Swing_Attacks/_Characters/Swing_Characters_human.png", front="Swing_Attacks/Swing_flail.png", back=null, conv=Conv.Cardinal, rotate=true },
+        new Cfg{ id="Whip",  body="Swing_Attacks/_Characters/Swing_Characters_human.png", front="Swing_Attacks/Swing_whip.png",  back=null, conv=Conv.Cardinal, rotate=true },
         // Two-Handed (diagonal, 6 cols).
         new Cfg{ id="Longsword", body="Two_Handed_Attacks/_Characters/TwoHanded_Characters_human.png", front="Two_Handed_Attacks/Longsword/TwoHanded_longsword_f.png", back="Two_Handed_Attacks/Longsword/TwoHanded_longsword_b.png", conv=Conv.Diagonal, rotate=false },
         new Cfg{ id="Waraxe",    body="Two_Handed_Attacks/_Characters/TwoHanded_Characters_human.png", front="Two_Handed_Attacks/Waraxe/TwoHanded_waraxe_f.png",       back="Two_Handed_Attacks/Waraxe/TwoHanded_waraxe_b.png",       conv=Conv.Diagonal, rotate=false },

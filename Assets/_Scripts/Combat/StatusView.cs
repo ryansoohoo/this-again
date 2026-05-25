@@ -6,7 +6,6 @@ using UnityEngine;
 public sealed class StatusView : MonoBehaviour
 {
     SpriteRenderer[] sprites;
-    static readonly StatusKind[] Priority = { StatusKind.Freeze, StatusKind.Fire, StatusKind.Poison, StatusKind.Bleed, StatusKind.Slow, StatusKind.Fear };
 
     void Awake() => sprites = GetComponentsInChildren<SpriteRenderer>(true);
 
@@ -15,15 +14,16 @@ public sealed class StatusView : MonoBehaviour
         if (sprites == null) return;
         var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
         if (cat == null) return;
-        for (int k = 0; k < Priority.Length; k++)
+        int best = -1, bestPri = -1;
+        for (int id = 0; id < 16; id++)
         {
-            int id = (int)Priority[k];
             if ((mask & (1 << id)) == 0) continue;
             var fx = cat.Visual(id);
             if (fx == null || fx.tintColor == Color.white) continue;   // white = no tint
-            for (int i = 0; i < sprites.Length; i++) if (sprites[i] != null) sprites[i].color = fx.tintColor;
-            return;
+            if (fx.visualPriority > bestPri) { bestPri = fx.visualPriority; best = id; }
         }
-        // no tinting effect active — leave color alone (do NOT write white)
+        if (best < 0) return;   // no tinting effect active — leave color alone (do NOT write white)
+        var c = cat.Visual(best).tintColor;
+        for (int i = 0; i < sprites.Length; i++) if (sprites[i] != null) sprites[i].color = c;
     }
 }

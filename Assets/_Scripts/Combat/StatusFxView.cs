@@ -20,40 +20,38 @@ public sealed class StatusFxView : MonoBehaviour
         if (tickRenderer != null) tickRenderer.enabled = false;
     }
 
-    // Priority for which single effect's tick FX shows when several are active (higher first).
-    static readonly StatusKind[] Priority = { StatusKind.Fire, StatusKind.Bleed, StatusKind.Poison, StatusKind.Freeze, StatusKind.Slow, StatusKind.Fear };
-
     public void Render(ushort mask)
     {
         var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
         if (cat == null) return;
 
-        // --- Layer B: one-shot on any bit that just turned on ---
+        // --- Layer B: one-shot on the highest-priority effect whose bit just turned on ---
         ushort rising = (ushort)(mask & ~prevMask);
         if (rising != 0)
         {
-            for (int k = 0; k < Priority.Length; k++)
+            int best = -1, bestPri = -1;
+            for (int id = 0; id < 16; id++)
             {
-                int id = (int)Priority[k];
                 if ((rising & (1 << id)) == 0) continue;
                 var fx = cat.Visual(id);
-                if (fx != null && fx.hitFx != null && fx.hitFx.Length > 0) { hitDefId = id; hitElapsed = 0f; }
-                break;
+                if (fx == null || fx.hitFx == null || fx.hitFx.Length == 0) continue;
+                if (fx.visualPriority > bestPri) { bestPri = fx.visualPriority; best = id; }
             }
+            if (best >= 0) { hitDefId = best; hitElapsed = 0f; }
         }
         prevMask = mask;
         DriveOneShot(cat);
 
-        // --- Layer C: looping tick FX for the highest-priority active effect ---
-        int activeTick = -1;
-        for (int k = 0; k < Priority.Length; k++)
+        // --- Layer C: looping tick FX for the highest-priority active effect that has one ---
+        int tBest = -1, tPri = -1;
+        for (int id = 0; id < 16; id++)
         {
-            int id = (int)Priority[k];
             if ((mask & (1 << id)) == 0) continue;
             var fx = cat.Visual(id);
-            if (fx != null && fx.tickFx != null && fx.tickFx.Length > 0) { activeTick = id; break; }
+            if (fx == null || fx.tickFx == null || fx.tickFx.Length == 0) continue;
+            if (fx.visualPriority > tPri) { tPri = fx.visualPriority; tBest = id; }
         }
-        DriveTick(cat, activeTick);
+        DriveTick(cat, tBest);
     }
 
     void DriveOneShot(StatusCatalog cat)

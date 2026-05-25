@@ -23,6 +23,7 @@ public sealed class StatusEffectAsset : ScriptableObject
 
     [Header("Visual (View layer only)")]
     public byte visualId;
+    public byte visualPriority;     // higher = shown first when several effects are active (tint + FX selection)
     public Color tintColor = Color.white;   // rig tint while active (StatusView); white = no tint
     public Sprite[] hitFx;                   // one-shot on apply, on the victim (StatusFxView Layer B)
     public float hitFps = 14f;

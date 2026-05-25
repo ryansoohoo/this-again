@@ -24,6 +24,7 @@ MonoBehaviour:
   forcedMove: 1
   forcedMoveScale: 0.8
   visualId: 7
+  visualPriority: 70
   tintColor: {r: 1, g: 1, b: 1, a: 1}
   hitFx: []
   hitFps: 14

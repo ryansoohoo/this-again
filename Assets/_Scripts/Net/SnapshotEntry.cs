@@ -24,6 +24,7 @@ public struct SnapshotEntry : INetworkSerializable
     public byte[] effDefId;
     public ushort[] effRemaining;
     public byte[] effStacks;
+    public ushort selfFleeAngle;   // quantized flee dir for the active forced-move effect (self block); 0xFFFF = none
 
     public const byte SnapBit = 1, SelfBit = 2, AttackingBit = 4, InstanceBit = 8;
 
@@ -37,6 +38,7 @@ public struct SnapshotEntry : INetworkSerializable
         if ((flags & SelfBit) != 0)
         {
             s.SerializeValue(ref effectCount);
+            s.SerializeValue(ref selfFleeAngle);
             if (s.IsReader) { effDefId = new byte[effectCount]; effRemaining = new ushort[effectCount]; effStacks = new byte[effectCount]; }
             for (int i = 0; i < effectCount; i++)
             {

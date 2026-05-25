@@ -52,8 +52,10 @@ public sealed class PredictionSystem
 
     // On each snapshot: drop our external effects, re-add the authoritative ones (re-syncs stun/poison/freeze/slow
     // timing), and leave self-predicted instances untouched so the cooldown doesn't flicker before the ack catches up.
-    public void AdoptExternal(byte[] defIds, ushort[] remaining, byte[] stacks, int n)
+    public void AdoptExternal(byte[] defIds, ushort[] remaining, byte[] stacks, int n, ushort selfFleeAngle)
     {
+        Vector2 fleeDir = selfFleeAngle == 0xFFFF ? default : AimQuant.Decode(selfFleeAngle);
+        var defs = Defs();
         for (int i = 0; i < Status.count; )
         {
             if (!SelfPredicted(Status.effects[i].defId)) Status.effects[i] = Status.effects[--Status.count];
@@ -63,10 +65,12 @@ public sealed class PredictionSystem
         {
             if (SelfPredicted(defIds[k])) continue;   // server's copy of our cooldown — keep our prediction
             if (Status.count >= StatusState.Cap) break;
+            bool forced = defIds[k] < defs.Length && defs[defIds[k]].forcedMove != ForcedMoveKind.None;
             Status.effects[Status.count++] = new ActiveEffect
             {
                 defId = defIds[k], remainingTicks = remaining[k], stacks = stacks[k],
                 sincePeriodTick = 0, appliedTick = 0, selfInflicted = false,
+                fleeDir = forced ? fleeDir : default,
             };
         }
     }
@@ -101,10 +105,9 @@ public sealed class PredictionSystem
         prevPos = Pos;
         Vector2 p = Pos;
         var ctx = new InstanceCtx { timeline = tl, scales = scales, dt = dt, speed = cfg.moveSpeed, walkable = Walkable, defs = Defs() };
-        InstanceStep.Step(ref atk, Status, ref p, new InstanceInput { rawMove = rawMove, attack = attack }, ctx, out _);   // steps Status + derives the gate
+        InstanceStep.Step(ref atk, Status, ref p, new InstanceInput { rawMove = rawMove, attack = attack }, ctx, out var res);
         Pos = ResolveSelfCollision(p, prevPos);          // predict push-apart; p includes lunge so invMass mirrors the server
-        GateMod gate = GateMod.Quantize(StatusLogic.Reduce(Status, Defs()));   // read-only: the post-step gate for the stored fallback vector
-        buffer.Store(new InputFrame { tick = Tick, input = AttackLogic.LungeVelocity(atk, tl) ?? InstanceStep.FreeMove(rawMove, gate), predictedPos = Pos });
+        buffer.Store(new InputFrame { tick = Tick, input = res.moveApplied, predictedPos = Pos });
         byte bits = (byte)((attack.pressed ? InputCommand.Pressed : 0) | (attack.held ? InputCommand.Held : 0)
                          | (attack.released ? InputCommand.Released : 0) | (attack.feint ? InputCommand.Feint : 0));
         ReplicationHub.Instance.SubmitInputTickRpc(new InputCommand { tick = Tick, rawMove = rawMove, attackBits = bits, aimAngle = aimQ, weaponId = weaponId });

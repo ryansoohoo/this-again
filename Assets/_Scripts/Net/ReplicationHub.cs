@@ -119,6 +119,10 @@ public sealed class ReplicationHub : NetworkBehaviour
                         entry.effRemaining[k] = (ushort)Mathf.Max(0, sp.status.effects[k].remainingTicks);
                         entry.effStacks[k] = sp.status.effects[k].stacks;
                     }
+                    entry.selfFleeAngle = 0xFFFF;
+                    var statusDefs = Game.Instance != null ? Game.Instance.StatusCatalog?.Defs : null;
+                    if (statusDefs != null && StatusLogic.ActiveForcedMove(sp.status, statusDefs, out var fdir, out _))
+                        entry.selfFleeAngle = AimQuant.Encode(fdir);
                 }
                 else if (sp.inInstance)
                 {

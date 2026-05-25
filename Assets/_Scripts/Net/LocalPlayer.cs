@@ -171,7 +171,7 @@ public sealed class LocalPlayer : MonoBehaviour
                 var e = entries[i];
                 if ((e.flags & SnapshotEntry.SelfBit) != 0)
                 {
-                    prediction.AdoptExternal(e.effDefId, e.effRemaining, e.effStacks, e.effectCount);
+                    prediction.AdoptExternal(e.effDefId, e.effRemaining, e.effStacks, e.effectCount, e.selfFleeAngle);
                     SelfHp = e.hp;
                 }
                 bool snap = (e.flags & SnapshotEntry.SnapBit) != 0;

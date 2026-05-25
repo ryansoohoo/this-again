@@ -46,12 +46,11 @@ public static class EffectFxSpriteSetup
         {
             var asset = AssetDatabase.LoadAssetAtPath<StatusEffectAsset>($"{EffectDir}{m.kind}.asset");
             if (asset == null) { Debug.LogWarning($"[EffectFx] no asset for {m.kind}"); continue; }
-            asset.attackOverlayFx = LoadFrames($"{FxRoot}{m.slash}.png");
             asset.hitFx           = LoadFrames($"{FxRoot}{m.impact}.png");
             asset.tickFx          = LoadFrames($"{FxRoot}{m.burn}.png");
             asset.tintColor       = m.tint;
             EditorUtility.SetDirty(asset);
-            Debug.Log($"[EffectFx] {m.kind}: overlay={asset.attackOverlayFx.Length} hit={asset.hitFx.Length} tick={asset.tickFx.Length}");
+            Debug.Log($"[EffectFx] {m.kind}: hit={asset.hitFx.Length} tick={asset.tickFx.Length}");
         }
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();

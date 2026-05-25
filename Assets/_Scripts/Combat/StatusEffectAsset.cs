@@ -1,5 +1,9 @@
 using UnityEngine;
 
+// One attack-motion's swing-overlay frames (front + back layers) for a given status effect's color.
+[System.Serializable]
+public struct MotionOverlay { public AttackMotion motion; public Sprite[] front; public Sprite[] back; }
+
 // One status effect as a reusable asset: gameplay (compiled to the pure StatusEffectDef the sim consumes) plus
 // visual data (read ONLY by the View layer — never enters Minifantasy.InstanceSim). Weapons reference these;
 // spells/abilities/items will too. Order in StatusCatalog MUST place index i at kind == (StatusKind)i.
@@ -29,8 +33,17 @@ public sealed class StatusEffectAsset : ScriptableObject
     public float hitFps = 14f;
     public Sprite[] tickFx;                  // over-time loop on the victim, pulses at periodSeconds (Layer C)
     public float tickFps = 10f;
-    public Sprite[] attackOverlayFx;         // attacker swing overlay (AttackView Layer A)
-    public float overlayFps = 14f;
+    public string fxColor;                    // pack color name for the swing overlay ("fire","ice","poisson",...); empty = no overlay
+    public MotionOverlay[] attackOverlays;    // per attack-motion swing overlay (front/back), already in THIS effect's color
+
+    // Front/back swing-overlay frames for a weapon's attack motion (this effect's color). False if none authored.
+    public bool TryGetOverlay(AttackMotion m, out Sprite[] front, out Sprite[] back)
+    {
+        if (attackOverlays != null)
+            for (int i = 0; i < attackOverlays.Length; i++)
+                if (attackOverlays[i].motion == m) { front = attackOverlays[i].front; back = attackOverlays[i].back; return front != null && front.Length > 0; }
+        front = null; back = null; return false;
+    }
 
     public StatusEffectDef ToDef() => new StatusEffectDef
     {

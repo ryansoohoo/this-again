@@ -10,6 +10,7 @@ public sealed class AttackView : MonoBehaviour
     [SerializeField] SpriteRenderer body;
     [SerializeField] SpriteRenderer weaponFront;
     [SerializeField] SpriteRenderer overlay;   // effect FX layered over the swing (own renderer; above weaponFront)
+    [SerializeField] SpriteRenderer overlayBack;   // swing overlay BACK layer (behind the body); front is `overlay`
 
     // Fixed weapon attack FX — the SAME for every weapon (not per-keyframe data): a small glow on the Hit frame,
     // a darken-to-gray through Follow-through, nothing on the wind-up. Values come from Game.CombatFx (tunable live
@@ -33,6 +34,7 @@ public sealed class AttackView : MonoBehaviour
             SetRigActive(false);
             if (playerView != null) playerView.SetBodyVisible(true);
             if (overlay != null) overlay.enabled = false;
+            if (overlayBack != null) overlayBack.enabled = false;
             return;
         }
 
@@ -99,21 +101,32 @@ public sealed class AttackView : MonoBehaviour
         if (weaponFront != null) weaponFront.color = dn.tint;
     }
 
-    // Layer A: if the weapon has a primary on-hit effect with an attackOverlayFx, play it by attack progress,
-    // rotated toward the locked aim. Own renderer, so it never writes the weapon/body color.
+    // Layer A: the weapon's swing overlay (an arc) in the status's color, front+back, played across the swing.
     void DriveOverlay(AttackState state, AttackDefinition def)
     {
-        if (overlay == null) return;
-        StatusEffectAsset fx = def.mainEffect;
-        if (fx == null || fx.attackOverlayFx == null || fx.attackOverlayFx.Length == 0) { overlay.enabled = false; return; }
-
-        float p = AttackLogic.PhaseProgress01(state, def.Timeline);   // 0..1 across the whole swing
-        int frame = Mathf.Clamp((int)(p * fx.attackOverlayFx.Length), 0, fx.attackOverlayFx.Length - 1);
-        overlay.enabled = true;
-        overlay.sprite = fx.attackOverlayFx[frame];
+        if (overlay == null && overlayBack == null) return;
+        var fx = def.mainEffect;
+        if (fx == null || !fx.TryGetOverlay(def.attackMotion, out var front, out var back))
+        {
+            if (overlay != null) overlay.enabled = false;
+            if (overlayBack != null) overlayBack.enabled = false;
+            return;
+        }
+        float p = AttackLogic.PhaseProgress01(state, def.Timeline);   // 0..1 across the swing
         float rot = def.rotateToAim ? state.residualDeg : 0f;
-        overlay.transform.localEulerAngles = new Vector3(0f, 0f, rot);
-        var dn = Game.Instance != null ? Game.Instance.DayNight : null;
-        if (dn != null) overlay.color = dn.tint;
+        Color tint = (Game.Instance != null && Game.Instance.DayNight != null) ? Game.Instance.DayNight.tint : Color.white;
+        DriveOverlayLayer(overlay, front, p, rot, tint);
+        DriveOverlayLayer(overlayBack, back, p, rot, tint);
+    }
+
+    void DriveOverlayLayer(SpriteRenderer sr, Sprite[] frames, float p, float rot, Color tint)
+    {
+        if (sr == null) return;
+        if (frames == null || frames.Length == 0) { sr.enabled = false; return; }
+        int f = Mathf.Clamp((int)(p * frames.Length), 0, frames.Length - 1);
+        sr.enabled = true;
+        sr.sprite = frames[f];
+        sr.transform.localEulerAngles = new Vector3(0f, 0f, rot);
+        sr.color = tint;
     }
 }

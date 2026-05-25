@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+// Which attack-effect family a weapon's swing uses (keys the recolored swing-overlay art from the Magic Effects pack).
+public enum AttackMotion : byte { None = 0, SlashL = 1, SlashM = 2, Pierce = 3, Lash = 4, Flail = 5, Shot = 6 }
+
 // One timed sprite frame: which column of the sheet, and how long to show it (seconds, base — scaled at runtime).
 [Serializable]
 public struct TimedFrame

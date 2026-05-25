@@ -21,7 +21,9 @@ public sealed class PlayerView : MonoBehaviour
         var all = GetComponentsInChildren<SpriteRenderer>(true);
         var body = new System.Collections.Generic.List<SpriteRenderer>(all.Length);
         foreach (var sr in all)
-            if (sr.gameObject.name != "Shadow" && sr.gameObject.name != "DmgBody" && !IsUnderAttackRig(sr.transform)) body.Add(sr);   // leave the pack shadow + attack rig + hurt sprite untouched
+            if (sr.gameObject.name != "Shadow" && sr.gameObject.name != "DmgBody"
+                && sr.gameObject.name != "HitFxBody" && sr.gameObject.name != "TickFxBody"
+                && !IsUnderAttackRig(sr.transform)) body.Add(sr);   // leave shadow + attack rig + hurt + status-FX sprites untouched
         bodyRenderers = body.ToArray();
     }
 

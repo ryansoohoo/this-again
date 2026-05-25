@@ -110,6 +110,7 @@ public sealed class LocalPlayer : MonoBehaviour
         {
             byte mask = prediction.Active ? StatusLogic.ActiveMask(prediction.Status) : (byte)0;
             var sv = selfGhost.GetComponent<StatusView>(); if (sv != null) sv.Render(mask);
+            var fx = selfGhost.GetComponent<StatusFxView>(); if (fx != null) fx.Render(mask);
             var dv = selfGhost.GetComponent<DmgView>(); if (dv != null) dv.Render(mask);   // after StatusView (tint) — DmgView wins the hurt sprite
         }
     }

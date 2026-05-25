@@ -19,6 +19,7 @@ public sealed class GhostManager : MonoBehaviour
         public bool seen;
         public AttackView attackView;   // remote attack rig (the self ghost's is driven by LocalPlayer instead)
         public StatusView statusView;   // remote effect tint (self's is driven by LocalPlayer)
+        public StatusFxView statusFxView;   // remote victim FX (hit one-shot + over-time tick)
         public DmgView dmgView;         // remote hurt animation (self's is driven by LocalPlayer)
         public bool attacking;
         public byte weaponId, poseByte;
@@ -56,7 +57,7 @@ public sealed class GhostManager : MonoBehaviour
             {
                 if (ghostPrefab == null) continue;
                 var go = Instantiate(ghostPrefab, pos, Quaternion.identity);
-                g = new Ghost { tf = go.transform, fromPos = pos, toPos = pos, t = 1f, dur = dur, attackView = go.GetComponent<AttackView>(), statusView = go.GetComponent<StatusView>(), dmgView = go.GetComponent<DmgView>() };
+                g = new Ghost { tf = go.transform, fromPos = pos, toPos = pos, t = 1f, dur = dur, attackView = go.GetComponent<AttackView>(), statusView = go.GetComponent<StatusView>(), statusFxView = go.GetComponent<StatusFxView>(), dmgView = go.GetComponent<DmgView>() };
                 ghosts[e.id] = g;
                 if (e.id == localId) SelfGhost = g.tf;
             }
@@ -136,6 +137,7 @@ public sealed class GhostManager : MonoBehaviour
             {
                 RenderAttack(g);
                 if (g.statusView != null) g.statusView.Render(g.effectMask);
+                if (g.statusFxView != null) g.statusFxView.Render(g.effectMask);
                 if (g.dmgView != null) g.dmgView.Render(g.effectMask);   // after AttackView (body visibility) + StatusView (tint) so it wins both
             }
         }

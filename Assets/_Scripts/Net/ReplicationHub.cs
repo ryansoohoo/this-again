@@ -59,7 +59,7 @@ public sealed class ReplicationHub : NetworkBehaviour
         int n = (int)clientId;
         var cell = new Vector2Int((n % 5) - 2, (n / 5) - 2);   // small spread around origin (old OnNetworkSpawn)
         var pos = gm != null ? gm.CellCenter(cell.x, cell.y) : (Vector2)cell;
-        registry.Add(clientId, cell, pos);
+        registry.Add(clientId, cell, pos, gm != null ? gm.PlayerCharacter : null);
     }
 
     void Update()

@@ -37,6 +37,7 @@ public sealed class TunerPanels : MonoBehaviour
         new Panel("Day/Night",     DayNightBody,  () => {}),
         new Panel("Replication",   ReplicationBody, () => {}),
         new Panel("View",          ViewBody, () => gm.ApplyViewSettings()),
+        new Panel("Weapon FX",     WeaponFxBody, () => {}),   // AttackView reads gm.CombatFx live each frame
     };
 
     void OnGUI()
@@ -195,6 +196,19 @@ public sealed class TunerPanels : MonoBehaviour
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Save")) gm.SaveViewSettings();
         if (GUILayout.Button("Reset")) gm.ResetViewSettings();
+        GUILayout.EndHorizontal();
+    }
+
+    void WeaponFxBody()
+    {
+        var f = gm.CombatFx;
+        GUILayout.Label("Hit = glow, Follow-through = darken to gray (all weapons)");
+        F("Hit glow", ref f.hitGlow, 0f, 10f, "0.0");
+        F("Follow-through bright", ref f.followThroughBright, 0f, 1f, "0.00");
+        F("Follow-through gray (0 = full gray)", ref f.followThroughSaturation, 0f, 1f, "0.00");
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Save")) gm.SaveCombatFxSettings();
+        if (GUILayout.Button("Reset")) gm.ResetCombatFxSettings();
         GUILayout.EndHorizontal();
     }
 

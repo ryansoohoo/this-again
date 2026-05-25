@@ -41,6 +41,7 @@ public sealed class Game : MonoBehaviour
 
     [Header("Movement (free / prediction)")]
     [SerializeField] MovementSettings movement = new MovementSettings();
+    [SerializeField] CombatFxSettings combatFx = new CombatFxSettings();   // tunable weapon attack FX (same for all weapons)
 
     [Header("Combat")]
     [SerializeField] WeaponCatalog weaponCatalog;   // byte id <-> AttackDefinition; shared by server sim + remote render
@@ -68,6 +69,7 @@ public sealed class Game : MonoBehaviour
     public void SetTimeOverride(float? t) { if (dayNightSystem != null) dayNightSystem.TimeOverride = t; }
     public ReplicationSettings ReplicationCfg => replication;
     public MovementSettings MovementCfg => movement;
+    public CombatFxSettings CombatFx => combatFx;
     public WeaponCatalog WeaponCatalog => weaponCatalog;
     public StatusCatalog StatusCatalog => statusCatalog;
     public ViewSettings ViewCfg => viewSettings;
@@ -105,6 +107,7 @@ public sealed class Game : MonoBehaviour
     readonly JsonPref<DayNightSettings> dayNightPref = new("daynight.json");
     readonly JsonPref<ReplicationSettings> replicationPref = new("replication.json");
     readonly JsonPref<MovementSettings> movementPref = new("movement.json");
+    readonly JsonPref<CombatFxSettings> combatFxPref = new("combatfx.json");
     readonly JsonPref<ViewSettings> viewPref = new("view.json");
 
     void Awake()
@@ -117,6 +120,7 @@ public sealed class Game : MonoBehaviour
         replicationPref.Load(replication);
         movementPref.Load(movement);
         viewPref.Load(viewSettings);
+        combatFxPref.Load(combatFx);
         cellWorld = (float)cellSizePixels / pixelsPerUnit;
 
         if (weaponCatalog == null)
@@ -204,6 +208,8 @@ public sealed class Game : MonoBehaviour
     public void ResetMovementSettings() => ResetTo(movementPref, movement, new MovementSettings(), null, "Movement");
     public void SaveViewSettings()  => SaveTo(viewPref, viewSettings, "View");
     public void ResetViewSettings() => ResetTo(viewPref, viewSettings, new ViewSettings(), ApplyViewSettings, "View");
+    public void SaveCombatFxSettings()  => SaveTo(combatFxPref, combatFx, "Combat FX");
+    public void ResetCombatFxSettings() => ResetTo(combatFxPref, combatFx, new CombatFxSettings(), null, "Combat FX");
     public void ApplyViewSettings()
     {
         if (cameraSystem != null)

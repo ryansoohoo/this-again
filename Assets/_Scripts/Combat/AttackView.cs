@@ -11,13 +11,10 @@ public sealed class AttackView : MonoBehaviour
     [SerializeField] SpriteRenderer weaponFront;
 
     // Fixed weapon attack FX — the SAME for every weapon (not per-keyframe data): a small glow on the Hit frame,
-    // a darken-to-gray through Follow-through, nothing on the wind-up. Driven onto the weapon layers' AllIn1
-    // _Glow + HSV via each renderer's per-INSTANCE material (sr.material), NOT a MaterialPropertyBlock — an MPB on
-    // a SpriteRenderer clobbers its color (day/night tint). Material needs GLOW_ON + HSV_ON (Setup Weapon Shine).
-    [Header("Weapon attack FX (same for all weapons)")]
-    [SerializeField] float hitGlow = 1.5f;                  // small glow on the Hit frame
-    [SerializeField] float followThroughBright = 0.5f;      // HSV brightness on follow-through (<1 = darker)
-    [SerializeField] float followThroughSaturation = 0f;    // HSV saturation on follow-through (0 = gray)
+    // a darken-to-gray through Follow-through, nothing on the wind-up. Values come from Game.CombatFx (tunable live
+    // in the TunerPanels "Weapon FX" panel). Driven onto the weapon layers' AllIn1 _Glow + HSV via each renderer's
+    // per-INSTANCE material (sr.material), NOT a MaterialPropertyBlock — an MPB on a SpriteRenderer clobbers its
+    // color (day/night tint). Material needs GLOW_ON + HSV_ON (Tools > Minifantasy > Setup Weapon Shine).
     static readonly int GlowId = Shader.PropertyToID("_Glow");
     static readonly int HsvBrightId = Shader.PropertyToID("_HsvBright");
     static readonly int HsvSatId = Shader.PropertyToID("_HsvSaturation");
@@ -60,9 +57,11 @@ public sealed class AttackView : MonoBehaviour
     void DriveFx(AttackState state)
     {
         if (!Application.isPlaying) return;   // sr.material instantiates — don't leak materials in edit mode
+        var fx = Game.Instance != null ? Game.Instance.CombatFx : null;
+        if (fx == null) return;
         float glow = 0f, bright = 1f, sat = 1f;
-        if (state.phase == AttackPhase.Hit) glow = hitGlow;
-        else if (state.phase == AttackPhase.FollowThrough) { bright = followThroughBright; sat = followThroughSaturation; }
+        if (state.phase == AttackPhase.Hit) glow = fx.hitGlow;
+        else if (state.phase == AttackPhase.FollowThrough) { bright = fx.followThroughBright; sat = fx.followThroughSaturation; }
         SetFx(weaponFront, glow, bright, sat);
         SetFx(weaponBack, glow, bright, sat);
     }

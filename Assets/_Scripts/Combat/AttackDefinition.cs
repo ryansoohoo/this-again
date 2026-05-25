@@ -35,6 +35,9 @@ public sealed class AttackDefinition : ScriptableObject
     public float hitstunFullSeconds = 0.45f;   // HitStun on a full (charged) strike
     public float hitstunTapSeconds = 0.2f;     // HitStun on a tap (quick) strike — fast attacks stun less
 
+    [Header("Weapon shine")]
+    public Color glowColor = new Color(1f, 0.95f, 0.7f, 1f);   // shine color; per-frame intensity is each TimedFrame.glow
+
     AttackTimeline _timeline;
     public AttackTimeline Timeline => _timeline ??= BuildTimeline();
 
@@ -61,6 +64,7 @@ public sealed class AttackDefinition : ScriptableObject
             onHit = onHit,
             hitstunTicks = Mathf.CeilToInt(hitstunFullSeconds * 60f),
             hitstunTapTicks = Mathf.CeilToInt(hitstunTapSeconds * 60f),
+            glowColor = glowColor,
         };
     }
 

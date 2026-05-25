@@ -76,6 +76,19 @@ public static class AttackLogic
         }
     }
 
+    // Per-frame weapon-shine intensity for the current phase + frame (visual layer reads this). 0 when idle.
+    public static float CurrentGlow(AttackState s, AttackTimeline tl)
+    {
+        switch (s.phase)
+        {
+            case AttackPhase.Anticipation: return Glow(tl.anticipation, s.frameIndex);
+            case AttackPhase.TapWindup:    return Glow(tl.tapAnticipation, s.frameIndex);
+            case AttackPhase.Hit:          return Glow(tl.hit, s.frameIndex);
+            case AttackPhase.FollowThrough:return Glow(tl.followThrough, s.frameIndex);
+            default:                       return 0f;
+        }
+    }
+
     public static float TimeToHit(AttackTimeline tl, bool tapped, PhaseScales scales)
     {
         if (!tapped) return 0f;
@@ -98,24 +111,6 @@ public static class AttackLogic
         else if (s.phase == AttackPhase.FollowThrough) elapsed = SumDur(tl.hit) + SumBefore(tl.followThrough, s.frameIndex) + s.phaseElapsed;
         else return 0f;
         return Mathf.Clamp01(elapsed / dur);
-    }
-
-    // Normalized 0..1 charge through the wind-up (Anticipation or TapWindup); 1 when fully wound; 0 outside.
-    // Lets the visual layer ramp a "charging" effect as the player holds the attack.
-    public static float AnticipationProgress(AttackState s, AttackTimeline tl)
-    {
-        if (s.phase == AttackPhase.Anticipation)
-        {
-            if (s.windupComplete) return 1f;
-            float dur = SumDur(tl.anticipation);
-            return dur <= 0f ? 1f : Mathf.Clamp01((SumBefore(tl.anticipation, s.frameIndex) + s.phaseElapsed) / dur);
-        }
-        if (s.phase == AttackPhase.TapWindup)
-        {
-            float dur = SumDur(tl.tapAnticipation);
-            return dur <= 0f ? 1f : Mathf.Clamp01((SumBefore(tl.tapAnticipation, s.frameIndex) + s.phaseElapsed) / dur);
-        }
-        return 0f;
     }
 
     // The movement override an attack imposes: null outside an attack (normal WASD), zero during the wind-up
@@ -177,5 +172,6 @@ public static class AttackLogic
     }
 
     static int Col(TimedFrame[] list, int i) => Has(list) ? list[Mathf.Clamp(i, 0, list.Length - 1)].column : 0;
+    static float Glow(TimedFrame[] list, int i) => Has(list) ? list[Mathf.Clamp(i, 0, list.Length - 1)].glow : 0f;
     static bool Has(TimedFrame[] list) => list != null && list.Length > 0;
 }

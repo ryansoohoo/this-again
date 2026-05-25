@@ -10,17 +10,10 @@ public sealed class AttackView : MonoBehaviour
     [SerializeField] SpriteRenderer body;
     [SerializeField] SpriteRenderer weaponFront;
 
-    // Weapon shine drives the AllIn1 _Glow + _GlowColor per attack phase (weapon material needs GLOW_ON; run
-    // Tools > Minifantasy > Setup Weapon Shine). NOTE: high glow + the scene Bloom = the halo spills onto the
-    // character (bloom is screen-space). Keep these modest (or raise the Bloom threshold) to keep it weapon-only.
-    [Header("Weapon shine — CHARGE (wind-up)")]
-    [SerializeField] float chargeGlow = 2f;                                                  // peak _Glow while charging
-    [SerializeField] Color chargeColor = new Color(0.7f, 0.85f, 1f);                         // cool build-up
-    [SerializeField] AnimationCurve chargeCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);     // vs wind-up progress (builds as you hold)
-    [Header("Weapon shine — ATTACK (strike)")]
-    [SerializeField] float attackGlow = 6f;                                                  // peak _Glow during the swing
-    [SerializeField] Color attackColor = new Color(1f, 0.95f, 0.7f);                         // warm flash
-    [SerializeField] AnimationCurve attackCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);  // vs lunge progress (flash at strike, fade)
+    // Weapon shine: per-KEYFRAME intensity (TimedFrame.glow, authored on each attack's frames) × the attack's
+    // glowColor, driven onto the weapon layers' AllIn1 _Glow/_GlowColor. Weapon material needs GLOW_ON (run
+    // Tools > Minifantasy > Setup Weapon Shine). NOTE: high glow + the scene Bloom spills the halo onto the
+    // character (bloom is screen-space) — keep glow modest or raise the Bloom threshold to keep it weapon-only.
     static readonly int GlowId = Shader.PropertyToID("_Glow");
     static readonly int GlowColorId = Shader.PropertyToID("_GlowColor");
     MaterialPropertyBlock _shineMpb;
@@ -63,20 +56,8 @@ public sealed class AttackView : MonoBehaviour
     // weapon material needs GLOW_ON. Per-renderer MaterialPropertyBlock so it stays per-ghost and still batches.
     void DriveShine(AttackState state, AttackTimeline tl)
     {
-        float glow = 0f; Color color = attackColor;
-        switch (state.phase)
-        {
-            case AttackPhase.Anticipation:
-            case AttackPhase.TapWindup:
-                glow = chargeGlow * Mathf.Max(0f, chargeCurve.Evaluate(AttackLogic.AnticipationProgress(state, tl)));
-                color = chargeColor;
-                break;
-            case AttackPhase.Hit:
-            case AttackPhase.FollowThrough:
-                glow = attackGlow * Mathf.Max(0f, attackCurve.Evaluate(AttackLogic.LungeProgress(state, tl)));
-                color = attackColor;
-                break;
-        }
+        float glow = AttackLogic.CurrentGlow(state, tl);   // per-keyframe intensity authored on the attack's frames
+        Color color = tl.glowColor.maxColorComponent > 0.01f ? tl.glowColor : Color.white;  // fallback for un-migrated assets
         SetShine(weaponFront, glow, color);
         SetShine(weaponBack, glow, color);
     }

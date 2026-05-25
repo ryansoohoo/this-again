@@ -10,7 +10,7 @@ public sealed class StatusView : MonoBehaviour
 
     void Awake() => sprites = GetComponentsInChildren<SpriteRenderer>(true);
 
-    public void Render(byte mask)
+    public void Render(ushort mask)
     {
         if (sprites == null) return;
         var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;

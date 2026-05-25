@@ -27,7 +27,7 @@ public sealed class DmgView : MonoBehaviour
     }
 
     // mask: active-effect bitmask (StatusLogic.ActiveMask). Call every frame; pass 0 to clear.
-    public void Render(byte mask)
+    public void Render(ushort mask)
     {
         bool hurt = (mask & (1 << (int)StatusKind.HitStun)) != 0;
         if (!hurt) { if (active) Stop(); return; }

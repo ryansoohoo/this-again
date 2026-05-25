@@ -97,10 +97,10 @@ public static class StatusLogic
     }
 
     // One bit per active effect kind (defId), for the cosmetic remote wire.
-    public static byte ActiveMask(StatusState s)
+    public static ushort ActiveMask(StatusState s)
     {
-        byte m = 0;
-        for (int i = 0; i < s.count; i++) m |= (byte)(1 << s.effects[i].defId);
+        ushort m = 0;
+        for (int i = 0; i < s.count; i++) m |= (ushort)(1 << s.effects[i].defId);
         return m;
     }
 

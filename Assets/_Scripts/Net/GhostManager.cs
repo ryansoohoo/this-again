@@ -24,7 +24,7 @@ public sealed class GhostManager : MonoBehaviour
         public bool attacking;
         public byte weaponId, poseByte;
         public ushort residual;
-        public byte effectMask;         // active-effect bitmask for remote tint (self carries the full block instead)
+        public ushort effectMask;        // active-effect bitmask for remote tint (self carries the full block instead)
     }
 
     readonly Dictionary<ulong, Ghost> ghosts = new();

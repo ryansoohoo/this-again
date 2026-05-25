@@ -106,7 +106,7 @@ public class StatusLogicTests
         var defs = Defs();
         StatusLogic.Apply(s, defs[(int)StatusKind.Poison], tick: 1, self: false);
         StatusLogic.Apply(s, defs[(int)StatusKind.Slow], tick: 1, self: false);
-        byte mask = StatusLogic.ActiveMask(s);
+        ushort mask = StatusLogic.ActiveMask(s);
         Assert.AreEqual((1 << (int)StatusKind.Poison) | (1 << (int)StatusKind.Slow), mask);
     }
 }

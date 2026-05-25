@@ -10,7 +10,7 @@ public sealed class StatusFxView : MonoBehaviour
     [SerializeField] SpriteRenderer hitRenderer;    // own child "HitFxBody"
     [SerializeField] SpriteRenderer tickRenderer;   // own child "TickFxBody"
 
-    byte prevMask;
+    ushort prevMask;
     int hitDefId = -1; float hitElapsed;
     int tickDefId = -1; float tickElapsed;
 
@@ -23,13 +23,13 @@ public sealed class StatusFxView : MonoBehaviour
     // Priority for which single effect's tick FX shows when several are active (higher first).
     static readonly StatusKind[] Priority = { StatusKind.Fire, StatusKind.Bleed, StatusKind.Poison, StatusKind.Freeze, StatusKind.Slow, StatusKind.Fear };
 
-    public void Render(byte mask)
+    public void Render(ushort mask)
     {
         var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
         if (cat == null) return;
 
         // --- Layer B: one-shot on any bit that just turned on ---
-        byte rising = (byte)(mask & ~prevMask);
+        ushort rising = (ushort)(mask & ~prevMask);
         if (rising != 0)
         {
             for (int k = 0; k < Priority.Length; k++)

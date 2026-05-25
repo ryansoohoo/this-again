@@ -17,7 +17,7 @@ public struct SnapshotEntry : INetworkSerializable
 
     // in-instance member block (InstanceBit)
     public ushort hp;
-    public byte effectMask;        // remotes: one bit per active StatusKind (cosmetic)
+    public ushort effectMask;      // remotes: one bit per active StatusKind (cosmetic)
 
     // self status block (SelfBit): authoritative active effects for owner prediction
     public byte effectCount;

@@ -26,6 +26,7 @@ public static class StatusCatalogBuilder
         new Spec { kind = StatusKind.Slow,           dur = 2f,   bMove = false, bAtk = false, moveScale = 0.5f, policy = StackPolicy.Refresh, maxStacks = 1, vis = 4 },
         new Spec { kind = StatusKind.Bleed, dur = 4f,   bMove = false, bAtk = false, moveScale = 1f, period = 0.5f, perTick = 3, policy = StackPolicy.Stack,   maxStacks = 5, vis = 5 },
         new Spec { kind = StatusKind.Fire,  dur = 2.5f, bMove = false, bAtk = false, moveScale = 1f, period = 0.4f, perTick = 6, policy = StackPolicy.Refresh, maxStacks = 1, vis = 6 },
+        new Spec { kind = StatusKind.Fear, dur = 1.2f, bMove = true, bAtk = true, moveScale = 0f, policy = StackPolicy.Refresh, maxStacks = 1, vis = 7, forced = ForcedMoveKind.FleeFrozen, forcedScale = 0.8f },
     };
 
     [MenuItem("Tools/Combat/Build Status Catalog")]

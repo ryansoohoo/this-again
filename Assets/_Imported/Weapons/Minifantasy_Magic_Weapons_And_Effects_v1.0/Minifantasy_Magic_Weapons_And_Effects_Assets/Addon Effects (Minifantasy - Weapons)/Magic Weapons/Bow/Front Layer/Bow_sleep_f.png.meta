@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: c7b30e030eab6ad478fdbde8d32b8f9d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8484794861014498615
+    second: Bow_sleep_f_0
+  - first:
+      213: 8514071487838273687
+    second: Bow_sleep_f_1
+  - first:
+      213: -7410246476796887413
+    second: Bow_sleep_f_2
+  - first:
+      213: -3724001644553547165
+    second: Bow_sleep_f_3
+  - first:
+      213: 2177507510346086900
+    second: Bow_sleep_f_4
+  - first:
+      213: 7722599707264378335
+    second: Bow_sleep_f_5
+  - first:
+      213: -6616700410502195389
+    second: Bow_sleep_f_6
+  - first:
+      213: -7505667252607846576
+    second: Bow_sleep_f_7
+  - first:
+      213: 8227365510702127915
+    second: Bow_sleep_f_8
+  - first:
+      213: 1817802325586786696
+    second: Bow_sleep_f_9
+  - first:
+      213: 4527253307953663061
+    second: Bow_sleep_f_10
+  - first:
+      213: 3418565520765959662
+    second: Bow_sleep_f_11
+  - first:
+      213: -7221199929773086777
+    second: Bow_sleep_f_12
+  - first:
+      213: 2212917167805293040
+    second: Bow_sleep_f_13
+  - first:
+      213: 3398258960435445087
+    second: Bow_sleep_f_14
+  - first:
+      213: 1707391020182774963
+    second: Bow_sleep_f_15
+  - first:
+      213: 1323966447693496922
+    second: Bow_sleep_f_16
+  - first:
+      213: 8291580434723804879
+    second: Bow_sleep_f_17
+  - first:
+      213: -2066329469354778091
+    second: Bow_sleep_f_18
+  - first:
+      213: 7541776014734202183
+    second: Bow_sleep_f_19
+  - first:
+      213: -1958185097784181406
+    second: Bow_sleep_f_20
+  - first:
+      213: 6057587074988125571
+    second: Bow_sleep_f_21
+  - first:
+      213: 1752232255943819234
+    second: Bow_sleep_f_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bow_sleep_f_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 109
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73d34d2c8fb00c570800000000000000
+      internalID: 8484794861014498615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 107
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 790c1e0a8ee082670800000000000000
+      internalID: 8514071487838273687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_2
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8e7e6c2714892990800000000000000
+      internalID: -7410246476796887413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_3
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3625a612c30b15cc0800000000000000
+      internalID: -3724001644553547165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_4
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f97ce13b8f083e10800000000000000
+      internalID: 2177507510346086900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd56706848f2c2b60800000000000000
+      internalID: 7722599707264378335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_6
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 107
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 347d5de8802cc24a0800000000000000
+      internalID: -6616700410502195389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_7
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 107
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 057f606866386d790800000000000000
+      internalID: -7505667252607846576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_8
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 107
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2b53be67597d2270800000000000000
+      internalID: 8227365510702127915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_9
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 75
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 889ba7085912a3910800000000000000
+      internalID: 1817802325586786696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_10
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 77
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55c4acca5e804de30800000000000000
+      internalID: 4527253307953663061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_11
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eed37a29a3f217f20800000000000000
+      internalID: 3418565520765959662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_12
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c7acc56ce429cb90800000000000000
+      internalID: -7221199929773086777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_13
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f1e568807cd5be10800000000000000
+      internalID: 2212917167805293040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_14
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5dfa8f058a092f20800000000000000
+      internalID: 3398258960435445087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_15
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 40
+        width: 14
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b4afa2361fd1b710800000000000000
+      internalID: 1707391020182774963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_16
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 75
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a528e41387caf5210800000000000000
+      internalID: 1323966447693496922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_17
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 31
+        width: 38
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc69a46897c911370800000000000000
+      internalID: 8291580434723804879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_18
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 43
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 512ef26ab4ce253e0800000000000000
+      internalID: -2066329469354778091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_19
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7451bcdc355c9a860800000000000000
+      internalID: 7541776014734202183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_20
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26d3c1a470123d4e0800000000000000
+      internalID: -1958185097784181406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_21
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38d2aa8a95fd01450800000000000000
+      internalID: 6057587074988125571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_sleep_f_22
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ef338bf3fd215810800000000000000
+      internalID: 1752232255943819234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bow_sleep_f_0: 8484794861014498615
+      Bow_sleep_f_1: 8514071487838273687
+      Bow_sleep_f_10: 4527253307953663061
+      Bow_sleep_f_11: 3418565520765959662
+      Bow_sleep_f_12: -7221199929773086777
+      Bow_sleep_f_13: 2212917167805293040
+      Bow_sleep_f_14: 3398258960435445087
+      Bow_sleep_f_15: 1707391020182774963
+      Bow_sleep_f_16: 1323966447693496922
+      Bow_sleep_f_17: 8291580434723804879
+      Bow_sleep_f_18: -2066329469354778091
+      Bow_sleep_f_19: 7541776014734202183
+      Bow_sleep_f_2: -7410246476796887413
+      Bow_sleep_f_20: -1958185097784181406
+      Bow_sleep_f_21: 6057587074988125571
+      Bow_sleep_f_22: 1752232255943819234
+      Bow_sleep_f_3: -3724001644553547165
+      Bow_sleep_f_4: 2177507510346086900
+      Bow_sleep_f_5: 7722599707264378335
+      Bow_sleep_f_6: -6616700410502195389
+      Bow_sleep_f_7: -7505667252607846576
+      Bow_sleep_f_8: 8227365510702127915
+      Bow_sleep_f_9: 1817802325586786696
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

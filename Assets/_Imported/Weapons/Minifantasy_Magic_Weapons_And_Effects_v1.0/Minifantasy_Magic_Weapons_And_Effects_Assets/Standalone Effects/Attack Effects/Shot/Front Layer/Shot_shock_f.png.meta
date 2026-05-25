@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: cf8a25e9c142b54438090a9c9861f6bc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7693390505878545169
+    second: Shot_shock_f_0
+  - first:
+      213: 366449863396922082
+    second: Shot_shock_f_1
+  - first:
+      213: 1138868943996756629
+    second: Shot_shock_f_2
+  - first:
+      213: 4949677840947871715
+    second: Shot_shock_f_3
+  - first:
+      213: -5964202536826872260
+    second: Shot_shock_f_4
+  - first:
+      213: -1657349317755290369
+    second: Shot_shock_f_5
+  - first:
+      213: -545757484476781740
+    second: Shot_shock_f_6
+  - first:
+      213: -457317918164684630
+    second: Shot_shock_f_7
+  - first:
+      213: 5708955536806087315
+    second: Shot_shock_f_8
+  - first:
+      213: 2518848864153337624
+    second: Shot_shock_f_9
+  - first:
+      213: 5886861167754917978
+    second: Shot_shock_f_10
+  - first:
+      213: 5936966995568229422
+    second: Shot_shock_f_11
+  - first:
+      213: 2345145015851582313
+    second: Shot_shock_f_12
+  - first:
+      213: -5844731746965402238
+    second: Shot_shock_f_13
+  - first:
+      213: 6033146098953649429
+    second: Shot_shock_f_14
+  - first:
+      213: 5946686557816261470
+    second: Shot_shock_f_15
+  - first:
+      213: 6118786219459328086
+    second: Shot_shock_f_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Shot_shock_f_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 43
+        width: 77
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fec1fb2a8169b3590800000000000000
+      internalID: -7693390505878545169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_1
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 107
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e293cf8534e51500800000000000000
+      internalID: 366449863396922082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_2
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 592a6a445431ecf00800000000000000
+      internalID: 1138868943996756629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_3
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 107
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eff15695c9c0b440800000000000000
+      internalID: 4949677840947871715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_4
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 107
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3e53f77465ea3da0800000000000000
+      internalID: -5964202536826872260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_5
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 108
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffcb5769399eff8e0800000000000000
+      internalID: -1657349317755290369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_6
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 75
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45b204c95741d68f0800000000000000
+      internalID: -545757484476781740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_7
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa07f52c6c747a9f0800000000000000
+      internalID: -457317918164684630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_8
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 75
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39a83d930d84a3f40800000000000000
+      internalID: 5708955536806087315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_9
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81f71ce42bfb4f220800000000000000
+      internalID: 2518848864153337624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_10
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a58b21aca0552b150800000000000000
+      internalID: 5886861167754917978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_11
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 43
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2cff0ee608546250800000000000000
+      internalID: 5936966995568229422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_12
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 75
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9638c9087f0ab8020800000000000000
+      internalID: 2345145015851582313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_13
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 40
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28dcdae517753eea0800000000000000
+      internalID: -5844731746965402238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_14
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 75
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51d7a2a796a0ab350800000000000000
+      internalID: 6033146098953649429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_15
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 38
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5b8a3ddaefd68250800000000000000
+      internalID: 5946686557816261470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_shock_f_16
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 31
+        width: 20
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 658bd6bd5ab4ae450800000000000000
+      internalID: 6118786219459328086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Shot_shock_f_0: -7693390505878545169
+      Shot_shock_f_1: 366449863396922082
+      Shot_shock_f_10: 5886861167754917978
+      Shot_shock_f_11: 5936966995568229422
+      Shot_shock_f_12: 2345145015851582313
+      Shot_shock_f_13: -5844731746965402238
+      Shot_shock_f_14: 6033146098953649429
+      Shot_shock_f_15: 5946686557816261470
+      Shot_shock_f_16: 6118786219459328086
+      Shot_shock_f_2: 1138868943996756629
+      Shot_shock_f_3: 4949677840947871715
+      Shot_shock_f_4: -5964202536826872260
+      Shot_shock_f_5: -1657349317755290369
+      Shot_shock_f_6: -545757484476781740
+      Shot_shock_f_7: -457317918164684630
+      Shot_shock_f_8: 5708955536806087315
+      Shot_shock_f_9: 2518848864153337624
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

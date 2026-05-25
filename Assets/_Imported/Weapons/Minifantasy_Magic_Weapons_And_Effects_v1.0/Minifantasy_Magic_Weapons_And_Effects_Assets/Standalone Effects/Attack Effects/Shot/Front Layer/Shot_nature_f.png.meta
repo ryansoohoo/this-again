@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: a87c20ab8578b2540bbfd545ae308834
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 696309373763463473
+    second: Shot_nature_f_0
+  - first:
+      213: -3323805357682178386
+    second: Shot_nature_f_1
+  - first:
+      213: 1749057592495231302
+    second: Shot_nature_f_2
+  - first:
+      213: 8184748645836814398
+    second: Shot_nature_f_3
+  - first:
+      213: -8520783066712232026
+    second: Shot_nature_f_4
+  - first:
+      213: -4519927804217502749
+    second: Shot_nature_f_5
+  - first:
+      213: 5039641640469867354
+    second: Shot_nature_f_6
+  - first:
+      213: -8768653503236227400
+    second: Shot_nature_f_7
+  - first:
+      213: 7080331860968067348
+    second: Shot_nature_f_8
+  - first:
+      213: -8109429223255216241
+    second: Shot_nature_f_9
+  - first:
+      213: 2168123417287353161
+    second: Shot_nature_f_10
+  - first:
+      213: 6971653874427586330
+    second: Shot_nature_f_11
+  - first:
+      213: -1490074521839276432
+    second: Shot_nature_f_12
+  - first:
+      213: -8607827417278100784
+    second: Shot_nature_f_13
+  - first:
+      213: -4171555758196013209
+    second: Shot_nature_f_14
+  - first:
+      213: 3486935886568231974
+    second: Shot_nature_f_15
+  - first:
+      213: 8946598839069359944
+    second: Shot_nature_f_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Shot_nature_f_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 43
+        width: 77
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13922fcafa9c9a900800000000000000
+      internalID: 696309373763463473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_1
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 107
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea640d033a87fd1d0800000000000000
+      internalID: -3323805357682178386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_2
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 641d06c0d96e54810800000000000000
+      internalID: 1749057592495231302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_3
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 107
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3876fa5781169170800000000000000
+      internalID: 8184748645836814398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_4
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 107
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6af247422f810c980800000000000000
+      internalID: -8520783066712232026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_5
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 108
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e354331c9df541c0800000000000000
+      internalID: -4519927804217502749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_6
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 75
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5b297fee5760f540800000000000000
+      internalID: 5039641640469867354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_7
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bebe1dd81c7f4680800000000000000
+      internalID: -8768653503236227400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_8
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 75
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 411d1e87054624260800000000000000
+      internalID: 7080331860968067348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_9
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8f63b84615857f80800000000000000
+      internalID: -8109429223255216241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_10
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9436e94c2c8b61e10800000000000000
+      internalID: 2168123417287353161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_11
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 43
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a176b3ae24a40c060800000000000000
+      internalID: 6971653874427586330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_12
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 75
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07ee8ecfd11325be0800000000000000
+      internalID: -1490074521839276432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_13
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 40
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0da4549f19ada8880800000000000000
+      internalID: -8607827417278100784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_14
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 75
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 767cdf7c328ab16c0800000000000000
+      internalID: -4171555758196013209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_15
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 38
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6241679d6b5146030800000000000000
+      internalID: 3486935886568231974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_nature_f_16
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 31
+        width: 20
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84fb6a63e34b82c70800000000000000
+      internalID: 8946598839069359944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Shot_nature_f_0: 696309373763463473
+      Shot_nature_f_1: -3323805357682178386
+      Shot_nature_f_10: 2168123417287353161
+      Shot_nature_f_11: 6971653874427586330
+      Shot_nature_f_12: -1490074521839276432
+      Shot_nature_f_13: -8607827417278100784
+      Shot_nature_f_14: -4171555758196013209
+      Shot_nature_f_15: 3486935886568231974
+      Shot_nature_f_16: 8946598839069359944
+      Shot_nature_f_2: 1749057592495231302
+      Shot_nature_f_3: 8184748645836814398
+      Shot_nature_f_4: -8520783066712232026
+      Shot_nature_f_5: -4519927804217502749
+      Shot_nature_f_6: 5039641640469867354
+      Shot_nature_f_7: -8768653503236227400
+      Shot_nature_f_8: 7080331860968067348
+      Shot_nature_f_9: -8109429223255216241
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

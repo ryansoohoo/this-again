@@ -1,0 +1,24 @@
+Overlay the layers included in this Asset pack above or below the characters and monsters to get the desired effects.
+
+
+
++ Addon Effects for Minifantasy - Weapons
+
+The assets in this folder are designed to be used in combination with the character animations from the 'Minifantasy - Weapons' asset pack.
+
+
+
++ Stand-Alone Effects
+
+The assets in this folder are a compilation of attack, hit and status effects.
+They are designed to be used as stand-alone effects to enhance character's or enemy's attacks. 
+They can also be used for other purposes.
+
+
++ Important:
+
+Front layers (marked with '_f' at the end of the file name) should be rendered after the character sprite, on top of it.
+
+Back layers (marked with '_b' at the end of the file name) should be rendered before the character sprite, below it.
+
+Some weapon effects don't need to make differences between front and back layers. Those ones only include Front layers.

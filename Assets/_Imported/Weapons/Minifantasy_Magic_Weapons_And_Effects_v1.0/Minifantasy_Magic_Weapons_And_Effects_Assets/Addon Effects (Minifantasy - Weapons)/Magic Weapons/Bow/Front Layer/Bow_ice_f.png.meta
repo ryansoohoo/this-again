@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: eed434d770e28af43824ae2912b9c7e3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8983575115934820158
+    second: Bow_ice_f_0
+  - first:
+      213: 4673980438609268035
+    second: Bow_ice_f_1
+  - first:
+      213: 9152058339233238783
+    second: Bow_ice_f_2
+  - first:
+      213: 7078654530577043379
+    second: Bow_ice_f_3
+  - first:
+      213: -3093739210275408007
+    second: Bow_ice_f_4
+  - first:
+      213: 8363462431783008753
+    second: Bow_ice_f_5
+  - first:
+      213: 5191873122682482580
+    second: Bow_ice_f_6
+  - first:
+      213: -67448314867015375
+    second: Bow_ice_f_7
+  - first:
+      213: -8918851156789552175
+    second: Bow_ice_f_8
+  - first:
+      213: 7487791782134474514
+    second: Bow_ice_f_9
+  - first:
+      213: 5116451297785137463
+    second: Bow_ice_f_10
+  - first:
+      213: 5765881983954692651
+    second: Bow_ice_f_11
+  - first:
+      213: -6125898343395529976
+    second: Bow_ice_f_12
+  - first:
+      213: -6974174437660118054
+    second: Bow_ice_f_13
+  - first:
+      213: -8974406035943044174
+    second: Bow_ice_f_14
+  - first:
+      213: -5694006053224900877
+    second: Bow_ice_f_15
+  - first:
+      213: 7779806726587706443
+    second: Bow_ice_f_16
+  - first:
+      213: -1408780291852765922
+    second: Bow_ice_f_17
+  - first:
+      213: -6328537847367983645
+    second: Bow_ice_f_18
+  - first:
+      213: -1984102147926166013
+    second: Bow_ice_f_19
+  - first:
+      213: -6289586649739076929
+    second: Bow_ice_f_20
+  - first:
+      213: -2231132161428951465
+    second: Bow_ice_f_21
+  - first:
+      213: -1715204942975178259
+    second: Bow_ice_f_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bow_ice_f_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 109
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c89aa1770ee35380800000000000000
+      internalID: -8983575115934820158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 107
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34d0e62f1705dd040800000000000000
+      internalID: 4673980438609268035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_2
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffe06a1e194a20f70800000000000000
+      internalID: 9152058339233238783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_3
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bf01ce8ace6c3260800000000000000
+      internalID: 7078654530577043379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_4
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97736df5494d015d0800000000000000
+      internalID: -3093739210275408007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f930ca25ccf01470800000000000000
+      internalID: 8363462431783008753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_6
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 107
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49f236ce81d3d0840800000000000000
+      internalID: 5191873122682482580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_7
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 107
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13127af6d10601ff0800000000000000
+      internalID: -67448314867015375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_8
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 107
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1db1af28020e93480800000000000000
+      internalID: -8918851156789552175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_9
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 75
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 217e63e24faf9e760800000000000000
+      internalID: 7487791782134474514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_10
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 77
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 739c113e859410740800000000000000
+      internalID: 5116451297785137463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_11
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2aa17e8d17840050800000000000000
+      internalID: 5765881983954692651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_12
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80b61cfb9ef6cfaa0800000000000000
+      internalID: -6125898343395529976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_13
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad3b8a9bc41c63f90800000000000000
+      internalID: -6974174437660118054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_14
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bb4e7d3241847380800000000000000
+      internalID: -8974406035943044174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_15
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 40
+        width: 14
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f61b98a9a3daf0b0800000000000000
+      internalID: -5694006053224900877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_16
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 75
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4c6477affc67fb60800000000000000
+      internalID: 7779806726587706443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_17
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 31
+        width: 38
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e157b81e9c1037ce0800000000000000
+      internalID: -1408780291852765922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_18
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 43
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ed140c9b548c28a0800000000000000
+      internalID: -6328537847367983645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_19
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30675c2db9d0774e0800000000000000
+      internalID: -1984102147926166013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_20
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fba53460446e6b8a0800000000000000
+      internalID: -6289586649739076929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_21
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75ee317ce1d6901e0800000000000000
+      internalID: -2231132161428951465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_ice_f_22
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de968f0213e5238e0800000000000000
+      internalID: -1715204942975178259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bow_ice_f_0: -8983575115934820158
+      Bow_ice_f_1: 4673980438609268035
+      Bow_ice_f_10: 5116451297785137463
+      Bow_ice_f_11: 5765881983954692651
+      Bow_ice_f_12: -6125898343395529976
+      Bow_ice_f_13: -6974174437660118054
+      Bow_ice_f_14: -8974406035943044174
+      Bow_ice_f_15: -5694006053224900877
+      Bow_ice_f_16: 7779806726587706443
+      Bow_ice_f_17: -1408780291852765922
+      Bow_ice_f_18: -6328537847367983645
+      Bow_ice_f_19: -1984102147926166013
+      Bow_ice_f_2: 9152058339233238783
+      Bow_ice_f_20: -6289586649739076929
+      Bow_ice_f_21: -2231132161428951465
+      Bow_ice_f_22: -1715204942975178259
+      Bow_ice_f_3: 7078654530577043379
+      Bow_ice_f_4: -3093739210275408007
+      Bow_ice_f_5: 8363462431783008753
+      Bow_ice_f_6: 5191873122682482580
+      Bow_ice_f_7: -67448314867015375
+      Bow_ice_f_8: -8918851156789552175
+      Bow_ice_f_9: 7487791782134474514
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

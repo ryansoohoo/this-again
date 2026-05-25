@@ -1,0 +1,11 @@
++ These mockups have been created by combining:
+
+- Attacker, from Minifantasy - Weapons (Minifantasy_Weapons / Slash_Attacks / _Characters / Human)
+
+- Defender, from Minifantasy - Creatures (Idle and Dmg animations)
+
+- Magic Weapon Effects, from this asset pack (Addon Effects / Magic Weapons / Sword)
+
+- Hit Effects, from this asset pack (Standalone Effects / Hit Effects)
+
+- Status Effects, from this asset pack (Standalone Effects / Status Effects)

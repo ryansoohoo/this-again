@@ -78,7 +78,31 @@ MonoBehaviour:
     duration: 0.12
   feintCooldown: 0.5
   rotateToAim: 0
-  lungeDistance: 0.8
+  aimSnapDegrees: 0
+  lungeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   directions:
   - canonicalDir: {x: 1, y: -1}
     row: 0
@@ -89,3 +113,10 @@ MonoBehaviour:
   - canonicalDir: {x: -1, y: 1}
     row: 3
   attackId: slash
+  damage: 10
+  hitRange: 1
+  hitArcDegrees: 90
+  mainEffect: {fileID: 11400000, guid: 665f8b86841421245b9269b1f427d8a6, type: 2}
+  attackMotion: 2
+  hitstunFullSeconds: 0.45
+  hitstunTapSeconds: 0.2

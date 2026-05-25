@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: 61c4b965413a8a04ca89b9e379748f39
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1084012764665331046
+    second: Bow_shock_f_0
+  - first:
+      213: 1206119323729842172
+    second: Bow_shock_f_1
+  - first:
+      213: 8463627976883451500
+    second: Bow_shock_f_2
+  - first:
+      213: 8297070300296265885
+    second: Bow_shock_f_3
+  - first:
+      213: -30524164011096953
+    second: Bow_shock_f_4
+  - first:
+      213: 1003939129526522700
+    second: Bow_shock_f_5
+  - first:
+      213: -6112654499931223681
+    second: Bow_shock_f_6
+  - first:
+      213: -7883128214709750584
+    second: Bow_shock_f_7
+  - first:
+      213: 647229589645869572
+    second: Bow_shock_f_8
+  - first:
+      213: -8840396894137475535
+    second: Bow_shock_f_9
+  - first:
+      213: -3377994852602633678
+    second: Bow_shock_f_10
+  - first:
+      213: -7627039706312872613
+    second: Bow_shock_f_11
+  - first:
+      213: 7083998597271060694
+    second: Bow_shock_f_12
+  - first:
+      213: 1032550907756268340
+    second: Bow_shock_f_13
+  - first:
+      213: -5688870281846181103
+    second: Bow_shock_f_14
+  - first:
+      213: -6387474143738011800
+    second: Bow_shock_f_15
+  - first:
+      213: -7029275307666352642
+    second: Bow_shock_f_16
+  - first:
+      213: -4313312922446279477
+    second: Bow_shock_f_17
+  - first:
+      213: -3900108696984483619
+    second: Bow_shock_f_18
+  - first:
+      213: -6483613051056572988
+    second: Bow_shock_f_19
+  - first:
+      213: -8909869856005520348
+    second: Bow_shock_f_20
+  - first:
+      213: 7339735237600809853
+    second: Bow_shock_f_21
+  - first:
+      213: 6809922629733268629
+    second: Bow_shock_f_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bow_shock_f_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 109
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66dbdd9bddf2b0f00800000000000000
+      internalID: 1084012764665331046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 107
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cffc6a7722ffcb010800000000000000
+      internalID: 1206119323729842172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_2
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6632318dc8d47570800000000000000
+      internalID: 8463627976883451500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_3
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d904a957a7d152370800000000000000
+      internalID: 8297070300296265885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_4
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7848d0f3f6e839ff0800000000000000
+      internalID: -30524164011096953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 107
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c431b87b155beed00800000000000000
+      internalID: 1003939129526522700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_6
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 107
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7908e85e1d7b2ba0800000000000000
+      internalID: -6112654499931223681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_7
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 107
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c4bd53c7a0899290800000000000000
+      internalID: -7883128214709750584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_8
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 107
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 402c6f2f1eb6bf800800000000000000
+      internalID: 647229589645869572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_9
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 75
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13e187bfcd9905580800000000000000
+      internalID: -8840396894137475535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_10
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 77
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 232a5853493fe11d0800000000000000
+      internalID: -3377994852602633678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_11
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5deb610ccf472690800000000000000
+      internalID: -7627039706312872613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_12
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d005bb013b6f4260800000000000000
+      internalID: 7083998597271060694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_13
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43bc155749b545e00800000000000000
+      internalID: 1032550907756268340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_14
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 75
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 113384d9e921d01b0800000000000000
+      internalID: -5688870281846181103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_15
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 40
+        width: 14
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86fd08acb122b57a0800000000000000
+      internalID: -6387474143738011800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_16
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 75
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef55f12b95ff27e90800000000000000
+      internalID: -7029275307666352642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_17
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 31
+        width: 38
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcccc7cffb80424c0800000000000000
+      internalID: -4313312922446279477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_18
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 43
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd804d2cdc700e9c0800000000000000
+      internalID: -3900108696984483619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_19
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c5bfae18449506a0800000000000000
+      internalID: -6483613051056572988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_20
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42484dd8298c95480800000000000000
+      internalID: -8909869856005520348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_21
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d731d9e9f4afbd560800000000000000
+      internalID: 7339735237600809853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_shock_f_22
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 43
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59c352d1d84b18e50800000000000000
+      internalID: 6809922629733268629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bow_shock_f_0: 1084012764665331046
+      Bow_shock_f_1: 1206119323729842172
+      Bow_shock_f_10: -3377994852602633678
+      Bow_shock_f_11: -7627039706312872613
+      Bow_shock_f_12: 7083998597271060694
+      Bow_shock_f_13: 1032550907756268340
+      Bow_shock_f_14: -5688870281846181103
+      Bow_shock_f_15: -6387474143738011800
+      Bow_shock_f_16: -7029275307666352642
+      Bow_shock_f_17: -4313312922446279477
+      Bow_shock_f_18: -3900108696984483619
+      Bow_shock_f_19: -6483613051056572988
+      Bow_shock_f_2: 8463627976883451500
+      Bow_shock_f_20: -8909869856005520348
+      Bow_shock_f_21: 7339735237600809853
+      Bow_shock_f_22: 6809922629733268629
+      Bow_shock_f_3: 8297070300296265885
+      Bow_shock_f_4: -30524164011096953
+      Bow_shock_f_5: 1003939129526522700
+      Bow_shock_f_6: -6112654499931223681
+      Bow_shock_f_7: -7883128214709750584
+      Bow_shock_f_8: 647229589645869572
+      Bow_shock_f_9: -8840396894137475535
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -171,3 +171,10 @@ MonoBehaviour:
   - canonicalDir: {x: 0, y: 1}
     row: 3
   attackId: slingshot
+  damage: 10
+  hitRange: 1
+  hitArcDegrees: 90
+  mainEffect: {fileID: 0}
+  attackMotion: 6
+  hitstunFullSeconds: 0.45
+  hitstunTapSeconds: 0.2

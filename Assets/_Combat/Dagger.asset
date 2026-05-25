@@ -78,6 +78,7 @@ MonoBehaviour:
     duration: 0.12
   feintCooldown: 0.5
   rotateToAim: 0
+  aimSnapDegrees: 0
   lungeCurve:
     serializedVersion: 2
     m_Curve:
@@ -112,4 +113,10 @@ MonoBehaviour:
   - canonicalDir: {x: -1, y: 1}
     row: 3
   attackId: dagger
+  damage: 10
+  hitRange: 1
+  hitArcDegrees: 90
   mainEffect: {fileID: 11400000, guid: 9d4889d827b10034a811fdccc2f120f9, type: 2}
+  attackMotion: 2
+  hitstunFullSeconds: 0.45
+  hitstunTapSeconds: 0.2

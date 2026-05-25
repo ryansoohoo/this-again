@@ -101,4 +101,10 @@ MonoBehaviour:
   - canonicalDir: {x: 0, y: 1}
     row: 3
   attackId: spear
+  damage: 10
+  hitRange: 1
+  hitArcDegrees: 90
   mainEffect: {fileID: 11400000, guid: 551202e70286bd34ca5b92244564acee, type: 2}
+  attackMotion: 3
+  hitstunFullSeconds: 0.45
+  hitstunTapSeconds: 0.2

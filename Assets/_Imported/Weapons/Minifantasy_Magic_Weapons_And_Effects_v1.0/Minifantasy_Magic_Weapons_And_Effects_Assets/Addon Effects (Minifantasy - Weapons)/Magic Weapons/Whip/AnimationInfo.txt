@@ -1,0 +1,13 @@
+Magic Whip layers are designed to be used in combination with: 
+
+'Minifantasy_weapons / Swing_Attacks / _Characters' Layers
+
+
+*Frame size* 
+
+- 32x32px
+
+
+*Frame Duration*
+
+- 100ms

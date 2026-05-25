@@ -21,6 +21,7 @@ public static class EffectFxSetupTool
             var attackView = root.GetComponent<AttackView>();
             var rig = FindByName(root.transform, "AttackRig");
             var overlay = EnsureChild(rig != null ? rig : root.transform, "OverlayFx", bodySr, sortingBump: 2);
+            var overlayBack = EnsureChild(rig != null ? rig : root.transform, "OverlayFxBack", bodySr, sortingBump: -2);
             var hit = EnsureChild(root.transform, "HitFxBody", bodySr, sortingBump: 3);
             var tick = EnsureChild(root.transform, "TickFxBody", bodySr, sortingBump: 1);
 
@@ -28,11 +29,12 @@ public static class EffectFxSetupTool
             if (fxView == null) fxView = root.AddComponent<StatusFxView>();
 
             Wire(attackView, "overlay", overlay);
+            Wire(attackView, "overlayBack", overlayBack);
             Wire(fxView, "hitRenderer", hit);
             Wire(fxView, "tickRenderer", tick);
 
             PrefabUtility.SaveAsPrefabAsset(root, PrefabPath);
-            Debug.Log("[EffectFx] prefab wired: OverlayFx, HitFxBody, TickFxBody + StatusFxView");
+            Debug.Log("[EffectFx] prefab wired: OverlayFx, OverlayFxBack, HitFxBody, TickFxBody + StatusFxView");
         }
         finally { PrefabUtility.UnloadPrefabContents(root); }
     }

@@ -169,7 +169,7 @@ public static class AttackLogic
         switch (s.phase)
         {
             case AttackPhase.Anticipation:
-            case AttackPhase.TapWindup: return 0.25f * FrameFrac(s, tl.anticipation);
+            case AttackPhase.TapWindup: return 0.5f * FrameFrac(s, tl.anticipation);
             case AttackPhase.Hit:          return 0.5f + 0.25f * FrameFrac(s, tl.hit);
             case AttackPhase.FollowThrough:return 0.75f + 0.25f * FrameFrac(s, tl.followThrough);
             default: return 0f;

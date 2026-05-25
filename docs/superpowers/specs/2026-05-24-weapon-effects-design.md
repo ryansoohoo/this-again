@@ -16,7 +16,8 @@ effect (besides the always-applied HitStun): e.g. **Bleed**, **Fire** (damage-ov
 
 Effects become **ScriptableObject assets** so weapons today — and spells/abilities/items later —
 can all reference the same effect by pointing at one asset. All three visual layers are **cosmetic**
-and ride the status mask that is already replicated; no new wire fields are added.
+and ride the status mask that is already replicated; they add no wire. (Fear's client-side prediction
+adds one small field — a quantized flee angle — to the self status block; see Netcode.)
 
 ## Goals / Non-goals
 
@@ -31,7 +32,9 @@ and ride the status mask that is already replicated; no new wire fields are adde
 **Non-goals (later)**
 - No spell/ability system, projectiles, cast bars, or mana in this work — only the seam they will use.
 - No items/inventory — only that effects are first-class assets items can later grant.
-- No owner-prediction of Fear movement (server-authoritative + reconcile in v1; predicted is a documented upgrade).
+- No full deterministic rollback of the *whole* status history (Approach 2). Fear movement IS
+  owner-predicted (the owner runs `InstanceStep` on the adopted flee direction), reusing the existing
+  movement reconcile; we are not adding per-tick status rollback beyond what prediction already does.
 - No death/respawn (unchanged from current combat).
 - More than 8 effect *kinds* (the cosmetic remote mask is one byte; see Constraints).
 
@@ -45,6 +48,8 @@ and ride the status mask that is already replicated; no new wire fields are adde
 | 4 | Attack visual | **Themed FX overlay** on the weapon swing (reused across weapons) |
 | 5 | FX sync | **Cosmetic, no new wire** (driven by the existing effect mask) |
 | 6 | Scalability | Effect SO is the shared currency; extract a source-agnostic apply seam |
+| 7 | Fear netcode | **Owner-predicted** — client runs `InstanceStep` on an adopted `fleeDir`; +1 quantized ushort on the self status block |
+| 8 | Weapon effects | `onHitEffect` is an **array** (multi-effect weapons later); v1 authors one entry |
 
 ## Data model
 
@@ -74,8 +79,9 @@ data never drags sprites into `InstanceSim`.
 - The catalog is still wired on **Game** (the existing footgun; `Game.Awake` LogErrors if null).
 
 `StatusEffectDef` gains `byte forcedMove` and `float forcedMoveScale`. `ActiveEffect` gains
-`Vector2 fleeDir` (frozen flee direction; zero when not a forced-move effect or when adopted by a
-non-authoritative predictor). Both remain pure value types.
+`Vector2 fleeDir` (frozen flee direction, quantized; zero when the effect has no forced move). The
+owner receives `fleeDir` via the self status block, so its prediction matches the server. Both remain
+pure value types.
 
 ## Effects
 
@@ -86,35 +92,43 @@ amountPerTick), exactly like Poison, with their own numbers, `tintColor`, and FX
 authoring (tunable): Bleed = `Stack` policy, longer + lower per-tick; Fire = `Refresh`, shorter +
 higher per-tick. No code change beyond the enum values and catalog assets.
 
-### Fear (new sim logic; stays off the wire and off the GateMod byte)
+### Fear (new sim logic; owner-predicted)
 
-`StatusKind.Fear=7`. Authoring: `blocksAttack=true`, `blocksMove=true`, `forcedMove=FleeFrozen`,
-`forcedMoveScale≈0.8`, a duration, and (optionally) DoT.
+`StatusKind.Fear=7`. Authoring: `blocksAttack=true`, `blocksMove=true` (WASD can't fight the flee),
+`forcedMove=FleeFrozen`, `forcedMoveScale≈0.8`, a duration, and (optionally) DoT.
 
 - **Apply:** at strike time `OnStrike` knows both positions, so it computes
-  `fleeDir = normalize(victimPos − sourcePos)` (fallback to the strike aim if the two coincide) and
-  stores it on the victim's new `ActiveEffect.fleeDir`.
-- **Step:** `InstanceStep` applies the flee as a move override (same slot as the lunge). Order:
+  `fleeAngle = AimQuant.Encode(victimPos − sourcePos)` (fallback to the strike aim if the two coincide)
+  and stores the decoded `fleeDir` on the victim's new `ActiveEffect.fleeDir`. Quantizing through
+  `AimQuant` (the same discipline aim uses) guarantees the server and owner derive the identical vector.
+- **Step:** `InstanceStep` applies the flee as a move override (same slot as the lunge), and now
+  **outputs the move vector it actually applied** so the predictor can buffer the true value:
   ```
   lunge = AttackLogic.LungeVelocity(atk, tl)        // null while feared (attack interrupted)
   move  = lunge ?? InstanceStep.FreeMove(rawMove, g) // gate blocksMove → zero
   if (StatusLogic.ActiveForcedMove(status, defs, out dir, out scale) && dir.sqrMagnitude > eps)
       move = dir * scale                             // forced flee overrides WASD
   pos = MovementStep.Step(pos, move, dt, speed, walkable)
+  result.moveApplied = move                          // NEW: the exact pre-collision vector used
   ```
-- **Server vs owner (the key netcode point):** server and owner run the *same* `InstanceStep`. The
-  **server's** Fear effect carries `fleeDir` → it flees and the authoritative position replicates. The
-  **owner's** adopted Fear has `fleeDir = 0` (not wired) → the override is skipped, the gate's
-  `blocksMove` stops it in place, and it reconciles toward the server's fleeing position via the
-  existing snap + eased `smoothOffset`. This is **not** a determinism violation of the shared-code
-  keystone — it is the same model as "the server has inputs the client doesn't," resolved by position
-  reconcile. (Upgrade path: wire `fleeDir` on the self status block to fully predict fear movement.)
-- **Adopt:** Fear is server-applied + adopted as an external effect (by kind), exactly like
-  hitstun/poison today; the owner needs only the kind (to stop + be unable to attack), not `fleeDir`.
+- **Owner-predicted (the key netcode point):** the owner already runs this same `InstanceStep` every
+  predicted tick (`PredictionSystem.FixedTickInstance`). Once it has adopted Fear **with `fleeDir`**
+  (wired on the self block), its prediction flees identically to the server — no reconcile drift during
+  fear. Two changes make this correct:
+  1. **Wire `fleeDir`:** the self status block carries one quantized `selfFleeAngle` (ushort) alongside
+     the existing per-effect `defId/remaining/stacks`. `AdoptExternal` applies it to the adopted
+     forced-move effect. (One field suffices: v1 has a single forced-move kind / one instance at a time.)
+  2. **Buffer the real move:** `FixedTickInstance` stores `result.moveApplied` in the input ring instead
+     of re-deriving `lunge ?? FreeMove(...)` (which is zero during fear and would make `ReplayFrom` undo
+     the flee on any correction). This also removes the existing fragile re-derivation.
+  Remotes stay cosmetic (mask only); their position is server-driven as usual.
+- **Adopt:** Fear is server-applied + adopted as an external effect (by kind), like hitstun/poison; the
+  owner additionally copies `selfFleeAngle` so it can predict the flee.
 
 `StatusLogic` changes: `Apply(...)` gains an optional `Vector2 forcedDir = default` stored on the new
 effect (and refreshed on re-apply per policy); new `bool ActiveForcedMove(StatusState, StatusEffectDef[],
 out Vector2 dir, out float scale)` that surfaces the highest-priority active forced-move effect.
+`InstanceResult` gains `Vector2 moveApplied`.
 
 ## Visual layers (cosmetic; driven by the existing mask, no new wire)
 
@@ -125,7 +139,7 @@ They use **their own child renderers**, so they never write another component's 
 (avoiding the documented multi-writer/full-bright footgun).
 
 - **Layer A — attacker swing overlay** (`AttackView`, +1 rig layer above `weaponFront`):
-  when the attacking weapon's `AttackDefinition.onHitEffect` is set, play that effect's `attackOverlayFx`
+  when the attacking weapon has a primary on-hit effect (`onHitEffects[0]`), play that effect's `attackOverlayFx`
   driven by **attack phase + progress**, rotated toward `state.lockedAim`/`residualDeg`. Same phase
   timing as the swing → the attack visibly "becomes" themed. No effect → overlay disabled (current
   behavior). Remotes get it free: `weaponId` is already replicated and `AttackView.Render` already
@@ -146,16 +160,21 @@ DmgView so DmgView's hurt sprite still wins its own renderer.
 
 ## Per-weapon binding
 
-`AttackDefinition` gains `StatusEffectAsset onHitEffect` (nullable; the one non-HitStun effect),
-replacing the general `OnHitEffect[] onHit`. `AttackTimeline` carries the resolved effect (or its
-defId). `OnStrike` per victim: apply flat `damage`, always apply charge-scaled HitStun (as today),
-then if `onHitEffect != null` apply it through the new seam (below). `WeaponCatalog` is unchanged
-(byte id → `AttackDefinition`; the effect is reached via `def.onHitEffect`).
+`AttackDefinition` keeps an **array** of on-hit effects so multi-effect weapons are possible later,
+but each entry now references an effect **asset**: `OnHitEffect[] onHitEffects` where
+`OnHitEffect = { StatusEffectAsset effect; float magnitudeScale = 1f; }` (the per-weapon scale is the
+data-oriented stat hook, default 1). HitStun is **implicit + always applied** (charge-scaled), so it
+is no longer an array entry. **v1 authors exactly one** non-HitStun entry per weapon (the "one effect
+per weapon" rule), but the data does not enforce it. `AttackTimeline` carries the resolved entries
+(effect defId + scale). `OnStrike` per victim: apply flat `damage`, always apply charge-scaled HitStun,
+then loop `onHitEffects` applying each via the seam (below). For the attacker overlay (Layer A) the
+**primary (first)** entry's theme is used. `WeaponCatalog` is unchanged (byte id → `AttackDefinition`;
+effects are reached via `def.onHitEffects`).
 
 ## Scalability for spells/abilities (designed-for, not built)
 
 - **`StatusEffectAsset` is the shared "effect" currency.** Weapons reference it via
-  `AttackDefinition.onHitEffect`; a future `SpellDef`/`AbilityDef` SO references the same assets. No
+  `AttackDefinition.onHitEffects[]`; a future `SpellDef`/`AbilityDef` SO references the same assets. No
   effect logic is weapon-specific.
 - **Source-agnostic apply seam.** Extract the per-victim application out of `OnStrike` into
   `Net/CombatEffects.cs`:
@@ -178,8 +197,10 @@ then if `onHitEffect != null` apply it through the new seam (below). `WeaponCata
 
 - **DoT (Bleed/Fire):** server applies on hit, ticks in `StatusLogic.Step` (server applies HP), owner
   adopts the effect (gate + visuals). Same as Poison. No new wire.
-- **Fear:** server-applied + server-computed `fleeDir`; server `InstanceStep` flees → authoritative
-  position replicates; owner adopts Fear (stops + can't attack) and reconciles. No new wire.
+- **Fear:** server-applied + server-computed quantized `fleeDir`; the self status block carries one
+  `selfFleeAngle` (ushort) so the **owner predicts the flee** by running the same `InstanceStep` on the
+  adopted `fleeDir` (no reconcile drift during fear). Remotes are cosmetic (mask) + server-driven
+  position. This one ushort is the only wire addition in the whole feature.
 - **All visuals:** cosmetic, from the existing remote `effectMask` (`SnapshotEntry.effectMask`,
   `ReplicationHub.cs:125`) + replicated `weaponId`/pose. No new wire.
 
@@ -190,8 +211,9 @@ then if `onHitEffect != null` apply it through the new seam (below). `WeaponCata
   `SnapshotEntry`. Fine for v1; flagged.
 - **One-shot hit FX** does not re-fire on re-application of an already-active effect (cheap cosmetic
   tradeoff).
-- **Fear is server-authoritative, not owner-predicted** — during fear the owner eases toward the
-  server path rather than predicting the flee.
+- **Fear is owner-predicted** — the owner runs `InstanceStep` on the adopted `fleeDir`, so the flee is
+  smooth locally (no easing toward the server path). Requires the `selfFleeAngle` wire field + buffering
+  `InstanceStep`'s applied move so reconcile replay is faithful.
 - **`SpriteRenderer.color` has multiple writers** (PlayerView/AttackView/StatusView/DmgView). The new
   views use their own renderers; do not add another writer to the shared body/weapon renderers.
 
@@ -200,12 +222,14 @@ then if `onHitEffect != null` apply it through the new seam (below). `WeaponCata
 1. **Data refactor (no behavior change):** `StatusEffectAsset` SO; `StatusCatalog`/`StatusCatalogBuilder`
    migration to the SO array; `StatusEffectDef.forcedMove/forcedMoveScale` + `ActiveEffect.fleeDir`
    (default/unused yet); migrate existing kinds (HitStun, AttackCooldown, Poison, Freeze, Slow) to
-   assets; `AttackDefinition.onHitEffect` replacing `onHit[]`; `OnStrike` updated to the new seam
-   (`CombatEffects.ApplyEffect`) with current behavior preserved. Verify: clean compile, existing
-   EditMode tests green, host combat unchanged.
+   assets; `AttackDefinition.onHitEffects[]` (array of effect-asset refs) replacing `OnHitEffect[] onHit`,
+   HitStun now implicit; `OnStrike` updated to the new seam (`CombatEffects.ApplyEffect`) with current
+   behavior preserved. Verify: clean compile, existing EditMode tests green, host combat unchanged.
 2. **New DoT effects:** author Bleed/Fire assets + `StatusKind` values; assign to a couple of weapons.
-3. **Fear:** `ActiveForcedMove`, `Apply(forcedDir)`, `InstanceStep` override, `OnStrike` fleeDir; author
-   the Fear asset; EditMode tests.
+3. **Fear (+ owner prediction):** `ActiveForcedMove`, `Apply(forcedDir)`, `InstanceStep` forced-move
+   override + `InstanceResult.moveApplied`; `OnStrike` computes the quantized fleeDir; wire
+   `selfFleeAngle` on the self block (`SnapshotEntry`/`ReplicationHub`); `AdoptExternal` copies it;
+   `FixedTickInstance` buffers `moveApplied`; author the Fear asset; EditMode tests (incl. replay parity).
 4. **Visuals:** import/slice the PixeLike2 fx sheets; add the 3 rig renderers via a re-runnable setup
    tool (pre-placed, per the scene-objects preference); `StatusFxView`; `AttackView` overlay layer;
    data-driven `StatusView` tint; wire `GhostManager`/`LocalPlayer` to drive `StatusFxView`.
@@ -214,8 +238,10 @@ then if `onHitEffect != null` apply it through the new seam (below). `WeaponCata
 
 - **EditMode (pure, deterministic):**
   - Bleed/Fire DoT accrual over ticks (periodic damage × stacks; expiry).
-  - Fear sets `blocksAttack`; `ActiveForcedMove` returns the stored `fleeDir`; `InstanceStep` flees when
-    `fleeDir` present and stops when absent (server-vs-owner data divergence) — same code path.
+  - Fear sets `blocksAttack`; `ActiveForcedMove` returns the stored `fleeDir`; `InstanceStep` flees in
+    `fleeDir` and reports it in `moveApplied`.
+  - **Fear prediction parity:** with the same `fleeDir` + inputs, `PredictionSystem` live-step and
+    `ReplayFrom` (using the buffered `moveApplied`) land on the same position as the server `InstanceStep`.
   - `StatusLogic.ActiveMask` includes the new bits; catalog ordering (kind == index) holds.
   - Server-vs-replay parity of `InstanceStep` given identical inputs + effect data.
 - **Manual host test** (the known MCP-can't-click-Host limitation): overlay themed swing per weapon;
@@ -228,14 +254,17 @@ then if `onHitEffect != null` apply it through the new seam (below). `WeaponCata
   `ActiveEffect` += `fleeDir`.
 - `Combat/StatusEffectAsset.cs` — **new** SO (gameplay + visual fields).
 - `Combat/StatusCatalog.cs` — `StatusEffectAsset[]`; `Defs` build from SOs; `Visual(defId)`.
-- `Combat/AttackDefinition.cs`, `Combat/Core/AttackTimeline.cs` — `onHitEffect` replaces `onHit[]`.
+- `Combat/AttackDefinition.cs`, `Combat/Core/AttackTimeline.cs` — `onHitEffects[]` (array of effect-asset
+  refs + per-entry scale) replaces `OnHitEffect[] onHit`; HitStun implicit.
 - `Combat/AttackView.cs` — overlay rig layer driven by phase/progress.
 - `Combat/StatusView.cs` — tint from `Visual(defId).tintColor`.
 - `Combat/StatusFxView.cs` — **new** (Layers B + C, own renderers).
 - `InstanceSim/StatusLogic.cs` — `Apply(forcedDir)`, `ActiveForcedMove`.
-- `InstanceSim/InstanceStep.cs` — forced-move override.
+- `InstanceSim/InstanceStep.cs` — forced-move override + `InstanceResult.moveApplied`.
 - `Net/CombatEffects.cs` — **new** source-agnostic apply seam.
-- `Net/AttackSimSystem.cs` — `OnStrike` uses the seam + computes fleeDir.
+- `Net/AttackSimSystem.cs` — `OnStrike` uses the seam + computes the quantized fleeDir.
+- `Net/SnapshotEntry.cs`, `Net/ReplicationHub.cs` — `selfFleeAngle` (ushort) on the self block.
+- `Net/PredictionSystem.cs` — `AdoptExternal` copies `fleeDir`; `FixedTickInstance` buffers `moveApplied`.
 - `Net/GhostManager.cs`, `Net/LocalPlayer.cs` — drive `StatusFxView`.
 - `Editor/StatusCatalogBuilder.cs` — assemble from SO assets.
 - `Editor/<EffectFxSetupTool>.cs` — **new** re-runnable rig/prefab wiring + sheet slicing.

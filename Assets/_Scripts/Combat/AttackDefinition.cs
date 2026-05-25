@@ -32,6 +32,8 @@ public sealed class AttackDefinition : ScriptableObject
     public float hitRange = 1.0f;
     [Range(0f, 180f)] public float hitArcDegrees = 90f;   // half-arc each side of the locked aim
     public OnHitEffect[] onHit = new[] { new OnHitEffect { kind = StatusKind.HitStun, magnitude = 1 } };
+    public float hitstunFullSeconds = 0.45f;   // HitStun on a full (charged) strike
+    public float hitstunTapSeconds = 0.2f;     // HitStun on a tap (quick) strike — fast attacks stun less
 
     AttackTimeline _timeline;
     public AttackTimeline Timeline => _timeline ??= BuildTimeline();
@@ -57,6 +59,8 @@ public sealed class AttackDefinition : ScriptableObject
             hitRange = hitRange,
             hitArcCos = Mathf.Cos(hitArcDegrees * Mathf.Deg2Rad),
             onHit = onHit,
+            hitstunTicks = Mathf.CeilToInt(hitstunFullSeconds * 60f),
+            hitstunTapTicks = Mathf.CeilToInt(hitstunTapSeconds * 60f),
         };
     }
 

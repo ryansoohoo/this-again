@@ -140,6 +140,8 @@ public static class AttackSimSystem
         var defs = statusCat != null ? statusCat.Defs : null;
         Vector2 origin = sp.worldPos;
         Vector2 aim = sp.attackState.lockedAim.sqrMagnitude > 1e-6f ? sp.attackState.lockedAim.normalized : Vector2.right;
+        bool full = sp.attackState.windupComplete;   // full (charged) strike vs tap → scales the hitstun duration
+        int hitstunTicks = full ? tl.hitstunTicks : tl.hitstunTapTicks;
         float range2 = tl.hitRange * tl.hitRange;
         foreach (var kv in _reg.Players)
         {
@@ -154,11 +156,13 @@ public static class AttackSimSystem
                 foreach (var oh in tl.onHit)
                 {
                     int idx = (int)oh.kind;
-                    if (idx < defs.Length)
-                        StatusLogic.Apply(victim.status, defs[idx], tick, self: false,
-                                          durationOverride: oh.kind == StatusKind.AttackCooldown ? 30 : -1);
+                    if (idx >= defs.Length) continue;
+                    int durOverride =
+                        oh.kind == StatusKind.HitStun ? hitstunTicks :
+                        oh.kind == StatusKind.AttackCooldown ? 30 : -1;
+                    StatusLogic.Apply(victim.status, defs[idx], tick, self: false, durationOverride: durOverride);
                 }
-            Debug.Log($"[attack] HIT {id} -> {kv.Key} dmg={tl.damage} hp={victim.hp} effects={(tl.onHit != null ? tl.onHit.Length : 0)}");
+            Debug.Log($"[attack] HIT {id} -> {kv.Key} dmg={tl.damage} hp={victim.hp} hitstun={hitstunTicks}t ({(full ? "full" : "tap")})");
         }
     }
 }

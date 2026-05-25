@@ -23,4 +23,6 @@ public sealed class AttackTimeline
     public float hitRange;        // broadphase radius from the attacker
     public float hitArcCos;       // cos(halfArc); a victim must be within this of lockedAim
     public OnHitEffect[] onHit;   // effects applied to each victim on a strike (e.g., HitStun, Poison)
+    public int hitstunTicks;      // HitStun duration for a FULL strike (windup completed)
+    public int hitstunTapTicks;   // HitStun duration for a TAP strike (released before windup completed) — shorter
 }

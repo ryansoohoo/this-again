@@ -101,3 +101,6 @@ MonoBehaviour:
   - canonicalDir: {x: 0, y: 1}
     row: 3
   attackId: spear
+  onHitEffects:
+  - effect: {fileID: 11400000, guid: 551202e70286bd34ca5b92244564acee, type: 2}
+    magnitudeScale: 1

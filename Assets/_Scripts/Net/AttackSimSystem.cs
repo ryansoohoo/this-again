@@ -162,6 +162,9 @@ public static class AttackSimSystem
                     if (oh.defId >= defs.Length) continue;
                     CombatEffects.ApplyEffect(victim.status, victim.worldPos, origin, defs[oh.defId], tick, scale: oh.scale);
                 }
+            // (debug) the attacker's 'enchant' command override — an extra on-strike effect on top of the weapon's own.
+            if (defs != null && sp.enchantDefId >= 0 && sp.enchantDefId < defs.Length)
+                CombatEffects.ApplyEffect(victim.status, victim.worldPos, origin, defs[sp.enchantDefId], tick);
             Debug.Log($"[attack] HIT {id} -> {kv.Key} dmg={tl.damage} hp={victim.hp} hitstun={hitstunTicks}t ({(full ? "full" : "tap")})");
         }
     }

@@ -251,4 +251,12 @@ public sealed class ReplicationHub : NetworkBehaviour
         if (!IsServer || nm == null) return null;
         return registry.TryGet(nm.LocalClientId, out var sp) ? sp.status : null;
     }
+
+    // (debug, host-only) the local player's ServerPlayer (for the 'enchant' command). Null if not host / no player.
+    public ServerPlayer DebugLocalPlayer()
+    {
+        var nm = NetworkManager.Singleton;
+        if (!IsServer || nm == null) return null;
+        return registry.TryGet(nm.LocalClientId, out var sp) ? sp : null;
+    }
 }

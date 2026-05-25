@@ -132,6 +132,36 @@ public static class CommandBootstrap
         });
         r.Register(new Command
         {
+            Keyword = "enchant", Scope = CommandScope.Instance, Arg = ArgMode.Optional,
+            Description = "(debug) Enchant your equipped weapon: its strikes also apply a status effect.",
+            Usage = "enchant [poison|freeze|slow|bleed|fire|fear|none|list]",
+            Run = arg =>
+            {
+                var hub = ReplicationHub.Instance;
+                var sp = hub != null ? hub.DebugLocalPlayer() : null;
+                if (sp == null) return CommandResult.Bad("Enchant is host-only for now — run this on the host, in a dungeon.");
+                var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
+                if (cat == null || cat.Defs == null) return CommandResult.Bad("No StatusCatalog wired on Game.");
+
+                string which = arg.Trim().ToLowerInvariant();
+                if (which.Length == 0 || which == "list")
+                {
+                    string cur = sp.enchantDefId >= 0 ? ((StatusKind)sp.enchantDefId).ToString() : "none";
+                    return CommandResult.Ok($"Weapon enchant: {cur}. Usage: enchant [poison|freeze|slow|bleed|fire|fear|none]", keepOpen: true, output: OutputType.System);
+                }
+                if (which == "none" || which == "clear") { sp.enchantDefId = -1; return CommandResult.Ok("Weapon enchant removed.", keepOpen: true, output: OutputType.System); }
+                if (!System.Enum.TryParse<StatusKind>(which, true, out var kind))
+                    return CommandResult.Bad("Usage: enchant [poison|freeze|slow|bleed|fire|fear|none|list]");
+                if (kind == StatusKind.HitStun || kind == StatusKind.AttackCooldown)
+                    return CommandResult.Bad("Pick a real status (poison/freeze/slow/bleed/fire/fear), not hitstun/cooldown.");
+                int id = (int)kind;
+                if (id >= cat.Defs.Length) return CommandResult.Bad("Catalog missing that effect — run Tools > Combat > Build Status Catalog.");
+                sp.enchantDefId = id;
+                return CommandResult.Ok($"Weapon enchanted with {kind}. Your strikes now also apply it.", keepOpen: true, output: OutputType.System);
+            },
+        });
+        r.Register(new Command
+        {
             Keyword = "colgizmos", Aliases = new[] { "cgz" }, Scope = CommandScope.Global, Arg = ArgMode.None,
             Description = "(debug) Toggle collision rings — player body circles drawn in-game (works in builds; underworld only).",
             Run = _ =>

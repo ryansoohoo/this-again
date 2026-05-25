@@ -152,15 +152,15 @@ public static class AttackSimSystem
             if (to.sqrMagnitude > range2 || to.sqrMagnitude < 1e-6f) continue;
             if (Vector2.Dot(to.normalized, aim) < tl.hitArcCos) continue;     // outside the forward arc
             ApplyDamage(victim, tl.damage);
+            // Always apply charge-scaled HitStun (the base hurt).
+            if (defs != null && (int)StatusKind.HitStun < defs.Length)
+                StatusLogic.Apply(victim.status, defs[(int)StatusKind.HitStun], tick, self: false, durationOverride: hitstunTicks);
+            // The weapon's on-hit effects, through the source-agnostic seam (attacker is the source).
             if (defs != null && tl.onHit != null)
                 foreach (var oh in tl.onHit)
                 {
-                    int idx = (int)oh.kind;
-                    if (idx >= defs.Length) continue;
-                    int durOverride =
-                        oh.kind == StatusKind.HitStun ? hitstunTicks :
-                        oh.kind == StatusKind.AttackCooldown ? 30 : -1;
-                    StatusLogic.Apply(victim.status, defs[idx], tick, self: false, durationOverride: durOverride);
+                    if (oh.defId >= defs.Length) continue;
+                    CombatEffects.ApplyEffect(victim.status, victim.worldPos, origin, defs[oh.defId], tick, scale: oh.scale);
                 }
             Debug.Log($"[attack] HIT {id} -> {kv.Key} dmg={tl.damage} hp={victim.hp} hitstun={hitstunTicks}t ({(full ? "full" : "tap")})");
         }

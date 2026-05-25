@@ -1,5 +1,9 @@
 using UnityEngine;
 
+// One authored on-hit effect on a weapon: the effect asset + a per-weapon magnitude scale (default 1).
+[System.Serializable]
+public struct WeaponEffect { public StatusEffectAsset effect; public float magnitudeScale; }
+
 // Authoring asset for one attack. Holds the three sliced sheets + columnsPerRow, the four timed-frame phase
 // lists, the feint cooldown, and the per-direction vectors. Builds/caches a render-agnostic AttackTimeline.
 [CreateAssetMenu(menuName = "Minifantasy/Attack Definition", fileName = "Attack")]
@@ -31,9 +35,9 @@ public sealed class AttackDefinition : ScriptableObject
     public int damage = 10;
     public float hitRange = 1.0f;
     [Range(0f, 180f)] public float hitArcDegrees = 90f;   // half-arc each side of the locked aim
-    public OnHitEffect[] onHit = new[] { new OnHitEffect { kind = StatusKind.HitStun, magnitude = 1 } };
-    public float hitstunFullSeconds = 0.45f;   // HitStun on a full (charged) strike
-    public float hitstunTapSeconds = 0.2f;     // HitStun on a tap (quick) strike — fast attacks stun less
+    public WeaponEffect[] onHitEffects;   // non-HitStun effects (v1: author one); HitStun is always applied
+    public float hitstunFullSeconds = 0.45f;
+    public float hitstunTapSeconds = 0.2f;
 
     AttackTimeline _timeline;
     public AttackTimeline Timeline => _timeline ??= BuildTimeline();
@@ -43,6 +47,14 @@ public sealed class AttackDefinition : ScriptableObject
         int n = directions != null ? directions.Length : 0;
         var dirs = new Vector2[n];
         for (int i = 0; i < n; i++) dirs[i] = directions[i].canonicalDir;
+        int em = onHitEffects != null ? onHitEffects.Length : 0;
+        var applies = new System.Collections.Generic.List<EffectApply>(em);
+        for (int i = 0; i < em; i++)
+        {
+            var e = onHitEffects[i];
+            if (e.effect == null) continue;
+            applies.Add(new EffectApply { defId = (byte)e.effect.kind, scale = e.magnitudeScale <= 0f ? 1f : e.magnitudeScale });
+        }
         return new AttackTimeline
         {
             anticipation = anticipation,
@@ -58,7 +70,7 @@ public sealed class AttackDefinition : ScriptableObject
             damage = damage,
             hitRange = hitRange,
             hitArcCos = Mathf.Cos(hitArcDegrees * Mathf.Deg2Rad),
-            onHit = onHit,
+            onHit = applies.ToArray(),
             hitstunTicks = Mathf.CeilToInt(hitstunFullSeconds * 60f),
             hitstunTapTicks = Mathf.CeilToInt(hitstunTapSeconds * 60f),
         };

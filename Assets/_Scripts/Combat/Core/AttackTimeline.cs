@@ -1,8 +1,7 @@
 using UnityEngine;
 
-// One effect a strike applies to each victim. magnitude is kind-specific (stacks for Poison, etc.).
-[System.Serializable]
-public struct OnHitEffect { public StatusKind kind; public int magnitude; }
+// One resolved on-hit effect application: which catalog effect (defId) and a per-weapon magnitude scale.
+public struct EffectApply { public byte defId; public float scale; }
 
 // Runtime, render-agnostic view of an attack's timing + directions. Built once from an AttackDefinition.
 public sealed class AttackTimeline
@@ -14,15 +13,15 @@ public sealed class AttackTimeline
     public DirectionEntry[] directions;
     public Vector2[] dirs;        // cached directions[].canonicalDir for the picker (no per-tick alloc)
     public float feintCooldown;
-    public int feintCooldownTicks;  // feintCooldown converted to ticks (60 Hz); the AttackCooldown effect's duration
-    public float aimSnapDegrees;  // 0 = rotate freely to the cursor; 45 = snap the aim to 8 directions
-    public AnimationCurve lungeCurve;  // copied from the SO; lets the pure core compute the lunge without an SO ref
+    public int feintCooldownTicks;
+    public float aimSnapDegrees;
+    public AnimationCurve lungeCurve;
 
-    // On-hit (consumed by AttackSimSystem.OnStrike's broadphase query).
-    public int damage;            // HP removed per strike
-    public float hitRange;        // broadphase radius from the attacker
-    public float hitArcCos;       // cos(halfArc); a victim must be within this of lockedAim
-    public OnHitEffect[] onHit;   // effects applied to each victim on a strike (e.g., HitStun, Poison)
-    public int hitstunTicks;      // HitStun duration for a FULL strike (windup completed)
-    public int hitstunTapTicks;   // HitStun duration for a TAP strike (released before windup completed) — shorter
+    // On-hit (consumed by AttackSimSystem.OnStrike's broadphase query). HitStun is implicit (always applied).
+    public int damage;
+    public float hitRange;
+    public float hitArcCos;
+    public EffectApply[] onHit;   // non-HitStun effects to apply to each victim
+    public int hitstunTicks;
+    public int hitstunTapTicks;
 }

@@ -112,3 +112,6 @@ MonoBehaviour:
   - canonicalDir: {x: -1, y: 1}
     row: 3
   attackId: dagger
+  onHitEffects:
+  - effect: {fileID: 11400000, guid: 9d4889d827b10034a811fdccc2f120f9, type: 2}
+    magnitudeScale: 1

@@ -13,54 +13,9 @@ MonoBehaviour:
   m_Name: StatusCatalog
   m_EditorClassIdentifier: Assembly-CSharp::StatusCatalog
   maxHp: 100
-  entries:
-  - name: HitStun
-    durationSeconds: 0.3
-    blocksMove: 1
-    blocksAttack: 1
-    moveScale: 0
-    periodSeconds: 0
-    amountPerTick: 0
-    policy: 0
-    maxStacks: 1
-    visualId: 1
-  - name: AttackCooldown
-    durationSeconds: 0
-    blocksMove: 0
-    blocksAttack: 1
-    moveScale: 1
-    periodSeconds: 0
-    amountPerTick: 0
-    policy: 0
-    maxStacks: 1
-    visualId: 0
-  - name: Poison
-    durationSeconds: 3
-    blocksMove: 0
-    blocksAttack: 0
-    moveScale: 1
-    periodSeconds: 0.5
-    amountPerTick: 5
-    policy: 1
-    maxStacks: 5
-    visualId: 2
-  - name: Freeze
-    durationSeconds: 1.5
-    blocksMove: 1
-    blocksAttack: 0
-    moveScale: 0
-    periodSeconds: 0
-    amountPerTick: 0
-    policy: 0
-    maxStacks: 1
-    visualId: 3
-  - name: Slow
-    durationSeconds: 2
-    blocksMove: 0
-    blocksAttack: 0
-    moveScale: 0.5
-    periodSeconds: 0
-    amountPerTick: 0
-    policy: 0
-    maxStacks: 1
-    visualId: 4
+  effects:
+  - {fileID: 11400000, guid: 24e5498b8573535428a23bcadcaf5922, type: 2}
+  - {fileID: 11400000, guid: 3edd4859b256ddf4894a5828cddaa1fa, type: 2}
+  - {fileID: 11400000, guid: 665f8b86841421245b9269b1f427d8a6, type: 2}
+  - {fileID: 11400000, guid: c7ed161abeea6f642a7663b3af1ae9ee, type: 2}
+  - {fileID: 11400000, guid: d9d504f94c9dd4944842cbfd745a311d, type: 2}

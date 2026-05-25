@@ -161,4 +161,24 @@ public static class AttackLogic
 
     static int Col(TimedFrame[] list, int i) => Has(list) ? list[Mathf.Clamp(i, 0, list.Length - 1)].column : 0;
     static bool Has(TimedFrame[] list) => list != null && list.Length > 0;
+
+    // Coarse 0..1 progress across the whole swing for FX overlays: anticipation = 0..0.5, hit = 0.5..0.75,
+    // follow-through = 0.75..1 (frame-fraction within each phase). Idle = 0.
+    public static float PhaseProgress01(in AttackState s, AttackTimeline tl)
+    {
+        switch (s.phase)
+        {
+            case AttackPhase.Anticipation:
+            case AttackPhase.TapWindup: return 0.25f * FrameFrac(s, tl.anticipation);
+            case AttackPhase.Hit:          return 0.5f + 0.25f * FrameFrac(s, tl.hit);
+            case AttackPhase.FollowThrough:return 0.75f + 0.25f * FrameFrac(s, tl.followThrough);
+            default: return 0f;
+        }
+    }
+
+    static float FrameFrac(in AttackState s, TimedFrame[] phase)
+    {
+        if (phase == null || phase.Length == 0) return 0f;
+        return Mathf.Clamp01((s.frameIndex + 0.5f) / phase.Length);
+    }
 }

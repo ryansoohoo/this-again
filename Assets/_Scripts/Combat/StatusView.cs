@@ -1,24 +1,29 @@
 using UnityEngine;
 
-// Visual: tints the player rig by active status effects. Driven each frame by GhostManager (remotes) or
-// LocalPlayer (self) with the active-effect mask (StatusLogic.ActiveMask). No logic, no new GameObjects.
+// Visual: tints the player rig by the highest-priority active tinting effect, read from the catalog (data-driven).
+// Driven each frame with the active-effect mask. When no tinting effect is active it must NOT touch the color
+// (PlayerView/AttackView own the day/night tint). HitStun has no tint (DmgView shows the hurt sprite).
 public sealed class StatusView : MonoBehaviour
 {
     SpriteRenderer[] sprites;
+    static readonly StatusKind[] Priority = { StatusKind.Freeze, StatusKind.Fire, StatusKind.Poison, StatusKind.Bleed, StatusKind.Slow, StatusKind.Fear };
 
     void Awake() => sprites = GetComponentsInChildren<SpriteRenderer>(true);
 
-    // mask: one bit per StatusKind. Highest-priority tinting effect wins. When NO tinting effect is active we must
-    // NOT touch the color — PlayerView/AttackView own it (day/night tint), and writing white here would wipe their
-    // darkening (it previously left the whole attack rig full-bright, since nothing re-darkens the rig after us).
     public void Render(byte mask)
     {
         if (sprites == null) return;
-        Color c;
-        if ((mask & (1 << (int)StatusKind.Freeze)) != 0) c = new Color(0.6f, 0.8f, 1f);       // blue
-        else if ((mask & (1 << (int)StatusKind.Poison)) != 0) c = new Color(0.6f, 1f, 0.6f);  // green
-        else if ((mask & (1 << (int)StatusKind.Slow)) != 0) c = new Color(0.8f, 0.8f, 0.95f); // dim
-        else return;   // no tint (idle, or HitStun-only which DmgView handles) — leave day/night alone
-        for (int i = 0; i < sprites.Length; i++) if (sprites[i] != null) sprites[i].color = c;
+        var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
+        if (cat == null) return;
+        for (int k = 0; k < Priority.Length; k++)
+        {
+            int id = (int)Priority[k];
+            if ((mask & (1 << id)) == 0) continue;
+            var fx = cat.Visual(id);
+            if (fx == null || fx.tintColor == Color.white) continue;   // white = no tint
+            for (int i = 0; i < sprites.Length; i++) if (sprites[i] != null) sprites[i].color = fx.tintColor;
+            return;
+        }
+        // no tinting effect active — leave color alone (do NOT write white)
     }
 }

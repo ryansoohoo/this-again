@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Minifantasy/Status Catalog", fileName = "StatusCatalog")]
 public sealed class StatusCatalog : ScriptableObject
 {
-    public int maxHp = 100;
     public StatusEffectAsset[] effects;   // ordered so effects[i].kind == (StatusKind)i
 
     StatusEffectDef[] _defs;

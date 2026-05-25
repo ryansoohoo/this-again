@@ -228,8 +228,7 @@ public sealed class ReplicationHub : NetworkBehaviour
         sp.regionKey = origin;
         PlayerSimSystem.Teleport(sp, Underworld.SpawnCell(origin, (int)id));
         sp.inInstance = true;
-        var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
-        sp.hp = cat != null ? cat.maxHp : 100;   // full HP each run
+        sp.hp = sp.stats != null ? sp.stats.GetInt(StatKind.MaxHp) : 100;   // full HP each run (from CharacterDef stats)
         sp.status.Clear();                        // no effects carried in from a previous run
     }
 

@@ -53,10 +53,9 @@ public static class StatusCatalogBuilder
         var catalog = AssetDatabase.LoadAssetAtPath<StatusCatalog>(CatalogPath);
         bool catCreated = catalog == null;
         if (catCreated) catalog = ScriptableObject.CreateInstance<StatusCatalog>();
-        catalog.maxHp = 100;
         catalog.effects = assets;
         if (catCreated) AssetDatabase.CreateAsset(catalog, CatalogPath); else EditorUtility.SetDirty(catalog);
         AssetDatabase.SaveAssets();
-        Debug.Log($"[StatusCatalog] {(catCreated ? "created" : "updated")} with {assets.Length} effects, maxHp={catalog.maxHp}");
+        Debug.Log($"[StatusCatalog] {(catCreated ? "created" : "updated")} with {assets.Length} effects");
     }
 }

@@ -10,14 +10,6 @@ public sealed class AttackView : MonoBehaviour
     [SerializeField] SpriteRenderer body;
     [SerializeField] SpriteRenderer weaponFront;
 
-    // Weapon shine: per-KEYFRAME intensity (TimedFrame.glow, authored on each attack's frames) × the attack's
-    // glowColor, driven onto the weapon layers' AllIn1 _Glow/_GlowColor. Weapon material needs GLOW_ON (run
-    // Tools > Minifantasy > Setup Weapon Shine). NOTE: high glow + the scene Bloom spills the halo onto the
-    // character (bloom is screen-space) — keep glow modest or raise the Bloom threshold to keep it weapon-only.
-    static readonly int GlowId = Shader.PropertyToID("_Glow");
-    static readonly int GlowColorId = Shader.PropertyToID("_GlowColor");
-    MaterialPropertyBlock _shineMpb;
-
     void Awake()
     {
         if (playerView == null) playerView = GetComponent<PlayerView>();
@@ -48,28 +40,6 @@ public sealed class AttackView : MonoBehaviour
         if (weaponBack != null) weaponBack.transform.localEulerAngles = new Vector3(0f, 0f, rot);
         if (weaponFront != null) weaponFront.transform.localEulerAngles = new Vector3(0f, 0f, rot);
         Tint();
-        DriveShine(state, tl);
-    }
-
-    // Drive the AllIn1 glow on the weapon layers per attack phase — a "charging" look during the wind-up and a
-    // separate "attack" look during the strike — each with its own intensity/color/curve (authored above). The
-    // weapon material needs GLOW_ON. Per-renderer MaterialPropertyBlock so it stays per-ghost and still batches.
-    void DriveShine(AttackState state, AttackTimeline tl)
-    {
-        float glow = AttackLogic.CurrentGlow(state, tl);   // per-keyframe intensity authored on the attack's frames
-        Color color = tl.glowColor.maxColorComponent > 0.01f ? tl.glowColor : Color.white;  // fallback for un-migrated assets
-        SetShine(weaponFront, glow, color);
-        SetShine(weaponBack, glow, color);
-    }
-
-    void SetShine(SpriteRenderer sr, float glow, Color color)
-    {
-        if (sr == null) return;
-        _shineMpb ??= new MaterialPropertyBlock();
-        sr.GetPropertyBlock(_shineMpb);
-        _shineMpb.SetFloat(GlowId, glow);
-        _shineMpb.SetColor(GlowColorId, color);
-        sr.SetPropertyBlock(_shineMpb);
     }
 
     void SetFrame(SpriteRenderer sr, Sprite[] frames, int i)

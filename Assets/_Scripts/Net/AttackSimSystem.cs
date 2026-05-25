@@ -37,7 +37,7 @@ public static class AttackSimSystem
 
         // ---- Pre-pass: snapshot start positions for every in-instance combatant (for mover-yields invMass) ----
         _pending.Clear();
-        foreach (var c in reg.Combatants)
+        foreach (var c in reg.Combatants.Values)
         {
             if (!c.inInstance) continue;
             _pending.Add(new Pending { id = c.entityId, c = c, region = c.regionKey, startPos = c.worldPos });
@@ -162,7 +162,7 @@ public static class AttackSimSystem
         bool full = attacker.attackState.windupComplete;   // full (charged) strike vs tap → scales the hitstun duration
         int hitstunTicks = full ? tl.hitstunTicks : tl.hitstunTapTicks;
         float range2 = tl.hitRange * tl.hitRange;
-        foreach (var victim in _reg.Combatants)
+        foreach (var victim in _reg.Combatants.Values)
         {
             if (victim == attacker) continue;
             if (!victim.inInstance || victim.regionKey != attacker.regionKey) continue;   // underworld-only + same room

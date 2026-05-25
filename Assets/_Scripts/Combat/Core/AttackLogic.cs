@@ -100,6 +100,24 @@ public static class AttackLogic
         return Mathf.Clamp01(elapsed / dur);
     }
 
+    // Normalized 0..1 charge through the wind-up (Anticipation or TapWindup); 1 when fully wound; 0 outside.
+    // Lets the visual layer ramp a "charging" effect as the player holds the attack.
+    public static float AnticipationProgress(AttackState s, AttackTimeline tl)
+    {
+        if (s.phase == AttackPhase.Anticipation)
+        {
+            if (s.windupComplete) return 1f;
+            float dur = SumDur(tl.anticipation);
+            return dur <= 0f ? 1f : Mathf.Clamp01((SumBefore(tl.anticipation, s.frameIndex) + s.phaseElapsed) / dur);
+        }
+        if (s.phase == AttackPhase.TapWindup)
+        {
+            float dur = SumDur(tl.tapAnticipation);
+            return dur <= 0f ? 1f : Mathf.Clamp01((SumBefore(tl.tapAnticipation, s.frameIndex) + s.phaseElapsed) / dur);
+        }
+        return 0f;
+    }
+
     // The movement override an attack imposes: null outside an attack (normal WASD), zero during the wind-up
     // (rooted), and the lunge vector during hit/follow-through (lockedAim * curve(progress)). Pure.
     public static Vector2? LungeVelocity(AttackState s, AttackTimeline tl)

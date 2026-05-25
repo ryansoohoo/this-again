@@ -10,10 +10,19 @@ public sealed class AttackView : MonoBehaviour
     [SerializeField] SpriteRenderer body;
     [SerializeField] SpriteRenderer weaponFront;
 
-    [Header("Weapon attack shine (AllIn1 glow — needs the weapon material's GLOW_ON; run Tools > Minifantasy > Setup Weapon Shine)")]
-    [SerializeField] float shinePeak = 12f;     // peak _Glow during the swing
-    [SerializeField] AnimationCurve shineCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);  // glow vs lunge progress (peak at strike, fade out)
+    // Weapon shine drives the AllIn1 _Glow + _GlowColor per attack phase (weapon material needs GLOW_ON; run
+    // Tools > Minifantasy > Setup Weapon Shine). NOTE: high glow + the scene Bloom = the halo spills onto the
+    // character (bloom is screen-space). Keep these modest (or raise the Bloom threshold) to keep it weapon-only.
+    [Header("Weapon shine — CHARGE (wind-up)")]
+    [SerializeField] float chargeGlow = 2f;                                                  // peak _Glow while charging
+    [SerializeField] Color chargeColor = new Color(0.7f, 0.85f, 1f);                         // cool build-up
+    [SerializeField] AnimationCurve chargeCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);     // vs wind-up progress (builds as you hold)
+    [Header("Weapon shine — ATTACK (strike)")]
+    [SerializeField] float attackGlow = 6f;                                                  // peak _Glow during the swing
+    [SerializeField] Color attackColor = new Color(1f, 0.95f, 0.7f);                         // warm flash
+    [SerializeField] AnimationCurve attackCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);  // vs lunge progress (flash at strike, fade)
     static readonly int GlowId = Shader.PropertyToID("_Glow");
+    static readonly int GlowColorId = Shader.PropertyToID("_GlowColor");
     MaterialPropertyBlock _shineMpb;
 
     void Awake()
@@ -49,24 +58,36 @@ public sealed class AttackView : MonoBehaviour
         DriveShine(state, tl);
     }
 
-    // Brighten/shine the weapon layers during the swing by driving the AllIn1 _Glow per-renderer (the weapon
-    // material needs GLOW_ON — set up by Tools > Minifantasy > Setup Weapon Shine). Peak + curve are tunable here;
-    // the glow color/look is tunable in the AllIn1 material inspector. MaterialPropertyBlock keeps it per-ghost.
+    // Drive the AllIn1 glow on the weapon layers per attack phase — a "charging" look during the wind-up and a
+    // separate "attack" look during the strike — each with its own intensity/color/curve (authored above). The
+    // weapon material needs GLOW_ON. Per-renderer MaterialPropertyBlock so it stays per-ghost and still batches.
     void DriveShine(AttackState state, AttackTimeline tl)
     {
-        float glow = 0f;
-        if (state.phase == AttackPhase.Hit || state.phase == AttackPhase.FollowThrough)
-            glow = shinePeak * Mathf.Max(0f, shineCurve.Evaluate(AttackLogic.LungeProgress(state, tl)));
-        SetGlow(weaponFront, glow);
-        SetGlow(weaponBack, glow);
+        float glow = 0f; Color color = attackColor;
+        switch (state.phase)
+        {
+            case AttackPhase.Anticipation:
+            case AttackPhase.TapWindup:
+                glow = chargeGlow * Mathf.Max(0f, chargeCurve.Evaluate(AttackLogic.AnticipationProgress(state, tl)));
+                color = chargeColor;
+                break;
+            case AttackPhase.Hit:
+            case AttackPhase.FollowThrough:
+                glow = attackGlow * Mathf.Max(0f, attackCurve.Evaluate(AttackLogic.LungeProgress(state, tl)));
+                color = attackColor;
+                break;
+        }
+        SetShine(weaponFront, glow, color);
+        SetShine(weaponBack, glow, color);
     }
 
-    void SetGlow(SpriteRenderer sr, float glow)
+    void SetShine(SpriteRenderer sr, float glow, Color color)
     {
         if (sr == null) return;
         _shineMpb ??= new MaterialPropertyBlock();
         sr.GetPropertyBlock(_shineMpb);
         _shineMpb.SetFloat(GlowId, glow);
+        _shineMpb.SetColor(GlowColorId, color);
         sr.SetPropertyBlock(_shineMpb);
     }
 

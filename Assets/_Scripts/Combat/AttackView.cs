@@ -10,6 +10,12 @@ public sealed class AttackView : MonoBehaviour
     [SerializeField] SpriteRenderer body;
     [SerializeField] SpriteRenderer weaponFront;
 
+    [Header("Weapon attack shine (AllIn1 glow — needs the weapon material's GLOW_ON; run Tools > Minifantasy > Setup Weapon Shine)")]
+    [SerializeField] float shinePeak = 12f;     // peak _Glow during the swing
+    [SerializeField] AnimationCurve shineCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);  // glow vs lunge progress (peak at strike, fade out)
+    static readonly int GlowId = Shader.PropertyToID("_Glow");
+    MaterialPropertyBlock _shineMpb;
+
     void Awake()
     {
         if (playerView == null) playerView = GetComponent<PlayerView>();
@@ -40,6 +46,28 @@ public sealed class AttackView : MonoBehaviour
         if (weaponBack != null) weaponBack.transform.localEulerAngles = new Vector3(0f, 0f, rot);
         if (weaponFront != null) weaponFront.transform.localEulerAngles = new Vector3(0f, 0f, rot);
         Tint();
+        DriveShine(state, tl);
+    }
+
+    // Brighten/shine the weapon layers during the swing by driving the AllIn1 _Glow per-renderer (the weapon
+    // material needs GLOW_ON — set up by Tools > Minifantasy > Setup Weapon Shine). Peak + curve are tunable here;
+    // the glow color/look is tunable in the AllIn1 material inspector. MaterialPropertyBlock keeps it per-ghost.
+    void DriveShine(AttackState state, AttackTimeline tl)
+    {
+        float glow = 0f;
+        if (state.phase == AttackPhase.Hit || state.phase == AttackPhase.FollowThrough)
+            glow = shinePeak * Mathf.Max(0f, shineCurve.Evaluate(AttackLogic.LungeProgress(state, tl)));
+        SetGlow(weaponFront, glow);
+        SetGlow(weaponBack, glow);
+    }
+
+    void SetGlow(SpriteRenderer sr, float glow)
+    {
+        if (sr == null) return;
+        _shineMpb ??= new MaterialPropertyBlock();
+        sr.GetPropertyBlock(_shineMpb);
+        _shineMpb.SetFloat(GlowId, glow);
+        sr.SetPropertyBlock(_shineMpb);
     }
 
     void SetFrame(SpriteRenderer sr, Sprite[] frames, int i)

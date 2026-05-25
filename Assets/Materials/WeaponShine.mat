@@ -8,12 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WeaponShine
-  m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 202ffec9202f22e478034613d6beb49c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - GLOW_ON
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _GLOWAFFECTLIGHT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -53,6 +54,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -123,6 +132,7 @@ Material:
     - _GlitchSize: 1
     - _GlitchSpeed: 20
     - _Glow: 0
+    - _GlowAffectLight: 1
     - _GlowGlobal: 1
     - _GradBlend: 1
     - _GradBoostX: 1.2
@@ -152,6 +162,7 @@ Material:
     - _InnerOutlineAlpha: 1
     - _InnerOutlineGlow: 4
     - _InnerOutlineThickness: 1
+    - _LitAmount: 1
     - _MaxXUV: 1
     - _MaxYUV: 1
     - _MinXUV: 0
@@ -161,6 +172,7 @@ Material:
     - _MyDstMode: 10
     - _MySrcMode: 5
     - _NegativeAmount: 1
+    - _NormalStrength: 1
     - _OffsetUvX: 0
     - _OffsetUvY: 0
     - _OnlyInnerOutline: 0
@@ -230,7 +242,10 @@ Material:
     - _ColorSwapBlue: {r: 1, g: 1, b: 1, a: 1}
     - _ColorSwapGreen: {r: 1, g: 1, b: 1, a: 1}
     - _ColorSwapRed: {r: 1, g: 1, b: 1, a: 1}
+    - _DistortTex_ScaleAndTiling: {r: 1, g: 1, b: 0, a: 0}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
+    - _FadeBurnTex_ScaleAndTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _FadeTex_ScaleAndTiling: {r: 1, g: 1, b: 0, a: 0}
     - _GlowColor: {r: 1, g: 0.95, b: 0.7, a: 1}
     - _GradBotLeftCol: {r: 0, g: 0, b: 1, a: 1}
     - _GradBotRightCol: {r: 0, g: 1, b: 0, a: 1}
@@ -240,8 +255,12 @@ Material:
     - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}
     - _HologramStripeColor: {r: 0, g: 1, b: 1, a: 1}
     - _InnerOutlineColor: {r: 1, g: 0, b: 0, a: 1}
+    - _MainTex_ScaleAndTiling: {r: 1, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineDistortTex_ScaleAndTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _OutlineTex_ScaleAndTiling: {r: 1, g: 1, b: 0, a: 0}
     - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayTex_ScaleAndTiling: {r: 1, g: 1, b: 0, a: 0}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

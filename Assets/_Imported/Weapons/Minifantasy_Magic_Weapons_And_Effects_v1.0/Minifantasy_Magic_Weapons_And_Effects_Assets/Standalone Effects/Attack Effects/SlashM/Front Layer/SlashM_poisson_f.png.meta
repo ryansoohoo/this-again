@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -118,19 +118,19 @@ TextureImporter:
       name: SlashM_poisson_f_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 110
-        width: 41
-        height: 8
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 75c0b90ac0ee6e3c0800000000000000
+      spriteID: ecfeedf1e8d43c94c856c058839c7796
       internalID: -4330512253668619177
       vertices: []
       indices: 
@@ -140,19 +140,19 @@ TextureImporter:
       name: SlashM_poisson_f_1
       rect:
         serializedVersion: 2
-        x: 75
-        y: 105
-        width: 42
-        height: 9
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7f818ac02f39893f0800000000000000
+      spriteID: c0a9294e79708a04d9cba620cd5737f9
       internalID: -893801858229331721
       vertices: []
       indices: 
@@ -162,19 +162,19 @@ TextureImporter:
       name: SlashM_poisson_f_2
       rect:
         serializedVersion: 2
-        x: 12
-        y: 78
-        width: 34
-        height: 8
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 78e8817e008214940800000000000000
+      spriteID: c723bd5b8de9c5144994e96b705496d8
       internalID: 5278544222597189255
       vertices: []
       indices: 
@@ -184,19 +184,19 @@ TextureImporter:
       name: SlashM_poisson_f_3
       rect:
         serializedVersion: 2
-        x: 71
-        y: 73
-        width: 45
-        height: 9
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 02e9ee043b9d1fc20800000000000000
+      spriteID: 14bb73dfd3f3d114bb46d003302a5fa0
       internalID: 3238608970967850528
       vertices: []
       indices: 
@@ -206,19 +206,19 @@ TextureImporter:
       name: SlashM_poisson_f_4
       rect:
         serializedVersion: 2
-        x: 17
-        y: 42
-        width: 41
-        height: 7
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5bf5a6cb14e2dc990800000000000000
+      spriteID: 4a8c160a713b01045beafe78562f8865
       internalID: -7364178955812053067
       vertices: []
       indices: 
@@ -228,20 +228,240 @@ TextureImporter:
       name: SlashM_poisson_f_5
       rect:
         serializedVersion: 2
-        x: 12
-        y: 10
-        width: 33
-        height: 7
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 704a1a73ecb5215f0800000000000000
+      spriteID: c46d8dbb9fde9ee4199709fab26a29ef
       internalID: -787466043581684729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_poisson_f_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c74a2afcae8d994c9e3fea27ff29122
+      internalID: -483127606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_poisson_f_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e71f85e7fab6ced4b98cc371a929ed0f
+      internalID: 1199001548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_poisson_f_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b56c845bad014754799bba2a4f322a01
+      internalID: -1096162070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_poisson_f_9
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73a0e0d08c1ab4b4d848dce0adeb84e4
+      internalID: 1464913528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_poisson_f_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 894964cddbb4d7d4b91248bd72b485f6
+      internalID: -1806403915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_poisson_f_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94d77bb0e46007549ac65a3abac2225f
+      internalID: 1274907829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_poisson_f_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c75e02f9e21091459169aaef3f7d3e1
+      internalID: -456660281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_poisson_f_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7518d612488ad4e46a45b65eeb80ea06
+      internalID: -626865665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_poisson_f_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1772b73895f07cb4d8a096add6b8d018
+      internalID: 899080232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_poisson_f_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2c9ea242f548fa439bf205e99e72ca9
+      internalID: 42716344
       vertices: []
       indices: 
       edges: []
@@ -250,7 +470,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d6fbf64bcb9e0014cb874f44fe60257e
     internalID: 0
     vertices: []
     indices: 
@@ -262,10 +482,20 @@ TextureImporter:
     nameFileIdTable:
       SlashM_poisson_f_0: -4330512253668619177
       SlashM_poisson_f_1: -893801858229331721
+      SlashM_poisson_f_10: -1806403915
+      SlashM_poisson_f_11: 1274907829
+      SlashM_poisson_f_12: -456660281
+      SlashM_poisson_f_13: -626865665
+      SlashM_poisson_f_14: 899080232
+      SlashM_poisson_f_15: 42716344
       SlashM_poisson_f_2: 5278544222597189255
       SlashM_poisson_f_3: 3238608970967850528
       SlashM_poisson_f_4: -7364178955812053067
       SlashM_poisson_f_5: -787466043581684729
+      SlashM_poisson_f_6: -483127606
+      SlashM_poisson_f_7: 1199001548
+      SlashM_poisson_f_8: -1096162070
+      SlashM_poisson_f_9: 1464913528
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -118,19 +118,19 @@ TextureImporter:
       name: SlashL_sickness_f_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 84
-        width: 45
-        height: 36
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f8a30b71e43931d10800000000000000
+      spriteID: 5801f049d0fcf9f45838b949e19e88b6
       internalID: 2095180215271570063
       vertices: []
       indices: 
@@ -140,19 +140,19 @@ TextureImporter:
       name: SlashL_sickness_f_1
       rect:
         serializedVersion: 2
-        x: 10
-        y: 79
-        width: 12
-        height: 9
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 49c6e66b336df5490800000000000000
+      spriteID: 76375df21d0c8654cbbd226a1188aa10
       internalID: -7755244515716338540
       vertices: []
       indices: 
@@ -162,19 +162,19 @@ TextureImporter:
       name: SlashL_sickness_f_2
       rect:
         serializedVersion: 2
-        x: 73
-        y: 104
-        width: 48
-        height: 16
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c19bd5061bb98c210800000000000000
+      spriteID: 1bf0fa650cc8b924e924940895550c1c
       internalID: 1353502874153105692
       vertices: []
       indices: 
@@ -184,19 +184,19 @@ TextureImporter:
       name: SlashL_sickness_f_3
       rect:
         serializedVersion: 2
-        x: 83
-        y: 72
-        width: 31
-        height: 16
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4ab7444b1eca1bc00800000000000000
+      spriteID: 779c7db699749e94fb26b9b2690a7a2e
       internalID: 914702284724927396
       vertices: []
       indices: 
@@ -206,19 +206,19 @@ TextureImporter:
       name: SlashL_sickness_f_4
       rect:
         serializedVersion: 2
-        x: 145
-        y: 104
-        width: 37
-        height: 9
+        x: 128
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7b1916e926441e820800000000000000
+      spriteID: fa713b455344a06489f602fa69dd4d10
       internalID: 2945710821631693239
       vertices: []
       indices: 
@@ -228,20 +228,416 @@ TextureImporter:
       name: SlashL_sickness_f_5
       rect:
         serializedVersion: 2
-        x: 134
-        y: 72
-        width: 40
-        height: 9
+        x: 160
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 31c7b4c455b58df20800000000000000
+      spriteID: 97af5d68d5e540f44895da4704ebad22
       internalID: 3447605936662477843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 660fb46715b0a5c45a960e0e1d1533cb
+      internalID: 190615695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dce04793b87d1424c9e755927d8ed126
+      internalID: 1929824249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e3b9d3af347e6c43b45c18722177281
+      internalID: -1221853886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_9
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3472d41555f32e4f987ae8aeab80969
+      internalID: 1363217491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06a7a5db0e862e3429ef6192ac089e17
+      internalID: -1130927456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_11
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d96e7b7b5658b34b9e54277cd694c78
+      internalID: 826641075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 498defb1c3f5be646812e04666f254a3
+      internalID: -701834976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43b1eaf75e81e5b4c934d959dd31e31a
+      internalID: -1090360768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd004d7977f175c4b93c27fe0fb50afd
+      internalID: -1650674876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6564013944909dc47a114cc9581da52e
+      internalID: 1977990004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94f24a59bc2bf78469dcd5519dc2211d
+      internalID: -1735429271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_17
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d42117066676f5a40a829faf40d2ccf6
+      internalID: -779951101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7581d4418bd389a499cc0feafb4333b7
+      internalID: -547880215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00dd30ede600b804281203f0cdd091f9
+      internalID: -238028584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_20
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a693036d22c7374b850e4add115584b
+      internalID: 45538474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_21
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6efbe5352b1bb0a4398516907366b433
+      internalID: -1468580284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_22
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f27e58cbafe1d4b4a8d0355268911861
+      internalID: 1077017861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_sickness_f_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21219d60e84f46e4c9babc148e74b5e6
+      internalID: -337711616
       vertices: []
       indices: 
       edges: []
@@ -250,7 +646,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ee2ea501c5ac35f41a2f18a40d961c62
     internalID: 0
     vertices: []
     indices: 
@@ -262,10 +658,28 @@ TextureImporter:
     nameFileIdTable:
       SlashL_sickness_f_0: 2095180215271570063
       SlashL_sickness_f_1: -7755244515716338540
+      SlashL_sickness_f_10: -1130927456
+      SlashL_sickness_f_11: 826641075
+      SlashL_sickness_f_12: -701834976
+      SlashL_sickness_f_13: -1090360768
+      SlashL_sickness_f_14: -1650674876
+      SlashL_sickness_f_15: 1977990004
+      SlashL_sickness_f_16: -1735429271
+      SlashL_sickness_f_17: -779951101
+      SlashL_sickness_f_18: -547880215
+      SlashL_sickness_f_19: -238028584
       SlashL_sickness_f_2: 1353502874153105692
+      SlashL_sickness_f_20: 45538474
+      SlashL_sickness_f_21: -1468580284
+      SlashL_sickness_f_22: 1077017861
+      SlashL_sickness_f_23: -337711616
       SlashL_sickness_f_3: 914702284724927396
       SlashL_sickness_f_4: 2945710821631693239
       SlashL_sickness_f_5: 3447605936662477843
+      SlashL_sickness_f_6: 190615695
+      SlashL_sickness_f_7: 1929824249
+      SlashL_sickness_f_8: -1221853886
+      SlashL_sickness_f_9: 1363217491
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

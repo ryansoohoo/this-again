@@ -105,7 +105,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -133,19 +133,19 @@ TextureImporter:
       name: Lash_poisson_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 111
-        width: 8
-        height: 9
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 72c11a59c1beaaaf0800000000000000
+      spriteID: f379d22db7667804786d54302129c818
       internalID: -384236310184780761
       vertices: []
       indices: 
@@ -155,19 +155,19 @@ TextureImporter:
       name: Lash_poisson_1
       rect:
         serializedVersion: 2
-        x: 39
-        y: 110
-        width: 23
-        height: 7
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a25c16eb670822300800000000000000
+      spriteID: 5524f07dbbfaf1f438b5e992bf20c223
       internalID: 225884178810520874
       vertices: []
       indices: 
@@ -177,19 +177,19 @@ TextureImporter:
       name: Lash_poisson_2
       rect:
         serializedVersion: 2
-        x: 80
-        y: 108
-        width: 16
-        height: 7
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 50633ce953c331d40800000000000000
+      spriteID: 8b2cb79e650991f4dabb027b7bbb0e4b
       internalID: 5553848966472480261
       vertices: []
       indices: 
@@ -199,19 +199,19 @@ TextureImporter:
       name: Lash_poisson_3
       rect:
         serializedVersion: 2
-        x: 9
-        y: 52
-        width: 21
-        height: 36
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 94e7f2bf94e541b80800000000000000
+      spriteID: 014b05a77f119d84d94ed0bb3bc799eb
       internalID: -8425005331063538103
       vertices: []
       indices: 
@@ -221,19 +221,19 @@ TextureImporter:
       name: Lash_poisson_4
       rect:
         serializedVersion: 2
-        x: 34
-        y: 78
-        width: 23
-        height: 7
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 691e3b051c869ce70800000000000000
+      spriteID: 85a515ece43f73f4a850a1b919f2d8f4
       internalID: 9135948498589704598
       vertices: []
       indices: 
@@ -243,19 +243,19 @@ TextureImporter:
       name: Lash_poisson_5
       rect:
         serializedVersion: 2
-        x: 40
-        y: 34
-        width: 7
-        height: 22
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a8c323849a8a98320800000000000000
+      spriteID: f6f20e75a8618fc4f93cbc762023c988
       internalID: 2560763308151028874
       vertices: []
       indices: 
@@ -265,19 +265,19 @@ TextureImporter:
       name: Lash_poisson_6
       rect:
         serializedVersion: 2
-        x: 63
-        y: 76
-        width: 17
-        height: 7
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ef34b49b5ae6fc880800000000000000
+      spriteID: 1bc4215d09c94c34291af59a20647658
       internalID: -8588524306314869762
       vertices: []
       indices: 
@@ -287,19 +287,19 @@ TextureImporter:
       name: Lash_poisson_7
       rect:
         serializedVersion: 2
-        x: 74
-        y: 34
-        width: 7
-        height: 12
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3e04f74840f7e8f00800000000000000
+      spriteID: db349d1ccf0cd3046a321b0bb60f8000
       internalID: 1120973014641361123
       vertices: []
       indices: 
@@ -309,19 +309,19 @@ TextureImporter:
       name: Lash_poisson_8
       rect:
         serializedVersion: 2
-        x: 74
-        y: 29
-        width: 9
-        height: 6
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0d2e72b9c11a9e260800000000000000
+      spriteID: 1af4944deb74d604892352ee291f9566
       internalID: 7127405029524759248
       vertices: []
       indices: 
@@ -331,19 +331,19 @@ TextureImporter:
       name: Lash_poisson_9
       rect:
         serializedVersion: 2
-        x: 18
-        y: 3
-        width: 38
-        height: 27
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0a2ade53463963710800000000000000
+      spriteID: 3b7aa11e358863a45ab6465173c3ee7e
       internalID: 1672686370225496736
       vertices: []
       indices: 
@@ -353,20 +353,42 @@ TextureImporter:
       name: Lash_poisson_10
       rect:
         serializedVersion: 2
-        x: 79
-        y: 17
-        width: 7
-        height: 16
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 667a1c1d80eb78d60800000000000000
+      spriteID: 7fc29443f3b9f25459080858c4cfd25f
       internalID: 7892485817078228838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lash_poisson_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6772c674e79c32545a57f33db5b85820
+      internalID: 1564173114
       vertices: []
       indices: 
       edges: []
@@ -375,7 +397,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 36946110562be844ab6341873f186302
     internalID: 0
     vertices: []
     indices: 
@@ -388,6 +410,7 @@ TextureImporter:
       Lash_poisson_0: -384236310184780761
       Lash_poisson_1: 225884178810520874
       Lash_poisson_10: 7892485817078228838
+      Lash_poisson_11: 1564173114
       Lash_poisson_2: 5553848966472480261
       Lash_poisson_3: -8425005331063538103
       Lash_poisson_4: 9135948498589704598

@@ -54,7 +54,7 @@ public sealed class AttackView : MonoBehaviour
         if (weaponFront != null) weaponFront.transform.localEulerAngles = new Vector3(0f, 0f, rot);
         Tint();
         DriveFx(state);
-        DriveOverlay(state, def);
+        DriveOverlay(state, def, i);
     }
 
     // Fixed by phase, same for all weapons: Hit → small glow; Follow-through → darken to gray; else neutral.
@@ -101,8 +101,10 @@ public sealed class AttackView : MonoBehaviour
         if (weaponFront != null) weaponFront.color = dn.tint;
     }
 
-    // Layer A: the weapon's swing overlay (an arc) in the status's color, front+back, played across the swing.
-    void DriveOverlay(AttackState state, AttackDefinition def)
+    // Layer A: the weapon's swing overlay (an arc) in the status's color, front+back. The effect sheets are
+    // grid-sliced 32x32 row-major to the SAME directional layout as the weapon attack sheets, so the overlay is
+    // frame-locked to the swing: it uses the SAME frame index `i` the body/weapon layers use (not phase progress).
+    void DriveOverlay(AttackState state, AttackDefinition def, int i)
     {
         if (overlay == null && overlayBack == null) return;
         var fx = def.mainEffect;
@@ -112,20 +114,18 @@ public sealed class AttackView : MonoBehaviour
             if (overlayBack != null) overlayBack.enabled = false;
             return;
         }
-        float p = AttackLogic.PhaseProgress01(state, def.Timeline);   // 0..1 across the swing
         float rot = def.rotateToAim ? state.residualDeg : 0f;
         Color tint = (Game.Instance != null && Game.Instance.DayNight != null) ? Game.Instance.DayNight.tint : Color.white;
-        DriveOverlayLayer(overlay, front, p, rot, tint);
-        DriveOverlayLayer(overlayBack, back, p, rot, tint);
+        DriveOverlayLayer(overlay, front, i, rot, tint);
+        DriveOverlayLayer(overlayBack, back, i, rot, tint);
     }
 
-    void DriveOverlayLayer(SpriteRenderer sr, Sprite[] frames, float p, float rot, Color tint)
+    void DriveOverlayLayer(SpriteRenderer sr, Sprite[] frames, int i, float rot, Color tint)
     {
         if (sr == null) return;
-        if (frames == null || frames.Length == 0) { sr.enabled = false; return; }
-        int f = Mathf.Clamp((int)(p * frames.Length), 0, frames.Length - 1);
+        if (frames == null || i < 0 || i >= frames.Length || frames[i] == null) { sr.enabled = false; return; }
         sr.enabled = true;
-        sr.sprite = frames[f];
+        sr.sprite = frames[i];
         sr.transform.localEulerAngles = new Vector3(0f, 0f, rot);
         sr.color = tint;
     }

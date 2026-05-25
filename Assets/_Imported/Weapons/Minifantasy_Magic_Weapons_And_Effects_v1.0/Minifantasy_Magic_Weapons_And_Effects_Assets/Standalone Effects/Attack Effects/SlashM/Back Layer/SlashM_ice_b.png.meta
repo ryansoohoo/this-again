@@ -84,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -112,19 +112,19 @@ TextureImporter:
       name: SlashM_ice_b_0
       rect:
         serializedVersion: 2
-        x: 75
-        y: 44
-        width: 15
-        height: 11
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2e737dc14253212b0800000000000000
+      spriteID: 637dc68fffa615e49aee06db0f4ac870
       internalID: -5615367356158625822
       vertices: []
       indices: 
@@ -134,19 +134,19 @@ TextureImporter:
       name: SlashM_ice_b_1
       rect:
         serializedVersion: 2
-        x: 107
-        y: 49
-        width: 11
-        height: 6
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 81bb2a80d5747e220800000000000000
+      spriteID: 1cd9080f60eb3ac429028b4e06c637e6
       internalID: 2515057381812124440
       vertices: []
       indices: 
@@ -156,19 +156,19 @@ TextureImporter:
       name: SlashM_ice_b_2
       rect:
         serializedVersion: 2
-        x: 70
-        y: 12
-        width: 15
-        height: 11
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bc76bc470500795b0800000000000000
+      spriteID: 42d3a414bff6a2940b847e807cfa17da
       internalID: -5361816485804415029
       vertices: []
       indices: 
@@ -178,20 +178,284 @@ TextureImporter:
       name: SlashM_ice_b_3
       rect:
         serializedVersion: 2
-        x: 106
-        y: 17
-        width: 11
-        height: 6
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a1bc02eaaa2d3f300800000000000000
+      spriteID: 7c965d265f69b4e44bdcc0107e57bfc6
       internalID: 284802831962131226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4161da90e20a04680cc1f7b66439a5
+      internalID: 1969460196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05cf4022945959045993ccca29db63ba
+      internalID: 387820738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bef8c8a79e42724587155464ae78ae3
+      internalID: 971072590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cb4bd0ee4140bb4ea81a14ec2fc6c4e
+      internalID: -913096812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af8e04716c4c3234a9bb84c6cd4f90a9
+      internalID: -774940486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_9
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1e0808d64226074995e0524babd5104
+      internalID: -108768940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c60ff9db23ff7a84c8a556d702e459d0
+      internalID: -784039662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aab22f5ce11de8442bf14f8fa2499e37
+      internalID: -1741997812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a32fade1ca33a8a49ac58254b76453a9
+      internalID: 1775141720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1a8269c57a950d4c8a5984493c04313
+      internalID: -2129432270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f9b6d35ced57ea4b839d6300da80b0a
+      internalID: 1702633533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_ice_b_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2691c1aad9e81c4f8017ad36c7bb1b5
+      internalID: -633876883
       vertices: []
       indices: 
       edges: []
@@ -200,7 +464,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ea2af8e93ccf2b04bbcfffc5ea03447e
     internalID: 0
     vertices: []
     indices: 
@@ -212,8 +476,20 @@ TextureImporter:
     nameFileIdTable:
       SlashM_ice_b_0: -5615367356158625822
       SlashM_ice_b_1: 2515057381812124440
+      SlashM_ice_b_10: -784039662
+      SlashM_ice_b_11: -1741997812
+      SlashM_ice_b_12: 1775141720
+      SlashM_ice_b_13: -2129432270
+      SlashM_ice_b_14: 1702633533
+      SlashM_ice_b_15: -633876883
       SlashM_ice_b_2: -5361816485804415029
       SlashM_ice_b_3: 284802831962131226
+      SlashM_ice_b_4: 1969460196
+      SlashM_ice_b_5: 387820738
+      SlashM_ice_b_6: 971072590
+      SlashM_ice_b_7: -913096812
+      SlashM_ice_b_8: -774940486
+      SlashM_ice_b_9: -108768940
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

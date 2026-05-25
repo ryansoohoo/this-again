@@ -102,7 +102,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,19 +130,19 @@ TextureImporter:
       name: Shot_sickness_f_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 44
-        width: 75
-        height: 71
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e886588ee0dabb580800000000000000
+      spriteID: a4c4fbf68d3d7b94bb1e35499231a53e
       internalID: -8810257966478038898
       vertices: []
       indices: 
@@ -152,19 +152,19 @@ TextureImporter:
       name: Shot_sickness_f_1
       rect:
         serializedVersion: 2
-        x: 110
-        y: 108
-        width: 8
-        height: 7
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 32bd2ec83f707caf0800000000000000
+      spriteID: fbf3ae114932bd74f993daa112cae635
       internalID: -376323301240022237
       vertices: []
       indices: 
@@ -174,19 +174,19 @@ TextureImporter:
       name: Shot_sickness_f_2
       rect:
         serializedVersion: 2
-        x: 141
-        y: 108
-        width: 9
-        height: 7
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b66752d44aac98c50800000000000000
+      spriteID: 201ce7c74e1492e4f8cc7df004666a09
       internalID: 6668083530316478059
       vertices: []
       indices: 
@@ -196,19 +196,19 @@ TextureImporter:
       name: Shot_sickness_f_3
       rect:
         serializedVersion: 2
-        x: 174
-        y: 108
-        width: 12
-        height: 7
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 98a29be069724b690800000000000000
+      spriteID: 07c32e6a3ece1384eaa248d232c3c133
       internalID: -7587395946766849399
       vertices: []
       indices: 
@@ -218,19 +218,19 @@ TextureImporter:
       name: Shot_sickness_f_4
       rect:
         serializedVersion: 2
-        x: 209
-        y: 108
-        width: 47
-        height: 7
+        x: 128
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 706c1cb6a6ab50a00800000000000000
+      spriteID: 6a63eb748dbfd1046851a4c02124a497
       internalID: 722188281499993607
       vertices: []
       indices: 
@@ -240,19 +240,19 @@ TextureImporter:
       name: Shot_sickness_f_5
       rect:
         serializedVersion: 2
-        x: 74
-        y: 76
-        width: 6
-        height: 7
+        x: 160
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a152ab90486f84d30800000000000000
+      spriteID: b049b7f172df8224a815910a68f608cc
       internalID: 4416050481596081434
       vertices: []
       indices: 
@@ -262,19 +262,19 @@ TextureImporter:
       name: Shot_sickness_f_6
       rect:
         serializedVersion: 2
-        x: 106
-        y: 76
-        width: 8
-        height: 7
+        x: 192
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1f94970b047eec620800000000000000
+      spriteID: 518fd993235fb9546bfd8f1be6d49bae
       internalID: 2796426683668318705
       vertices: []
       indices: 
@@ -284,19 +284,19 @@ TextureImporter:
       name: Shot_sickness_f_7
       rect:
         serializedVersion: 2
-        x: 110
-        y: 44
-        width: 37
-        height: 39
+        x: 224
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6ba079ed827a689a0800000000000000
+      spriteID: f56446ba36a688c4892d6012bcf5f854
       internalID: -6231109240445531466
       vertices: []
       indices: 
@@ -306,19 +306,19 @@ TextureImporter:
       name: Shot_sickness_f_8
       rect:
         serializedVersion: 2
-        x: 166
-        y: 76
-        width: 12
-        height: 7
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 57ffac3cbb903fed0800000000000000
+      spriteID: 79cb74c32378a5347b7d13efb0cda221
       internalID: -2381549075900465291
       vertices: []
       indices: 
@@ -328,20 +328,504 @@ TextureImporter:
       name: Shot_sickness_f_9
       rect:
         serializedVersion: 2
-        x: 174
-        y: 32
-        width: 68
-        height: 51
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a340bbd21d55ca8f0800000000000000
+      spriteID: 51bc6ca63fc2bbf4cbc5a93ff8ef42e1
       internalID: -527952699405433798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a89415794174da4bbf26aa34694ca07
+      internalID: 1165880781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2ab152b0ac9e304f801caf67991846b
+      internalID: -1412540144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_12
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad1998d2bca75f14184bba1f49652c61
+      internalID: -1003929184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_13
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d05276cc46047b4ebd260673f297768
+      internalID: -414078284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_14
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16f2015dfc7ef6a41988898e71685bf9
+      internalID: 1155856440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_15
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcc666c81ab25f841936406b8baccf21
+      internalID: -2095775523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f7e46643c993e84d8c4a989653cf446
+      internalID: -170708420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07bc5202c29e816478492e51a24531a8
+      internalID: 173807557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_18
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef0878b622ddc8647a64c5f123272867
+      internalID: 801850245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29b5c418e5505a848a7eefaf89097cd1
+      internalID: 2086865156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_20
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a0b0ea05e8415946a801e02c2357d98
+      internalID: 401010269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_21
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 350fbe76fd1cb7a46bb693eb7f3cd299
+      internalID: -1815217903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_22
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97632ac50b4340b4b84a95d6ecf5d5a2
+      internalID: 1320726172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_23
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de79c0a2be78efc4e84811076606a8ff
+      internalID: 17618818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05560deda880e6542a9030f546424d01
+      internalID: 1611829204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_25
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19e5b90139e5e654ebe4e6c2eb7ca98d
+      internalID: -1772162538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 076a90d9b40a02549947f060543d0fba
+      internalID: -1267539413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_27
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9392b75920b614744a217b87af3c39ac
+      internalID: 645587177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2949ee8041beca4587de96b462f1a88
+      internalID: -1392714946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_29
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4639a80c14c43b64b88a02dbf4bcc8d2
+      internalID: -1157155875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_30
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 678534acd25bd7c489705b7fe4872415
+      internalID: -450902995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_sickness_f_31
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ee72ef2e28d247439b6b3500c91cb10
+      internalID: 1171672144
       vertices: []
       indices: 
       edges: []
@@ -350,7 +834,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4cd558209f10d884486e315b5359f366
     internalID: 0
     vertices: []
     indices: 
@@ -362,8 +846,30 @@ TextureImporter:
     nameFileIdTable:
       Shot_sickness_f_0: -8810257966478038898
       Shot_sickness_f_1: -376323301240022237
+      Shot_sickness_f_10: 1165880781
+      Shot_sickness_f_11: -1412540144
+      Shot_sickness_f_12: -1003929184
+      Shot_sickness_f_13: -414078284
+      Shot_sickness_f_14: 1155856440
+      Shot_sickness_f_15: -2095775523
+      Shot_sickness_f_16: -170708420
+      Shot_sickness_f_17: 173807557
+      Shot_sickness_f_18: 801850245
+      Shot_sickness_f_19: 2086865156
       Shot_sickness_f_2: 6668083530316478059
+      Shot_sickness_f_20: 401010269
+      Shot_sickness_f_21: -1815217903
+      Shot_sickness_f_22: 1320726172
+      Shot_sickness_f_23: 17618818
+      Shot_sickness_f_24: 1611829204
+      Shot_sickness_f_25: -1772162538
+      Shot_sickness_f_26: -1267539413
+      Shot_sickness_f_27: 645587177
+      Shot_sickness_f_28: -1392714946
+      Shot_sickness_f_29: -1157155875
       Shot_sickness_f_3: -7587395946766849399
+      Shot_sickness_f_30: -450902995
+      Shot_sickness_f_31: 1171672144
       Shot_sickness_f_4: 722188281499993607
       Shot_sickness_f_5: 4416050481596081434
       Shot_sickness_f_6: 2796426683668318705

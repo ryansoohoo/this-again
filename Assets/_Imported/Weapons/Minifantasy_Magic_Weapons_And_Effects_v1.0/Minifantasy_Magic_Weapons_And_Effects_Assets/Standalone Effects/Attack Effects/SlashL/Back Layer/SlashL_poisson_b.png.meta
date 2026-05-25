@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -118,19 +118,19 @@ TextureImporter:
       name: SlashL_poisson_b_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 15
-        width: 12
-        height: 9
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 31681ff539378ddc0800000000000000
+      spriteID: 92604d68c85170d44a37aacd8b6b1fe6
       internalID: -3614011624157772269
       vertices: []
       indices: 
@@ -140,19 +140,19 @@ TextureImporter:
       name: SlashL_poisson_b_1
       rect:
         serializedVersion: 2
-        x: 11
-        y: 20
-        width: 44
-        height: 36
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f1938e7a7a8a91ac0800000000000000
+      spriteID: 7cecfa4714f6dec429cf0c7f93cb1133
       internalID: -3883887765600323297
       vertices: []
       indices: 
@@ -162,19 +162,19 @@ TextureImporter:
       name: SlashL_poisson_b_2
       rect:
         serializedVersion: 2
-        x: 73
-        y: 45
-        width: 48
-        height: 11
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2236e99467f70c790800000000000000
+      spriteID: 8a235b81e5cd13e4289995a7761a762c
       internalID: -7511864032436002014
       vertices: []
       indices: 
@@ -184,19 +184,19 @@ TextureImporter:
       name: SlashL_poisson_b_3
       rect:
         serializedVersion: 2
-        x: 83
-        y: 13
-        width: 31
-        height: 11
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2d8f59709006841a0800000000000000
+      spriteID: 34bbe9ba7dc518d488c8a15e15fba729
       internalID: -6825099643381745454
       vertices: []
       indices: 
@@ -206,19 +206,19 @@ TextureImporter:
       name: SlashL_poisson_b_4
       rect:
         serializedVersion: 2
-        x: 134
-        y: 13
-        width: 40
-        height: 8
+        x: 128
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6c3f7a3cfe4bba0b0800000000000000
+      spriteID: b99e001b5faf23b4e8bfcd6dac14eadd
       internalID: -5716276360143965242
       vertices: []
       indices: 
@@ -228,20 +228,416 @@ TextureImporter:
       name: SlashL_poisson_b_5
       rect:
         serializedVersion: 2
-        x: 145
-        y: 45
-        width: 37
-        height: 8
+        x: 160
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e2e78719438ead200800000000000000
+      spriteID: 98d99a504d6011f42aae3d6bd8e1ad10
       internalID: 205732045475315246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6929bb362a1a9145bddff8c03f65c79
+      internalID: -302146092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a73f4fead3c7a1e49bc7c5aba17a26f5
+      internalID: 916909480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84f3ddcef9612ba4f9dee2dcfc38d9dc
+      internalID: 267570955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_9
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 884927b432431614eb0dc477c162bed9
+      internalID: 788489505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7638dfd78d03774fae008914ddbbf4f
+      internalID: 1248844626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_11
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6343ad2977c6fb442843d8cd98af386c
+      internalID: -1829407294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b043448469ce54479cdee458e5f3064
+      internalID: -931377496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fa4255bdb1f0124fb9eac91568e8874
+      internalID: -1920180323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8d321dfdc8dafb468e7d52e56efec81
+      internalID: 1629510473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a79269c90f208dc49805f13be7ff5b62
+      internalID: 903742409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0e1c85aa4819b24ba7f1852df105f07
+      internalID: -1447874490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_17
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f682485f989fa724295a12a46d5b4155
+      internalID: 1459826342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a883ade1fbcb544f96bf3a9b45331fd
+      internalID: 2111700945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 086c7dee3210151439a89eabac2d2512
+      internalID: -396177522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_20
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58117b346a6711f4ca4dc0064b362c7b
+      internalID: 1879530143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_21
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ba18d60cfc1a7d489fc049b1f1a136e
+      internalID: -781471827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_22
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5887096ce131184ca8f8d6fef4f031d
+      internalID: 672151105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_poisson_b_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ae701bccee8e994d827fbf33113ddb8
+      internalID: -746267890
       vertices: []
       indices: 
       edges: []
@@ -250,7 +646,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b68f65d3feb4edc49809f9af4cd8bfcd
     internalID: 0
     vertices: []
     indices: 
@@ -262,10 +658,28 @@ TextureImporter:
     nameFileIdTable:
       SlashL_poisson_b_0: -3614011624157772269
       SlashL_poisson_b_1: -3883887765600323297
+      SlashL_poisson_b_10: 1248844626
+      SlashL_poisson_b_11: -1829407294
+      SlashL_poisson_b_12: -931377496
+      SlashL_poisson_b_13: -1920180323
+      SlashL_poisson_b_14: 1629510473
+      SlashL_poisson_b_15: 903742409
+      SlashL_poisson_b_16: -1447874490
+      SlashL_poisson_b_17: 1459826342
+      SlashL_poisson_b_18: 2111700945
+      SlashL_poisson_b_19: -396177522
       SlashL_poisson_b_2: -7511864032436002014
+      SlashL_poisson_b_20: 1879530143
+      SlashL_poisson_b_21: -781471827
+      SlashL_poisson_b_22: 672151105
+      SlashL_poisson_b_23: -746267890
       SlashL_poisson_b_3: -6825099643381745454
       SlashL_poisson_b_4: -5716276360143965242
       SlashL_poisson_b_5: 205732045475315246
+      SlashL_poisson_b_6: -302146092
+      SlashL_poisson_b_7: 916909480
+      SlashL_poisson_b_8: 267570955
+      SlashL_poisson_b_9: 788489505
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

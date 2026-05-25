@@ -93,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -121,19 +121,19 @@ TextureImporter:
       name: Pierce_fire_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 108
-        width: 46
-        height: 7
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1d1c8cfd326b6b850800000000000000
+      spriteID: 64cb6249c3f544e429decc2fdd4f1100
       internalID: 6392496986293584337
       vertices: []
       indices: 
@@ -143,19 +143,19 @@ TextureImporter:
       name: Pierce_fire_1
       rect:
         serializedVersion: 2
-        x: 79
-        y: 108
-        width: 17
-        height: 7
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 054e5a49a46b8ad80800000000000000
+      spriteID: f8b486e4f32e6e64c8d7e7ed9f7806fa
       internalID: -8239135086836587440
       vertices: []
       indices: 
@@ -165,19 +165,19 @@ TextureImporter:
       name: Pierce_fire_2
       rect:
         serializedVersion: 2
-        x: 13
-        y: 51
-        width: 42
+        x: 64
+        y: 96
+        width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c77554b3c800effb0800000000000000
+      spriteID: af8ecc766dbc5364087ef5e50b3c88d3
       internalID: -4612248366090987652
       vertices: []
       indices: 
@@ -187,19 +187,19 @@ TextureImporter:
       name: Pierce_fire_3
       rect:
         serializedVersion: 2
-        x: 63
-        y: 76
-        width: 18
-        height: 7
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dcf4bcfd72aa23240800000000000000
+      spriteID: e31d4739de462e3438e720a7d29059c4
       internalID: 4770062043573866445
       vertices: []
       indices: 
@@ -209,19 +209,19 @@ TextureImporter:
       name: Pierce_fire_4
       rect:
         serializedVersion: 2
-        x: 44
-        y: 42
-        width: 7
-        height: 13
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 463f9a1ce62938150800000000000000
+      spriteID: 11fd97e0b7889ed4eb77a6df78c4d2f3
       internalID: 5873699343414457188
       vertices: []
       indices: 
@@ -231,19 +231,19 @@ TextureImporter:
       name: Pierce_fire_5
       rect:
         serializedVersion: 2
-        x: 76
-        y: 15
-        width: 8
-        height: 34
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 290a739cdd7d03800800000000000000
+      spriteID: 4364e003550117d4eb67bd09e72dfc32
       internalID: 590208898749145234
       vertices: []
       indices: 
@@ -253,20 +253,130 @@ TextureImporter:
       name: Pierce_fire_6
       rect:
         serializedVersion: 2
-        x: 14
-        y: 8
-        width: 38
-        height: 14
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7a65376e0e48c8f00800000000000000
+      spriteID: 1b1f2136e7ceca34998a6da6df6d9e58
       internalID: 1120416508782270119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_fire_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e93d05401a5de14499c0b4d1acb240ca
+      internalID: 1238461744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_fire_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c97d36bcec60d864ea6bac3cb8a5f47b
+      internalID: 741184911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_fire_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adfe39004e7395243952df8c0a1ffbf2
+      internalID: 1790298153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_fire_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e7c2f0da15ca40428a970590689ee6b
+      internalID: 1302159374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_fire_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b0012f52333b7c4a8890c2f863753f2
+      internalID: -848312510
       vertices: []
       indices: 
       edges: []
@@ -275,7 +385,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 14abb90a533f6e3409ba3af03209b122
     internalID: 0
     vertices: []
     indices: 
@@ -287,11 +397,16 @@ TextureImporter:
     nameFileIdTable:
       Pierce_fire_0: 6392496986293584337
       Pierce_fire_1: -8239135086836587440
+      Pierce_fire_10: 1302159374
+      Pierce_fire_11: -848312510
       Pierce_fire_2: -4612248366090987652
       Pierce_fire_3: 4770062043573866445
       Pierce_fire_4: 5873699343414457188
       Pierce_fire_5: 590208898749145234
       Pierce_fire_6: 1120416508782270119
+      Pierce_fire_7: 1238461744
+      Pierce_fire_8: 741184911
+      Pierce_fire_9: 1790298153
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

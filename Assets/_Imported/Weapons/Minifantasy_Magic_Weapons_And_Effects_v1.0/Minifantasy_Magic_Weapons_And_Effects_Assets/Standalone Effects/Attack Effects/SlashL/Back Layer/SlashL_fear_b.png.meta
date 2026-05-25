@@ -108,7 +108,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -136,19 +136,19 @@ TextureImporter:
       name: SlashL_fear_b_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 46
-        width: 14
-        height: 11
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1383f182734ea1590800000000000000
+      spriteID: 0d763ea70ca45b447953219310bfbe06
       internalID: -7702593287116343247
       vertices: []
       indices: 
@@ -158,19 +158,19 @@ TextureImporter:
       name: SlashL_fear_b_1
       rect:
         serializedVersion: 2
-        x: 40
-        y: 51
-        width: 9
-        height: 6
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d8d20cb66a22a6650800000000000000
+      spriteID: 578f3174af093d24c90dc8dc2f5b207c
       internalID: 6226827532960804237
       vertices: []
       indices: 
@@ -180,19 +180,19 @@ TextureImporter:
       name: SlashL_fear_b_2
       rect:
         serializedVersion: 2
-        x: 72
-        y: 51
-        width: 6
-        height: 6
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d726da8d6bacb5220800000000000000
+      spriteID: c979519b5ddd9bd4bba9d49b30868f49
       internalID: 2475795306838319741
       vertices: []
       indices: 
@@ -202,19 +202,19 @@ TextureImporter:
       name: SlashL_fear_b_3
       rect:
         serializedVersion: 2
-        x: 109
-        y: 44
-        width: 13
-        height: 13
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 412699e70a8a69760800000000000000
+      spriteID: 5df46b5bc59dd4644acc76b00513c98c
       internalID: 7464338839685390868
       vertices: []
       indices: 
@@ -224,19 +224,19 @@ TextureImporter:
       name: SlashL_fear_b_4
       rect:
         serializedVersion: 2
-        x: 144
-        y: 44
-        width: 11
-        height: 10
+        x: 128
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cbfca638a35eae4b0800000000000000
+      spriteID: a3091ac280e2470429cb29460c072f53
       internalID: -5410259962856550468
       vertices: []
       indices: 
@@ -246,19 +246,19 @@ TextureImporter:
       name: SlashL_fear_b_5
       rect:
         serializedVersion: 2
-        x: 177
-        y: 44
-        width: 6
-        height: 6
+        x: 160
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3555d675ba8ffc9e0800000000000000
+      spriteID: f49cdaa1d09450b41b948b5efed08940
       internalID: -1598785927903357613
       vertices: []
       indices: 
@@ -268,19 +268,19 @@ TextureImporter:
       name: SlashL_fear_b_6
       rect:
         serializedVersion: 2
-        x: 8
-        y: 14
-        width: 14
-        height: 11
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0c3926828f0662240800000000000000
+      spriteID: 062c3b051dcc202429fabe600465f5d8
       internalID: 4766603874563953600
       vertices: []
       indices: 
@@ -290,19 +290,19 @@ TextureImporter:
       name: SlashL_fear_b_7
       rect:
         serializedVersion: 2
-        x: 47
-        y: 19
-        width: 9
-        height: 6
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7a1d84ad0bc6dc3d0800000000000000
+      spriteID: 8ddb679c0036c384390f8dc29cebc24c
       internalID: -3184769854648823385
       vertices: []
       indices: 
@@ -312,19 +312,19 @@ TextureImporter:
       name: SlashL_fear_b_8
       rect:
         serializedVersion: 2
-        x: 82
-        y: 19
-        width: 6
-        height: 6
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4a2e5e7f116fd9030800000000000000
+      spriteID: 1ef9dc6c9590a0347bc7c474976d80ff
       internalID: 3503226642198028964
       vertices: []
       indices: 
@@ -334,19 +334,19 @@ TextureImporter:
       name: SlashL_fear_b_9
       rect:
         serializedVersion: 2
-        x: 102
-        y: 12
-        width: 13
-        height: 13
+        x: 96
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: adf19f5948ce0e160800000000000000
+      spriteID: c05675bd6e15b054e9cc1139be1993be
       internalID: 7052897070658166746
       vertices: []
       indices: 
@@ -356,19 +356,19 @@ TextureImporter:
       name: SlashL_fear_b_10
       rect:
         serializedVersion: 2
-        x: 133
-        y: 12
-        width: 11
-        height: 10
+        x: 128
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9cdcb234ccc055620800000000000000
+      spriteID: 9d7b1cb6bdfd8624b9e316a411153ad1
       internalID: 2762128017901473225
       vertices: []
       indices: 
@@ -378,20 +378,284 @@ TextureImporter:
       name: SlashL_fear_b_11
       rect:
         serializedVersion: 2
-        x: 169
-        y: 12
-        width: 6
-        height: 6
+        x: 160
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 66346a9fcf38fbea0800000000000000
+      spriteID: aeb85ff0c4d2cea4ea70bf8451922f54
       internalID: -5854815868014935194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d742817aa7b19444aa1273038894f78
+      internalID: -1711298295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6403c4d28e539b04f81d9421b153cb83
+      internalID: -2007333194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d23cb062a2fdbb43a01b15f9aa014f8
+      internalID: -50909021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1288bef0faf4a04cb8371bc78995a9b
+      internalID: -340247084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a606a1574a31f6344bb097bdc7987eb0
+      internalID: 633436174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_17
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30f6adf05425be94faebef1c38c3ef65
+      internalID: -1347699758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42a8d3e21d718b045909fd7387a06230
+      internalID: -1671339716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1eddb2c799011842937f8109081c990
+      internalID: 1568790794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_20
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb3b1c0171a58c44eb01e47007ba217c
+      internalID: 368523165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_21
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 874b3233c4b74f14da6b7430fccc78e9
+      internalID: -1830062438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_22
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a05f3fce93993714aa292f80eb45e330
+      internalID: 838382447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fear_b_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfaf5fdbef69dca48be2b47d80fde708
+      internalID: -1647154961
       vertices: []
       indices: 
       edges: []
@@ -400,7 +664,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 953cf53eb20dc97458f148f0da395d10
     internalID: 0
     vertices: []
     indices: 
@@ -414,7 +678,19 @@ TextureImporter:
       SlashL_fear_b_1: 6226827532960804237
       SlashL_fear_b_10: 2762128017901473225
       SlashL_fear_b_11: -5854815868014935194
+      SlashL_fear_b_12: -1711298295
+      SlashL_fear_b_13: -2007333194
+      SlashL_fear_b_14: -50909021
+      SlashL_fear_b_15: -340247084
+      SlashL_fear_b_16: 633436174
+      SlashL_fear_b_17: -1347699758
+      SlashL_fear_b_18: -1671339716
+      SlashL_fear_b_19: 1568790794
       SlashL_fear_b_2: 2475795306838319741
+      SlashL_fear_b_20: 368523165
+      SlashL_fear_b_21: -1830062438
+      SlashL_fear_b_22: 838382447
+      SlashL_fear_b_23: -1647154961
       SlashL_fear_b_3: 7464338839685390868
       SlashL_fear_b_4: -5410259962856550468
       SlashL_fear_b_5: -1598785927903357613

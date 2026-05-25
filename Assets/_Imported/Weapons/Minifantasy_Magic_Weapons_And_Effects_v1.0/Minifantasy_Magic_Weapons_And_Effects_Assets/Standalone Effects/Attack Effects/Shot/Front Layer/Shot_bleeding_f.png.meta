@@ -102,7 +102,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,19 +130,19 @@ TextureImporter:
       name: Shot_bleeding_f_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 44
-        width: 75
-        height: 71
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bc5df36f9fd04c9e0800000000000000
+      spriteID: 0d49e746cbb69404592604245d31b973
       internalID: -1602140200207657525
       vertices: []
       indices: 
@@ -152,19 +152,19 @@ TextureImporter:
       name: Shot_bleeding_f_1
       rect:
         serializedVersion: 2
-        x: 110
-        y: 108
-        width: 8
-        height: 7
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8bb88039b3879b210800000000000000
+      spriteID: b3f7a013cf8bf30438874f123176e9ad
       internalID: 1349241760639388600
       vertices: []
       indices: 
@@ -174,19 +174,19 @@ TextureImporter:
       name: Shot_bleeding_f_2
       rect:
         serializedVersion: 2
-        x: 141
-        y: 108
-        width: 9
-        height: 7
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d8bc5df3443b67ad0800000000000000
+      spriteID: a2eb98134265c7748976b725508c358a
       internalID: -2704777420479280243
       vertices: []
       indices: 
@@ -196,19 +196,19 @@ TextureImporter:
       name: Shot_bleeding_f_3
       rect:
         serializedVersion: 2
-        x: 174
-        y: 108
-        width: 12
-        height: 7
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d7bfad7da8af688a0800000000000000
+      spriteID: cc5bf791233f53f4782b9ac4b01f7d4e
       internalID: -6303075154224546947
       vertices: []
       indices: 
@@ -218,19 +218,19 @@ TextureImporter:
       name: Shot_bleeding_f_4
       rect:
         serializedVersion: 2
-        x: 209
-        y: 108
-        width: 47
-        height: 7
+        x: 128
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f816a0999106198a0800000000000000
+      spriteID: f4091aaa4ea962f43a8e3a21c1317898
       internalID: -6300148740656569969
       vertices: []
       indices: 
@@ -240,19 +240,19 @@ TextureImporter:
       name: Shot_bleeding_f_5
       rect:
         serializedVersion: 2
-        x: 74
-        y: 76
-        width: 6
-        height: 7
+        x: 160
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2aac1607d4252a2e0800000000000000
+      spriteID: 41561f5f8104323469a9061283c56c1e
       internalID: -2116038382359295326
       vertices: []
       indices: 
@@ -262,19 +262,19 @@ TextureImporter:
       name: Shot_bleeding_f_6
       rect:
         serializedVersion: 2
-        x: 106
-        y: 76
-        width: 8
-        height: 7
+        x: 192
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1633f667bc7f8c880800000000000000
+      spriteID: 463e37de5a380f642ac59f4dcb8fd066
       internalID: -8590343835971800223
       vertices: []
       indices: 
@@ -284,19 +284,19 @@ TextureImporter:
       name: Shot_bleeding_f_7
       rect:
         serializedVersion: 2
-        x: 110
-        y: 44
-        width: 37
-        height: 39
+        x: 224
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ead70c233df61c4e0800000000000000
+      spriteID: d87ddff482af22546b09f9c7eeb67f43
       internalID: -1963165009676567122
       vertices: []
       indices: 
@@ -306,19 +306,19 @@ TextureImporter:
       name: Shot_bleeding_f_8
       rect:
         serializedVersion: 2
-        x: 166
-        y: 76
-        width: 12
-        height: 7
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5d789d45e5321b490800000000000000
+      spriteID: 998fcbbcb5adb90448f15e10b7e0b51e
       internalID: -7732360197160990763
       vertices: []
       indices: 
@@ -328,20 +328,504 @@ TextureImporter:
       name: Shot_bleeding_f_9
       rect:
         serializedVersion: 2
-        x: 174
-        y: 32
-        width: 68
-        height: 51
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6f637993e215ab920800000000000000
+      spriteID: ceaaf7801385d1d46832ca3e3edd1f7a
       internalID: 3006804960199784182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d164caf7f1af04849ac9cd7e23aaa357
+      internalID: -214152983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 197aac347e76de34689a7c682b6d8d5b
+      internalID: -114665130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_12
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c37b2117273eed4883db747b02b75c1
+      internalID: 948996841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_13
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0838b39b9bb1264982784451be89cb0
+      internalID: -1239850088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_14
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce0329ec2e2bf5745ae1648cdd38ab11
+      internalID: 1696086682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_15
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e13b6e7d181a3124c9ad6f906cb55fda
+      internalID: 102513117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaf078a2b8ab1314f8db4cf94ff92351
+      internalID: 871714214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02eeba633283d85448d8615947aabac2
+      internalID: 849590707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_18
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e493f01a328e5549994452c5434da70
+      internalID: -1227797646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b217f855d61461740a669d10c1e900a0
+      internalID: 252575534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_20
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f5d0292a21f02e498ffd3860ad429c2
+      internalID: 956748990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_21
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00f0305bf62b1e14fa75450bc6831077
+      internalID: -321337488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_22
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0d4cb1cfd6581240ae2aa18395576c9
+      internalID: 136194005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_23
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65731555e24a07e46bd07919a77d44b1
+      internalID: 1798447668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df334d7523ee0404792d1d66b1b7b2d8
+      internalID: -1204924157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_25
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a981a1222a2730409211a2b7573dbac
+      internalID: 1197283932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0ea8808ee57d6a43ae5b944ee39828e
+      internalID: -1356022213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_27
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb404712cf4a35145830a4c7ce2da245
+      internalID: -463260894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d46ed267ed2ca94987abf6f6c47e665
+      internalID: 55268262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_29
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d835531199e14e64892210552bdc976e
+      internalID: 1922729850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_30
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd974859a18562641ac2c616050d4e0f
+      internalID: -1768668076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_bleeding_f_31
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7d8e2fead8bc3740a5b5ad2ff1ac757
+      internalID: 1835733710
       vertices: []
       indices: 
       edges: []
@@ -350,7 +834,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 656bcd2b39d7177459f72a8443bc075e
     internalID: 0
     vertices: []
     indices: 
@@ -362,8 +846,30 @@ TextureImporter:
     nameFileIdTable:
       Shot_bleeding_f_0: -1602140200207657525
       Shot_bleeding_f_1: 1349241760639388600
+      Shot_bleeding_f_10: -214152983
+      Shot_bleeding_f_11: -114665130
+      Shot_bleeding_f_12: 948996841
+      Shot_bleeding_f_13: -1239850088
+      Shot_bleeding_f_14: 1696086682
+      Shot_bleeding_f_15: 102513117
+      Shot_bleeding_f_16: 871714214
+      Shot_bleeding_f_17: 849590707
+      Shot_bleeding_f_18: -1227797646
+      Shot_bleeding_f_19: 252575534
       Shot_bleeding_f_2: -2704777420479280243
+      Shot_bleeding_f_20: 956748990
+      Shot_bleeding_f_21: -321337488
+      Shot_bleeding_f_22: 136194005
+      Shot_bleeding_f_23: 1798447668
+      Shot_bleeding_f_24: -1204924157
+      Shot_bleeding_f_25: 1197283932
+      Shot_bleeding_f_26: -1356022213
+      Shot_bleeding_f_27: -463260894
+      Shot_bleeding_f_28: 55268262
+      Shot_bleeding_f_29: 1922729850
       Shot_bleeding_f_3: -6303075154224546947
+      Shot_bleeding_f_30: -1768668076
+      Shot_bleeding_f_31: 1835733710
       Shot_bleeding_f_4: -6300148740656569969
       Shot_bleeding_f_5: -2116038382359295326
       Shot_bleeding_f_6: -8590343835971800223

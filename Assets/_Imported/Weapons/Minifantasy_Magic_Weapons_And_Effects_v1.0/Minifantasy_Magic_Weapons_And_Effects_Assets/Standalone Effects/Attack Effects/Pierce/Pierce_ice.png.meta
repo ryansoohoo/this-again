@@ -93,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -121,19 +121,19 @@ TextureImporter:
       name: Pierce_ice_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 108
-        width: 46
-        height: 7
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1016d72aa5c677e20800000000000000
+      spriteID: fd83fc27054c92547afb6ce839aea43c
       internalID: 3348263984502235393
       vertices: []
       indices: 
@@ -143,19 +143,19 @@ TextureImporter:
       name: Pierce_ice_1
       rect:
         serializedVersion: 2
-        x: 79
-        y: 108
-        width: 17
-        height: 7
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dd1f00d1542bd49e0800000000000000
+      spriteID: 93a86ffd567b6834295112ad5d64a111
       internalID: -1635455079756533283
       vertices: []
       indices: 
@@ -165,19 +165,19 @@ TextureImporter:
       name: Pierce_ice_2
       rect:
         serializedVersion: 2
-        x: 13
-        y: 51
-        width: 42
+        x: 64
+        y: 96
+        width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 14b3e27056cee0f60800000000000000
+      spriteID: 7d84a314f61a7cc44b7f9f6920cc85ae
       internalID: 8002593506540272449
       vertices: []
       indices: 
@@ -187,19 +187,19 @@ TextureImporter:
       name: Pierce_ice_3
       rect:
         serializedVersion: 2
-        x: 63
-        y: 76
-        width: 18
-        height: 7
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fcdbfd31e9660f240800000000000000
+      spriteID: c225d93f609466047b6fc34dccaa7f38
       internalID: 4823468030038097359
       vertices: []
       indices: 
@@ -209,19 +209,19 @@ TextureImporter:
       name: Pierce_ice_4
       rect:
         serializedVersion: 2
-        x: 44
-        y: 42
-        width: 7
-        height: 13
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 979f82b8b514b4660800000000000000
+      spriteID: 72461aa8dd88561499e683a6a64c7b9d
       internalID: 7371057076554496377
       vertices: []
       indices: 
@@ -231,19 +231,19 @@ TextureImporter:
       name: Pierce_ice_5
       rect:
         serializedVersion: 2
-        x: 76
-        y: 15
-        width: 8
-        height: 34
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d9ba44b93ccc61310800000000000000
+      spriteID: 452a696463ef5f148a10780105156385
       internalID: 1375511876703923101
       vertices: []
       indices: 
@@ -253,20 +253,130 @@ TextureImporter:
       name: Pierce_ice_6
       rect:
         serializedVersion: 2
-        x: 14
-        y: 8
-        width: 38
-        height: 14
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1d4684c9965a534e0800000000000000
+      spriteID: 3fe46369f252f5b4190370d533e7423e
       internalID: -2002512586284178223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_ice_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2e596b90e335bf42bc7b7d89fbec2d0
+      internalID: 2019617023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_ice_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19de4c7c0217bef4aa8ea9f734d7abf6
+      internalID: 506264980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_ice_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6b555a4f25443a40aa7c587580b0701
+      internalID: -365749372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_ice_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61014c98958a89a4ea6d06e3820f11f1
+      internalID: 1726809753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_ice_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6281a9ab1f83d4c4aa59b682a9bea409
+      internalID: 1378431615
       vertices: []
       indices: 
       edges: []
@@ -275,7 +385,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f6fb6409477925547be931b2e27d5efa
     internalID: 0
     vertices: []
     indices: 
@@ -287,11 +397,16 @@ TextureImporter:
     nameFileIdTable:
       Pierce_ice_0: 3348263984502235393
       Pierce_ice_1: -1635455079756533283
+      Pierce_ice_10: 1726809753
+      Pierce_ice_11: 1378431615
       Pierce_ice_2: 8002593506540272449
       Pierce_ice_3: 4823468030038097359
       Pierce_ice_4: 7371057076554496377
       Pierce_ice_5: 1375511876703923101
       Pierce_ice_6: -2002512586284178223
+      Pierce_ice_7: 2019617023
+      Pierce_ice_8: 506264980
+      Pierce_ice_9: -365749372
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

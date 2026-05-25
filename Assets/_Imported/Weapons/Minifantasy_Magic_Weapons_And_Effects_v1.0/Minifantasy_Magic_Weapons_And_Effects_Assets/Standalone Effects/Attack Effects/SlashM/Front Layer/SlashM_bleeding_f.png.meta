@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -118,19 +118,19 @@ TextureImporter:
       name: SlashM_bleeding_f_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 110
-        width: 41
-        height: 8
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 329dbdcb40de300f0800000000000000
+      spriteID: 8a0f1a1d5b76c7946a88dbf152e75906
       internalID: -1151816475072538333
       vertices: []
       indices: 
@@ -140,19 +140,19 @@ TextureImporter:
       name: SlashM_bleeding_f_1
       rect:
         serializedVersion: 2
-        x: 75
-        y: 105
-        width: 44
-        height: 11
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 112fd1a27b74a4ea0800000000000000
+      spriteID: 18bdb0949074fb44f9c81a7b4ac5901c
       internalID: -5887814710822309359
       vertices: []
       indices: 
@@ -162,19 +162,19 @@ TextureImporter:
       name: SlashM_bleeding_f_2
       rect:
         serializedVersion: 2
-        x: 12
-        y: 78
-        width: 34
-        height: 8
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8f21b65b8fb27f440800000000000000
+      spriteID: e0dabfe5822254d458b884b61e053d50
       internalID: 4969489061022208760
       vertices: []
       indices: 
@@ -184,19 +184,19 @@ TextureImporter:
       name: SlashM_bleeding_f_3
       rect:
         serializedVersion: 2
-        x: 70
-        y: 73
-        width: 47
-        height: 11
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ea2533e182e82d310800000000000000
+      spriteID: e129ef424a282ab4f8decc9f9888a945
       internalID: 1428360334786384558
       vertices: []
       indices: 
@@ -206,19 +206,19 @@ TextureImporter:
       name: SlashM_bleeding_f_4
       rect:
         serializedVersion: 2
-        x: 17
-        y: 42
-        width: 41
-        height: 8
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2180ddb623ec72d20800000000000000
+      spriteID: 37d77b5811ed3d54cb1f2e9a5771b5a3
       internalID: 3253795971751806994
       vertices: []
       indices: 
@@ -228,20 +228,240 @@ TextureImporter:
       name: SlashM_bleeding_f_5
       rect:
         serializedVersion: 2
-        x: 12
-        y: 10
-        width: 34
-        height: 8
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d3144119bc3291570800000000000000
+      spriteID: b2168e9b43d0946458c9b42b99b25827
       internalID: 8437814734074691901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_bleeding_f_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f267482fc1624b84a8026438a4c0c1bf
+      internalID: 1682234735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_bleeding_f_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c68e61172a67d642bff2ef34000a493
+      internalID: -1489895172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_bleeding_f_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8badcce55051fc548b1ff136ea44ddf6
+      internalID: 365517731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_bleeding_f_9
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77a14393bb6f2ce47b8cda223b22bc1e
+      internalID: -203466712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_bleeding_f_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8aef6406341ae4e44ac3aa0fce167ffc
+      internalID: -498518269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_bleeding_f_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdeb3197cb3a11644913c5ed84315828
+      internalID: -454406468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_bleeding_f_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20199c5ecacd9af4e939d9424f2c7a5d
+      internalID: 109276116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_bleeding_f_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f2b52f111ae2294fa7275050cb4c7c1
+      internalID: -807705552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_bleeding_f_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09bbb37e5f9340e4ba0d0f3ef6148058
+      internalID: 986387885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashM_bleeding_f_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8f9f99dec040ab4d8d8f618e3094ae3
+      internalID: 319906666
       vertices: []
       indices: 
       edges: []
@@ -250,7 +470,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a39e744156903c249969bf41054a1f97
     internalID: 0
     vertices: []
     indices: 
@@ -262,10 +482,20 @@ TextureImporter:
     nameFileIdTable:
       SlashM_bleeding_f_0: -1151816475072538333
       SlashM_bleeding_f_1: -5887814710822309359
+      SlashM_bleeding_f_10: -498518269
+      SlashM_bleeding_f_11: -454406468
+      SlashM_bleeding_f_12: 109276116
+      SlashM_bleeding_f_13: -807705552
+      SlashM_bleeding_f_14: 986387885
+      SlashM_bleeding_f_15: 319906666
       SlashM_bleeding_f_2: 4969489061022208760
       SlashM_bleeding_f_3: 1428360334786384558
       SlashM_bleeding_f_4: 3253795971751806994
       SlashM_bleeding_f_5: 8437814734074691901
+      SlashM_bleeding_f_6: 1682234735
+      SlashM_bleeding_f_7: -1489895172
+      SlashM_bleeding_f_8: 365517731
+      SlashM_bleeding_f_9: -203466712
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

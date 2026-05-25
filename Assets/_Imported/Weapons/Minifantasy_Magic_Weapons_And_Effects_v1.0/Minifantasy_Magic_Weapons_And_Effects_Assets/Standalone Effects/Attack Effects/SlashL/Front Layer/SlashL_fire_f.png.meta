@@ -108,7 +108,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -136,19 +136,19 @@ TextureImporter:
       name: SlashL_fire_f_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 110
-        width: 14
-        height: 11
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0cfe21f54167a1f40800000000000000
+      spriteID: b150838532052b842825565b9eedc5fb
       internalID: 5699998108257284032
       vertices: []
       indices: 
@@ -158,19 +158,19 @@ TextureImporter:
       name: SlashL_fire_f_1
       rect:
         serializedVersion: 2
-        x: 40
-        y: 115
-        width: 9
-        height: 6
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6b1488c8326ca02d0800000000000000
+      spriteID: b67397817eb5f1b48aea24e769cc1901
       internalID: -3311616719993683530
       vertices: []
       indices: 
@@ -180,19 +180,19 @@ TextureImporter:
       name: SlashL_fire_f_2
       rect:
         serializedVersion: 2
-        x: 72
-        y: 115
-        width: 6
-        height: 6
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8ef53d5f744963a10800000000000000
+      spriteID: 7f4dbdf1e0c0f91449964f6e7b6e00c7
       internalID: 1888860130516361192
       vertices: []
       indices: 
@@ -202,19 +202,19 @@ TextureImporter:
       name: SlashL_fire_f_3
       rect:
         serializedVersion: 2
-        x: 109
-        y: 103
-        width: 13
-        height: 18
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: da96652d44be6ade0800000000000000
+      spriteID: c7bb9ecd623823342b7b2f4600e85b9b
       internalID: -1322110759767479891
       vertices: []
       indices: 
@@ -224,19 +224,19 @@ TextureImporter:
       name: SlashL_fire_f_4
       rect:
         serializedVersion: 2
-        x: 144
-        y: 103
-        width: 11
-        height: 11
+        x: 128
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 485ee38b8ec562bd0800000000000000
+      spriteID: f3a2137aeeb3745459c3ae94b4171cc6
       internalID: -2655332775695030908
       vertices: []
       indices: 
@@ -246,19 +246,19 @@ TextureImporter:
       name: SlashL_fire_f_5
       rect:
         serializedVersion: 2
-        x: 177
-        y: 103
-        width: 6
-        height: 6
+        x: 160
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 36b999ea63b23f890800000000000000
+      spriteID: 1a13022d733750f49abfdec8604e7522
       internalID: -7425543846746285213
       vertices: []
       indices: 
@@ -268,19 +268,19 @@ TextureImporter:
       name: SlashL_fire_f_6
       rect:
         serializedVersion: 2
-        x: 9
-        y: 78
-        width: 14
-        height: 11
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7c655cd304534d9e0800000000000000
+      spriteID: 4c347fd81790abd489c63ca970030092
       internalID: -1597593417779161401
       vertices: []
       indices: 
@@ -290,19 +290,19 @@ TextureImporter:
       name: SlashL_fire_f_7
       rect:
         serializedVersion: 2
-        x: 47
-        y: 83
-        width: 9
-        height: 6
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 59ebde60368662160800000000000000
+      spriteID: a26f0f817cbdbaf45a8970e3fee78663
       internalID: 7000397445321309845
       vertices: []
       indices: 
@@ -312,19 +312,19 @@ TextureImporter:
       name: SlashL_fire_f_8
       rect:
         serializedVersion: 2
-        x: 82
-        y: 83
-        width: 6
-        height: 6
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f5475362c27ab5210800000000000000
+      spriteID: 3b9ca4a900e306449a8315e4258d3600
       internalID: 1322834723624809567
       vertices: []
       indices: 
@@ -334,19 +334,19 @@ TextureImporter:
       name: SlashL_fire_f_9
       rect:
         serializedVersion: 2
-        x: 102
-        y: 71
-        width: 13
-        height: 18
+        x: 96
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 98a9c5ff4c253b420800000000000000
+      spriteID: 3c7a7ca4cc2497443af567d339f85f97
       internalID: 2644548412247939721
       vertices: []
       indices: 
@@ -356,19 +356,19 @@ TextureImporter:
       name: SlashL_fire_f_10
       rect:
         serializedVersion: 2
-        x: 133
-        y: 71
-        width: 11
-        height: 11
+        x: 128
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d8b675e3a73ea42d0800000000000000
+      spriteID: 98a85db208c5db34a923d5d9ef0a530a
       internalID: -3293570063296664691
       vertices: []
       indices: 
@@ -378,20 +378,284 @@ TextureImporter:
       name: SlashL_fire_f_11
       rect:
         serializedVersion: 2
-        x: 169
-        y: 71
-        width: 6
-        height: 6
+        x: 160
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 594e6a9d8b1ba15f0800000000000000
+      spriteID: 9cf9700815043764a8d81596c210ce37
       internalID: -785119777539038059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e54396e7cfb02a14aacc24e4e1a8fd8b
+      internalID: -1112828570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c1badaa593dea94d9e9c6e6cd0b11e2
+      internalID: -954558395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5b7869d2b1e4c04283008f0054c7303
+      internalID: -1510047766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59f9cc1fb6068b04c83ce49bf8dc84be
+      internalID: -481079511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e56bd5c4451cdb48b23f08b52df339b
+      internalID: -16338855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_17
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a12c4b31936ba864caf761ed27256776
+      internalID: 55375765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a12c9122e6cbdd4d986e0952f4c0bc8
+      internalID: -218403266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bdce049189bf4c468334dcf49ab7195
+      internalID: -1203367082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_20
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71dc5dd82efb5074aa960a2fa879c44c
+      internalID: -844893159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_21
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6774ca586c03729439641864a1bc01ca
+      internalID: -151781803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_22
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17b90df5e32bf2b4c9210775b85fdc69
+      internalID: -1275920140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_fire_f_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b1632c6c25407545bfe62e75d2fbe2b
+      internalID: -478321044
       vertices: []
       indices: 
       edges: []
@@ -400,7 +664,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a6d2bcc6836af1d46b938e87c6651891
     internalID: 0
     vertices: []
     indices: 
@@ -414,7 +678,19 @@ TextureImporter:
       SlashL_fire_f_1: -3311616719993683530
       SlashL_fire_f_10: -3293570063296664691
       SlashL_fire_f_11: -785119777539038059
+      SlashL_fire_f_12: -1112828570
+      SlashL_fire_f_13: -954558395
+      SlashL_fire_f_14: -1510047766
+      SlashL_fire_f_15: -481079511
+      SlashL_fire_f_16: -16338855
+      SlashL_fire_f_17: 55375765
+      SlashL_fire_f_18: -218403266
+      SlashL_fire_f_19: -1203367082
       SlashL_fire_f_2: 1888860130516361192
+      SlashL_fire_f_20: -844893159
+      SlashL_fire_f_21: -151781803
+      SlashL_fire_f_22: -1275920140
+      SlashL_fire_f_23: -478321044
       SlashL_fire_f_3: -1322110759767479891
       SlashL_fire_f_4: -2655332775695030908
       SlashL_fire_f_5: -7425543846746285213

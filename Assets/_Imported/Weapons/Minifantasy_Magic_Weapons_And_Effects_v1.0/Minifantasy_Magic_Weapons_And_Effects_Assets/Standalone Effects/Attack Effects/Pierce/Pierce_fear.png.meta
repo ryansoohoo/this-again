@@ -93,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -121,19 +121,19 @@ TextureImporter:
       name: Pierce_fear_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 108
-        width: 46
-        height: 7
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f8fbdc002e554db90800000000000000
+      spriteID: aaec0e93ca352a94194d5978700616bc
       internalID: -7218049873603608689
       vertices: []
       indices: 
@@ -143,19 +143,19 @@ TextureImporter:
       name: Pierce_fear_1
       rect:
         serializedVersion: 2
-        x: 79
-        y: 108
-        width: 17
-        height: 7
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c23d4448ac54b5330800000000000000
+      spriteID: 3339a2ea78526b047953cc41e714ccaf
       internalID: 3700628254919807788
       vertices: []
       indices: 
@@ -165,19 +165,19 @@ TextureImporter:
       name: Pierce_fear_2
       rect:
         serializedVersion: 2
-        x: 13
-        y: 51
-        width: 42
+        x: 64
+        y: 96
+        width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9ab1790ca67001df0800000000000000
+      spriteID: 3891e4c707cf5734baca2e5cf75eadc7
       internalID: -211661027407357015
       vertices: []
       indices: 
@@ -187,19 +187,19 @@ TextureImporter:
       name: Pierce_fear_3
       rect:
         serializedVersion: 2
-        x: 63
-        y: 76
-        width: 18
-        height: 7
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7d9490cdec8d13550800000000000000
+      spriteID: 881991f771dc6594e91927ce387095dc
       internalID: 6138926150049155543
       vertices: []
       indices: 
@@ -209,19 +209,19 @@ TextureImporter:
       name: Pierce_fear_4
       rect:
         serializedVersion: 2
-        x: 44
-        y: 42
-        width: 7
-        height: 13
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fa8ddf5729c736550800000000000000
+      spriteID: 78c8f8fc6d63b9846a65029e3b74737b
       internalID: 6152898484404869295
       vertices: []
       indices: 
@@ -231,19 +231,19 @@ TextureImporter:
       name: Pierce_fear_5
       rect:
         serializedVersion: 2
-        x: 76
-        y: 15
-        width: 8
-        height: 34
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b1bcf375982bae0d0800000000000000
+      spriteID: a9893b4675f397447aac89b6a2ecda83
       internalID: -3392703066326185189
       vertices: []
       indices: 
@@ -253,20 +253,130 @@ TextureImporter:
       name: Pierce_fear_6
       rect:
         serializedVersion: 2
-        x: 14
-        y: 8
-        width: 38
-        height: 14
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fa41dfdcb41f43ae0800000000000000
+      spriteID: 1dcf6b751740b3142a333257786038a8
       internalID: -1570365062164704081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_fear_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a25bf6801941b642bfc0b2efc22acfb
+      internalID: -644168115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_fear_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 106c4620621911e4ab8f9186bbeb4c92
+      internalID: 1596738730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_fear_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c0d30d6f9ef5e3479c194dea46e07dd
+      internalID: -1983678835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_fear_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 951bfc238501e4e41944a33bc2e66735
+      internalID: -1941595740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pierce_fear_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef36927d42bcaae4a890f4672a3599c6
+      internalID: 865797554
       vertices: []
       indices: 
       edges: []
@@ -275,7 +385,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b7825c881a6e8c1478c18febd1d144de
     internalID: 0
     vertices: []
     indices: 
@@ -287,11 +397,16 @@ TextureImporter:
     nameFileIdTable:
       Pierce_fear_0: -7218049873603608689
       Pierce_fear_1: 3700628254919807788
+      Pierce_fear_10: -1941595740
+      Pierce_fear_11: 865797554
       Pierce_fear_2: -211661027407357015
       Pierce_fear_3: 6138926150049155543
       Pierce_fear_4: 6152898484404869295
       Pierce_fear_5: -3392703066326185189
       Pierce_fear_6: -1570365062164704081
+      Pierce_fear_7: -644168115
+      Pierce_fear_8: 1596738730
+      Pierce_fear_9: -1983678835
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -118,19 +118,19 @@ TextureImporter:
       name: SlashL_bleeding_b_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 15
-        width: 12
-        height: 9
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 690c10cd92f1cfc20800000000000000
+      spriteID: 5cf54d6848b668849810896bd6084c75
       internalID: 3241500096445137046
       vertices: []
       indices: 
@@ -140,19 +140,19 @@ TextureImporter:
       name: SlashL_bleeding_b_1
       rect:
         serializedVersion: 2
-        x: 11
-        y: 20
-        width: 44
-        height: 36
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: eee84a47f28516400800000000000000
+      spriteID: af47b821326fe44439bcc8c708cf1bfa
       internalID: 315630409736294126
       vertices: []
       indices: 
@@ -162,19 +162,19 @@ TextureImporter:
       name: SlashL_bleeding_b_2
       rect:
         serializedVersion: 2
-        x: 73
-        y: 45
-        width: 48
-        height: 11
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8f6852e25bdd31fb0800000000000000
+      spriteID: 9a668fe09fb2ebb4abb2ae54cba4ef0b
       internalID: -4678151817674782984
       vertices: []
       indices: 
@@ -184,19 +184,19 @@ TextureImporter:
       name: SlashL_bleeding_b_3
       rect:
         serializedVersion: 2
-        x: 83
-        y: 13
-        width: 31
-        height: 11
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1272ec9a1812373f0800000000000000
+      spriteID: 7ea6657d1f0e90442a7290a84c925bda
       internalID: -904342259387979999
       vertices: []
       indices: 
@@ -206,19 +206,19 @@ TextureImporter:
       name: SlashL_bleeding_b_4
       rect:
         serializedVersion: 2
-        x: 134
-        y: 13
-        width: 40
-        height: 8
+        x: 128
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 31848b5c88dd46950800000000000000
+      spriteID: 4ba4ce984d62fd042bb6f3c831802437
       internalID: 6441516946549131283
       vertices: []
       indices: 
@@ -228,20 +228,416 @@ TextureImporter:
       name: SlashL_bleeding_b_5
       rect:
         serializedVersion: 2
-        x: 145
-        y: 45
-        width: 37
-        height: 8
+        x: 160
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f7383239da02535e0800000000000000
+      spriteID: 412ee94850100ad4f9a6289f2f17334b
       internalID: -1930600935388380289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4686faee57b60a48a4a598cc2d3282c
+      internalID: 900329356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3292276887b0a504b9a6452d1fdb13b9
+      internalID: 1544827129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04e57c9084520394e849a28ea15c4b57
+      internalID: -1438665292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_9
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be39a2d5f44e7a34f93152402e502d21
+      internalID: 526971217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d2f437682086ac4a85f7db818edf79c
+      internalID: 1923472324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_11
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47a34a7d917e68b469a1c8a237133c9e
+      internalID: -498341776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0770280190aade946bb5e6d6ebd5d3ea
+      internalID: 778041865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 639f131322a9bf24c9706abdae3a656e
+      internalID: 1141869146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8aeb443de06fc1408feaedbcc511c4a
+      internalID: -1744795563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc9462e38846e1544905d3b5be18dd8f
+      internalID: 936716072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24a879230a3125f42a9b9bfc5ade6360
+      internalID: -892487051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_17
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 077043b15c8800042a4033ef600004b6
+      internalID: -1302084559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d39794837efe8a74db89691deded1413
+      internalID: -2111893439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbc6ede6402420546a1b5a7f1e3f453c
+      internalID: -1799627086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_20
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 422411f89a2c3cf4997df1b9274ee29d
+      internalID: 1782260274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_21
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96c2aba97973ee44a865d943ca676f53
+      internalID: -1387610820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_22
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e664cc6d0368174c87078733c349527
+      internalID: 486346358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlashL_bleeding_b_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6430dfd21394d844bba746d27ccc4e3
+      internalID: -1995179449
       vertices: []
       indices: 
       edges: []
@@ -250,7 +646,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: cc2fc27768143114e86d36ac30e86639
     internalID: 0
     vertices: []
     indices: 
@@ -262,10 +658,28 @@ TextureImporter:
     nameFileIdTable:
       SlashL_bleeding_b_0: 3241500096445137046
       SlashL_bleeding_b_1: 315630409736294126
+      SlashL_bleeding_b_10: 1923472324
+      SlashL_bleeding_b_11: -498341776
+      SlashL_bleeding_b_12: 778041865
+      SlashL_bleeding_b_13: 1141869146
+      SlashL_bleeding_b_14: -1744795563
+      SlashL_bleeding_b_15: 936716072
+      SlashL_bleeding_b_16: -892487051
+      SlashL_bleeding_b_17: -1302084559
+      SlashL_bleeding_b_18: -2111893439
+      SlashL_bleeding_b_19: -1799627086
       SlashL_bleeding_b_2: -4678151817674782984
+      SlashL_bleeding_b_20: 1782260274
+      SlashL_bleeding_b_21: -1387610820
+      SlashL_bleeding_b_22: 486346358
+      SlashL_bleeding_b_23: -1995179449
       SlashL_bleeding_b_3: -904342259387979999
       SlashL_bleeding_b_4: 6441516946549131283
       SlashL_bleeding_b_5: -1930600935388380289
+      SlashL_bleeding_b_6: 900329356
+      SlashL_bleeding_b_7: 1544827129
+      SlashL_bleeding_b_8: -1438665292
+      SlashL_bleeding_b_9: 526971217
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

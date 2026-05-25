@@ -123,7 +123,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -151,19 +151,19 @@ TextureImporter:
       name: Shot_fear_f_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 43
-        width: 77
-        height: 73
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e2bf70a72b1fa26a0800000000000000
+      spriteID: 14cf07c130b735c41a62fbd7b2ad7640
       internalID: -6473095765537850578
       vertices: []
       indices: 
@@ -173,19 +173,19 @@ TextureImporter:
       name: Shot_fear_f_1
       rect:
         serializedVersion: 2
-        x: 109
-        y: 107
-        width: 10
-        height: 9
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4364628f208ca9600800000000000000
+      spriteID: 73d2f813567ab5747b77670b5d133d29
       internalID: 475912625719756340
       vertices: []
       indices: 
@@ -195,19 +195,19 @@ TextureImporter:
       name: Shot_fear_f_2
       rect:
         serializedVersion: 2
-        x: 140
-        y: 107
-        width: 11
-        height: 9
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1c2569c50366a54b0800000000000000
+      spriteID: 7fd4e33f7a9153d498fce10972eb9417
       internalID: -5450932041080745279
       vertices: []
       indices: 
@@ -217,19 +217,19 @@ TextureImporter:
       name: Shot_fear_f_3
       rect:
         serializedVersion: 2
-        x: 173
-        y: 107
-        width: 14
-        height: 9
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 98036f38e1eee0ca0800000000000000
+      spriteID: 9b5bcb6bcd6926d48b37a40198b8a222
       internalID: -6048635434681618295
       vertices: []
       indices: 
@@ -239,19 +239,19 @@ TextureImporter:
       name: Shot_fear_f_4
       rect:
         serializedVersion: 2
-        x: 208
-        y: 107
-        width: 10
-        height: 9
+        x: 128
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3341f028b9c774e90800000000000000
+      spriteID: fa13252af9e1f114cb24694ce0125d3b
       internalID: -7041522485026679757
       vertices: []
       indices: 
@@ -261,19 +261,19 @@ TextureImporter:
       name: Shot_fear_f_5
       rect:
         serializedVersion: 2
-        x: 241
-        y: 108
-        width: 15
-        height: 7
+        x: 160
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: abefaff0573aa0360800000000000000
+      spriteID: 300ac714b8d8c97468eff377d6925163
       internalID: 7136696282696580794
       vertices: []
       indices: 
@@ -283,19 +283,19 @@ TextureImporter:
       name: Shot_fear_f_6
       rect:
         serializedVersion: 2
-        x: 73
-        y: 75
-        width: 8
-        height: 9
+        x: 192
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ae78535b760531950800000000000000
+      spriteID: 761b263ca3f53fa4d9f34678f3d8b722
       internalID: 6418562300285126634
       vertices: []
       indices: 
@@ -305,19 +305,19 @@ TextureImporter:
       name: Shot_fear_f_7
       rect:
         serializedVersion: 2
-        x: 77
-        y: 43
-        width: 7
-        height: 9
+        x: 224
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 90821df5ba44d01a0800000000000000
+      spriteID: 4a404bacb2b89f94a8dc3359e0606cce
       internalID: -6841736756068276215
       vertices: []
       indices: 
@@ -327,19 +327,19 @@ TextureImporter:
       name: Shot_fear_f_8
       rect:
         serializedVersion: 2
-        x: 105
-        y: 75
-        width: 10
-        height: 9
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 15306287dacd58310800000000000000
+      spriteID: 035a775ddbc63b54ca5d9f465dd6472a
       internalID: 1406773096226358097
       vertices: []
       indices: 
@@ -349,19 +349,19 @@ TextureImporter:
       name: Shot_fear_f_9
       rect:
         serializedVersion: 2
-        x: 109
-        y: 43
-        width: 7
-        height: 9
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c32dd66da23f4ed50800000000000000
+      spriteID: 7ed0dbfd70575e14f80ec01712da1e16
       internalID: 6765799905529025084
       vertices: []
       indices: 
@@ -371,19 +371,19 @@ TextureImporter:
       name: Shot_fear_f_10
       rect:
         serializedVersion: 2
-        x: 137
-        y: 75
-        width: 11
-        height: 9
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cb6665d8c5e2e2d00800000000000000
+      spriteID: 3cf157d0c4e41e44fb1b260fa993c4ce
       internalID: 949747546464872124
       vertices: []
       indices: 
@@ -393,19 +393,19 @@ TextureImporter:
       name: Shot_fear_f_11
       rect:
         serializedVersion: 2
-        x: 141
-        y: 43
-        width: 7
-        height: 10
+        x: 96
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f13e382e83ed9c560800000000000000
+      spriteID: 9b62555e71fe74c4f9ab608d10e79b0c
       internalID: 7334637804049392415
       vertices: []
       indices: 
@@ -415,19 +415,19 @@ TextureImporter:
       name: Shot_fear_f_12
       rect:
         serializedVersion: 2
-        x: 165
-        y: 75
-        width: 14
-        height: 9
+        x: 128
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1df1629e78825e790800000000000000
+      spriteID: 5a0ecc1ec6564e84c98e114ffe11db69
       internalID: -7501545040118407215
       vertices: []
       indices: 
@@ -437,19 +437,19 @@ TextureImporter:
       name: Shot_fear_f_13
       rect:
         serializedVersion: 2
-        x: 173
-        y: 40
-        width: 7
-        height: 15
+        x: 160
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4043040d7400cbfa0800000000000000
+      spriteID: 9c4d09ae48d05a84c8200879cb62da98
       internalID: -5783747513014012924
       vertices: []
       indices: 
@@ -459,19 +459,19 @@ TextureImporter:
       name: Shot_fear_f_14
       rect:
         serializedVersion: 2
-        x: 198
-        y: 75
-        width: 10
-        height: 9
+        x: 192
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9af71d0a25aaff6b0800000000000000
+      spriteID: 73748bb1900864641b82a3c0255df1b6
       internalID: -5260298567883325527
       vertices: []
       indices: 
@@ -481,19 +481,19 @@ TextureImporter:
       name: Shot_fear_f_15
       rect:
         serializedVersion: 2
-        x: 205
-        y: 38
-        width: 7
-        height: 15
+        x: 224
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4b01512de7af9a990800000000000000
+      spriteID: 2b56c7d21a925724a92ba6d48fe15ff1
       internalID: -7374087492245057356
       vertices: []
       indices: 
@@ -503,20 +503,350 @@ TextureImporter:
       name: Shot_fear_f_16
       rect:
         serializedVersion: 2
-        x: 223
-        y: 31
-        width: 20
-        height: 52
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 841a600f7d115a0a0800000000000000
+      spriteID: f96f40e055d204544aa56806699879e7
       internalID: -6871066037341216440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c078be48d0e878d40b47635378cefba7
+      internalID: -2005775218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_18
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15813ebee5940cf4890c274873070267
+      internalID: 322440516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0eed949707e29b947973699a9221c2a6
+      internalID: -1288144846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_20
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5d1999b2b53af646af71a441721dfe2
+      internalID: 693788369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_21
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76c27a5eea1aeb64abfab8bf7c7f0c50
+      internalID: -829068184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_22
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a74281286caf50468e870d0a04a8566
+      internalID: 1009775112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_23
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 137b7d07dbe6c8a42a1202e998cfa631
+      internalID: -1953821453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd112a11a428a1049ad6eb8abf66462b
+      internalID: 1294402403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_25
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ede41abb62eb29468acf62ff7510f03
+      internalID: -153370785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42f9a8e2a1077214f938e916208c59c7
+      internalID: -1037747369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_27
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c43932321db54d644bda1c9267a90c05
+      internalID: -2119325937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cef2a737a2ae7e4bac8e5338d4056cd
+      internalID: -951008588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_29
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 072d4332f38fa944fb8fc06a3ccee0b2
+      internalID: -1569393521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_30
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68ad3fe8d451bae46804eea4fe1ada2e
+      internalID: 641842498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_fear_f_31
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce994f1a8702a59489957c90683ee322
+      internalID: 318145722
       vertices: []
       indices: 
       edges: []
@@ -525,7 +855,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0850996f990811c49b3ed29fa339fa7f
     internalID: 0
     vertices: []
     indices: 
@@ -544,8 +874,23 @@ TextureImporter:
       Shot_fear_f_14: -5260298567883325527
       Shot_fear_f_15: -7374087492245057356
       Shot_fear_f_16: -6871066037341216440
+      Shot_fear_f_17: -2005775218
+      Shot_fear_f_18: 322440516
+      Shot_fear_f_19: -1288144846
       Shot_fear_f_2: -5450932041080745279
+      Shot_fear_f_20: 693788369
+      Shot_fear_f_21: -829068184
+      Shot_fear_f_22: 1009775112
+      Shot_fear_f_23: -1953821453
+      Shot_fear_f_24: 1294402403
+      Shot_fear_f_25: -153370785
+      Shot_fear_f_26: -1037747369
+      Shot_fear_f_27: -2119325937
+      Shot_fear_f_28: -951008588
+      Shot_fear_f_29: -1569393521
       Shot_fear_f_3: -6048635434681618295
+      Shot_fear_f_30: 641842498
+      Shot_fear_f_31: 318145722
       Shot_fear_f_4: -7041522485026679757
       Shot_fear_f_5: 7136696282696580794
       Shot_fear_f_6: 6418562300285126634

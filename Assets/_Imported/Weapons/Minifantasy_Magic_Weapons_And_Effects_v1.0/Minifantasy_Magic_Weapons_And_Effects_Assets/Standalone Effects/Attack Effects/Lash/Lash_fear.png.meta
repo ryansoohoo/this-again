@@ -105,7 +105,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -133,19 +133,19 @@ TextureImporter:
       name: Lash_fear_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 110
-        width: 10
-        height: 11
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 50daca66aa046e470800000000000000
+      spriteID: 7cb81e6a8809bcb40a00a5ffefab1888
       internalID: 8423491253654301957
       vertices: []
       indices: 
@@ -155,19 +155,19 @@ TextureImporter:
       name: Lash_fear_1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 109
-        width: 25
-        height: 9
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0526d45c6a6775c20800000000000000
+      spriteID: ed09a62a10c7f5741bf89660d2802f24
       internalID: 3195152919289487952
       vertices: []
       indices: 
@@ -177,19 +177,19 @@ TextureImporter:
       name: Lash_fear_2
       rect:
         serializedVersion: 2
-        x: 79
-        y: 108
-        width: 17
-        height: 8
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: aa353e5a058ce4390800000000000000
+      spriteID: 6193354c00abe1c45ab7b0c484969d93
       internalID: -7832102453244636246
       vertices: []
       indices: 
@@ -199,19 +199,19 @@ TextureImporter:
       name: Lash_fear_3
       rect:
         serializedVersion: 2
-        x: 21
-        y: 78
-        width: 10
-        height: 11
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dd510530f28146d50800000000000000
+      spriteID: 2c6339bc58ec53c42a95a4626de8a363
       internalID: 6729530333396473309
       vertices: []
       indices: 
@@ -221,19 +221,19 @@ TextureImporter:
       name: Lash_fear_4
       rect:
         serializedVersion: 2
-        x: 33
-        y: 77
-        width: 25
-        height: 9
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0dca00c5997553c00800000000000000
+      spriteID: 058de2ccc7e103043a78e44f252b439b
       internalID: 879705618405960912
       vertices: []
       indices: 
@@ -243,19 +243,19 @@ TextureImporter:
       name: Lash_fear_5
       rect:
         serializedVersion: 2
-        x: 63
-        y: 76
-        width: 18
-        height: 8
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cb9b54416fc80ac20800000000000000
+      spriteID: 13cbdb4f401be494ea011a4cfb08f805
       internalID: 3215725122472491452
       vertices: []
       indices: 
@@ -265,19 +265,19 @@ TextureImporter:
       name: Lash_fear_6
       rect:
         serializedVersion: 2
-        x: 8
-        y: 51
-        width: 7
-        height: 11
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 37d72b068e57cc3f0800000000000000
+      spriteID: 5ff6c80fdff0eb349b4617feb5d3bd8a
       internalID: -879198186328916621
       vertices: []
       indices: 
@@ -287,19 +287,19 @@ TextureImporter:
       name: Lash_fear_7
       rect:
         serializedVersion: 2
-        x: 39
-        y: 33
-        width: 9
-        height: 24
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2812047b784be04a0800000000000000
+      spriteID: cea77dc4768221a488fdf502c5b5318c
       internalID: -6625159506827402878
       vertices: []
       indices: 
@@ -309,19 +309,19 @@ TextureImporter:
       name: Lash_fear_8
       rect:
         serializedVersion: 2
-        x: 48
-        y: 7
-        width: 9
-        height: 24
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 96fa8b72edd8ea310800000000000000
+      spriteID: babf10c4f798ac44aa2f5d84d0daeae0
       internalID: 1418226917956956009
       vertices: []
       indices: 
@@ -331,19 +331,19 @@ TextureImporter:
       name: Lash_fear_9
       rect:
         serializedVersion: 2
-        x: 73
-        y: 16
-        width: 14
-        height: 31
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 18a488d3e5ffbca00800000000000000
+      spriteID: b9193d104f5545e4d9c077220cf2599f
       internalID: 777996140875893377
       vertices: []
       indices: 
@@ -353,20 +353,42 @@ TextureImporter:
       name: Lash_fear_10
       rect:
         serializedVersion: 2
-        x: 17
-        y: 2
-        width: 7
-        height: 11
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 66d47f10152839bc0800000000000000
+      spriteID: cd7caa2494bfccd4f94d25c2970e99f6
       internalID: -3777532377996767898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lash_fear_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d328e11c2317762428be8b0e944e9593
+      internalID: 1758525696
       vertices: []
       indices: 
       edges: []
@@ -375,7 +397,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1d36078d6e0de0d4a92d6ecce3a13006
     internalID: 0
     vertices: []
     indices: 
@@ -388,6 +410,7 @@ TextureImporter:
       Lash_fear_0: 8423491253654301957
       Lash_fear_1: 3195152919289487952
       Lash_fear_10: -3777532377996767898
+      Lash_fear_11: 1758525696
       Lash_fear_2: -7832102453244636246
       Lash_fear_3: 6729530333396473309
       Lash_fear_4: 879705618405960912

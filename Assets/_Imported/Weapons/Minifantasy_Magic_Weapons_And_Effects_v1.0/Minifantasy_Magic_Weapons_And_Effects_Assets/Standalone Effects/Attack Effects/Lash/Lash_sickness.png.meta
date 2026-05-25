@@ -105,7 +105,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -133,19 +133,19 @@ TextureImporter:
       name: Lash_sickness_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 111
-        width: 8
-        height: 9
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0c197f83976d94c90800000000000000
+      spriteID: 102b49d2780d8a24e84cce2ea13d6349
       internalID: -7184975914357780032
       vertices: []
       indices: 
@@ -155,19 +155,19 @@ TextureImporter:
       name: Lash_sickness_1
       rect:
         serializedVersion: 2
-        x: 39
-        y: 110
-        width: 23
-        height: 7
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ff15e30a6f71d60b0800000000000000
+      spriteID: 2686ab088540a5a4a94d9789d4cb8b38
       internalID: -5733900402554940929
       vertices: []
       indices: 
@@ -177,19 +177,19 @@ TextureImporter:
       name: Lash_sickness_2
       rect:
         serializedVersion: 2
-        x: 80
-        y: 108
-        width: 16
-        height: 7
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 61f21cad762f3c5b0800000000000000
+      spriteID: 5be5baa1f97ce8945a60336f48d0a5a1
       internalID: -5349165404520370410
       vertices: []
       indices: 
@@ -199,19 +199,19 @@ TextureImporter:
       name: Lash_sickness_3
       rect:
         serializedVersion: 2
-        x: 9
-        y: 52
-        width: 21
-        height: 36
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3f0c1656335d0d050800000000000000
+      spriteID: 56d98052efbac704e82ddf84354266ef
       internalID: 5823388734911004915
       vertices: []
       indices: 
@@ -221,19 +221,19 @@ TextureImporter:
       name: Lash_sickness_4
       rect:
         serializedVersion: 2
-        x: 34
-        y: 78
-        width: 23
-        height: 7
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 588d1cf0be58a13d0800000000000000
+      spriteID: 3652ce468d21acf4f9d2cd897271b565
       internalID: -3235126137684109179
       vertices: []
       indices: 
@@ -243,19 +243,19 @@ TextureImporter:
       name: Lash_sickness_5
       rect:
         serializedVersion: 2
-        x: 40
-        y: 34
-        width: 7
-        height: 22
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9fbe6a4c9d51ff7e0800000000000000
+      spriteID: 812b3e29468a833438d456e65a22fd04
       internalID: -1729639706835620871
       vertices: []
       indices: 
@@ -265,19 +265,19 @@ TextureImporter:
       name: Lash_sickness_6
       rect:
         serializedVersion: 2
-        x: 63
-        y: 76
-        width: 17
-        height: 7
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 53b987629ec371530800000000000000
+      spriteID: ff3b9be87b1fe8e41ab63e5a8dc61839
       internalID: 3825593380545010485
       vertices: []
       indices: 
@@ -287,19 +287,19 @@ TextureImporter:
       name: Lash_sickness_7
       rect:
         serializedVersion: 2
-        x: 74
-        y: 34
-        width: 7
-        height: 12
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a3c6d741d1914b490800000000000000
+      spriteID: 614d86f6ab068a242b2df36f1df8a2bd
       internalID: -7731527047599788998
       vertices: []
       indices: 
@@ -309,19 +309,19 @@ TextureImporter:
       name: Lash_sickness_8
       rect:
         serializedVersion: 2
-        x: 74
-        y: 29
-        width: 9
-        height: 6
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a941c9d217de8a0a0800000000000000
+      spriteID: c15a0add1cbd9644f8febd89d7a3fa56
       internalID: -6869980161201400678
       vertices: []
       indices: 
@@ -331,19 +331,19 @@ TextureImporter:
       name: Lash_sickness_9
       rect:
         serializedVersion: 2
-        x: 18
-        y: 3
-        width: 38
-        height: 27
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5c50e2a9a6d6c9750800000000000000
+      spriteID: 2465090315b68fa41bf808efd7db553f
       internalID: 6313041082287261125
       vertices: []
       indices: 
@@ -353,20 +353,42 @@ TextureImporter:
       name: Lash_sickness_10
       rect:
         serializedVersion: 2
-        x: 79
-        y: 17
-        width: 7
-        height: 16
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f50bea30e09010060800000000000000
+      spriteID: a56cf21d9b2a8df4083218c099666506
       internalID: 6917820458413764703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lash_sickness_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11511bc39d716b041a7f3c941d5f3e4f
+      internalID: -1388546496
       vertices: []
       indices: 
       edges: []
@@ -375,7 +397,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0430c92fa3f77f2499411e6a0d350450
     internalID: 0
     vertices: []
     indices: 
@@ -388,6 +410,7 @@ TextureImporter:
       Lash_sickness_0: -7184975914357780032
       Lash_sickness_1: -5733900402554940929
       Lash_sickness_10: 6917820458413764703
+      Lash_sickness_11: -1388546496
       Lash_sickness_2: -5349165404520370410
       Lash_sickness_3: 5823388734911004915
       Lash_sickness_4: -3235126137684109179

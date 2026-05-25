@@ -108,7 +108,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -136,19 +136,19 @@ TextureImporter:
       name: Flail_fire_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 116
-        width: 6
-        height: 6
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7aa196dcd3c2c2490800000000000000
+      spriteID: 3db8785a5fff3f744a645b0f3fed4550
       internalID: -7769786613170103641
       vertices: []
       indices: 
@@ -158,19 +158,19 @@ TextureImporter:
       name: Flail_fire_1
       rect:
         serializedVersion: 2
-        x: 43
-        y: 108
-        width: 17
-        height: 14
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 42ace66dcfb52a160800000000000000
+      spriteID: 69bbf92c9041d0a488bd9249e4595b2c
       internalID: 7035286709393607204
       vertices: []
       indices: 
@@ -180,19 +180,19 @@ TextureImporter:
       name: Flail_fire_2
       rect:
         serializedVersion: 2
-        x: 86
-        y: 108
-        width: 6
-        height: 7
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: da9b83c090c4c8650800000000000000
+      spriteID: 29ca63dcadaeb4d49abe2217ca298b0f
       internalID: 6236443185744755117
       vertices: []
       indices: 
@@ -202,19 +202,19 @@ TextureImporter:
       name: Flail_fire_3
       rect:
         serializedVersion: 2
-        x: 17
-        y: 84
-        width: 6
-        height: 6
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 95fa1d90c9d135220800000000000000
+      spriteID: 306fe7826f5102f46862d01ecb3241d4
       internalID: 2473353176373374809
       vertices: []
       indices: 
@@ -224,19 +224,19 @@ TextureImporter:
       name: Flail_fire_4
       rect:
         serializedVersion: 2
-        x: 36
-        y: 76
-        width: 17
-        height: 14
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 88f0693c6b6f2ff30800000000000000
+      spriteID: c0899ace4f6e6ef4d9258f63ebfa42c6
       internalID: 4608016633579310984
       vertices: []
       indices: 
@@ -246,19 +246,19 @@ TextureImporter:
       name: Flail_fire_5
       rect:
         serializedVersion: 2
-        x: 68
-        y: 76
-        width: 6
-        height: 7
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 806de3ba1e67f4440800000000000000
+      spriteID: 4495d958dd588a047b15c1b5746dd011
       internalID: 4922283629351982600
       vertices: []
       indices: 
@@ -268,19 +268,19 @@ TextureImporter:
       name: Flail_fire_6
       rect:
         serializedVersion: 2
-        x: 9
-        y: 52
-        width: 6
-        height: 6
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 814ecae2ac6908f70800000000000000
+      spriteID: 9ed824123b717b143af1b3c5b6c42d85
       internalID: 9187509034946454552
       vertices: []
       indices: 
@@ -290,19 +290,19 @@ TextureImporter:
       name: Flail_fire_7
       rect:
         serializedVersion: 2
-        x: 43
-        y: 35
-        width: 7
-        height: 21
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9207a0f32e4f371d0800000000000000
+      spriteID: 9f494e9318ddb304bae082f26853e440
       internalID: -3354068044903452631
       vertices: []
       indices: 
@@ -312,19 +312,19 @@ TextureImporter:
       name: Flail_fire_8
       rect:
         serializedVersion: 2
-        x: 75
-        y: 35
-        width: 6
-        height: 7
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 725c2e25b54638600800000000000000
+      spriteID: b8c1bc7c4d0dbdf4ca53757bde98c325
       internalID: 469329129572058407
       vertices: []
       indices: 
@@ -334,19 +334,19 @@ TextureImporter:
       name: Flail_fire_9
       rect:
         serializedVersion: 2
-        x: 46
-        y: 8
-        width: 7
-        height: 21
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a989a10be5d2e5590800000000000000
+      spriteID: c171435fd5cd6f44a91ef320f58d8271
       internalID: -7683654029542778726
       vertices: []
       indices: 
@@ -356,19 +356,19 @@ TextureImporter:
       name: Flail_fire_10
       rect:
         serializedVersion: 2
-        x: 79
-        y: 21
-        width: 6
-        height: 8
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 265a77afcdde5da20800000000000000
+      spriteID: 2215c5097f922a14cad66bab1d60e087
       internalID: 3086634652983076194
       vertices: []
       indices: 
@@ -378,19 +378,19 @@ TextureImporter:
       name: Flail_fire_11
       rect:
         serializedVersion: 2
-        x: 17
-        y: 6
-        width: 6
-        height: 6
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6593805b4f00a8690800000000000000
+      spriteID: 7c18c3e17861d514995a2f9a67c76e21
       internalID: -7599260370225055402
       vertices: []
       indices: 
@@ -400,7 +400,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d35f7a8682fee3e409507d59d8cbf575
     internalID: 0
     vertices: []
     indices: 

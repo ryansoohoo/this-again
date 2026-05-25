@@ -105,7 +105,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -133,19 +133,19 @@ TextureImporter:
       name: Lash_bleeding_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 111
-        width: 8
-        height: 9
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1a11fe05ecf7a3100800000000000000
+      spriteID: dfee615ce52471840a97deec70e3449b
       internalID: 88523666784981409
       vertices: []
       indices: 
@@ -155,19 +155,19 @@ TextureImporter:
       name: Lash_bleeding_1
       rect:
         serializedVersion: 2
-        x: 39
-        y: 110
-        width: 23
-        height: 7
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a026bec138087bac0800000000000000
+      spriteID: b920d15fd3c2b5847bb5584897bdd3d7
       internalID: -3839458856695799286
       vertices: []
       indices: 
@@ -177,19 +177,19 @@ TextureImporter:
       name: Lash_bleeding_2
       rect:
         serializedVersion: 2
-        x: 80
-        y: 108
-        width: 16
-        height: 7
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fa52f2ffd78bec8c0800000000000000
+      spriteID: 8a1945c92ae22774e8dc08e01699e7b7
       internalID: -3977038569629866577
       vertices: []
       indices: 
@@ -199,19 +199,19 @@ TextureImporter:
       name: Lash_bleeding_3
       rect:
         serializedVersion: 2
-        x: 9
-        y: 52
-        width: 21
-        height: 36
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 75341139383369060800000000000000
+      spriteID: 7369cc399f2963543a2ebdeacb3190d6
       internalID: 6959806914348794711
       vertices: []
       indices: 
@@ -221,19 +221,19 @@ TextureImporter:
       name: Lash_bleeding_4
       rect:
         serializedVersion: 2
-        x: 34
-        y: 78
-        width: 23
-        height: 7
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1beb70a2e52c43bb0800000000000000
+      spriteID: 72de8e79da6ddcf4db34c548dab89393
       internalID: -4957123580140208463
       vertices: []
       indices: 
@@ -243,19 +243,19 @@ TextureImporter:
       name: Lash_bleeding_5
       rect:
         serializedVersion: 2
-        x: 40
-        y: 34
-        width: 7
-        height: 22
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 05b3a377788ae91a0800000000000000
+      spriteID: d58bae707cc15454aa2723654d75e18a
       internalID: -6800813087508513968
       vertices: []
       indices: 
@@ -265,19 +265,19 @@ TextureImporter:
       name: Lash_bleeding_6
       rect:
         serializedVersion: 2
-        x: 63
-        y: 76
-        width: 17
-        height: 7
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: eb3640db1109f0a60800000000000000
+      spriteID: d3c5440e6b51d784d85eda486e84df8a
       internalID: 7642485498531046334
       vertices: []
       indices: 
@@ -287,19 +287,19 @@ TextureImporter:
       name: Lash_bleeding_7
       rect:
         serializedVersion: 2
-        x: 74
-        y: 34
-        width: 7
-        height: 12
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ab066736eefe50460800000000000000
+      spriteID: d6d3884ea5a05a541b42d2f21a4eb984
       internalID: 7207430585826304186
       vertices: []
       indices: 
@@ -309,19 +309,19 @@ TextureImporter:
       name: Lash_bleeding_8
       rect:
         serializedVersion: 2
-        x: 74
-        y: 29
-        width: 9
-        height: 6
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6ae7dec60cf8839c0800000000000000
+      spriteID: 888bc0bb1f9d4f14894c564015a57ccd
       internalID: -3947247016766243162
       vertices: []
       indices: 
@@ -331,19 +331,19 @@ TextureImporter:
       name: Lash_bleeding_9
       rect:
         serializedVersion: 2
-        x: 18
-        y: 3
-        width: 38
-        height: 27
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f307e7f771e5dcfd0800000000000000
+      spriteID: 264f0ca72636b384682f434ad395e06f
       internalID: -2320094778009685953
       vertices: []
       indices: 
@@ -353,20 +353,42 @@ TextureImporter:
       name: Lash_bleeding_10
       rect:
         serializedVersion: 2
-        x: 79
-        y: 17
-        width: 7
-        height: 16
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 303f1e146e895dc30800000000000000
+      spriteID: 9fc73ef522871aa4c82fdb91d5e7d245
       internalID: 4383577927030272771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lash_bleeding_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c78fa0c0d3b27541b9164328fee3308
+      internalID: 2127311705
       vertices: []
       indices: 
       edges: []
@@ -375,7 +397,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a549cacba4bc3c64eb70fa7daeb58a4e
     internalID: 0
     vertices: []
     indices: 
@@ -388,6 +410,7 @@ TextureImporter:
       Lash_bleeding_0: 88523666784981409
       Lash_bleeding_1: -3839458856695799286
       Lash_bleeding_10: 4383577927030272771
+      Lash_bleeding_11: 2127311705
       Lash_bleeding_2: -3977038569629866577
       Lash_bleeding_3: 6959806914348794711
       Lash_bleeding_4: -4957123580140208463

@@ -102,7 +102,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,19 +130,19 @@ TextureImporter:
       name: Shot_poisson_f_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 44
-        width: 75
-        height: 71
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 65a94ddaba5b60df0800000000000000
+      spriteID: 21a1b210016ad254790f705b4b388c2a
       internalID: -214284183293093290
       vertices: []
       indices: 
@@ -152,19 +152,19 @@ TextureImporter:
       name: Shot_poisson_f_1
       rect:
         serializedVersion: 2
-        x: 110
-        y: 108
-        width: 8
-        height: 7
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 26e9974cb3eb86b90800000000000000
+      spriteID: 77a8f6a9d0cd185429cde69fa1e8a284
       internalID: -7248334436344160670
       vertices: []
       indices: 
@@ -174,19 +174,19 @@ TextureImporter:
       name: Shot_poisson_f_2
       rect:
         serializedVersion: 2
-        x: 141
-        y: 108
-        width: 9
-        height: 7
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c1a6309b6ae521900800000000000000
+      spriteID: 44a3662e296794b4eb9ba60210437cb6
       internalID: 653688966083734044
       vertices: []
       indices: 
@@ -196,19 +196,19 @@ TextureImporter:
       name: Shot_poisson_f_3
       rect:
         serializedVersion: 2
-        x: 174
-        y: 108
-        width: 12
-        height: 7
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 51dc18ddd3cea6050800000000000000
+      spriteID: 9f548b6afd4e6ca4db79d356f6d1ea4c
       internalID: 5794703621018995989
       vertices: []
       indices: 
@@ -218,19 +218,19 @@ TextureImporter:
       name: Shot_poisson_f_4
       rect:
         serializedVersion: 2
-        x: 209
-        y: 108
-        width: 47
-        height: 7
+        x: 128
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4eed9c9d5ec79c020800000000000000
+      spriteID: 79359cd422d4241418241dde7658788d
       internalID: 2362556806175776484
       vertices: []
       indices: 
@@ -240,19 +240,19 @@ TextureImporter:
       name: Shot_poisson_f_5
       rect:
         serializedVersion: 2
-        x: 74
-        y: 76
-        width: 6
-        height: 7
+        x: 160
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 99365165102e34000800000000000000
+      spriteID: 808589157fdc5ec4f80e7f13a89e365a
       internalID: 19107318806700953
       vertices: []
       indices: 
@@ -262,19 +262,19 @@ TextureImporter:
       name: Shot_poisson_f_6
       rect:
         serializedVersion: 2
-        x: 106
-        y: 76
-        width: 8
-        height: 7
+        x: 192
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 958907aaf7a3a3ad0800000000000000
+      spriteID: 80adb0d9692366e4693a848f2495a625
       internalID: -2721798704797280167
       vertices: []
       indices: 
@@ -284,19 +284,19 @@ TextureImporter:
       name: Shot_poisson_f_7
       rect:
         serializedVersion: 2
-        x: 110
-        y: 44
-        width: 37
-        height: 39
+        x: 224
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bb29da50836e3e870800000000000000
+      spriteID: c89be9c652b4073439a545e3357bb864
       internalID: 8711059232552489659
       vertices: []
       indices: 
@@ -306,19 +306,19 @@ TextureImporter:
       name: Shot_poisson_f_8
       rect:
         serializedVersion: 2
-        x: 166
-        y: 76
-        width: 12
-        height: 7
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fe5bc32eb4a0f7880800000000000000
+      spriteID: 8775ee3dc1718d948b8d5f03995d21c1
       internalID: -8611152641474644497
       vertices: []
       indices: 
@@ -328,20 +328,504 @@ TextureImporter:
       name: Shot_poisson_f_9
       rect:
         serializedVersion: 2
-        x: 174
-        y: 32
-        width: 68
-        height: 51
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 44a1d840c06d8d9c0800000000000000
+      spriteID: 0c614f77c1d6dd543a80b8b411f3319b
       internalID: -3902133730012227004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7af45112becec04ba45aed51e235f30
+      internalID: -2054975666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd72b5ac699194b48915a511bc93bc8d
+      internalID: 64133006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_12
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f913b31152752c49bfdacf34dbd93fd
+      internalID: -972126726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_13
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49b14426b2ab4314f95c6c92fd55c7c4
+      internalID: 609100563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_14
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97717cd60f0b6e442a94fb37b8cf256f
+      internalID: -1375320356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_15
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ea67d2cad717c34eb675d9bb87a447a
+      internalID: 365183098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc5c062b8d9a44a4199a73f6db69e4dc
+      internalID: 372459740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ac835300c611e24892fe763f4916786
+      internalID: -990247873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_18
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81034fcb21e6df24fb526f46751152fb
+      internalID: 459785518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 830bf9ce8e4efe1479dd974c760ea5ba
+      internalID: -436696228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_20
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa9b0991477a2fe429f0fe57b7de986a
+      internalID: 201157543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_21
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6efc947a6a1d19489da9ad00e8bec0e
+      internalID: -1859079181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_22
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 281c53e0d364ca0499a01da3d47474f0
+      internalID: 1188268215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_23
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7723af45805cc9b41b476243bd3af8be
+      internalID: 1589096773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f8908eaf27decf4e8f44e03ac6f359e
+      internalID: -118497589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_25
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 170fdc146f144d44c952cecbf23f2d5b
+      internalID: -1423256936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 211f4cd05f8804840a4bed1fcdf7b652
+      internalID: -1005255093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_27
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 058956852884342468628d025b59a022
+      internalID: -1548074935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b2933b5b87dc4d4289145356765acd5
+      internalID: 1951162810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_29
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7491320845588a943bf3fbf998937395
+      internalID: -1681154823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_30
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 709525725a76de342b8c3118130d8702
+      internalID: 237731829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shot_poisson_f_31
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 639d44176324ba942a04e8ab7dc95d0f
+      internalID: 1755027989
       vertices: []
       indices: 
       edges: []
@@ -350,7 +834,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c6e2f25f9fe51e24c98da964a1623a9c
     internalID: 0
     vertices: []
     indices: 
@@ -362,8 +846,30 @@ TextureImporter:
     nameFileIdTable:
       Shot_poisson_f_0: -214284183293093290
       Shot_poisson_f_1: -7248334436344160670
+      Shot_poisson_f_10: -2054975666
+      Shot_poisson_f_11: 64133006
+      Shot_poisson_f_12: -972126726
+      Shot_poisson_f_13: 609100563
+      Shot_poisson_f_14: -1375320356
+      Shot_poisson_f_15: 365183098
+      Shot_poisson_f_16: 372459740
+      Shot_poisson_f_17: -990247873
+      Shot_poisson_f_18: 459785518
+      Shot_poisson_f_19: -436696228
       Shot_poisson_f_2: 653688966083734044
+      Shot_poisson_f_20: 201157543
+      Shot_poisson_f_21: -1859079181
+      Shot_poisson_f_22: 1188268215
+      Shot_poisson_f_23: 1589096773
+      Shot_poisson_f_24: -118497589
+      Shot_poisson_f_25: -1423256936
+      Shot_poisson_f_26: -1005255093
+      Shot_poisson_f_27: -1548074935
+      Shot_poisson_f_28: 1951162810
+      Shot_poisson_f_29: -1681154823
       Shot_poisson_f_3: 5794703621018995989
+      Shot_poisson_f_30: 237731829
+      Shot_poisson_f_31: 1755027989
       Shot_poisson_f_4: 2362556806175776484
       Shot_poisson_f_5: 19107318806700953
       Shot_poisson_f_6: -2721798704797280167

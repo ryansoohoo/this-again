@@ -105,7 +105,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -133,19 +133,19 @@ TextureImporter:
       name: Lash_ice_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 110
-        width: 10
-        height: 11
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4f204f95777a3e4f0800000000000000
+      spriteID: e58401f4f230659499b31d7bb650f914
       internalID: -800612177689705740
       vertices: []
       indices: 
@@ -155,19 +155,19 @@ TextureImporter:
       name: Lash_ice_1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 109
-        width: 25
-        height: 9
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4e3466c829ac5c750800000000000000
+      spriteID: dde24af305f3cd14ea35105f0720b9be
       internalID: 6324683982481277924
       vertices: []
       indices: 
@@ -177,19 +177,19 @@ TextureImporter:
       name: Lash_ice_2
       rect:
         serializedVersion: 2
-        x: 79
-        y: 108
-        width: 17
-        height: 8
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6d72a178915bf1380800000000000000
+      spriteID: 5c7eb789e6239ae48b447145d7516b7d
       internalID: -8998274409217513514
       vertices: []
       indices: 
@@ -199,19 +199,19 @@ TextureImporter:
       name: Lash_ice_3
       rect:
         serializedVersion: 2
-        x: 21
-        y: 78
-        width: 10
-        height: 11
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0c3234fa3be7e4080800000000000000
+      spriteID: 3c566c75d54378c4b9f5daf043d853f5
       internalID: -9201277678466686016
       vertices: []
       indices: 
@@ -221,19 +221,19 @@ TextureImporter:
       name: Lash_ice_4
       rect:
         serializedVersion: 2
-        x: 33
-        y: 77
-        width: 25
-        height: 9
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 097dc284446e23ba0800000000000000
+      spriteID: c363526e342dde446b6df13af01232ef
       internalID: -6110568563445278832
       vertices: []
       indices: 
@@ -243,19 +243,19 @@ TextureImporter:
       name: Lash_ice_5
       rect:
         serializedVersion: 2
-        x: 63
-        y: 76
-        width: 18
-        height: 8
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: afb464a6818e19440800000000000000
+      spriteID: a676b42dc70222c4d919b71a9d4e61af
       internalID: 4940985457761995770
       vertices: []
       indices: 
@@ -265,19 +265,19 @@ TextureImporter:
       name: Lash_ice_6
       rect:
         serializedVersion: 2
-        x: 8
-        y: 51
-        width: 7
-        height: 11
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a11ebb88af7d1f9a0800000000000000
+      spriteID: 74e2fd6f6f56e28408c26920aa528bbb
       internalID: -6200937740876652262
       vertices: []
       indices: 
@@ -287,19 +287,19 @@ TextureImporter:
       name: Lash_ice_7
       rect:
         serializedVersion: 2
-        x: 39
-        y: 33
-        width: 9
-        height: 24
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 45a2a14f914ff2560800000000000000
+      spriteID: 9de87cfb3a0eea1499aea6c51dde604e
       internalID: 7291314714042837588
       vertices: []
       indices: 
@@ -309,19 +309,19 @@ TextureImporter:
       name: Lash_ice_8
       rect:
         serializedVersion: 2
-        x: 48
-        y: 7
-        width: 9
-        height: 24
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 10ef9066abbbf8ad0800000000000000
+      spriteID: d5795f937226f41499a6a453796d1d96
       internalID: -2697731242521395711
       vertices: []
       indices: 
@@ -331,19 +331,19 @@ TextureImporter:
       name: Lash_ice_9
       rect:
         serializedVersion: 2
-        x: 73
-        y: 16
-        width: 14
-        height: 31
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 89d92f53dbac7e250800000000000000
+      spriteID: 6614ab3a99f6a04468070183e464ee89
       internalID: 5973966344732974488
       vertices: []
       indices: 
@@ -353,20 +353,42 @@ TextureImporter:
       name: Lash_ice_10
       rect:
         serializedVersion: 2
-        x: 17
-        y: 2
-        width: 7
-        height: 11
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 30110da5c30d5f360800000000000000
+      spriteID: 7712d04005307dd42932115081807008
       internalID: 7202892136689176835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lash_ice_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 772e630f19675364ea2d1511ea9c06d5
+      internalID: 192591202
       vertices: []
       indices: 
       edges: []
@@ -375,7 +397,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 612687564d77fbe4e9aeea0b191cefcc
     internalID: 0
     vertices: []
     indices: 
@@ -388,6 +410,7 @@ TextureImporter:
       Lash_ice_0: -800612177689705740
       Lash_ice_1: 6324683982481277924
       Lash_ice_10: 7202892136689176835
+      Lash_ice_11: 192591202
       Lash_ice_2: -8998274409217513514
       Lash_ice_3: -9201277678466686016
       Lash_ice_4: -6110568563445278832

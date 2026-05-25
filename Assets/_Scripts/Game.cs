@@ -47,6 +47,7 @@ public sealed class Game : MonoBehaviour
     [SerializeField] WeaponCatalog weaponCatalog;   // byte id <-> AttackDefinition; shared by server sim + remote render
     [SerializeField] StatusCatalog statusCatalog;   // byte id <-> status effect; shared by server sim + owner predict + remote render
     [SerializeField] CharacterDef playerCharacter;  // shared player character data (faction + base stats); server reads it on player register
+    [SerializeField] CharacterDef goblinCharacter;  // first enemy data; the test-dummy spawner reads it (one goblin per underworld room)
 
     [Header("View (tunable — minimap / viewport)")]
     [SerializeField] ViewSettings viewSettings = new ViewSettings();
@@ -74,6 +75,7 @@ public sealed class Game : MonoBehaviour
     public WeaponCatalog WeaponCatalog => weaponCatalog;
     public StatusCatalog StatusCatalog => statusCatalog;
     public CharacterDef PlayerCharacter => playerCharacter;
+    public CharacterDef GoblinCharacter => goblinCharacter;
     public ViewSettings ViewCfg => viewSettings;
 
     // Minimap facade (the Minimap HUD reads these).
@@ -131,6 +133,8 @@ public sealed class Game : MonoBehaviour
             Debug.LogError("[Game] StatusCatalog is unassigned — status effects (hitstun/cooldown/poison/freeze/slow) will not work. Assign Assets/_Combat/StatusCatalog.asset to the Game component's Status Catalog field (GridManager prefab instance).");
         if (playerCharacter == null)
             Debug.LogError("[Game] PlayerCharacter (CharacterDef) is unassigned — players fall back to 100 HP. Assign Assets/_Combat/Characters/Player.asset to the Game component's Player Character field (GridManager prefab instance).");
+        if (goblinCharacter == null)
+            Debug.LogWarning("[Game] GoblinCharacter (CharacterDef) is unassigned — no test-dummy goblins will spawn in underworld rooms. Assign Assets/_Combat/Characters/Goblin.asset to the Game component's Goblin Character field.");
 
         cameraState = new CameraState();
         cameraSystem = new CameraSystem(Cam, viewSettings, cellWorld, cameraState);

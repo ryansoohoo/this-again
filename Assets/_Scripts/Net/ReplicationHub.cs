@@ -14,6 +14,7 @@ public sealed class ReplicationHub : NetworkBehaviour
     [SerializeField] float moveSpeed = 4f;
 
     readonly PlayerRegistry registry = new();
+    readonly DummySpawner dummies = new();   // server-only test-dummy goblins (one per underworld room)
     float sendAccum;
 
     // server scratch (reused to avoid per-tick allocation where possible)
@@ -50,7 +51,14 @@ public sealed class ReplicationHub : NetworkBehaviour
     }
 
     void OnClientConnected(ulong clientId) => EnsurePlayer(clientId);
-    void OnClientDisconnected(ulong clientId) { registry.Remove(clientId); visiblePrev.Remove(clientId); }
+    void OnClientDisconnected(ulong clientId)
+    {
+        bool inInst = registry.TryGet(clientId, out var sp) && sp.inInstance;
+        Vector2Int region = inInst ? sp.regionKey : default;
+        registry.Remove(clientId);
+        visiblePrev.Remove(clientId);
+        if (inInst) dummies.RemoveDummyIfRoomEmpty(registry, region);
+    }
 
     void EnsurePlayer(ulong clientId)
     {
@@ -83,12 +91,13 @@ public sealed class ReplicationHub : NetworkBehaviour
         var cfg = Game.Instance != null ? Game.Instance.MovementCfg : null;
         var catalog = Game.Instance != null ? Game.Instance.WeaponCatalog : null;
         if (cfg != null) AttackSimSystem.StepInstanceFixed(registry, catalog, cfg, Time.fixedDeltaTime);
+        dummies.TickRespawn();
     }
 
     void SendSnapshots(ReplicationSettings cfg)
     {
         aoiScratch.Clear();
-        foreach (var kv in registry.Players)
+        foreach (var kv in registry.Combatants)
             aoiScratch.Add(new AoiPlayer(kv.Key, kv.Value.worldPos, kv.Value.regionKey));
 
         foreach (var kv in registry.Players)
@@ -100,39 +109,39 @@ public sealed class ReplicationHub : NetworkBehaviour
             entryScratch.Clear();
             foreach (var id in visibleNow)
             {
-                var sp = registry.Players[id];
+                var c = registry.Combatants[id];
                 byte flags = 0;
-                if (sp.snap) flags |= SnapshotEntry.SnapBit;
-                bool self = id == viewer && sp.inInstance;
+                if (c is ServerPlayer csp && csp.snap) flags |= SnapshotEntry.SnapBit;
+                bool self = id == viewer && c.inInstance;
                 if (self) flags |= SnapshotEntry.SelfBit;
-                if (sp.inInstance) flags |= SnapshotEntry.InstanceBit;
-                var entry = new SnapshotEntry { id = id, x = sp.worldPos.x, y = sp.worldPos.y, flags = flags };
-                if (sp.inInstance) entry.hp = (ushort)Mathf.Max(0, sp.hp);
+                if (c.inInstance) flags |= SnapshotEntry.InstanceBit;
+                var entry = new SnapshotEntry { id = id, x = c.worldPos.x, y = c.worldPos.y, flags = flags };
+                if (c.inInstance) entry.hp = (ushort)Mathf.Max(0, c.hp);
                 if (self)
                 {
-                    int n = sp.status.count;
+                    int n = c.status.count;
                     entry.effectCount = (byte)n;
                     entry.effDefId = new byte[n]; entry.effRemaining = new ushort[n]; entry.effStacks = new byte[n];
                     for (int k = 0; k < n; k++)
                     {
-                        entry.effDefId[k] = sp.status.effects[k].defId;
-                        entry.effRemaining[k] = (ushort)Mathf.Max(0, sp.status.effects[k].remainingTicks);
-                        entry.effStacks[k] = sp.status.effects[k].stacks;
+                        entry.effDefId[k] = c.status.effects[k].defId;
+                        entry.effRemaining[k] = (ushort)Mathf.Max(0, c.status.effects[k].remainingTicks);
+                        entry.effStacks[k] = c.status.effects[k].stacks;
                     }
                     entry.selfFleeAngle = 0xFFFF;
                     var statusDefs = Game.Instance != null ? Game.Instance.StatusCatalog?.Defs : null;
-                    if (statusDefs != null && StatusLogic.ActiveForcedMove(sp.status, statusDefs, out var fdir, out _))
+                    if (statusDefs != null && StatusLogic.ActiveForcedMove(c.status, statusDefs, out var fdir, out _))
                         entry.selfFleeAngle = AimQuant.Encode(fdir);
                 }
-                else if (sp.inInstance)
+                else if (c.inInstance)
                 {
-                    entry.effectMask = StatusLogic.ActiveMask(sp.status);
+                    entry.effectMask = StatusLogic.ActiveMask(c.status);
                 }
-                if (sp.inInstance && AttackLogic.IsAttacking(sp.attackState.phase))
+                if (c.inInstance && AttackLogic.IsAttacking(c.attackState.phase))
                 {
-                    var st = sp.attackState;
+                    var st = c.attackState;
                     entry.flags |= SnapshotEntry.AttackingBit;
-                    entry.weaponId = sp.weaponId;
+                    entry.weaponId = c.weaponId;
                     entry.pose = AttackPose.Pack(st.phase, st.frameIndex, st.dirIndex);
                     entry.residual = AimQuant.Encode(st.lockedAim);
                 }
@@ -153,9 +162,9 @@ public sealed class ReplicationHub : NetworkBehaviour
             eventScratch.Clear();
             foreach (var id in visibleNow)
             {
-                var sp2 = registry.Players[id];
-                if (sp2.pendingEvents == null || sp2.pendingEvents.Count == 0) continue;
-                foreach (var ev in sp2.pendingEvents) eventScratch.Add(ev);
+                var c2 = registry.Combatants[id];
+                if (c2.pendingEvents == null || c2.pendingEvents.Count == 0) continue;
+                foreach (var ev in c2.pendingEvents) eventScratch.Add(ev);
             }
             if (eventScratch.Count > 0)
             {
@@ -230,16 +239,19 @@ public sealed class ReplicationHub : NetworkBehaviour
         sp.inInstance = true;
         sp.hp = sp.stats != null ? sp.stats.GetInt(StatKind.MaxHp) : 100;   // full HP each run (from CharacterDef stats)
         sp.status.Clear();                        // no effects carried in from a previous run
+        dummies.EnsureRoomDummy(registry, sp.regionKey);   // one goblin test dummy per room
     }
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
     public void LeaveInstanceRpc(RpcParams p = default)
     {
         if (!registry.TryGet(p.Receive.SenderClientId, out var sp) || !sp.inInstance) return;
+        var leftRegion = sp.regionKey;
         sp.regionKey = Vector2Int.zero;
         PlayerSimSystem.Teleport(sp, sp.overworldReturnCell);
         sp.inInstance = false;
         sp.status.Clear();   // effects don't persist to the overworld
+        dummies.RemoveDummyIfRoomEmpty(registry, leftRegion);
     }
 
     // Debug seam (host/server only): the local player's authoritative StatusState, for console testing. Null on a

@@ -1,11 +1,15 @@
 // Pure status-effect data: the catalog-resolved def, one active instance, and the per-player collection.
 // No GateMod/Netcode/scene refs (StatusLogic, in Minifantasy.InstanceSim, reduces these to a GateMod).
+using UnityEngine;
 
 // Well-known effect ids: the value IS the catalog index AND the wire defId. Keep in sync with StatusCatalog order.
-public enum StatusKind : byte { HitStun = 0, AttackCooldown = 1, Poison = 2, Freeze = 3, Slow = 4 }
+public enum StatusKind : byte { HitStun = 0, AttackCooldown = 1, Poison = 2, Freeze = 3, Slow = 4, Bleed = 5, Fire = 6, Fear = 7 }
 
 // How a re-applied effect of the same kind combines with an existing instance.
 public enum StackPolicy : byte { Refresh, Stack, Independent }
+
+// Forced movement an effect imposes (overrides WASD in InstanceStep). FleeFrozen = move along a direction frozen at apply.
+public enum ForcedMoveKind : byte { None = 0, FleeFrozen = 1 }
 
 // One catalog entry, resolved to ticks/raw-gate fields for the deterministic sim.
 public struct StatusEffectDef
@@ -20,6 +24,8 @@ public struct StatusEffectDef
     public StackPolicy policy;
     public byte maxStacks;
     public byte visualId;
+    public ForcedMoveKind forcedMove;   // None unless this effect drives movement (Fear)
+    public float forcedMoveScale;       // forced-move speed as a fraction of moveSpeed
 }
 
 // One live effect on a player.
@@ -31,6 +37,7 @@ public struct ActiveEffect
     public int sincePeriodTick;
     public uint appliedTick;
     public bool selfInflicted;    // true = owner-predicted (AttackCooldown); false = adopted from server
+    public Vector2 fleeDir;       // frozen flee direction for forced-move effects (quantized); zero otherwise
 }
 
 // Per-player active-effect collection. Plain data; StatusLogic does all the work. Fixed capacity, compacted

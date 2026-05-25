@@ -12,15 +12,19 @@ public static class MovementStep
         Vector2 dir = input.sqrMagnitude > 1f ? input.normalized : input;
         Vector2 delta = dir * (speed * dt);
         if (delta == Vector2.zero) return pos;
+        return Slide(pos, delta, isWalkableAt);
+    }
 
-        Vector2 next = pos;
-
-        Vector2 tryX = new Vector2(pos.x + delta.x, next.y);
+    // Per-axis wall slide: move `from` by `delta`, taking each axis only if its destination is walkable (walls
+    // win, so you slide along a wall instead of stopping dead). Shared by movement integration above and the
+    // collision push-apart (CollisionStep) so both resolve against walls identically.
+    public static Vector2 Slide(Vector2 from, Vector2 delta, Func<Vector2, bool> isWalkableAt)
+    {
+        Vector2 next = from;
+        Vector2 tryX = new Vector2(from.x + delta.x, next.y);
         if (delta.x != 0f && isWalkableAt(tryX)) next.x = tryX.x;
-
-        Vector2 tryY = new Vector2(next.x, pos.y + delta.y);
+        Vector2 tryY = new Vector2(next.x, from.y + delta.y);
         if (delta.y != 0f && isWalkableAt(tryY)) next.y = tryY.y;
-
         return next;
     }
 }

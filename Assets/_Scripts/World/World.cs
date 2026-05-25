@@ -70,7 +70,7 @@ public sealed class World
             // structure art unassigned/foreign -> render as normal ground (the site still triggers encounters)
         }
         var gt = groundGen.At(cx, cy);
-        if (Hash01(cx, cy, cfg.biome.seed, 1009 + (int)gt) >= CoverageFor(gt)) return cfg.defaultGroundSprite;
+        if (CoverageRolledOut(cx, cy, gt)) return cfg.defaultGroundSprite;
         var picked = PickVariant(BiomeFor(gt)?.variants, cx, cy, (int)gt);
         return picked != null ? picked : cfg.defaultGroundSprite;
     }
@@ -82,7 +82,7 @@ public sealed class World
         if (Underworld.Contains(cx, cy)) return cfg.defaultGroundColor;
         if (cfg.structureSettings != null && SiteAt(cx, cy) != null) return (Color32)cfg.structureSettings.markerColor;
         var gt = groundGen.At(cx, cy);
-        if (Hash01(cx, cy, cfg.biome.seed, 1009 + (int)gt) >= CoverageFor(gt)) return cfg.defaultGroundColor;
+        if (CoverageRolledOut(cx, cy, gt)) return cfg.defaultGroundColor;
         var b = BiomeFor(gt);
         return b != null ? (Color32)b.minimapColor : cfg.defaultGroundColor;
     }
@@ -97,7 +97,7 @@ public sealed class World
         if (!IsLand(cx, cy)) return 0;
         if (SiteAt(cx, cy) != null) return 0;
         var gt = groundGen.At(cx, cy);
-        if (Hash01(cx, cy, cfg.biome.seed, 1009 + (int)gt) >= CoverageFor(gt)) return 0;
+        if (CoverageRolledOut(cx, cy, gt)) return 0;
         var b = BiomeFor(gt);
         return b != null ? Mathf.Max(0, b.extraMoveCost) : 0;
     }
@@ -117,6 +117,10 @@ public sealed class World
         GroundType.Mountain => cfg.ground.mountainCoverage,
         _                   => cfg.ground.grassCoverage,
     };
+
+    // The shared coverage roll: true = this cell renders as blank ground (its cover type rolled out). One
+    // source of truth so LandSprite / LandColor / MoveCost can never disagree about which cells are bare.
+    bool CoverageRolledOut(int cx, int cy, GroundType gt) => Hash01(cx, cy, cfg.biome.seed, 1009 + (int)gt) >= CoverageFor(gt);
 
     // Weighted-random variant pick made deterministic by hashing (cell, seed, salt) -> every client agrees.
     Sprite PickVariant(BiomeTileVariant[] variants, int cx, int cy, int salt)
@@ -151,14 +155,6 @@ public sealed class World
             Debug.LogWarning($"[World] Biome sprite '{s.name}' is not from the summer sheet; ignoring it. Slice biome tiles from world_map_tiles_SUMMER.");
     }
 
-    // Deterministic 0..1 hash of (cell, seed, salt). Pure -> identical variant choice on every client.
-    static float Hash01(int x, int y, int seed, int salt)
-    {
-        unchecked
-        {
-            uint h = (uint)(x * 73856093) ^ (uint)(y * 19349663) ^ (uint)(seed * 83492791) ^ (uint)(salt * 2654435761);
-            h ^= h >> 13; h *= 0x85ebca6b; h ^= h >> 16;
-            return (h & 0xFFFFFF) / 16777216f;
-        }
-    }
+    // Deterministic 0..1 hash of (cell, seed, salt) via the shared mixer. Pure -> identical on every client.
+    static float Hash01(int x, int y, int seed, int salt) => WorldHash.Unit(x, y, seed, salt);
 }

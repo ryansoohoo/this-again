@@ -288,7 +288,7 @@ public sealed class CommandConsole : MonoBehaviour
 
     void Confirm()
     {
-        string submitted = Collapse(text);
+        string submitted = CommandText.Collapse(text);
         if (submitted.Length == 0) { if (!LockOpen) Close(); return; }   // empty Enter cancels (unless locked)
 
         GameLog.Post(OutputType.Command, "> " + submitted);   // echo the typed line into the chat
@@ -485,6 +485,4 @@ public sealed class CommandConsole : MonoBehaviour
     static bool EnterPressed(Keyboard kb) => kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame;
 
     static string Sanitize(string s) => Regex.Replace(s, @"[\x00-\x1F\x7F]", "");   // strip newlines/tabs/control chars (single-line)
-
-    static string Collapse(string s) => Regex.Replace(s.Trim(), @"\s+", " ");
 }

@@ -91,16 +91,8 @@ public sealed class StructureGenerator
     // Integer floor division so blocks tile correctly across the origin (C# '/' truncates toward zero).
     static int FloorDiv(int a, int b) => (a >= 0 ? a : a - b + 1) / b;
 
-    // Same hash family as World.Hash01 (kept local so the generator is self-contained, like BiomeGenerator).
-    float Hash01(int x, int y, int salt)
-    {
-        unchecked
-        {
-            uint h = (uint)(x * 73856093) ^ (uint)(y * 19349663) ^ (uint)(seed * 83492791) ^ (uint)(salt * 2654435761);
-            h ^= h >> 13; h *= 0x85ebca6b; h ^= h >> 16;
-            return (h & 0xFFFFFF) / 16777216f;
-        }
-    }
+    // Deterministic 0..1 hash of (cell, salt) for this generator's seed, via the shared mixer.
+    float Hash01(int x, int y, int salt) => WorldHash.Unit(x, y, seed, salt);
 }
 
 // A placed structure site: which type, where, and its deterministic name. World picks the sprite variant.

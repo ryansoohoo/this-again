@@ -41,8 +41,8 @@ public static class CollisionStep
                     if (inv <= 0f) { wi = 0.5f; wj = 0.5f; }                    // both pinned -> separate gently
                     else { wi = bodies[i].invMass / inv; wj = bodies[j].invMass / inv; }
 
-                    bodies[i].pos = SlideClamp(bodies[i].pos, -normal * (pen * wi), walkable);
-                    bodies[j].pos = SlideClamp(bodies[j].pos,  normal * (pen * wj), walkable);
+                    bodies[i].pos = MovementStep.Slide(bodies[i].pos, -normal * (pen * wi), walkable);
+                    bodies[j].pos = MovementStep.Slide(bodies[j].pos,  normal * (pen * wj), walkable);
                 }
     }
 
@@ -87,17 +87,5 @@ public static class CollisionStep
             if ((bodies[i].pos - center).sqrMagnitude < rsum * rsum) results[n++] = i;
         }
         return n;
-    }
-
-    // Positional correction with the SAME per-axis wall slide as MovementStep: a body pushed toward a wall slides
-    // along it instead of entering non-walkable space (walls win over the push).
-    static Vector2 SlideClamp(Vector2 from, Vector2 delta, Func<Vector2, bool> walkable)
-    {
-        Vector2 next = from;
-        Vector2 tryX = new Vector2(from.x + delta.x, next.y);
-        if (delta.x != 0f && walkable(tryX)) next.x = tryX.x;
-        Vector2 tryY = new Vector2(next.x, from.y + delta.y);
-        if (delta.y != 0f && walkable(tryY)) next.y = tryY.y;
-        return next;
     }
 }

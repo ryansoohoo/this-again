@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 // Holds every command and resolves a typed line against the currently-active scopes. Pure logic with no
 // Unity/scene dependencies, so it is unit-testable. Keywords may be multi-word and are matched
@@ -21,7 +20,7 @@ public sealed class CommandRegistry
 
     public CommandResult Execute(string line, CommandScope active)
     {
-        string norm = Collapse(line);
+        string norm = CommandText.Collapse(line);
         if (norm.Length == 0) return new CommandResult(CommandStatus.Unknown);
         string lower = norm.ToLowerInvariant();
 
@@ -55,7 +54,7 @@ public sealed class CommandRegistry
     // UI (not wired yet) renders this as a ghost and accepts it on Tab/Enter.
     public string Suggest(string partial, CommandScope active)
     {
-        string s = Collapse(partial).ToLowerInvariant();
+        string s = CommandText.Collapse(partial).ToLowerInvariant();
         if (s.Length == 0) return "";
         string match = null;
         foreach (var c in commands)
@@ -83,6 +82,4 @@ public sealed class CommandRegistry
         if (c.Aliases != null)
             foreach (var a in c.Aliases) yield return a;
     }
-
-    static string Collapse(string s) => Regex.Replace(s.Trim(), @"\s+", " ");
 }

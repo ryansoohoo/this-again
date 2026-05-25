@@ -25,10 +25,7 @@ public sealed class PlayerInput
         var kb = Keyboard.current;
         if (kb != null)
         {
-            if (kb.wKey.isPressed) result.dir.y += 1f;
-            if (kb.sKey.isPressed) result.dir.y -= 1f;
-            if (kb.aKey.isPressed) result.dir.x -= 1f;
-            if (kb.dKey.isPressed) result.dir.x += 1f;
+            result.dir = WasdInput.Read(kb);
 
             for (int i = 0; i < 9; i++)
                 if (kb[(Key)((int)Key.Digit1 + i)].wasPressedThisFrame) { result.weaponSlot = i; break; }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 // Construction inputs for WorldView (top-level for symmetry with WorldConfig).
@@ -19,6 +20,9 @@ public sealed class WorldView
     readonly float cellWorld;
     readonly MeshFilter gridMesh;
     readonly CameraState cameraState;
+    readonly Func<int, int, bool> isLandAt;        // cached method-group delegates: re-passing world.IsLand etc.
+    readonly Func<int, int, Sprite> landSpriteAt;  // each rebuild allocates a fresh delegate, and a rebuild fires
+    readonly Func<int, int, Color32> landColorAt;  // every cell of movement (minimap) — cache once instead
 
     public Material WaterMat { get; }                       // submesh-1 material; WaterMaterial pushes settings into it
     public Material TerrainMat { get; }                     // submesh-0 material; DayNightView tints its _Color
@@ -33,6 +37,7 @@ public sealed class WorldView
                      Texture2D summerSheet, Texture2D waterSheet, CameraState cameraState)
     {
         this.world = world; this.cfg = cfg; this.vs = vs; this.cellWorld = cellWorld; this.cameraState = cameraState;
+        isLandAt = world.IsLand; landSpriteAt = world.LandSprite; landColorAt = world.LandColor;
         gridMesh = CellRenderer.Build(parent, summerSheet, waterSheet);
         var gridMr = gridMesh.GetComponent<MeshRenderer>();
         WaterMat = gridMr.sharedMaterials[1];
@@ -60,7 +65,7 @@ public sealed class WorldView
 
     void RebuildMesh()
     {
-        windowMesh = CellRenderer.FillWindowMesh(windowMesh, world.IsLand, world.LandSprite, meshCenter, cfg.viewRadius, cellWorld);
+        windowMesh = CellRenderer.FillWindowMesh(windowMesh, isLandAt, landSpriteAt, meshCenter, cfg.viewRadius, cellWorld);
         if (gridMesh.sharedMesh != windowMesh) gridMesh.sharedMesh = windowMesh;
 
         float size = (2 * cfg.viewRadius + 1) * cellWorld;
@@ -70,7 +75,7 @@ public sealed class WorldView
 
     void RebuildMinimap()
     {
-        MinimapTexture = CellRenderer.FillOverviewMinimap(MinimapTexture, world.IsLand, world.LandColor, ViewCenter,
+        MinimapTexture = CellRenderer.FillOverviewMinimap(MinimapTexture, isLandAt, landColorAt, ViewCenter,
                                                           vs.minimapRadius, cfg.waterMinimapColor, cfg.minimapBrightness);
     }
 

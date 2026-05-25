@@ -52,14 +52,7 @@ public static class Underworld
     // Non-negative modulo (band coords are >= Base, so this is belt-and-suspenders).
     static int Mod(int a, int m) { int r = a % m; return r < 0 ? r + m : r; }
 
-    // Same hash family as World/StructureGenerator, returning a raw uint for slot indexing.
-    static uint Hash(int x, int y, int salt)
-    {
-        unchecked
-        {
-            uint h = (uint)(x * 73856093) ^ (uint)(y * 19349663) ^ (uint)(salt * 2654435761);
-            h ^= h >> 13; h *= 0x85ebca6b; h ^= h >> 16;
-            return h;
-        }
-    }
+    // Raw hash for slot indexing, via the shared mixer. Seedless (seed 0): the band geometry is the same for
+    // every world, and seed 0 drops the seed term, so this is bit-identical to the old local mixer.
+    static uint Hash(int x, int y, int salt) => WorldHash.Raw(x, y, 0, salt);
 }

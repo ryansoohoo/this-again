@@ -26,9 +26,13 @@ public static class WeaponShineSetupTool
         if (created) mat = new Material(shader) { name = "WeaponShine" };
         else mat.shader = shader;                                  // fix to the correct URP 2D variant
         mat.EnableKeyword("GLOW_ON");
-        mat.SetColor("_GlowColor", new Color(1f, 0.95f, 0.7f, 1f));
-        mat.SetFloat("_Glow", 0f);                                 // base 0 — AttackView drives per-keyframe
+        mat.EnableKeyword("HSV_ON");
+        mat.SetColor("_GlowColor", Color.white);   // small white glow on Hit
+        mat.SetFloat("_Glow", 0f);                 // AttackView drives _Glow / _HsvBright / _HsvSaturation per phase
         mat.SetFloat("_GlowGlobal", 1f);
+        mat.SetFloat("_HsvShift", 0f);             // neutral hue (the shader default is 180 = hue-inverted!)
+        mat.SetFloat("_HsvSaturation", 1f);        // neutral until follow-through
+        mat.SetFloat("_HsvBright", 1f);
         if (created) AssetDatabase.CreateAsset(mat, MatPath); else EditorUtility.SetDirty(mat);
         AssetDatabase.SaveAssets();
 

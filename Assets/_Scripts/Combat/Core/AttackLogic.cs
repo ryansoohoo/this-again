@@ -76,18 +76,6 @@ public static class AttackLogic
         }
     }
 
-    // Per-frame weapon-shine intensity for the current phase + frame (visual layer reads this). 0 when idle.
-    public static float CurrentGlow(AttackState s, AttackTimeline tl)
-    {
-        switch (s.phase)
-        {
-            case AttackPhase.Anticipation: return Glow(tl.anticipation, s.frameIndex);
-            case AttackPhase.TapWindup:    return Glow(tl.tapAnticipation, s.frameIndex);
-            case AttackPhase.Hit:          return Glow(tl.hit, s.frameIndex);
-            case AttackPhase.FollowThrough:return Glow(tl.followThrough, s.frameIndex);
-            default:                       return 0f;
-        }
-    }
 
     public static float TimeToHit(AttackTimeline tl, bool tapped, PhaseScales scales)
     {
@@ -172,6 +160,5 @@ public static class AttackLogic
     }
 
     static int Col(TimedFrame[] list, int i) => Has(list) ? list[Mathf.Clamp(i, 0, list.Length - 1)].column : 0;
-    static float Glow(TimedFrame[] list, int i) => Has(list) ? list[Mathf.Clamp(i, 0, list.Length - 1)].glow : 0f;
     static bool Has(TimedFrame[] list) => list != null && list.Length > 0;
 }

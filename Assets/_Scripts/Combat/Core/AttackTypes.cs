@@ -1,15 +1,12 @@
 using System;
 using UnityEngine;
 
-// One timed sprite frame: which column of the sheet, how long to show it (seconds, base — scaled at runtime),
-// and a per-frame weapon-shine intensity. Shared across all 4 directions (directions are sheet ROWS; these
-// frame lists are per-COLUMN). `glow` is VISUAL ONLY — the deterministic sim (AttackLogic) ignores it.
+// One timed sprite frame: which column of the sheet, and how long to show it (seconds, base — scaled at runtime).
 [Serializable]
 public struct TimedFrame
 {
     public int column;
     public float duration;
-    public float glow;        // per-keyframe weapon shine: drives the AllIn1 _Glow on the weapon (0 = none)
 }
 
 // One authored direction: the canonical aim vector and which sheet row holds its frames.

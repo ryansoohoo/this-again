@@ -25,6 +25,4 @@ public sealed class AttackTimeline
     public OnHitEffect[] onHit;   // effects applied to each victim on a strike (e.g., HitStun, Poison)
     public int hitstunTicks;      // HitStun duration for a FULL strike (windup completed)
     public int hitstunTapTicks;   // HitStun duration for a TAP strike (released before windup completed) — shorter
-
-    public Color glowColor;       // weapon-shine color (per attack); per-frame intensity is TimedFrame.glow
 }

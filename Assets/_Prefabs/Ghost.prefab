@@ -311,6 +311,9 @@ MonoBehaviour:
   weaponBack: {fileID: 4298291014826253154}
   body: {fileID: 1049689782146622163}
   weaponFront: {fileID: 1704873637994654145}
+  hitGlow: 1.5
+  followThroughBright: 0.5
+  followThroughSaturation: 0
 --- !u!114 &6943726381048882201
 MonoBehaviour:
   m_ObjectHideFlags: 0

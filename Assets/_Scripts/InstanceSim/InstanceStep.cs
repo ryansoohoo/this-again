@@ -24,6 +24,7 @@ public struct InstanceResult
 {
     public bool feinted;        // a feint cancelled a windup this tick (caller emits the event; nothing client-side)
     public int periodicDamage;  // DOT accrued this tick (server applies to HP; predictor ignores)
+    public Vector2 moveApplied; // the exact pre-collision move vector used (owner buffers this for reconcile replay)
 }
 
 public static class InstanceStep
@@ -49,6 +50,9 @@ public static class InstanceStep
 
         Vector2? lunge = AttackLogic.LungeVelocity(atk, ctx.timeline);  // null = idle, zero = rooted windup, vec = lunge
         Vector2 move = lunge ?? FreeMove(cmd.rawMove, g);               // lunge overrides WASD; gate scales/blocks WASD only
+        if (StatusLogic.ActiveForcedMove(status, ctx.defs, out var fdir, out var fscale) && fdir.sqrMagnitude > 1e-6f)
+            move = fdir * fscale;                                       // forced flee (Fear) overrides everything
+        result.moveApplied = move;
         pos = MovementStep.Step(pos, move, ctx.dt, ctx.speed, ctx.walkable);
     }
 

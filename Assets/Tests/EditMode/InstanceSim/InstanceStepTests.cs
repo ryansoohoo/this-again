@@ -79,4 +79,26 @@ public class InstanceStepTests
         Assert.Greater(pos.x, before);   // lunged east (locked aim), not north (rawMove)
         Assert.AreEqual(0f, pos.y, 1e-4f);
     }
+
+    [Test]
+    public void Feared_FleesFrozenDir_OverridesWasd_AndReportsMoveApplied()
+    {
+        var tl = Tl();
+        var defs = new StatusEffectDef[8];
+        defs[(int)StatusKind.Fear] = new StatusEffectDef
+        {
+            id = (byte)StatusKind.Fear, durationTicks = 60, blocksMove = true, blocksAttack = true,
+            moveScale = 0f, policy = StackPolicy.Refresh, maxStacks = 1,
+            forcedMove = ForcedMoveKind.FleeFrozen, forcedMoveScale = 0.5f,
+        };
+        var ctx = new InstanceCtx { timeline = tl, scales = PhaseScales.One, dt = 0.02f, speed = 4f, walkable = _ => true, defs = defs };
+        var st = new StatusState();
+        StatusLogic.Apply(st, defs[(int)StatusKind.Fear], tick: 1, self: false, forcedDir: new Vector2(1, 0));
+        var atk = default(AttackState); Vector2 pos = Vector2.zero;
+        InstanceStep.Step(ref atk, st, ref pos, new InstanceInput { rawMove = new Vector2(0, 1), attack = new AttackIntent { aimDir = new Vector2(1, 0) } }, ctx, out var res);
+        Assert.Greater(pos.x, 0f);                 // fled east (frozen dir), not north (rawMove)
+        Assert.AreEqual(0f, pos.y, 1e-4f);
+        Assert.Greater(res.moveApplied.x, 0f);     // reported the applied flee vector
+        Assert.AreEqual(0f, res.moveApplied.y, 1e-4f);
+    }
 }

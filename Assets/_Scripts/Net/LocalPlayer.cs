@@ -99,13 +99,18 @@ public sealed class LocalPlayer : MonoBehaviour
         ResolveAttackView();
         if (attackView != null) attackView.Render(attack.State, currentAttack);   // render the rig every frame from current state
 
-        if (prediction.Active && GhostManager.Instance != null && GhostManager.Instance.SelfGhost != null)
+        var selfGhost = GhostManager.Instance != null ? GhostManager.Instance.SelfGhost : null;
+        if (prediction.Active && selfGhost != null)
         {
             // Render between fixed ticks so the sprite moves every frame (steady walk animation), not just on the tick.
             float alpha = Time.fixedDeltaTime > 0f ? Mathf.Clamp01((Time.time - Time.fixedTime) / Time.fixedDeltaTime) : 1f;
-            GhostManager.Instance.SelfGhost.position = prediction.VisualPos(alpha);
-            var sv = GhostManager.Instance.SelfGhost.GetComponent<StatusView>();
-            if (sv != null) sv.Render(StatusLogic.ActiveMask(prediction.Status));   // self effect tint from the predicted mask
+            selfGhost.position = prediction.VisualPos(alpha);
+        }
+        if (selfGhost != null)   // self effect tint + hurt anim from the predicted mask (0 when not predicting, so they reset on leave)
+        {
+            byte mask = prediction.Active ? StatusLogic.ActiveMask(prediction.Status) : (byte)0;
+            var sv = selfGhost.GetComponent<StatusView>(); if (sv != null) sv.Render(mask);
+            var dv = selfGhost.GetComponent<DmgView>(); if (dv != null) dv.Render(mask);   // after StatusView (tint) — DmgView wins the hurt sprite
         }
     }
 

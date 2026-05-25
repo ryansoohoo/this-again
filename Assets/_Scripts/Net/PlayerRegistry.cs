@@ -25,7 +25,6 @@ public sealed class ServerPlayer
     public AttackState attackState;
     public PhaseScales attackScales = PhaseScales.One;
     public byte weaponId;                 // equipped weapon (catalog id), set from each InputCommand
-    public int enchantDefId = -1;         // (debug) extra on-strike status effect from the 'enchant' command; -1 = none
     public AttackPhase prevAttackPhase;   // for transition detection (events + hit seam)
     public System.Collections.Generic.Queue<AttackEvent> pendingEvents;  // drained into per-viewer event RPCs each snapshot
 }

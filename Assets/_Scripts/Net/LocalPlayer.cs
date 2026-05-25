@@ -17,6 +17,7 @@ public sealed class LocalPlayer : MonoBehaviour
     bool wasInInstance;
 
     [SerializeField] AttackDefinition currentAttack;
+    public AttackDefinition EquippedWeapon => currentAttack;
     [SerializeField] AttackDefinition[] weapons;   // number keys 1-9,0 select these
     readonly AttackSystem attack = new();
     Transform attackViewGhost;

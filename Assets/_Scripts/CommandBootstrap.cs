@@ -133,31 +133,39 @@ public static class CommandBootstrap
         r.Register(new Command
         {
             Keyword = "enchant", Scope = CommandScope.Instance, Arg = ArgMode.Optional,
-            Description = "(debug) Enchant your equipped weapon: its strikes also apply a status effect.",
+            Description = "(debug) Set your equipped weapon's main on-hit status effect (mutates the weapon).",
             Usage = "enchant [poison|freeze|slow|bleed|fire|fear|none|list]",
             Run = arg =>
             {
-                var hub = ReplicationHub.Instance;
-                var sp = hub != null ? hub.DebugLocalPlayer() : null;
-                if (sp == null) return CommandResult.Bad("Enchant is host-only for now — run this on the host, in a dungeon.");
+                var lp = LocalPlayer.Instance;
+                var weapon = lp != null ? lp.EquippedWeapon : null;
+                if (weapon == null) return CommandResult.Bad("No weapon equipped.");
                 var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
-                if (cat == null || cat.Defs == null) return CommandResult.Bad("No StatusCatalog wired on Game.");
+                if (cat == null) return CommandResult.Bad("No StatusCatalog wired on Game.");
 
                 string which = arg.Trim().ToLowerInvariant();
                 if (which.Length == 0 || which == "list")
                 {
-                    string cur = sp.enchantDefId >= 0 ? ((StatusKind)sp.enchantDefId).ToString() : "none";
-                    return CommandResult.Ok($"Weapon enchant: {cur}. Usage: enchant [poison|freeze|slow|bleed|fire|fear|none]", keepOpen: true, output: OutputType.System);
+                    string cur = weapon.mainEffect != null ? weapon.mainEffect.kind.ToString() : "none";
+                    return CommandResult.Ok($"{weapon.name} main status: {cur}. Usage: enchant [poison|freeze|slow|bleed|fire|fear|none]", keepOpen: true, output: OutputType.System);
                 }
-                if (which == "none" || which == "clear") { sp.enchantDefId = -1; return CommandResult.Ok("Weapon enchant removed.", keepOpen: true, output: OutputType.System); }
-                if (!System.Enum.TryParse<StatusKind>(which, true, out var kind))
+                if (which == "none" || which == "clear")
+                {
+                    weapon.SetMainEffect(null);
+#if UNITY_EDITOR
+                    UnityEditor.EditorUtility.SetDirty(weapon);
+#endif
+                    return CommandResult.Ok($"{weapon.name} enchant removed.", keepOpen: true, output: OutputType.System);
+                }
+                if (!System.Enum.TryParse<StatusKind>(which, true, out var kind) || kind == StatusKind.HitStun || kind == StatusKind.AttackCooldown)
                     return CommandResult.Bad("Usage: enchant [poison|freeze|slow|bleed|fire|fear|none|list]");
-                if (kind == StatusKind.HitStun || kind == StatusKind.AttackCooldown)
-                    return CommandResult.Bad("Pick a real status (poison/freeze/slow/bleed/fire/fear), not hitstun/cooldown.");
-                int id = (int)kind;
-                if (id >= cat.Defs.Length) return CommandResult.Bad("Catalog missing that effect — run Tools > Combat > Build Status Catalog.");
-                sp.enchantDefId = id;
-                return CommandResult.Ok($"Weapon enchanted with {kind}. Your strikes now also apply it.", keepOpen: true, output: OutputType.System);
+                var fx = cat.Visual((int)kind);
+                if (fx == null) return CommandResult.Bad("Catalog missing that effect — run Tools > Combat > Build Status Catalog.");
+                weapon.SetMainEffect(fx);
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(weapon);
+#endif
+                return CommandResult.Ok($"{weapon.name} enchanted with {kind} (its main status). Strikes now apply it.", keepOpen: true, output: OutputType.System);
             },
         });
         r.Register(new Command

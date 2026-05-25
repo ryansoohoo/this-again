@@ -104,10 +104,7 @@ public sealed class AttackView : MonoBehaviour
     void DriveOverlay(AttackState state, AttackDefinition def)
     {
         if (overlay == null) return;
-        StatusEffectAsset fx = null;
-        if (def.onHitEffects != null)
-            for (int i = 0; i < def.onHitEffects.Length; i++)
-                if (def.onHitEffects[i].effect != null) { fx = def.onHitEffects[i].effect; break; }   // primary
+        StatusEffectAsset fx = def.mainEffect;
         if (fx == null || fx.attackOverlayFx == null || fx.attackOverlayFx.Length == 0) { overlay.enabled = false; return; }
 
         float p = AttackLogic.PhaseProgress01(state, def.Timeline);   // 0..1 across the whole swing

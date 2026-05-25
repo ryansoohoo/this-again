@@ -112,6 +112,4 @@ MonoBehaviour:
   - canonicalDir: {x: -1, y: 1}
     row: 3
   attackId: axe
-  onHitEffects:
-  - effect: {fileID: 11400000, guid: 75fee097a1fc6f041a179295787fd1e6, type: 2}
-    magnitudeScale: 1
+  mainEffect: {fileID: 11400000, guid: 75fee097a1fc6f041a179295787fd1e6, type: 2}

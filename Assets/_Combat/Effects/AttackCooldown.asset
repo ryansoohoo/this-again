@@ -30,5 +30,5 @@ MonoBehaviour:
   hitFps: 14
   tickFx: []
   tickFps: 10
-  attackOverlayFx: []
-  overlayFps: 14
+  fxColor: 
+  attackOverlays: []

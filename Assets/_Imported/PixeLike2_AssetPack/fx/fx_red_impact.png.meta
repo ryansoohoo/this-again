@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30c9134d880c61c40b1f8e3e7de6678a
+      spriteID: 8849e2ea65d3a694495805d72fe2ccb7
       internalID: -1165632672
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e2f9cd2ed1bda6478194b21ba1db48a
+      spriteID: 7998cafa57e54144f85769a5dc2393f1
       internalID: -235842066
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_red_impact_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e1fd685f047fc99458c56ab7cb0188f7
-      internalID: 1277980723
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6eff962fc790e84e9eb9fe22b4cae11
+      spriteID: 361aaa8a2e9890647b61df66e1997317
       internalID: -1328274616
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2bc44ecece152846a932a021a2f25dc
+      spriteID: 69816a43d4a097f4eb96721ea8d6f0bc
       internalID: -1310556040
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78117836aa59c5142a60e522c3ebbeb8
+      spriteID: 76e7f80e209162e49a14f1fbb28620bc
       internalID: 6571055
       vertices: []
       indices: 

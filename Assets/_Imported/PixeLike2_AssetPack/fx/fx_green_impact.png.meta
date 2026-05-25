@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: adab672fc888a4644a2afff9e96c73d8
+      spriteID: d52483618918fba49975b5e94c49122f
       internalID: 1413256356
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3d91b854e1d4b144b9d177f566933b5
+      spriteID: 5d692cb7d752c81418f9ce38de9690ca
       internalID: -1273264653
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_green_impact_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e4f39f5ba582e1b46acd607e5f0684fc
-      internalID: 1070420391
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2ad717fd77dea44f96af7f21a2f85ea
+      spriteID: 9bf0c2e2a726a6c438f10181e37654d0
       internalID: -99280757
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07e5325e72d16c2489c2a61503976042
+      spriteID: d254073063bc7c048a9404deacc31894
       internalID: -1110857561
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4636d5783243fd44815a45a20369207
+      spriteID: f3f6dcacb47d21d49811f87bd21c1ef1
       internalID: -347125561
       vertices: []
       indices: 

@@ -615,9 +615,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 36b7ec26ee4ee354ab3b2aba38c7f8bb, type: 2}
     - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: goblinCharacter
+      value: 
+      objectReference: {fileID: 11400000, guid: 281502df7cebc56418ff64cf24a42669, type: 2}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
       propertyPath: minCellsVisible
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
+      propertyPath: playerCharacter
+      value: 
+      objectReference: {fileID: 11400000, guid: ad7d7c085ab4f784499eaca059b98442, type: 2}
     - target: {fileID: 3700429862146659000, guid: 0fcbdcd1a043f404c9221c87d55038c6, type: 3}
       propertyPath: startCellsVisible
       value: 24

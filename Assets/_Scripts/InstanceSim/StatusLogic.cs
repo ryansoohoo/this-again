@@ -30,16 +30,18 @@ public static class StatusLogic
         {
             ref var e = ref s.effects[i];
             var d = defs[e.defId];
-            if (d.periodTicks > 0)
+            if (d.periodTicks > 0)   // tick-stacked: each period fires FLAT damage, then one stack (one tick) falls off
             {
                 e.sincePeriodTick++;
-                while (e.sincePeriodTick >= d.periodTicks)
+                if (e.sincePeriodTick >= d.periodTicks)
                 {
                     e.sincePeriodTick -= d.periodTicks;
-                    periodicDamage += d.amountPerTick * e.stacks;
+                    periodicDamage += d.amountPerTick;   // FLAT — stacks are remaining ticks, not a damage multiplier
+                    e.stacks--;
+                    if (e.stacks <= 0) { RemoveAt(s, i); continue; }
                 }
             }
-            if (d.durationTicks > 0 || e.remainingTicks > 0)   // 0-duration AttackCooldown uses an override > 0
+            else if (d.durationTicks > 0 || e.remainingTicks > 0)   // timed gate (HitStun/AttackCooldown); override > 0
             {
                 e.remainingTicks--;
                 if (e.remainingTicks <= 0) { RemoveAt(s, i); continue; }
@@ -53,19 +55,33 @@ public static class StatusLogic
     // forcedDir is the frozen flee direction stored on the instance (forced-move effects only).
     public static void Apply(StatusState s, in StatusEffectDef d, uint tick, bool self, float scale = 1f, int durationOverride = -1, Vector2 forcedDir = default)
     {
-        int dur = durationOverride >= 0 ? durationOverride : Mathf.CeilToInt(d.durationTicks * scale);
-        if (d.policy != StackPolicy.Independent)
+        if (d.periodTicks > 0)   // tick-stacked: a hit adds one stack (= one pending tick); the gate is live immediately
         {
             for (int i = 0; i < s.count; i++)
             {
                 if (s.effects[i].defId != d.id) continue;
-                if (d.policy == StackPolicy.Stack)
-                    s.effects[i].stacks = (byte)Mathf.Min(d.maxStacks, s.effects[i].stacks + 1);
-                s.effects[i].remainingTicks = dur;
+                s.effects[i].stacks = (byte)Mathf.Min(d.maxStacks, s.effects[i].stacks + 1);
                 s.effects[i].appliedTick = tick;
                 s.effects[i].fleeDir = forcedDir;
-                return;
+                return;   // leave sincePeriodTick running so a re-hit doesn't reset the in-progress tick
             }
+            if (s.count >= StatusState.Cap) return;   // full: drop the newcomer (8 simultaneous effects is already an edge)
+            s.effects[s.count++] = new ActiveEffect
+            {
+                defId = d.id, stacks = 1, sincePeriodTick = 0, remainingTicks = 0, appliedTick = tick, selfInflicted = self, fleeDir = forcedDir,
+            };
+            return;
+        }
+
+        // Timed gate (HitStun / AttackCooldown): single duration, refresh on re-apply. durationOverride >= 0 wins.
+        int dur = durationOverride >= 0 ? durationOverride : Mathf.CeilToInt(d.durationTicks * scale);
+        for (int i = 0; i < s.count; i++)
+        {
+            if (s.effects[i].defId != d.id) continue;
+            s.effects[i].remainingTicks = dur;
+            s.effects[i].appliedTick = tick;
+            s.effects[i].fleeDir = forcedDir;
+            return;
         }
         if (s.count >= StatusState.Cap) { if (!ReplaceWeakest(s, dur)) return; }
         s.effects[s.count++] = new ActiveEffect

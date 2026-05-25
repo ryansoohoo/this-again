@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ff57374be9827e48888d47be6e3f8ca
+      spriteID: 0793b1bddf2ec314383a6e8c44b54945
       internalID: 1767972732
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3afc060eeb44a34a9483c16f9af661a
+      spriteID: ce5c34937b438fa45886ef1beb99a61c
       internalID: 1200864661
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_frost_slash_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 352519829d5b6224799ffc66e7b08a9b
-      internalID: -1223000333
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06f770ecb0da6344bb182f2f4d9bc856
+      spriteID: c4a40c230d69089498c7bc4bbf3348b0
       internalID: 512635408
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14f5192f24468974cb6515b640710c12
+      spriteID: 0229f2df66a735442ac66249ce2d0310
       internalID: -1158411785
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aada6897ffbd2ac479d4619d9a34411d
+      spriteID: 5df910ca3977ae04f941a182f01c6d7f
       internalID: -277121921
       vertices: []
       indices: 

@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a62c2fc0f7e576e49ad11b4bd921c329
+      spriteID: 92855b3870dc487428b1cc7d909b369b
       internalID: -1224176755
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfd9283178cc12c469de2188f250d1c9
+      spriteID: d3314e34231d5ca4f8b27a653ed6649e
       internalID: 1744567231
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_frost_impact_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7d3a777bb2d3213429856cc639a05efa
-      internalID: 1804889913
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 883170d3e9b0cbf4cb782f907ad2582f
+      spriteID: da8ef991441fea44689f32f3d1246fed
       internalID: 2000272637
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07ec606540f58ae46868086f493eea33
+      spriteID: 400e3ca9100c96f45be77d0c7ede5e05
       internalID: 787087278
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fe5402fd4b926f4e9ffd7854f066410
+      spriteID: 67ab14b177b5b8d4081c4d90da7f2315
       internalID: 1278107387
       vertices: []
       indices: 

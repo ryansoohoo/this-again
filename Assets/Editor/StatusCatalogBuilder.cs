@@ -9,6 +9,7 @@ public static class StatusCatalogBuilder
 {
     const string CatalogPath = "Assets/_Combat/StatusCatalog.asset";
     const string EffectDir = "Assets/_Combat/Effects";
+    const float TickSeconds = 1.0f;   // every combat effect lasts 1s MIN (one tick), counted PER-EFFECT from its own apply time: a stack == one 1-second tick (a DoT fires flat dmg, then a stack drops). Also drives the per-tick FX animation length. Tune this one knob.
 
     struct Spec
     {
@@ -19,14 +20,16 @@ public static class StatusCatalogBuilder
 
     static Spec[] Specs() => new[]
     {
-        new Spec { kind = StatusKind.HitStun,        dur = 0.3f, bMove = true,  bAtk = true,  moveScale = 0f,   policy = StackPolicy.Refresh, maxStacks = 1, vis = 1 },
-        new Spec { kind = StatusKind.AttackCooldown, dur = 0f,   bMove = false, bAtk = true,  moveScale = 1f,   policy = StackPolicy.Refresh, maxStacks = 1, vis = 0 },
-        new Spec { kind = StatusKind.Poison,         dur = 3f,   bMove = false, bAtk = false, moveScale = 1f,   period = 0.5f, perTick = 5, policy = StackPolicy.Stack,   maxStacks = 5, vis = 2, vprio = 30 },
-        new Spec { kind = StatusKind.Freeze,         dur = 1.5f, bMove = true,  bAtk = false, moveScale = 0f,   policy = StackPolicy.Refresh, maxStacks = 1, vis = 3, vprio = 60 },
-        new Spec { kind = StatusKind.Slow,           dur = 2f,   bMove = false, bAtk = false, moveScale = 0.5f, policy = StackPolicy.Refresh, maxStacks = 1, vis = 4, vprio = 20 },
-        new Spec { kind = StatusKind.Bleed, dur = 4f,   bMove = false, bAtk = false, moveScale = 1f, period = 0.5f, perTick = 3, policy = StackPolicy.Stack,   maxStacks = 5, vis = 5, vprio = 40 },
-        new Spec { kind = StatusKind.Fire,  dur = 2.5f, bMove = false, bAtk = false, moveScale = 1f, period = 0.4f, perTick = 6, policy = StackPolicy.Refresh, maxStacks = 1, vis = 6, vprio = 50 },
-        new Spec { kind = StatusKind.Fear, dur = 1.2f, bMove = true, bAtk = true, moveScale = 0f, policy = StackPolicy.Refresh, maxStacks = 1, vis = 7, forced = ForcedMoveKind.FleeFrozen, forcedScale = 0.8f, vprio = 70 },
+        // Timed gates (period 0 => single duration, refresh on re-apply). HitStun is charge-scaled via durationOverride.
+        new Spec { kind = StatusKind.HitStun,        dur = 0.3f, bMove = true,  bAtk = true,  moveScale = 0f, maxStacks = 1, vis = 1 },
+        new Spec { kind = StatusKind.AttackCooldown, dur = 0f,   bMove = false, bAtk = true,  moveScale = 1f, maxStacks = 1, vis = 0 },
+        // Tick-stacked combat effects: period = the global tick; a stack = one pending tick; flat perTick damage; gate live on apply.
+        new Spec { kind = StatusKind.Poison, period = TickSeconds, perTick = 3, moveScale = 1f,   maxStacks = 10, vis = 2, vprio = 30 },
+        new Spec { kind = StatusKind.Freeze, period = TickSeconds, bMove = true, moveScale = 0f,   maxStacks = 10, vis = 3, vprio = 60 },
+        new Spec { kind = StatusKind.Slow,   period = TickSeconds, moveScale = 0.5f, maxStacks = 10, vis = 4, vprio = 20 },
+        new Spec { kind = StatusKind.Bleed,  period = TickSeconds, perTick = 4, moveScale = 1f,   maxStacks = 10, vis = 5, vprio = 40 },
+        new Spec { kind = StatusKind.Fire,   period = TickSeconds, perTick = 5, moveScale = 1f,   maxStacks = 10, vis = 6, vprio = 50 },
+        new Spec { kind = StatusKind.Fear,   period = TickSeconds, bMove = true, bAtk = true, moveScale = 0f, maxStacks = 10, vis = 7, forced = ForcedMoveKind.FleeFrozen, forcedScale = 0.8f, vprio = 70 },
     };
 
     [MenuItem("Tools/Combat/Build Status Catalog")]

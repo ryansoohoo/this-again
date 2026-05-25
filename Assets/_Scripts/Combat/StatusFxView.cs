@@ -74,10 +74,13 @@ public sealed class StatusFxView : MonoBehaviour
         if (defId < 0) { if (tickRenderer.enabled) tickRenderer.enabled = false; return; }
         var fx = cat.Visual(defId);
         if (fx == null || fx.tickFx == null || fx.tickFx.Length == 0) { tickRenderer.enabled = false; return; }
-        tickElapsed += Time.deltaTime;
         tickRenderer.enabled = true;
-        int frame = Mathf.Clamp((int)(tickElapsed * fx.tickFps), 0, fx.tickFx.Length - 1);
+        // One whole tick-FX animation per damage period, so 1 DoT tick == ~1 sprite-sheet cycle. The gameplay
+        // period (periodSeconds) is the source of truth; non-DoTs (period 0) fall back to the authored tickFps.
+        float loopDur = fx.periodSeconds > 0f ? fx.periodSeconds : fx.tickFx.Length / Mathf.Max(1f, fx.tickFps);
+        tickElapsed += Time.deltaTime;
+        if (tickElapsed >= loopDur) tickElapsed -= loopDur;   // loop once per period
+        int frame = Mathf.Clamp((int)(tickElapsed / loopDur * fx.tickFx.Length), 0, fx.tickFx.Length - 1);
         tickRenderer.sprite = fx.tickFx[frame];
-        if (frame >= fx.tickFx.Length - 1) tickElapsed = 0f;   // loop
     }
 }

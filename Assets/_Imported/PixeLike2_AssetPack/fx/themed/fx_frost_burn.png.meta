@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23b2879a38b2ce54eafabd9bf342b917
+      spriteID: 944e40347ff2b494095e912e92713376
       internalID: -1597580256
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c753a042b9c9bd4cbccf49f718670be
+      spriteID: 3d0881828efc04846b2c6571feead48b
       internalID: -1282522765
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_frost_burn_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9de4edc2ba178a04ba5ad0102541159d
-      internalID: 720881419
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7c3de427bd42ee4f837868da6fa1e76
+      spriteID: 0058d95687baec0418a796ffbc5bdcfa
       internalID: 195711772
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e46acfd4b0dcdaa489902428e68c3c1a
+      spriteID: 698cf854de28b8243be13413b7781607
       internalID: 2118949155
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f70d15a346fe9c748aa1f3c801ed4fa7
+      spriteID: bfd06b63353fdce4cb4c3d36387bee11
       internalID: -711623625
       vertices: []
       indices: 

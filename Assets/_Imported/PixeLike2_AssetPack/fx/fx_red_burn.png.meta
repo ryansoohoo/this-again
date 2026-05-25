@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62260b53c7a0e3b4c98d3df55a67da77
+      spriteID: 2e166ae4f5429b64ba949c05b28a92a6
       internalID: -259163173
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f30cdd3e728eef345bf1debd2033b5bc
+      spriteID: 34d54c5e1659391429d8502506b138cb
       internalID: -358498305
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_red_burn_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a66e773ba826f74f99f7ccd0532cc9d
-      internalID: 581421322
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0403f9cdf2ed4a441be95820893456e1
+      spriteID: 96b6db76193cd624484da7378a6da4fc
       internalID: -756780302
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc465215a2391b64691b0d0e3dd2344b
+      spriteID: f2adae350cb35904eba44524a0c75706
       internalID: 2054256494
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f84e51c36b2f7f446add084c34af007c
+      spriteID: 4309eeab48bcd32478f11df48d4e90a6
       internalID: 284500008
       vertices: []
       indices: 

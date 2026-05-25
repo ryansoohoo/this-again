@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b09a68187dee4474da47f734ec6786f8
+      spriteID: ebb97a0e7ca792645bca8204085f2ec4
       internalID: -1292637409
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ad789d9e7cf4dc49bed4de7cf56a4e6
+      spriteID: a8bc6294765b1e84cbc3e62989f4b680
       internalID: -1678892125
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_fire_burn_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8a97342455457ef4c99f46e335ae2a40
-      internalID: -1301775054
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6869155dea0f005448a12c99cb70d4e4
+      spriteID: 0690bc8b07a554b4c9fa8d792019f452
       internalID: 23675304
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 000d98ee5965ac44da4351bd6a6406c3
+      spriteID: b8d11e568971c4043a4c28d1c4593ba7
       internalID: -1131334102
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3b73673e18a9074e96792e94ee00df1
+      spriteID: 93e5b52b7a435b0489d69f12c9ce4a9c
       internalID: -920430541
       vertices: []
       indices: 

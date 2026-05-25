@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 327b5e11e14297d4b955f834c0ceb3af
+      spriteID: 5cef2c4e729942a4e849ca256907668d
       internalID: -1176865014
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa6ca3f4821406d4e8abd171d57fac29
+      spriteID: 493daa128341d9f499c44d262b3f93a5
       internalID: -128053695
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_purple_burn_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 97668fc61fca6a846bbb4c47d06606d0
-      internalID: 1412114759
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e8d19645662a8a4fac210548efe5ac5
+      spriteID: fbf3f6e10ff3a3642ac1c226173f8019
       internalID: 1360935688
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10ca4871effafa44282222cdf83c11c2
+      spriteID: a16c145d4a9e8ba46a385d48be5f8fb0
       internalID: 1817654238
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46915d3687b95f94b8005a234ff901e1
+      spriteID: 9b9b31650890ea44e8a11610f3a80c89
       internalID: 1491448575
       vertices: []
       indices: 

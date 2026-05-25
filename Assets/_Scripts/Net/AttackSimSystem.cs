@@ -77,6 +77,15 @@ public static class AttackSimSystem
             }
         }
 
+        // ---- Status tick for in-instance NPCs (non-players): age effects, accrue DoT damage, expire. Players are
+        //      stepped in Phase A via InstanceStep; NPCs have no input, so they tick here at the fixed 60Hz rate. ----
+        foreach (var c in reg.Combatants.Values)
+        {
+            if (!c.inInstance || c is ServerPlayer) continue;
+            StatusLogic.Step(c.status, statusDefs, out int npcDmg);
+            ApplyDamage(c, npcDmg);
+        }
+
         // ---- mover-yields weighting: moved this tick -> mover (1, absorbs the push), otherwise pinned (0) ----
         for (int i = 0; i < _pending.Count; i++)
         {

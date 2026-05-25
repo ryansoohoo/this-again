@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf82f48667089f547bdc6788b1db6209
+      spriteID: ea6dd24473eb60046ad925b17b3c47ba
       internalID: 370453914
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcd55b3e5920ed047bdb3a277e0183f3
+      spriteID: d95c20877e2e2f64f80afe599e7ef2fd
       internalID: 469195480
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_red_slash_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65e723797a00c334a86ef1236c0291bb
-      internalID: -741565787
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 870c41af1af2f4e4783aad3035654c59
+      spriteID: 903c94e22f3b4324593346526d2ef99f
       internalID: -975100503
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8aebf0f61de71b847a0950f9a174a71c
+      spriteID: e6cfe9012df1d524586864c121f2a949
       internalID: -711457248
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bde1dca980a8e74c89f5186c6f01643
+      spriteID: 359a3c082c0c57e4da9b711f9a15e461
       internalID: -173512540
       vertices: []
       indices: 

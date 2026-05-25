@@ -54,18 +54,49 @@ public class StatusLogicTests
         Assert.AreEqual(90, s.effects[0].remainingTicks);      // duration refreshed
     }
 
+    // --- Tick-stacked model (periodTicks > 0): a stack = one pending tick; each period fires FLAT damage then
+    //     drops one stack; re-apply adds a stack; gate is live from apply. (Poison: period 30, perTick 5, max 5.) ---
+
     [Test]
-    public void Stack_IncrementsUpToMax_AndScalesPeriodicDamage()
+    public void TickStack_Apply_AddsOneStack_NoImmediateDamage()
+    {
+        var s = new StatusState();
+        var defs = Defs();
+        StatusLogic.Apply(s, defs[(int)StatusKind.Poison], tick: 1, self: false);
+        Assert.AreEqual(1, s.count);
+        Assert.AreEqual(1, s.effects[0].stacks);
+        int dmg = 0;
+        for (int t = 0; t < 29; t++) { StatusLogic.Step(s, defs, out int d); dmg += d; }
+        Assert.AreEqual(0, dmg);   // nothing until a full period (30 ticks) elapses
+    }
+
+    [Test]
+    public void TickStack_FiresFlatDamage_AndDropsOneStackPerPeriod()
+    {
+        var s = new StatusState();
+        var defs = Defs();
+        StatusLogic.Apply(s, defs[(int)StatusKind.Poison], tick: 1, self: false);
+        StatusLogic.Apply(s, defs[(int)StatusKind.Poison], tick: 1, self: false);   // 2 stacks
+        Assert.AreEqual(2, s.effects[0].stacks);
+
+        int dmg = 0;
+        for (int t = 0; t < 30; t++) { StatusLogic.Step(s, defs, out int d); dmg += d; }
+        Assert.AreEqual(5, dmg);                  // FLAT amountPerTick (not x stacks)
+        Assert.AreEqual(1, s.effects[0].stacks);  // one stack consumed
+
+        for (int t = 0; t < 30; t++) { StatusLogic.Step(s, defs, out int d); dmg += d; }
+        Assert.AreEqual(10, dmg);                 // second period fires another flat 5
+        Assert.AreEqual(0, s.count);              // last stack consumed -> effect removed
+    }
+
+    [Test]
+    public void TickStack_CapsAtMaxStacks()
     {
         var s = new StatusState();
         var defs = Defs();
         for (int i = 0; i < 7; i++) StatusLogic.Apply(s, defs[(int)StatusKind.Poison], tick: 1, self: false);
-        Assert.AreEqual(1, s.count);                 // one Poison instance
-        Assert.AreEqual(5, s.effects[0].stacks);     // capped at maxStacks=5
-        // Advance 30 ticks (one period); expect 5 dmg/tick × 5 stacks = 25.
-        int dmg = 0, last = 0;
-        for (int t = 0; t < 30; t++) { StatusLogic.Step(s, defs, out last); dmg += last; }
-        Assert.AreEqual(25, dmg);
+        Assert.AreEqual(1, s.count);
+        Assert.AreEqual(5, s.effects[0].stacks);   // capped at maxStacks = 5
     }
 
     [Test]

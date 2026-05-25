@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01de2c24b04c2f84e9906c361febb9a5
+      spriteID: 76830323963603f40ad7a846dd479f4d
       internalID: -1065229188
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2740694ec15428749b291de0db831036
+      spriteID: 293b42b812a598d418269c46f31bdfc8
       internalID: 504051974
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_purple_impact_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f5c2bcc9cf3789648afb7971e64725a0
-      internalID: 1751087777
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60810b5438a80a3498e90ac59a5fa34a
+      spriteID: 9b9d25598bc63e645945d98799883f45
       internalID: -26145975
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec78b1c89a8e68e4f93f9b92ddefa633
+      spriteID: bcd7f0205d81fc341b56a4244f2fd34c
       internalID: -572654847
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3fd782602ca8ec43a4016d83fee161a
+      spriteID: 970d32e22c342a44eb691750fbdc6197
       internalID: 586789894
       vertices: []
       indices: 

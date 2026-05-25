@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbc818bda0581dc4ebad3b80cb094376
+      spriteID: 597ac57873692194aa158306a4f5f641
       internalID: -59976157
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5349a9c403de5e84eb1a77eeb45df7a3
+      spriteID: f246c1e10d90e78419896b8a40a07dac
       internalID: 620931420
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_purple_slash_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dd10610f0546fe742850cfe1919d632b
-      internalID: 787956594
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7814592743dcb554198b7dac8c223506
+      spriteID: 2910cca84a22742498b6cfcdf663de7b
       internalID: -1264676414
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dc798f47fcb74d409cfb8da850e46d4
+      spriteID: 74736469d22054e4984a9b867792af4c
       internalID: -622484846
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea1cefae6c8808845be8e56ecdb3a5c1
+      spriteID: 56e879f4402ae3e4882645a0d9338472
       internalID: -1402387587
       vertices: []
       indices: 

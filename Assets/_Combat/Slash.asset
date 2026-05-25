@@ -116,7 +116,7 @@ MonoBehaviour:
   damage: 10
   hitRange: 1
   hitArcDegrees: 90
-  mainEffect: {fileID: 11400000, guid: c7ed161abeea6f642a7663b3af1ae9ee, type: 2}
+  mainEffect: {fileID: 11400000, guid: e2f8ee4955aca2f4da41e2db21d0fd2c, type: 2}
   attackMotion: 2
   hitstunFullSeconds: 0.45
   hitstunTapSeconds: 0.2

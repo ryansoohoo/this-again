@@ -14,6 +14,7 @@ public static class EffectFxSpriteSetup
     const string EffectDir = "Assets/_Combat/Effects/";
     const int CellSize = 16;   // each frame is 16x16 px
     const float PPU = 16f;
+    const float SolidThreshold = 0.85f;   // cells with >= this opaque-pixel fraction are solid filler -> skip
 
     struct Map { public StatusKind kind; public string slash, impact, burn; public Color tint; }
 
@@ -83,31 +84,68 @@ public static class EffectFxSpriteSetup
         int cols = w / CellSize, rows = h / CellSize;
         string baseName = System.IO.Path.GetFileNameWithoutExtension(path);
 
+        // Detect the pack's solid filler cells: real frames are mostly transparent, but some cells are a
+        // ~fully-opaque colored block that renders as a bright square. Skip those (keep==null => couldn't scan).
+        var keep = SolidScan(path, w, h, cols, rows);
+
         var factory = new SpriteDataProviderFactories();
         factory.Init();
         var dp = factory.GetSpriteEditorDataProviderFromObject(importer);
         dp.InitSpriteEditorDataProvider();
 
         var rects = new List<SpriteRect>(cols * rows);
-        int idx = 0;
+        int idx = 0, skipped = 0;
         for (int r = 0; r < rows; r++)
         for (int c = 0; c < cols; c++)
         {
-            rects.Add(new SpriteRect
-            {
-                name      = $"{baseName}_{idx}",
-                rect      = new Rect(c * CellSize, h - (r + 1) * CellSize, CellSize, CellSize),
-                alignment = SpriteAlignment.Center,
-                pivot     = new Vector2(0.5f, 0.5f),
-                border    = Vector4.zero,
-                spriteID  = GUID.Generate(),
-            });
+            if (keep == null || keep[idx])
+                rects.Add(new SpriteRect
+                {
+                    name      = $"{baseName}_{idx}",
+                    rect      = new Rect(c * CellSize, h - (r + 1) * CellSize, CellSize, CellSize),
+                    alignment = SpriteAlignment.Center,
+                    pivot     = new Vector2(0.5f, 0.5f),
+                    border    = Vector4.zero,
+                    spriteID  = GUID.Generate(),
+                });
+            else skipped++;
             idx++;
         }
 
         dp.SetSpriteRects(rects.ToArray());
         dp.Apply();
         importer.SaveAndReimport();
+        if (skipped > 0) Debug.Log($"[EffectFx] {baseName}: kept {rects.Count}/{cols * rows} cells (skipped {skipped} solid filler)");
+    }
+
+    // Per-cell keep mask (false = solid filler). Null if the PNG can't be decoded/measured (caller keeps all).
+    // Decodes the source PNG into a temporary readable texture and counts opaque pixels per cell.
+    static bool[] SolidScan(string path, int w, int h, int cols, int rows)
+    {
+        try
+        {
+            var bytes = System.IO.File.ReadAllBytes(path);
+            var tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            bool ok = ImageConversion.LoadImage(tex, bytes);
+            if (!ok || tex.width != w || tex.height != h) { Object.DestroyImmediate(tex); return null; }
+            var px = tex.GetPixels32();
+            int tw = tex.width;
+            Object.DestroyImmediate(tex);
+
+            var keep = new bool[cols * rows];
+            int idx = 0;
+            for (int r = 0; r < rows; r++)
+            for (int c = 0; c < cols; c++)
+            {
+                int x0 = c * CellSize, y0 = h - (r + 1) * CellSize, opaque = 0;
+                for (int yy = 0; yy < CellSize; yy++)
+                for (int xx = 0; xx < CellSize; xx++)
+                    if (px[(y0 + yy) * tw + (x0 + xx)].a > 127) opaque++;
+                keep[idx++] = opaque / (float)(CellSize * CellSize) < SolidThreshold;
+            }
+            return keep;
+        }
+        catch { return null; }
     }
 
     static Sprite[] LoadFrames(string path)

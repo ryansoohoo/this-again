@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Freeze
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectAsset
   kind: 3
-  durationSeconds: 1.5
+  durationSeconds: 0
   blocksMove: 1
   blocksAttack: 0
   moveScale: 0
-  periodSeconds: 0
+  periodSeconds: 1
   amountPerTick: 0
   policy: 0
-  maxStacks: 1
+  maxStacks: 10
   forcedMove: 0
   forcedMoveScale: 1
   visualId: 3
@@ -29,7 +29,6 @@ MonoBehaviour:
   hitFx:
   - {fileID: -1224176755, guid: a0e201fbac116084a8e7fae27ac09c9d, type: 3}
   - {fileID: 1744567231, guid: a0e201fbac116084a8e7fae27ac09c9d, type: 3}
-  - {fileID: 1804889913, guid: a0e201fbac116084a8e7fae27ac09c9d, type: 3}
   - {fileID: 2000272637, guid: a0e201fbac116084a8e7fae27ac09c9d, type: 3}
   - {fileID: 787087278, guid: a0e201fbac116084a8e7fae27ac09c9d, type: 3}
   - {fileID: 1278107387, guid: a0e201fbac116084a8e7fae27ac09c9d, type: 3}
@@ -37,7 +36,6 @@ MonoBehaviour:
   tickFx:
   - {fileID: -1597580256, guid: cb79caacfdbfb8e42ac1c5af5c1a3120, type: 3}
   - {fileID: -1282522765, guid: cb79caacfdbfb8e42ac1c5af5c1a3120, type: 3}
-  - {fileID: 720881419, guid: cb79caacfdbfb8e42ac1c5af5c1a3120, type: 3}
   - {fileID: 195711772, guid: cb79caacfdbfb8e42ac1c5af5c1a3120, type: 3}
   - {fileID: 2118949155, guid: cb79caacfdbfb8e42ac1c5af5c1a3120, type: 3}
   - {fileID: -711623625, guid: cb79caacfdbfb8e42ac1c5af5c1a3120, type: 3}

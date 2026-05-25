@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07a1c801864de1243bd8649a09f217cb
+      spriteID: a6f4fda6deea4364990854226d8a0c02
       internalID: 668208095
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb886b9f006ccaf4ebbdf03e1d72002e
+      spriteID: 0e88013676cd2a6468548fac596cdde1
       internalID: 968894776
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_fire_slash_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 992e69c593506694897a753a5cdfaef2
-      internalID: 77904897
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffc46113e9f38704db415292e2f745ee
+      spriteID: 400eead559779f749861d577ee701f40
       internalID: -695183222
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b406590481ec9b45b803ed8d251b529
+      spriteID: c455a612cbdbbda42b573b96d6d035db
       internalID: -530103448
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39a64adcb802a53468dcb8dc7560775b
+      spriteID: 5ad1dbb59f5757c4094d25e92b25897f
       internalID: -354815211
       vertices: []
       indices: 

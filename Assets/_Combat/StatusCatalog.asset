@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a96c92c8e5c06c47828fbc7bd71f984, type: 3}
   m_Name: StatusCatalog
   m_EditorClassIdentifier: Assembly-CSharp::StatusCatalog
-  maxHp: 100
   effects:
   - {fileID: 11400000, guid: 24e5498b8573535428a23bcadcaf5922, type: 2}
   - {fileID: 11400000, guid: 3edd4859b256ddf4894a5828cddaa1fa, type: 2}

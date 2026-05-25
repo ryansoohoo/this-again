@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Poison
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectAsset
   kind: 2
-  durationSeconds: 3
+  durationSeconds: 0
   blocksMove: 0
   blocksAttack: 0
   moveScale: 1
-  periodSeconds: 0.5
-  amountPerTick: 5
-  policy: 1
-  maxStacks: 5
+  periodSeconds: 1
+  amountPerTick: 3
+  policy: 0
+  maxStacks: 10
   forcedMove: 0
   forcedMoveScale: 1
   visualId: 2
@@ -29,7 +29,6 @@ MonoBehaviour:
   hitFx:
   - {fileID: 1413256356, guid: 9358a1d6f2a02e44a86afc36b53c80b0, type: 3}
   - {fileID: -1273264653, guid: 9358a1d6f2a02e44a86afc36b53c80b0, type: 3}
-  - {fileID: 1070420391, guid: 9358a1d6f2a02e44a86afc36b53c80b0, type: 3}
   - {fileID: -99280757, guid: 9358a1d6f2a02e44a86afc36b53c80b0, type: 3}
   - {fileID: -1110857561, guid: 9358a1d6f2a02e44a86afc36b53c80b0, type: 3}
   - {fileID: -347125561, guid: 9358a1d6f2a02e44a86afc36b53c80b0, type: 3}
@@ -37,7 +36,6 @@ MonoBehaviour:
   tickFx:
   - {fileID: -551979147, guid: cb0806351ec02e042a3de7c69f6cfefc, type: 3}
   - {fileID: -695713306, guid: cb0806351ec02e042a3de7c69f6cfefc, type: 3}
-  - {fileID: 1480124563, guid: cb0806351ec02e042a3de7c69f6cfefc, type: 3}
   - {fileID: -2010576714, guid: cb0806351ec02e042a3de7c69f6cfefc, type: 3}
   - {fileID: 912904664, guid: cb0806351ec02e042a3de7c69f6cfefc, type: 3}
   - {fileID: -1867642030, guid: cb0806351ec02e042a3de7c69f6cfefc, type: 3}

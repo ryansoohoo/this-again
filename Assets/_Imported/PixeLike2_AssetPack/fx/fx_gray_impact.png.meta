@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f9007cadfe0a99428488fb5c629039e
+      spriteID: 10e69338f2c5719419e70ad81babc8b5
       internalID: 1956660812
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6dfb2f2eebe9f044b18bbc94bb0d66f
+      spriteID: d08ba20766f35674b84851876de997ca
       internalID: 935191538
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_gray_impact_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 144fc2aa1bd7e6146a5f124034eed70b
-      internalID: 222556321
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 132faaf302b4fac4da5390ab0172e04a
+      spriteID: f12e7f0cdf9997e4fa93358cb933f4d1
       internalID: 386011924
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7997491fd4c52844d90426c871a7672c
+      spriteID: 157b36cba44c6b44998372cda91ab9dd
       internalID: 1270439040
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1bca7f2c1706a04e91691bafd0b96ac
+      spriteID: e0ce6c0100ab9784e9219c41f7a097d2
       internalID: -1162445722
       vertices: []
       indices: 

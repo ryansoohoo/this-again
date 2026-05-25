@@ -112,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 339ea3f303f3659449a8dc27fb82ddda
+      spriteID: fcd5f6b308187f7408289a7dd045450e
       internalID: 251848476
       vertices: []
       indices: 
@@ -134,30 +134,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7ef12b2ce4630a4c9608e5b4d5a7f15
+      spriteID: d70f6644dff75ad4da393551e960c006
       internalID: -1710364986
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fx_fire_impact_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3b01f5745791d5a4686a73f73840ec13
-      internalID: 724215375
       vertices: []
       indices: 
       edges: []
@@ -178,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbfa97f3e21a239499a5c93d81432a8d
+      spriteID: 9db24fe767c3a5a4e8d5d3403da340e6
       internalID: 1589772722
       vertices: []
       indices: 
@@ -200,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0b5d05209e339648967cc6c8a720aee
+      spriteID: f872f6f27ac18154cb88a870c673efb4
       internalID: 804324519
       vertices: []
       indices: 
@@ -222,7 +200,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78ecbe221f7937d4c9aa6b6abe48b7a8
+      spriteID: 4f6167908241bca4c885939a5f5718f6
       internalID: 1553497549
       vertices: []
       indices: 

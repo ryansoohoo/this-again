@@ -25,10 +25,28 @@ MonoBehaviour:
   forcedMoveScale: 1
   visualId: 6
   visualPriority: 50
-  tintColor: {r: 1, g: 1, b: 1, a: 1}
-  hitFx: []
+  tintColor: {r: 1, g: 0.55, b: 0.15, a: 1}
+  hitFx:
+  - {fileID: 251848476, guid: dd4ca2a2ac87ce844ab31743324fceb6, type: 3}
+  - {fileID: -1710364986, guid: dd4ca2a2ac87ce844ab31743324fceb6, type: 3}
+  - {fileID: 724215375, guid: dd4ca2a2ac87ce844ab31743324fceb6, type: 3}
+  - {fileID: 1589772722, guid: dd4ca2a2ac87ce844ab31743324fceb6, type: 3}
+  - {fileID: 804324519, guid: dd4ca2a2ac87ce844ab31743324fceb6, type: 3}
+  - {fileID: 1553497549, guid: dd4ca2a2ac87ce844ab31743324fceb6, type: 3}
   hitFps: 14
-  tickFx: []
+  tickFx:
+  - {fileID: -1292637409, guid: 28199b9070b31c64f82c1b81a82ae549, type: 3}
+  - {fileID: -1678892125, guid: 28199b9070b31c64f82c1b81a82ae549, type: 3}
+  - {fileID: -1301775054, guid: 28199b9070b31c64f82c1b81a82ae549, type: 3}
+  - {fileID: 23675304, guid: 28199b9070b31c64f82c1b81a82ae549, type: 3}
+  - {fileID: -1131334102, guid: 28199b9070b31c64f82c1b81a82ae549, type: 3}
+  - {fileID: -920430541, guid: 28199b9070b31c64f82c1b81a82ae549, type: 3}
   tickFps: 10
-  attackOverlayFx: []
+  attackOverlayFx:
+  - {fileID: 668208095, guid: 07b0fc3e8b12f1a448f8ccfb073c58a6, type: 3}
+  - {fileID: 968894776, guid: 07b0fc3e8b12f1a448f8ccfb073c58a6, type: 3}
+  - {fileID: 77904897, guid: 07b0fc3e8b12f1a448f8ccfb073c58a6, type: 3}
+  - {fileID: -695183222, guid: 07b0fc3e8b12f1a448f8ccfb073c58a6, type: 3}
+  - {fileID: -530103448, guid: 07b0fc3e8b12f1a448f8ccfb073c58a6, type: 3}
+  - {fileID: -354815211, guid: 07b0fc3e8b12f1a448f8ccfb073c58a6, type: 3}
   overlayFps: 14

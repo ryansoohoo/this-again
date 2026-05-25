@@ -10,6 +10,13 @@ public sealed class AttackView : MonoBehaviour
     [SerializeField] SpriteRenderer body;
     [SerializeField] SpriteRenderer weaponFront;
 
+    // Weapon shine: per-keyframe intensity (TimedFrame.glow) × the attack's glowColor, driven onto the weapon
+    // layers' AllIn1 _Glow/_GlowColor. Uses each renderer's per-INSTANCE material (sr.material), NOT a
+    // MaterialPropertyBlock — an MPB on a SpriteRenderer clobbers its color (the day/night tint); a material
+    // instance leaves vertex color alone. Weapon material needs GLOW_ON (Tools > Minifantasy > Setup Weapon Shine).
+    static readonly int GlowId = Shader.PropertyToID("_Glow");
+    static readonly int GlowColorId = Shader.PropertyToID("_GlowColor");
+
     void Awake()
     {
         if (playerView == null) playerView = GetComponent<PlayerView>();
@@ -40,6 +47,26 @@ public sealed class AttackView : MonoBehaviour
         if (weaponBack != null) weaponBack.transform.localEulerAngles = new Vector3(0f, 0f, rot);
         if (weaponFront != null) weaponFront.transform.localEulerAngles = new Vector3(0f, 0f, rot);
         Tint();
+        DriveShine(state, tl);
+    }
+
+    // Reads the current keyframe's glow (authored on the attack's TimedFrames) and drives the weapon layers' glow.
+    // Per-instance material so it's per-ghost and never touches SpriteRenderer.color (day/night tint stays intact).
+    void DriveShine(AttackState state, AttackTimeline tl)
+    {
+        if (!Application.isPlaying) return;   // sr.material instantiates — don't leak materials in edit mode
+        float glow = AttackLogic.CurrentGlow(state, tl);
+        Color color = tl.glowColor.maxColorComponent > 0.01f ? tl.glowColor : Color.white;
+        SetGlow(weaponFront, glow, color);
+        SetGlow(weaponBack, glow, color);
+    }
+
+    void SetGlow(SpriteRenderer sr, float glow, Color color)
+    {
+        if (sr == null) return;
+        var m = sr.material;            // per-instance (created once); does NOT clobber the sprite's vertex color
+        m.SetFloat(GlowId, glow);
+        m.SetColor(GlowColorId, color);
     }
 
     void SetFrame(SpriteRenderer sr, Sprite[] frames, int i)

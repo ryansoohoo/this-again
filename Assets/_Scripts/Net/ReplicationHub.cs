@@ -327,6 +327,27 @@ public sealed class ReplicationHub : NetworkBehaviour
         ServerEmitInventory(sender, sp.inventory.slots);
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    public void EquipRequestServerRpc(int slotIndex, ServerRpcParams rpc = default)
+    {
+        if (!IsServer) return;
+        ulong sender = rpc.Receive.SenderClientId;
+        if (!registry.TryGet(sender, out var sp)) return;
+
+        if (sp.inInstance) {
+            GameLog.PostTo(sender, OutputType.System, "Can't switch weapons inside an instance.");
+            return;
+        }
+        if (!sp.inventory.TryEquip(slotIndex, out string reason)) {
+            GameLog.PostTo(sender, OutputType.System, reason);
+            return;
+        }
+        sp.weaponId = sp.inventory.equippedWeaponId;
+        string name = ResolveDisplayName(ItemKind.Weapon, sp.weaponId);
+        GameLog.PostTo(sender, OutputType.Inventory, $"Equipped {name}.");
+        ServerEmitInventory(sender, sp.inventory.slots);
+    }
+
     // Reused by Tasks 13 and 14 (equip/drop commands).
     byte ResolveMaxStack(ItemKind kind, byte id)
     {

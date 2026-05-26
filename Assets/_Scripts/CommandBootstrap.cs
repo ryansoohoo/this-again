@@ -132,6 +132,23 @@ public static class CommandBootstrap
             },
         });
 
+        r.Register(new Command
+        {
+            Keyword = "equip", Scope = CommandScope.Inventory, Arg = ArgMode.Required,
+            Description = "Equip a weapon by slot number or name. Overworld only.",
+            Usage = "equip <slot|name>",
+            Run = arg =>
+            {
+                var lp = LocalPlayer.Instance;
+                var hub = ReplicationHub.Instance;
+                if (lp == null || hub == null) return CommandResult.Bad("Not connected.");
+                if (!TryResolveSlotArg(lp.inventoryMirror, arg, out int slotIndex, out string reason))
+                    return CommandResult.Bad(reason);
+                hub.EquipRequestServerRpc(slotIndex);
+                return CommandResult.Ok(keepOpen: true);
+            },
+        });
+
         // ---- Debug ----
         r.Register(new Command
         {
@@ -272,6 +289,42 @@ public static class CommandBootstrap
             if ((c.Scope & router.Active) != 0)
                 sb.Append("\n  ").Append(c.Usage ?? c.Keyword).Append(" — ").Append(c.Description);
         return sb.ToString();
+    }
+
+    // Resolves "3" → slot 2 (0-based), or "iron sword" → first matching slot by item name. Returns -1 on miss.
+    static bool TryResolveSlotArg(InventorySlot[] mirror, string arg, out int slotIndex, out string reason)
+    {
+        slotIndex = -1; reason = null;
+        arg = arg.Trim();
+        if (int.TryParse(arg, out int n)) {
+            if (n < 1 || n > mirror.Length) { reason = $"Slot must be 1..{mirror.Length}."; return false; }
+            slotIndex = n - 1;
+            if (mirror[slotIndex].IsEmpty) { reason = "That slot is empty."; return false; }
+            return true;
+        }
+        // Name match — walk the mirror, look up display names via catalogs
+        var gm = Game.Instance;
+        int found = -1, hits = 0;
+        for (int i = 0; i < mirror.Length; i++)
+        {
+            var s = mirror[i];
+            if (s.IsEmpty) continue;
+            string name = null;
+            if (s.kind == ItemKind.Weapon && gm != null && gm.WeaponCatalog != null && gm.WeaponCatalog.Get(s.id) != null)
+                name = gm.WeaponCatalog.Get(s.id).name;
+            else if (s.kind == ItemKind.Consumable && gm != null && gm.ConsumableCatalog != null && gm.ConsumableCatalog.Get(s.id) != null)
+            {
+                var d = gm.ConsumableCatalog.Get(s.id);
+                name = d.displayName ?? d.name;
+            }
+            if (name == null) continue;
+            if (string.Equals(name, arg, System.StringComparison.OrdinalIgnoreCase)
+             || name.IndexOf(arg, System.StringComparison.OrdinalIgnoreCase) >= 0)
+            { found = i; hits++; }
+        }
+        if (hits == 0) { reason = $"No item matches '{arg}'."; return false; }
+        if (hits > 1) { reason = $"Multiple items match '{arg}'. Be more specific."; return false; }
+        slotIndex = found; return true;
     }
 
     static bool TryResolveItemId(ItemKind kind, string idOrName, out byte id, out string reason)

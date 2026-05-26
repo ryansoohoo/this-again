@@ -100,6 +100,38 @@ public static class CommandBootstrap
             },
         });
 
+        r.Register(new Command
+        {
+            Keyword = "give", Scope = CommandScope.Inventory, Arg = ArgMode.Required,
+            Description = "(host) Give yourself an item. Usage: give weapon|consumable <id|name> [count]",
+            Usage = "give weapon|consumable <id|name> [count]",
+            Run = arg =>
+            {
+                var hub = ReplicationHub.Instance;
+                if (hub == null || !hub.IsHost) return CommandResult.Bad("give is host-only.");
+                var parts = arg.Split(new[] { ' ' }, 3, System.StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length < 2) return CommandResult.Bad("Usage: give weapon|consumable <id|name> [count]");
+
+                ItemKind kind;
+                switch (parts[0].ToLowerInvariant())
+                {
+                    case "w": case "weapon": kind = ItemKind.Weapon; break;
+                    case "c": case "consumable": kind = ItemKind.Consumable; break;
+                    default: return CommandResult.Bad("First arg must be 'weapon' or 'consumable'.");
+                }
+
+                if (!TryResolveItemId(kind, parts[1], out byte id, out string resolveReason))
+                    return CommandResult.Bad(resolveReason);
+
+                byte count = 1;
+                if (parts.Length == 3 && (!byte.TryParse(parts[2], out count) || count == 0))
+                    return CommandResult.Bad("Count must be 1..255.");
+
+                hub.GiveSelfServerRpc((byte)kind, id, count);
+                return CommandResult.Ok(keepOpen: true);
+            },
+        });
+
         // ---- Debug ----
         r.Register(new Command
         {
@@ -240,5 +272,50 @@ public static class CommandBootstrap
             if ((c.Scope & router.Active) != 0)
                 sb.Append("\n  ").Append(c.Usage ?? c.Keyword).Append(" — ").Append(c.Description);
         return sb.ToString();
+    }
+
+    static bool TryResolveItemId(ItemKind kind, string idOrName, out byte id, out string reason)
+    {
+        id = 0; reason = null;
+        if (byte.TryParse(idOrName, out id)) return true;   // numeric id always wins
+
+        var gm = Game.Instance;
+        if (gm == null) { reason = "No catalog available."; return false; }
+
+        if (kind == ItemKind.Weapon)
+        {
+            var c = gm.WeaponCatalog;
+            if (c == null || c.weapons == null) { reason = "WeaponCatalog not wired."; return false; }
+            int found = -1, hits = 0;
+            for (int i = 0; i < c.weapons.Length; i++)
+            {
+                var w = c.weapons[i];
+                if (w == null) continue;
+                if (string.Equals(w.name, idOrName, System.StringComparison.OrdinalIgnoreCase)
+                 || w.name.IndexOf(idOrName, System.StringComparison.OrdinalIgnoreCase) >= 0)
+                { found = i; hits++; }
+            }
+            if (hits == 0) { reason = $"No weapon matches '{idOrName}'."; return false; }
+            if (hits > 1) { reason = $"Multiple weapons match '{idOrName}'. Be more specific."; return false; }
+            id = (byte)found; return true;
+        }
+        else // Consumable
+        {
+            var c = gm.ConsumableCatalog;
+            if (c == null || c.entries == null) { reason = "ConsumableCatalog not wired."; return false; }
+            int found = -1, hits = 0;
+            for (int i = 0; i < c.entries.Length; i++)
+            {
+                var d = c.entries[i];
+                if (d == null) continue;
+                string n = d.displayName ?? d.name;
+                if (string.Equals(n, idOrName, System.StringComparison.OrdinalIgnoreCase)
+                 || n.IndexOf(idOrName, System.StringComparison.OrdinalIgnoreCase) >= 0)
+                { found = i; hits++; }
+            }
+            if (hits == 0) { reason = $"No consumable matches '{idOrName}'."; return false; }
+            if (hits > 1) { reason = $"Multiple consumables match '{idOrName}'. Be more specific."; return false; }
+            id = (byte)found; return true;
+        }
     }
 }

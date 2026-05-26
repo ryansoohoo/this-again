@@ -299,4 +299,51 @@ public sealed class ReplicationHub : NetworkBehaviour
         if (!IsServer || nm == null) return null;
         return registry.TryGet(nm.LocalClientId, out var sp) ? sp.status : null;
     }
+
+    // ---- Inventory mutation (host-only give command) ----
+    [ServerRpc(RequireOwnership = false)]
+    public void GiveSelfServerRpc(byte kind, byte id, byte count, ServerRpcParams rpc = default)
+    {
+        if (!IsServer) return;
+        ulong sender = rpc.Receive.SenderClientId;
+        if (sender != NetworkManager.ServerClientId) {
+            GameLog.PostTo(sender, OutputType.System, "give is host-only.");
+            return;
+        }
+        if (!registry.TryGet(sender, out var sp)) return;
+
+        var k = (ItemKind)kind;
+        byte maxStack = ResolveMaxStack(k, id);
+        if (maxStack == 0) {
+            GameLog.PostTo(sender, OutputType.System, "Unknown item.");
+            return;
+        }
+
+        bool ok = sp.inventory.TryGive(k, id, count, maxStack, out byte added, out string reason);
+        string name = ResolveDisplayName(k, id);
+        if (ok && added == count) GameLog.PostTo(sender, OutputType.Inventory, $"Received {name}{(added > 1 ? $" x{added}" : "")}.");
+        else if (ok)               GameLog.PostTo(sender, OutputType.Inventory, $"Inventory full — added {added} of {count} {name}.");
+        else                       GameLog.PostTo(sender, OutputType.System, reason ?? "Couldn't add item.");
+        ServerEmitInventory(sender, sp.inventory.slots);
+    }
+
+    // Reused by Tasks 13 and 14 (equip/drop commands).
+    byte ResolveMaxStack(ItemKind kind, byte id)
+    {
+        var gm = Game.Instance;
+        if (gm == null) return 0;
+        if (kind == ItemKind.Weapon)     return gm.WeaponCatalog != null && gm.WeaponCatalog.Get(id) != null ? (byte)1 : (byte)0;
+        if (kind == ItemKind.Consumable) return gm.ConsumableCatalog != null && gm.ConsumableCatalog.Get(id) != null ? gm.ConsumableCatalog.Get(id).maxStack : (byte)0;
+        return 0;
+    }
+
+    // Reused by Tasks 13 and 14 (equip/drop commands).
+    string ResolveDisplayName(ItemKind kind, byte id)
+    {
+        var gm = Game.Instance;
+        if (gm == null) return $"item#{id}";
+        if (kind == ItemKind.Weapon)     return gm.WeaponCatalog != null && gm.WeaponCatalog.Get(id) != null ? gm.WeaponCatalog.Get(id).name : $"weapon#{id}";
+        if (kind == ItemKind.Consumable) return gm.ConsumableCatalog != null && gm.ConsumableCatalog.Get(id) != null ? gm.ConsumableCatalog.Get(id).displayName : $"consumable#{id}";
+        return $"item#{id}";
+    }
 }

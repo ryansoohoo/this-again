@@ -77,6 +77,16 @@ public class InventoryTests
     }
 
     [Test]
+    public void TryGive_CountZero_Rejects()
+    {
+        var inv = Make();
+        bool ok = inv.TryGive(ItemKind.Consumable, HealId, 0, MaxStack, out byte added, out string reason);
+        Assert.IsFalse(ok);
+        Assert.AreEqual(0, added);
+        Assert.IsNotNull(reason);
+    }
+
+    [Test]
     public void TryEquip_WeaponSlot_UpdatesEquippedState()
     {
         var inv = Make();
@@ -170,6 +180,15 @@ public class InventoryTests
         var inv = Make();
         inv.TryGive(ItemKind.Consumable, HealId, 3, MaxStack, out _, out _);
         Assert.IsTrue(inv.TryDrop(0, 99, out _));
+        Assert.IsTrue(inv.slots[0].IsEmpty);
+    }
+
+    [Test]
+    public void TryDrop_CountZero_DropsWholeStack()
+    {
+        var inv = Make();
+        inv.TryGive(ItemKind.Consumable, HealId, 5, MaxStack, out _, out _);
+        Assert.IsTrue(inv.TryDrop(0, 0, out _));
         Assert.IsTrue(inv.slots[0].IsEmpty);
     }
 

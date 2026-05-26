@@ -1,8 +1,10 @@
 using UnityEngine;
 
 // One attack-motion's swing-overlay frames (front + back layers) for a given status effect's color.
+// `columnsPerRow` is the source sheet's grid width — AttackView uses it to re-index the flat sprite array
+// when the overlay sheet's column count differs from the weapon's (otherwise direction rows past 0 scramble).
 [System.Serializable]
-public struct MotionOverlay { public AttackMotion motion; public Sprite[] front; public Sprite[] back; }
+public struct MotionOverlay { public AttackMotion motion; public Sprite[] front; public Sprite[] back; public int columnsPerRow; }
 
 // One status effect as a reusable asset: gameplay (compiled to the pure StatusEffectDef the sim consumes) plus
 // visual data (read ONLY by the View layer — never enters Minifantasy.InstanceSim). Weapons reference these;
@@ -37,12 +39,20 @@ public sealed class StatusEffectAsset : ScriptableObject
     public MotionOverlay[] attackOverlays;    // per attack-motion swing overlay (front/back), already in THIS effect's color
 
     // Front/back swing-overlay frames for a weapon's attack motion (this effect's color). False if none authored.
-    public bool TryGetOverlay(AttackMotion m, out Sprite[] front, out Sprite[] back)
+    // Returns the source sheet's `columnsPerRow` so the caller can re-index the flat sprite array against the
+    // overlay's own grid when it differs from the weapon's grid width.
+    public bool TryGetOverlay(AttackMotion m, out Sprite[] front, out Sprite[] back, out int columnsPerRow)
     {
         if (attackOverlays != null)
             for (int i = 0; i < attackOverlays.Length; i++)
-                if (attackOverlays[i].motion == m) { front = attackOverlays[i].front; back = attackOverlays[i].back; return front != null && front.Length > 0; }
-        front = null; back = null; return false;
+                if (attackOverlays[i].motion == m)
+                {
+                    front = attackOverlays[i].front;
+                    back = attackOverlays[i].back;
+                    columnsPerRow = attackOverlays[i].columnsPerRow;
+                    return front != null && front.Length > 0;
+                }
+        front = null; back = null; columnsPerRow = 0; return false;
     }
 
     public StatusEffectDef ToDef() => new StatusEffectDef

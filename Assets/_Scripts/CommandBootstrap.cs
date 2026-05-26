@@ -140,6 +140,7 @@ public static class CommandBootstrap
                 var lp = LocalPlayer.Instance;
                 var weapon = lp != null ? lp.EquippedWeapon : null;
                 if (weapon == null) return CommandResult.Bad("No weapon equipped.");
+                if (!weapon.canEnchant) return CommandResult.Bad($"{weapon.name} can't be enchanted.");
                 var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
                 if (cat == null) return CommandResult.Bad("No StatusCatalog wired on Game.");
 

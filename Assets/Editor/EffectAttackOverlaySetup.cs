@@ -48,10 +48,11 @@ public static class EffectAttackOverlaySetup
             var list = new List<MotionOverlay>();
             foreach (var m in AllMotions)
             {
-                var front = LoadLayer(m, color, true);
-                var back  = LoadLayer(m, color, false);
+                var front = LoadLayer(m, color, true, out int frontCols);
+                var back  = LoadLayer(m, color, false, out int backCols);
+                int cols = frontCols > 0 ? frontCols : backCols;
                 if (front.Length > 0 || back.Length > 0)
-                    list.Add(new MotionOverlay { motion = m, front = front, back = back });
+                    list.Add(new MotionOverlay { motion = m, front = front, back = back, columnsPerRow = cols });
             }
             asset.attackOverlays = list.ToArray();
             EditorUtility.SetDirty(asset);
@@ -72,8 +73,10 @@ public static class EffectAttackOverlaySetup
     }
 
     // SlashL/SlashM/Shot have Front Layer/Back Layer; Pierce/Lash/Flail are single (front only, no back).
-    static Sprite[] LoadLayer(AttackMotion m, string color, bool front)
+    // `cols` returns the sheet's grid width so the caller can stamp it onto MotionOverlay.
+    static Sprite[] LoadLayer(AttackMotion m, string color, bool front, out int cols)
     {
+        cols = 0;
         string path = m switch
         {
             AttackMotion.SlashL => front ? $"{Root}SlashL/Front Layer/SlashL_{color}_f.png" : $"{Root}SlashL/Back Layer/SlashL_{color}_b.png",
@@ -85,7 +88,7 @@ public static class EffectAttackOverlaySetup
             _ => null,
         };
         if (path == null) return System.Array.Empty<Sprite>();
-        if (!SliceSheet(path)) return System.Array.Empty<Sprite>();
+        if (!SliceSheet(path, out cols)) return System.Array.Empty<Sprite>();
         var sprites = AssetDatabase.LoadAllAssetsAtPath(path).OfType<Sprite>().ToList();
         sprites.Sort((a, b) => TrailingInt(a.name).CompareTo(TrailingInt(b.name)));
         return sprites.ToArray();
@@ -94,9 +97,11 @@ public static class EffectAttackOverlaySetup
     // Grid-slice the sheet into uniform 32x32 cells, row-major from the TOP (cell (r,c) at y = h-(r+1)*32), naming
     // each <baseName>_<idx> with idx = r*cols + c so the frame index matches the weapon's row*columnsPerRow+column.
     // Center pivot, 16 PPU, Point filter. Reuses the SpriteDataProviderFactories pattern from EffectFxSpriteSetup.
-    // Returns false if the sheet is missing or not divisible by the cell size.
-    static bool SliceSheet(string path)
+    // Returns false if the sheet is missing or not divisible by the cell size. `cols` returns the grid width so the
+    // caller can stamp it onto MotionOverlay (overlay sheets often have a different column count than weapons).
+    static bool SliceSheet(string path, out int cols)
     {
+        cols = 0;
         var importer = AssetImporter.GetAtPath(path) as TextureImporter;
         if (importer == null) { Debug.LogWarning($"[AtkFx] missing sheet {path}"); return false; }
 
@@ -117,7 +122,8 @@ public static class EffectAttackOverlaySetup
             return false;
         }
 
-        int cols = w / CellSize, rows = h / CellSize;
+        cols = w / CellSize;
+        int rows = h / CellSize;
         string baseName = System.IO.Path.GetFileNameWithoutExtension(path);
 
         var factory = new SpriteDataProviderFactories();

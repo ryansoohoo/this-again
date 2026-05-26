@@ -32,6 +32,7 @@ public sealed class AttackDefinition : ScriptableObject
     public float hitRange = 1.0f;
     [Range(0f, 180f)] public float hitArcDegrees = 90f;   // half-arc each side of the locked aim
     public StatusEffectAsset mainEffect;   // the weapon's ONE main on-hit status (besides HitStun); sub-effects come later
+    public bool canEnchant;   // opt-in: only weapons with this set true accept the `enchant` debug command
     public AttackMotion attackMotion = AttackMotion.SlashM;   // which swing-overlay family this weapon uses
     public float hitstunFullSeconds = 0.45f;
     public float hitstunTapSeconds = 0.2f;

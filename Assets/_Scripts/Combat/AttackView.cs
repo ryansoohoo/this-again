@@ -102,13 +102,14 @@ public sealed class AttackView : MonoBehaviour
     }
 
     // Layer A: the weapon's swing overlay (an arc) in the status's color, front+back. The effect sheets are
-    // grid-sliced 32x32 row-major to the SAME directional layout as the weapon attack sheets, so the overlay is
-    // frame-locked to the swing: it uses the SAME frame index `i` the body/weapon layers use (not phase progress).
+    // grid-sliced 32x32 row-major. Direction rows align 1:1 with the weapon, but the sheets may have a different
+    // column count (e.g. SlashL is 6 cols, Axe's weapon sheet is 4) — so we re-derive (row, col) from the
+    // weapon's flat index and recompute the overlay's flat index using its own columnsPerRow.
     void DriveOverlay(AttackState state, AttackDefinition def, int i)
     {
         if (overlay == null && overlayBack == null) return;
         var fx = def.mainEffect;
-        if (fx == null || !fx.TryGetOverlay(def.attackMotion, out var front, out var back))
+        if (fx == null || !fx.TryGetOverlay(def.attackMotion, out var front, out var back, out int overlayCols))
         {
             if (overlay != null) overlay.enabled = false;
             if (overlayBack != null) overlayBack.enabled = false;
@@ -116,8 +117,12 @@ public sealed class AttackView : MonoBehaviour
         }
         float rot = def.rotateToAim ? state.residualDeg : 0f;
         Color tint = (Game.Instance != null && Game.Instance.DayNight != null) ? Game.Instance.DayNight.tint : Color.white;
-        DriveOverlayLayer(overlay, front, i, rot, tint);
-        DriveOverlayLayer(overlayBack, back, i, rot, tint);
+        int weaponCols = def.columnsPerRow;
+        int row = weaponCols > 0 ? i / weaponCols : 0;
+        int col = weaponCols > 0 ? i % weaponCols : 0;
+        int overlayI = overlayCols > 0 ? row * overlayCols + col : i;
+        DriveOverlayLayer(overlay, front, overlayI, rot, tint);
+        DriveOverlayLayer(overlayBack, back, overlayI, rot, tint);
     }
 
     void DriveOverlayLayer(SpriteRenderer sr, Sprite[] frames, int i, float rot, Color tint)

@@ -143,6 +143,7 @@ MonoBehaviour:
   hitRange: 1
   hitArcDegrees: 90
   mainEffect: {fileID: 0}
+  canEnchant: 1
   attackMotion: 1
   hitstunFullSeconds: 0.45
   hitstunTapSeconds: 0.2

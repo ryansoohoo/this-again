@@ -5,7 +5,7 @@ using Unity.Netcode;
 public struct InventorySlot : INetworkSerializable
 {
     public ItemKind kind;
-    public byte id;
+    public byte id;        // index into WeaponCatalog (kind=Weapon) or ConsumableCatalog (kind=Consumable)
     public byte count;
     public byte _reserved;
 

@@ -93,6 +93,7 @@ MonoBehaviour:
     - {fileID: -1387610820, guid: 653f52b9d26d1394c9775ebeba5ca3b2, type: 3}
     - {fileID: 486346358, guid: 653f52b9d26d1394c9775ebeba5ca3b2, type: 3}
     - {fileID: -1995179449, guid: 653f52b9d26d1394c9775ebeba5ca3b2, type: 3}
+    columnsPerRow: 6
   - motion: 2
     front:
     - {fileID: -1151816475072538333, guid: 58d3c5024e6feb14eb9ac07ab6274e60, type: 3}
@@ -128,6 +129,7 @@ MonoBehaviour:
     - {fileID: 952460374, guid: 982ebbaedfd28544aafaf1a5341cb5da, type: 3}
     - {fileID: 1088678965, guid: 982ebbaedfd28544aafaf1a5341cb5da, type: 3}
     - {fileID: -2002598847, guid: 982ebbaedfd28544aafaf1a5341cb5da, type: 3}
+    columnsPerRow: 4
   - motion: 3
     front:
     - {fileID: 4694277818584670016, guid: 31a2d3abf216de348a29c0b1c11d99a6, type: 3}
@@ -143,6 +145,7 @@ MonoBehaviour:
     - {fileID: -1041458135, guid: 31a2d3abf216de348a29c0b1c11d99a6, type: 3}
     - {fileID: -1851895702, guid: 31a2d3abf216de348a29c0b1c11d99a6, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 4
     front:
     - {fileID: 88523666784981409, guid: 74d142ec76b04bc40a00212a0fb463e1, type: 3}
@@ -158,6 +161,7 @@ MonoBehaviour:
     - {fileID: 4383577927030272771, guid: 74d142ec76b04bc40a00212a0fb463e1, type: 3}
     - {fileID: 2127311705, guid: 74d142ec76b04bc40a00212a0fb463e1, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 5
     front:
     - {fileID: 1363913813118989613, guid: df83470b31ed6b342a8cd261056b0368, type: 3}
@@ -173,6 +177,7 @@ MonoBehaviour:
     - {fileID: 1540630610, guid: df83470b31ed6b342a8cd261056b0368, type: 3}
     - {fileID: 900441193, guid: df83470b31ed6b342a8cd261056b0368, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 6
     front:
     - {fileID: -1602140200207657525, guid: ba57ec77b0bb4ae45adf3f73f21be416, type: 3}
@@ -240,3 +245,4 @@ MonoBehaviour:
     - {fileID: 2012548127, guid: 8037bad8d5fc9d84b988e0c43000f905, type: 3}
     - {fileID: 386075107, guid: 8037bad8d5fc9d84b988e0c43000f905, type: 3}
     - {fileID: 1765251244, guid: 8037bad8d5fc9d84b988e0c43000f905, type: 3}
+    columnsPerRow: 8

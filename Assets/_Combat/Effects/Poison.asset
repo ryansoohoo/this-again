@@ -93,6 +93,7 @@ MonoBehaviour:
     - {fileID: -781471827, guid: 47de305af1d60a84799dde681192b861, type: 3}
     - {fileID: 672151105, guid: 47de305af1d60a84799dde681192b861, type: 3}
     - {fileID: -746267890, guid: 47de305af1d60a84799dde681192b861, type: 3}
+    columnsPerRow: 6
   - motion: 2
     front:
     - {fileID: -4330512253668619177, guid: 59d15ebcb1bf0b14e9af97124b3c80a6, type: 3}
@@ -128,6 +129,7 @@ MonoBehaviour:
     - {fileID: -2070898241, guid: 88f1bc543b4aa074a898ac2fdc263e09, type: 3}
     - {fileID: -1326802455, guid: 88f1bc543b4aa074a898ac2fdc263e09, type: 3}
     - {fileID: -1911009052, guid: 88f1bc543b4aa074a898ac2fdc263e09, type: 3}
+    columnsPerRow: 4
   - motion: 3
     front:
     - {fileID: -8457270808013704144, guid: a3c6718655b0be34fb98e1c227359eab, type: 3}
@@ -143,6 +145,7 @@ MonoBehaviour:
     - {fileID: 1857655256, guid: a3c6718655b0be34fb98e1c227359eab, type: 3}
     - {fileID: 2141372369, guid: a3c6718655b0be34fb98e1c227359eab, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 4
     front:
     - {fileID: -384236310184780761, guid: ee44d9994e34f674aa15e04083758589, type: 3}
@@ -158,6 +161,7 @@ MonoBehaviour:
     - {fileID: 7892485817078228838, guid: ee44d9994e34f674aa15e04083758589, type: 3}
     - {fileID: 1564173114, guid: ee44d9994e34f674aa15e04083758589, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 5
     front:
     - {fileID: -1471847059026839905, guid: dfd4806cbd0673a459cf16b45515e02e, type: 3}
@@ -173,6 +177,7 @@ MonoBehaviour:
     - {fileID: -1766927064, guid: dfd4806cbd0673a459cf16b45515e02e, type: 3}
     - {fileID: -826625463, guid: dfd4806cbd0673a459cf16b45515e02e, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 6
     front:
     - {fileID: -214284183293093290, guid: 4d5fd7670944faa4f987bb03ebf086cc, type: 3}
@@ -240,3 +245,4 @@ MonoBehaviour:
     - {fileID: 1115790780, guid: 941d444dc43977f48a0c2041405bd314, type: 3}
     - {fileID: -276448673, guid: 941d444dc43977f48a0c2041405bd314, type: 3}
     - {fileID: -1719294639, guid: 941d444dc43977f48a0c2041405bd314, type: 3}
+    columnsPerRow: 8

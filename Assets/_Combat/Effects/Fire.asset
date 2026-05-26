@@ -93,6 +93,7 @@ MonoBehaviour:
     - {fileID: 1570956239, guid: 5794fb1f931fa424997978c8a2d85e9c, type: 3}
     - {fileID: 1148204286, guid: 5794fb1f931fa424997978c8a2d85e9c, type: 3}
     - {fileID: 2029266037, guid: 5794fb1f931fa424997978c8a2d85e9c, type: 3}
+    columnsPerRow: 6
   - motion: 2
     front:
     - {fileID: -8338895905576564032, guid: 6fb88c53c2e377440aac65770b8555d7, type: 3}
@@ -128,6 +129,7 @@ MonoBehaviour:
     - {fileID: -1979825202, guid: cf64dacc5807c5448a72d6720493c22d, type: 3}
     - {fileID: 1706010839, guid: cf64dacc5807c5448a72d6720493c22d, type: 3}
     - {fileID: 1105690484, guid: cf64dacc5807c5448a72d6720493c22d, type: 3}
+    columnsPerRow: 4
   - motion: 3
     front:
     - {fileID: 6392496986293584337, guid: c77bebb9e6a6aee47adb9bca741782c4, type: 3}
@@ -143,6 +145,7 @@ MonoBehaviour:
     - {fileID: 1302159374, guid: c77bebb9e6a6aee47adb9bca741782c4, type: 3}
     - {fileID: -848312510, guid: c77bebb9e6a6aee47adb9bca741782c4, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 4
     front:
     - {fileID: -9149858675942038690, guid: 112f35705876a254daa2b90a19bb1150, type: 3}
@@ -158,6 +161,7 @@ MonoBehaviour:
     - {fileID: -4668789600172393644, guid: 112f35705876a254daa2b90a19bb1150, type: 3}
     - {fileID: -154651331, guid: 112f35705876a254daa2b90a19bb1150, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 5
     front:
     - {fileID: -7769786613170103641, guid: 9c62ff5d1b286c242b5ca095759708ff, type: 3}
@@ -173,6 +177,7 @@ MonoBehaviour:
     - {fileID: 3086634652983076194, guid: 9c62ff5d1b286c242b5ca095759708ff, type: 3}
     - {fileID: -7599260370225055402, guid: 9c62ff5d1b286c242b5ca095759708ff, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 6
     front:
     - {fileID: -6338575670993251002, guid: dc707155beafe864a8671412b4984b3c, type: 3}
@@ -240,3 +245,4 @@ MonoBehaviour:
     - {fileID: -2078725212, guid: b01e9451486deb94992b6bb3864e4a72, type: 3}
     - {fileID: -663461633, guid: b01e9451486deb94992b6bb3864e4a72, type: 3}
     - {fileID: -492930747, guid: b01e9451486deb94992b6bb3864e4a72, type: 3}
+    columnsPerRow: 8

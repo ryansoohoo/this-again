@@ -93,6 +93,7 @@ MonoBehaviour:
     - {fileID: 1443038404, guid: 08e86d3758cc07e40b6f51bfed708b36, type: 3}
     - {fileID: -906801033, guid: 08e86d3758cc07e40b6f51bfed708b36, type: 3}
     - {fileID: 45172265, guid: 08e86d3758cc07e40b6f51bfed708b36, type: 3}
+    columnsPerRow: 6
   - motion: 2
     front:
     - {fileID: 5692310094414556709, guid: 9d6dd42cfd058c64ca89bc1cec62ffd0, type: 3}
@@ -128,6 +129,7 @@ MonoBehaviour:
     - {fileID: -2129432270, guid: bfe956ef4a5d22c4b9fc343e18debbe7, type: 3}
     - {fileID: 1702633533, guid: bfe956ef4a5d22c4b9fc343e18debbe7, type: 3}
     - {fileID: -633876883, guid: bfe956ef4a5d22c4b9fc343e18debbe7, type: 3}
+    columnsPerRow: 4
   - motion: 3
     front:
     - {fileID: 3348263984502235393, guid: 4e008c61ae4effe4ebeb4bd28aaab576, type: 3}
@@ -143,6 +145,7 @@ MonoBehaviour:
     - {fileID: 1726809753, guid: 4e008c61ae4effe4ebeb4bd28aaab576, type: 3}
     - {fileID: 1378431615, guid: 4e008c61ae4effe4ebeb4bd28aaab576, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 4
     front:
     - {fileID: -800612177689705740, guid: e189053bc87a9b940a1698f33b296546, type: 3}
@@ -158,6 +161,7 @@ MonoBehaviour:
     - {fileID: 7202892136689176835, guid: e189053bc87a9b940a1698f33b296546, type: 3}
     - {fileID: 192591202, guid: e189053bc87a9b940a1698f33b296546, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 5
     front:
     - {fileID: -4814296938861468063, guid: 134132d8d83e6444db9ac5d0aeee5461, type: 3}
@@ -173,6 +177,7 @@ MonoBehaviour:
     - {fileID: 843784757725851276, guid: 134132d8d83e6444db9ac5d0aeee5461, type: 3}
     - {fileID: 3577757756495091092, guid: 134132d8d83e6444db9ac5d0aeee5461, type: 3}
     back: []
+    columnsPerRow: 3
   - motion: 6
     front:
     - {fileID: -5299302795391003211, guid: 68146958afe83ce4682671673ca9e92f, type: 3}
@@ -240,3 +245,4 @@ MonoBehaviour:
     - {fileID: -1283211533, guid: f317a3fd4d315f742802073e0482ec82, type: 3}
     - {fileID: -1488757548, guid: f317a3fd4d315f742802073e0482ec82, type: 3}
     - {fileID: -1829941657, guid: f317a3fd4d315f742802073e0482ec82, type: 3}
+    columnsPerRow: 8

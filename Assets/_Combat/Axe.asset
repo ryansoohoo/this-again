@@ -117,6 +117,7 @@ MonoBehaviour:
   hitRange: 1
   hitArcDegrees: 90
   mainEffect: {fileID: 11400000, guid: 75fee097a1fc6f041a179295787fd1e6, type: 2}
+  canEnchant: 0
   attackMotion: 1
   hitstunFullSeconds: 0.45
   hitstunTapSeconds: 0.2

@@ -328,6 +328,39 @@ public sealed class ReplicationHub : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
+    public void UseRequestServerRpc(int slotIndex, ServerRpcParams rpc = default)
+    {
+        if (!IsServer) return;
+        ulong sender = rpc.Receive.SenderClientId;
+        if (!registry.TryGet(sender, out var sp)) return;
+
+        if (slotIndex < 0 || slotIndex >= Inventory.Capacity) {
+            GameLog.PostTo(sender, OutputType.System, "No such slot.");
+            return;
+        }
+        var slot = sp.inventory.slots[slotIndex];   // capture id before TryUse mutates
+        if (!sp.inventory.TryUse(slotIndex, out string reason)) {
+            GameLog.PostTo(sender, OutputType.System, reason);
+            return;
+        }
+
+        var gm = Game.Instance;
+        var def = gm != null && gm.ConsumableCatalog != null ? gm.ConsumableCatalog.Get(slot.id) : null;
+        if (def != null && def.onUseEffect != null && gm.StatusCatalog != null)
+        {
+            var defs = gm.StatusCatalog.Defs;
+            int kindIdx = (int)def.onUseEffect.kind;
+            if (defs != null && kindIdx >= 0 && kindIdx < defs.Length)
+            {
+                StatusLogic.Apply(sp.status, defs[kindIdx], 0u, self: true, durationOverride: -1);
+            }
+        }
+        string name = def != null ? (def.displayName ?? def.name) : $"consumable#{slot.id}";
+        GameLog.PostTo(sender, OutputType.Inventory, $"Used {name}.");
+        ServerEmitInventory(sender, sp.inventory.slots);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
     public void EquipRequestServerRpc(int slotIndex, ServerRpcParams rpc = default)
     {
         if (!IsServer) return;

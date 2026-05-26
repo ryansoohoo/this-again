@@ -149,6 +149,23 @@ public static class CommandBootstrap
             },
         });
 
+        r.Register(new Command
+        {
+            Keyword = "use", Scope = CommandScope.Inventory, Arg = ArgMode.Required,
+            Description = "Use a consumable by slot number or name.",
+            Usage = "use <slot|name>",
+            Run = arg =>
+            {
+                var lp = LocalPlayer.Instance;
+                var hub = ReplicationHub.Instance;
+                if (lp == null || hub == null) return CommandResult.Bad("Not connected.");
+                if (!TryResolveSlotArg(lp.inventoryMirror, arg, out int slotIndex, out string reason))
+                    return CommandResult.Bad(reason);
+                hub.UseRequestServerRpc(slotIndex);
+                return CommandResult.Ok(keepOpen: true);
+            },
+        });
+
         // ---- Debug ----
         r.Register(new Command
         {

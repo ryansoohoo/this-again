@@ -137,35 +137,7 @@ public static class CommandBootstrap
             Usage = "enchant [poison|freeze|slow|bleed|fire|fear|none|list]",
             Run = arg =>
             {
-                var lp = LocalPlayer.Instance;
-                var weapon = lp != null ? lp.EquippedWeapon : null;
-                if (weapon == null) return CommandResult.Bad("No weapon equipped.");
-                var cat = Game.Instance != null ? Game.Instance.StatusCatalog : null;
-                if (cat == null) return CommandResult.Bad("No StatusCatalog wired on Game.");
-
-                string which = arg.Trim().ToLowerInvariant();
-                if (which.Length == 0 || which == "list")
-                {
-                    string cur = weapon.mainEffect != null ? weapon.mainEffect.kind.ToString() : "none";
-                    return CommandResult.Ok($"{weapon.name} main status: {cur}. Usage: enchant [poison|freeze|slow|bleed|fire|fear|none]", keepOpen: true, output: OutputType.System);
-                }
-                if (which == "none" || which == "clear")
-                {
-                    weapon.SetMainEffect(null);
-#if UNITY_EDITOR
-                    UnityEditor.EditorUtility.SetDirty(weapon);
-#endif
-                    return CommandResult.Ok($"{weapon.name} enchant removed.", keepOpen: true, output: OutputType.System);
-                }
-                if (!System.Enum.TryParse<StatusKind>(which, true, out var kind) || kind == StatusKind.HitStun || kind == StatusKind.AttackCooldown)
-                    return CommandResult.Bad("Usage: enchant [poison|freeze|slow|bleed|fire|fear|none|list]");
-                var fx = cat.Visual((int)kind);
-                if (fx == null) return CommandResult.Bad("Catalog missing that effect — run Tools > Combat > Build Status Catalog.");
-                weapon.SetMainEffect(fx);
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(weapon);
-#endif
-                return CommandResult.Ok($"{weapon.name} enchanted with {kind} (its main status). Strikes now apply it.", keepOpen: true, output: OutputType.System);
+                return CommandResult.Bad("'enchant' is being rewired for the new inventory system — see spec §8 follow-up.");
             },
         });
         r.Register(new Command

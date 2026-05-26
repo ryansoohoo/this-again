@@ -17,8 +17,7 @@ public sealed class LocalPlayer : MonoBehaviour
     bool wasInInstance;
 
     [SerializeField] AttackDefinition currentAttack;
-    public AttackDefinition EquippedWeapon => currentAttack;
-    [SerializeField] AttackDefinition[] weapons;   // number keys 1-9,0 select these
+    public readonly InventorySlot[] inventoryMirror = new InventorySlot[Inventory.Capacity];
     readonly AttackSystem attack = new();
     Transform attackViewGhost;
     AttackView attackView;
@@ -85,10 +84,6 @@ public sealed class LocalPlayer : MonoBehaviour
         var intent = input.Read(cam);
         if (intent.dir != lastSent) { lastSent = intent.dir; if (!prediction.Active) ReplicationHub.Instance.SubmitInputRpc(intent.dir); }
 
-        if (intent.weaponSlot >= 0 && weapons != null && intent.weaponSlot < weapons.Length
-            && weapons[intent.weaponSlot] != null && !AttackLogic.IsAttacking(attack.State.phase))
-            currentAttack = weapons[intent.weaponSlot];   // swap equipped weapon (not mid-attack)
-
         // Latch attack input for the next fixed tick (button edges fire on the render frame; the sim eats them there).
         bool canAttack = InInstance && SelfWorldPos.HasValue;   // combat is underworld-only
         attackPressed |= canAttack && intent.lmbDown;
@@ -136,7 +131,7 @@ public sealed class LocalPlayer : MonoBehaviour
                 feint = attackFeint, aimDir = attackAim,
             };
             var atk = attack.State;
-            prediction.FixedTickInstance(ref atk, ai, ResolveWeaponId(), currentAttack.Timeline, attack.Scales, Time.fixedDeltaTime);
+            prediction.FixedTickInstance(ref atk, ai, 0, currentAttack.Timeline, attack.Scales, Time.fixedDeltaTime);
             attack.SetState(atk);
         }
         else
@@ -144,15 +139,6 @@ public sealed class LocalPlayer : MonoBehaviour
             prediction.FixedTick(Time.fixedDeltaTime);
         }
         attackPressed = attackReleased = attackFeint = false;
-    }
-
-    // The equipped weapon's catalog id for the wire (server + remotes resolve it identically). 0 if unset.
-    byte ResolveWeaponId()
-    {
-        var cat = Game.Instance != null ? Game.Instance.WeaponCatalog : null;
-        if (cat == null || currentAttack == null) return 0;
-        int i = cat.IndexOf(currentAttack);
-        return (byte)(i < 0 ? 0 : i);
     }
 
     void ResolveAttackView()
@@ -163,8 +149,13 @@ public sealed class LocalPlayer : MonoBehaviour
         attackView = ghost != null ? ghost.GetComponent<AttackView>() : null;
     }
 
-    // Stub — full implementation lands in Task 9 (mirror an InventorySlot[20] from server).
-    public void OnInventoryChanged(InventorySlot[] slots) { }
+    public void OnInventoryChanged(InventorySlot[] slots)
+    {
+        if (slots == null) return;
+        int n = slots.Length < Inventory.Capacity ? slots.Length : Inventory.Capacity;
+        for (int i = 0; i < n; i++) inventoryMirror[i] = slots[i];
+        for (int i = n; i < Inventory.Capacity; i++) inventoryMirror[i] = default;
+    }
 
     // Routes the server's authoritative self position + last-processed tick into reconciliation.
     public void OnSnapshot(SnapshotEntry[] entries, ulong localId, uint ackTick)

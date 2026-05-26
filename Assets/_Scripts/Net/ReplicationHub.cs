@@ -67,7 +67,9 @@ public sealed class ReplicationHub : NetworkBehaviour
         int n = (int)clientId;
         var cell = new Vector2Int((n % 5) - 2, (n / 5) - 2);   // small spread around origin (old OnNetworkSpawn)
         var pos = gm != null ? gm.CellCenter(cell.x, cell.y) : (Vector2)cell;
-        registry.Add(clientId, cell, pos, gm != null ? gm.PlayerCharacter : null);
+        var sp = registry.Add(clientId, cell, pos, gm != null ? gm.PlayerCharacter : null);
+        // Initial inventory sync for the newly-connected client (empty array, sets up the client mirror).
+        ServerEmitInventory(clientId, sp.inventory.slots);
     }
 
     void Update()
@@ -200,6 +202,24 @@ public sealed class ReplicationHub : NetworkBehaviour
         // Receiving client posts to its local GameLog. The Send.TargetClientIds in the params ensures
         // only one client receives this.
         GameLog.Post((OutputType)outputType, message);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    void InventoryChangedClientRpc(InventorySlot[] slots, ClientRpcParams _ = default)
+    {
+        // Client mirror handler — populated in Task 9 (LocalPlayer changes).
+        var lp = LocalPlayer.Instance;
+        if (lp != null) lp.OnInventoryChanged(slots);
+    }
+
+    // Server-side entry: emit the full slot array to one client. Used by Inventory mutation commands
+    // and once on connect.
+    public void ServerEmitInventory(ulong clientId, InventorySlot[] slots)
+    {
+        if (!IsServer) return;
+        oneTarget[0] = clientId;
+        var p = new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = oneTarget } };
+        InventoryChangedClientRpc(slots, p);
     }
 
     // Server-side entry point used by GameLog.PostTo.

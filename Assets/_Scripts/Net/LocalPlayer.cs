@@ -163,6 +163,9 @@ public sealed class LocalPlayer : MonoBehaviour
         attackView = ghost != null ? ghost.GetComponent<AttackView>() : null;
     }
 
+    // Stub — full implementation lands in Task 9 (mirror an InventorySlot[20] from server).
+    public void OnInventoryChanged(InventorySlot[] slots) { }
+
     // Routes the server's authoritative self position + last-processed tick into reconciliation.
     public void OnSnapshot(SnapshotEntry[] entries, ulong localId, uint ackTick)
     {

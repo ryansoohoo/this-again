@@ -170,6 +170,17 @@ public sealed class LocalPlayer : MonoBehaviour
                     prediction.AdoptExternal(e.effDefId, e.effRemaining, e.effStacks, e.effectCount, e.selfFleeAngle);
                     SelfHp = e.hp;
                 }
+                // Sync currentAttack from the server's authoritative weaponId (AttackingBit carries the
+                // equipped weapon each tick the player is actively attacking). weaponId 255 = unarmed → null.
+                if ((e.flags & SnapshotEntry.AttackingBit) != 0)
+                {
+                    var weapons = Game.Instance != null ? Game.Instance.WeaponCatalog : null;
+                    if (weapons != null)
+                    {
+                        var def = weapons.Get(e.weaponId);
+                        if (def != currentAttack) currentAttack = def;
+                    }
+                }
                 bool snap = (e.flags & SnapshotEntry.SnapBit) != 0;
                 prediction.Reconcile(new Vector2(e.x, e.y), ackTick, snap);
                 return;

@@ -245,7 +245,6 @@ public sealed class ReplicationHub : NetworkBehaviour
     {
         if (!registry.TryGet(p.Receive.SenderClientId, out var sp)) return;
         if (cmd.tick <= sp.lastProcessedTick) return;                   // already simulated; ignore late dup
-        sp.weaponId = cmd.weaponId;
         sp.serverInputs ??= new RingBuffer<InputCommand>(Mathf.Max(8, Mathf.NextPowerOfTwo(
             Game.Instance != null ? Game.Instance.MovementCfg.inputBufferCapacity : 128)));
         sp.serverInputs.Store(cmd);

@@ -361,6 +361,31 @@ public sealed class ReplicationHub : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
+    public void DropRequestServerRpc(int slotIndex, byte count, ServerRpcParams rpc = default)
+    {
+        if (!IsServer) return;
+        ulong sender = rpc.Receive.SenderClientId;
+        if (!registry.TryGet(sender, out var sp)) return;
+
+        if (slotIndex < 0 || slotIndex >= Inventory.Capacity) {
+            GameLog.PostTo(sender, OutputType.System, "No such slot.");
+            return;
+        }
+        var slot = sp.inventory.slots[slotIndex];   // capture for name
+        byte dropped = count == 0 || count > slot.count ? slot.count : count;
+        if (!sp.inventory.TryDrop(slotIndex, count, out string reason)) {
+            GameLog.PostTo(sender, OutputType.System, reason);
+            return;
+        }
+        // If dropping the equipped weapon left us unarmed, sync sp.weaponId.
+        if (sp.inventory.equippedSlot < 0) sp.weaponId = Inventory.UnarmedSentinel;
+
+        string name = ResolveDisplayName(slot.kind, slot.id);
+        GameLog.PostTo(sender, OutputType.Inventory, $"Dropped {name}{(dropped > 1 ? $" x{dropped}" : "")}.");
+        ServerEmitInventory(sender, sp.inventory.slots);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
     public void EquipRequestServerRpc(int slotIndex, ServerRpcParams rpc = default)
     {
         if (!IsServer) return;

@@ -166,6 +166,28 @@ public static class CommandBootstrap
             },
         });
 
+        r.Register(new Command
+        {
+            Keyword = "drop", Scope = CommandScope.Inventory, Arg = ArgMode.Required,
+            Description = "Drop items from a slot. Items are destroyed in v1.",
+            Usage = "drop <slot> [count]",
+            Run = arg =>
+            {
+                var lp = LocalPlayer.Instance;
+                var hub = ReplicationHub.Instance;
+                if (lp == null || hub == null) return CommandResult.Bad("Not connected.");
+                var parts = arg.Split(new[] { ' ' }, 2, System.StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length < 1) return CommandResult.Bad("Usage: drop <slot> [count]");
+                if (!TryResolveSlotArg(lp.inventoryMirror, parts[0], out int slotIndex, out string reason))
+                    return CommandResult.Bad(reason);
+                byte count = 0;   // 0 means "whole stack" on the server side
+                if (parts.Length == 2 && !byte.TryParse(parts[1], out count))
+                    return CommandResult.Bad("Count must be 1..255 or omitted.");
+                hub.DropRequestServerRpc(slotIndex, count);
+                return CommandResult.Ok(keepOpen: true);
+            },
+        });
+
         // ---- Debug ----
         r.Register(new Command
         {

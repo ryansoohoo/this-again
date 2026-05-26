@@ -194,6 +194,23 @@ public sealed class ReplicationHub : NetworkBehaviour
             GhostManager.Instance.ApplyAttackEvents(events, NetworkManager.Singleton.LocalClientId);
     }
 
+    [ClientRpc(RequireOwnership = false)]
+    void TargetedLogClientRpc(byte outputType, string message, ClientRpcParams _ = default)
+    {
+        // Receiving client posts to its local GameLog. The Send.TargetClientIds in the params ensures
+        // only one client receives this.
+        GameLog.Post((OutputType)outputType, message);
+    }
+
+    // Server-side entry point used by GameLog.PostTo.
+    public void ServerPostTargeted(ulong clientId, OutputType type, string message)
+    {
+        if (!IsServer) return;
+        oneTarget[0] = clientId;
+        var p = new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = oneTarget } };
+        TargetedLogClientRpc((byte)type, message, p);
+    }
+
     // ---- owner -> server intent (RequireOwnership=false; caller = SenderClientId) ----
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
     public void SubmitInputRpc(Vector2 dir, RpcParams p = default)

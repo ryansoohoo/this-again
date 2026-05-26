@@ -29,6 +29,14 @@ public static class GameLog
         Posted?.Invoke(entry);
     }
 
+    // Server-side: route a per-player message to one client. The recipient's local GameLog.Post
+    // fires on receipt, so it appears in their chat with the same OutputType styling as any other entry.
+    public static void PostTo(ulong clientId, OutputType type, string message)
+    {
+        var hub = ReplicationHub.Instance;
+        if (hub != null) hub.ServerPostTargeted(clientId, type, message);
+    }
+
     public static void Clear()
     {
         history.Clear();

@@ -73,7 +73,119 @@ public static class CommandBootstrap
         {
             Keyword = "inventory", Aliases = new[] { "inv" }, Scope = CommandScope.Inventory, Arg = ArgMode.None,
             Description = "Show your inventory.",
-            Run = _ => CommandResult.Ok("Your inventory is empty.", keepOpen: true, output: OutputType.Inventory),
+            Run = _ =>
+            {
+                var lp = LocalPlayer.Instance;
+                if (lp == null) return CommandResult.Bad("No player yet.");
+                var mirror = lp.inventoryMirror;
+                var weapons = Game.Instance != null ? Game.Instance.WeaponCatalog : null;
+                var consumables = Game.Instance != null ? Game.Instance.ConsumableCatalog : null;
+                var sb = new StringBuilder();
+                bool any = false;
+                for (int i = 0; i < mirror.Length; i++)
+                {
+                    var s = mirror[i];
+                    if (s.IsEmpty) continue;
+                    any = true;
+                    string name = s.kind == ItemKind.Weapon
+                        ? (weapons != null && weapons.Get(s.id) != null ? weapons.Get(s.id).name : $"weapon#{s.id}")
+                        : (consumables != null && consumables.Get(s.id) != null ? consumables.Get(s.id).displayName : $"consumable#{s.id}");
+                    char tag = s.kind == ItemKind.Weapon ? 'W' : 'C';
+                    if (s.count > 1) sb.AppendLine($"[{i + 1}] {name} x{s.count} ({tag})");
+                    else sb.AppendLine($"[{i + 1}] {name} ({tag})");
+                }
+                if (!any) return CommandResult.Ok("Your inventory is empty.", keepOpen: true, output: OutputType.Inventory);
+                // v1 doesn't surface the equipped marker — the server's last `equip` confirmation log is the signal.
+                return CommandResult.Ok(sb.ToString().TrimEnd(), keepOpen: true, output: OutputType.Inventory);
+            },
+        });
+
+        r.Register(new Command
+        {
+            Keyword = "give", Scope = CommandScope.Inventory, Arg = ArgMode.Required,
+            Description = "(host) Give yourself an item. Usage: give weapon|consumable <id|name> [count]",
+            Usage = "give weapon|consumable <id|name> [count]",
+            Run = arg =>
+            {
+                var hub = ReplicationHub.Instance;
+                if (hub == null || !hub.IsHost) return CommandResult.Bad("give is host-only.");
+                var parts = arg.Split(new[] { ' ' }, 3, System.StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length < 2) return CommandResult.Bad("Usage: give weapon|consumable <id|name> [count]");
+
+                ItemKind kind;
+                switch (parts[0].ToLowerInvariant())
+                {
+                    case "w": case "weapon": kind = ItemKind.Weapon; break;
+                    case "c": case "consumable": kind = ItemKind.Consumable; break;
+                    default: return CommandResult.Bad("First arg must be 'weapon' or 'consumable'.");
+                }
+
+                if (!TryResolveItemId(kind, parts[1], out byte id, out string resolveReason))
+                    return CommandResult.Bad(resolveReason);
+
+                byte count = 1;
+                if (parts.Length == 3 && (!byte.TryParse(parts[2], out count) || count == 0))
+                    return CommandResult.Bad("Count must be 1..255.");
+
+                hub.GiveSelfServerRpc((byte)kind, id, count);
+                return CommandResult.Ok(keepOpen: true);
+            },
+        });
+
+        r.Register(new Command
+        {
+            Keyword = "equip", Scope = CommandScope.Inventory, Arg = ArgMode.Required,
+            Description = "Equip a weapon by slot number or name. Overworld only.",
+            Usage = "equip <slot|name>",
+            Run = arg =>
+            {
+                var lp = LocalPlayer.Instance;
+                var hub = ReplicationHub.Instance;
+                if (lp == null || hub == null) return CommandResult.Bad("Not connected.");
+                if (!TryResolveSlotArg(lp.inventoryMirror, arg, out int slotIndex, out string reason))
+                    return CommandResult.Bad(reason);
+                hub.EquipRequestServerRpc(slotIndex);
+                return CommandResult.Ok(keepOpen: true);
+            },
+        });
+
+        r.Register(new Command
+        {
+            Keyword = "use", Scope = CommandScope.Inventory, Arg = ArgMode.Required,
+            Description = "Use a consumable by slot number or name.",
+            Usage = "use <slot|name>",
+            Run = arg =>
+            {
+                var lp = LocalPlayer.Instance;
+                var hub = ReplicationHub.Instance;
+                if (lp == null || hub == null) return CommandResult.Bad("Not connected.");
+                if (!TryResolveSlotArg(lp.inventoryMirror, arg, out int slotIndex, out string reason))
+                    return CommandResult.Bad(reason);
+                hub.UseRequestServerRpc(slotIndex);
+                return CommandResult.Ok(keepOpen: true);
+            },
+        });
+
+        r.Register(new Command
+        {
+            Keyword = "drop", Scope = CommandScope.Inventory, Arg = ArgMode.Required,
+            Description = "Drop items from a slot. Items are destroyed in v1.",
+            Usage = "drop <slot> [count]",
+            Run = arg =>
+            {
+                var lp = LocalPlayer.Instance;
+                var hub = ReplicationHub.Instance;
+                if (lp == null || hub == null) return CommandResult.Bad("Not connected.");
+                var parts = arg.Split(new[] { ' ' }, 2, System.StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length < 1) return CommandResult.Bad("Usage: drop <slot> [count]");
+                if (!TryResolveSlotArg(lp.inventoryMirror, parts[0], out int slotIndex, out string reason))
+                    return CommandResult.Bad(reason);
+                byte count = 0;   // 0 means "whole stack" on the server side
+                if (parts.Length == 2 && !byte.TryParse(parts[1], out count))
+                    return CommandResult.Bad("Count must be 1..255 or omitted.");
+                hub.DropRequestServerRpc(slotIndex, count);
+                return CommandResult.Ok(keepOpen: true);
+            },
         });
 
         // ---- Debug ----
@@ -137,6 +249,7 @@ public static class CommandBootstrap
             Usage = "enchant [poison|freeze|slow|bleed|fire|fear|none|list]",
             Run = arg =>
             {
+<<<<<<< HEAD
                 var lp = LocalPlayer.Instance;
                 var weapon = lp != null ? lp.EquippedWeapon : null;
                 if (weapon == null) return CommandResult.Bad("No weapon equipped.");
@@ -167,6 +280,9 @@ public static class CommandBootstrap
                 UnityEditor.EditorUtility.SetDirty(weapon);
 #endif
                 return CommandResult.Ok($"{weapon.name} enchanted with {kind} (its main status). Strikes now apply it.", keepOpen: true, output: OutputType.System);
+=======
+                return CommandResult.Bad("'enchant' is being rewired for the new inventory system — see spec §8 follow-up.");
+>>>>>>> e3672dda01ec839248eb85744e5ce653066c9256
             },
         });
         r.Register(new Command
@@ -245,5 +361,86 @@ public static class CommandBootstrap
             if ((c.Scope & router.Active) != 0)
                 sb.Append("\n  ").Append(c.Usage ?? c.Keyword).Append(" — ").Append(c.Description);
         return sb.ToString();
+    }
+
+    // Resolves "3" → slot 2 (0-based), or "iron sword" → first matching slot by item name. Returns -1 on miss.
+    static bool TryResolveSlotArg(InventorySlot[] mirror, string arg, out int slotIndex, out string reason)
+    {
+        slotIndex = -1; reason = null;
+        arg = arg.Trim();
+        if (int.TryParse(arg, out int n)) {
+            if (n < 1 || n > mirror.Length) { reason = $"Slot must be 1..{mirror.Length}."; return false; }
+            slotIndex = n - 1;
+            if (mirror[slotIndex].IsEmpty) { reason = "That slot is empty."; return false; }
+            return true;
+        }
+        // Name match — walk the mirror, look up display names via catalogs
+        var gm = Game.Instance;
+        int found = -1, hits = 0;
+        for (int i = 0; i < mirror.Length; i++)
+        {
+            var s = mirror[i];
+            if (s.IsEmpty) continue;
+            string name = null;
+            if (s.kind == ItemKind.Weapon && gm != null && gm.WeaponCatalog != null && gm.WeaponCatalog.Get(s.id) != null)
+                name = gm.WeaponCatalog.Get(s.id).name;
+            else if (s.kind == ItemKind.Consumable && gm != null && gm.ConsumableCatalog != null && gm.ConsumableCatalog.Get(s.id) != null)
+            {
+                var d = gm.ConsumableCatalog.Get(s.id);
+                name = d.displayName ?? d.name;
+            }
+            if (name == null) continue;
+            if (string.Equals(name, arg, System.StringComparison.OrdinalIgnoreCase)
+             || name.IndexOf(arg, System.StringComparison.OrdinalIgnoreCase) >= 0)
+            { found = i; hits++; }
+        }
+        if (hits == 0) { reason = $"No item matches '{arg}'."; return false; }
+        if (hits > 1) { reason = $"Multiple items match '{arg}'. Be more specific."; return false; }
+        slotIndex = found; return true;
+    }
+
+    static bool TryResolveItemId(ItemKind kind, string idOrName, out byte id, out string reason)
+    {
+        id = 0; reason = null;
+        if (byte.TryParse(idOrName, out id)) return true;   // numeric id always wins
+
+        var gm = Game.Instance;
+        if (gm == null) { reason = "No catalog available."; return false; }
+
+        if (kind == ItemKind.Weapon)
+        {
+            var c = gm.WeaponCatalog;
+            if (c == null || c.weapons == null) { reason = "WeaponCatalog not wired."; return false; }
+            int found = -1, hits = 0;
+            for (int i = 0; i < c.weapons.Length; i++)
+            {
+                var w = c.weapons[i];
+                if (w == null) continue;
+                if (string.Equals(w.name, idOrName, System.StringComparison.OrdinalIgnoreCase)
+                 || w.name.IndexOf(idOrName, System.StringComparison.OrdinalIgnoreCase) >= 0)
+                { found = i; hits++; }
+            }
+            if (hits == 0) { reason = $"No weapon matches '{idOrName}'."; return false; }
+            if (hits > 1) { reason = $"Multiple weapons match '{idOrName}'. Be more specific."; return false; }
+            id = (byte)found; return true;
+        }
+        else // Consumable
+        {
+            var c = gm.ConsumableCatalog;
+            if (c == null || c.entries == null) { reason = "ConsumableCatalog not wired."; return false; }
+            int found = -1, hits = 0;
+            for (int i = 0; i < c.entries.Length; i++)
+            {
+                var d = c.entries[i];
+                if (d == null) continue;
+                string n = d.displayName ?? d.name;
+                if (string.Equals(n, idOrName, System.StringComparison.OrdinalIgnoreCase)
+                 || n.IndexOf(idOrName, System.StringComparison.OrdinalIgnoreCase) >= 0)
+                { found = i; hits++; }
+            }
+            if (hits == 0) { reason = $"No consumable matches '{idOrName}'."; return false; }
+            if (hits > 1) { reason = $"Multiple consumables match '{idOrName}'. Be more specific."; return false; }
+            id = (byte)found; return true;
+        }
     }
 }

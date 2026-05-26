@@ -24,7 +24,7 @@ public class Combatant
     // Authoritative attack state (in-instance only). Stepped via the shared InstanceStep.
     public AttackState attackState;
     public PhaseScales attackScales = PhaseScales.One;
-    public byte weaponId;                   // equipped weapon (catalog id)
+    public byte weaponId = 255;             // equipped weapon (catalog id); 255 = unarmed sentinel (Get returns null)
     public AttackPhase prevAttackPhase;     // for transition detection (events + hit seam)
     public Queue<AttackEvent> pendingEvents;    // drained into per-viewer event RPCs each snapshot
 }

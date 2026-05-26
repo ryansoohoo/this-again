@@ -67,7 +67,9 @@ public sealed class ReplicationHub : NetworkBehaviour
         int n = (int)clientId;
         var cell = new Vector2Int((n % 5) - 2, (n / 5) - 2);   // small spread around origin (old OnNetworkSpawn)
         var pos = gm != null ? gm.CellCenter(cell.x, cell.y) : (Vector2)cell;
-        registry.Add(clientId, cell, pos, gm != null ? gm.PlayerCharacter : null);
+        var sp = registry.Add(clientId, cell, pos, gm != null ? gm.PlayerCharacter : null);
+        // Initial inventory sync for the newly-connected client (empty array, sets up the client mirror).
+        ServerEmitInventory(clientId, sp.inventory.slots);
     }
 
     void Update()
@@ -194,6 +196,41 @@ public sealed class ReplicationHub : NetworkBehaviour
             GhostManager.Instance.ApplyAttackEvents(events, NetworkManager.Singleton.LocalClientId);
     }
 
+    [ClientRpc(RequireOwnership = false)]
+    void TargetedLogClientRpc(byte outputType, string message, ClientRpcParams _ = default)
+    {
+        // Receiving client posts to its local GameLog. The Send.TargetClientIds in the params ensures
+        // only one client receives this.
+        GameLog.Post((OutputType)outputType, message);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    void InventoryChangedClientRpc(InventorySlot[] slots, ClientRpcParams _ = default)
+    {
+        // Client mirror handler — populated in Task 9 (LocalPlayer changes).
+        var lp = LocalPlayer.Instance;
+        if (lp != null) lp.OnInventoryChanged(slots);
+    }
+
+    // Server-side entry: emit the full slot array to one client. Used by Inventory mutation commands
+    // and once on connect.
+    public void ServerEmitInventory(ulong clientId, InventorySlot[] slots)
+    {
+        if (!IsServer) return;
+        oneTarget[0] = clientId;
+        var p = new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = oneTarget } };
+        InventoryChangedClientRpc(slots, p);
+    }
+
+    // Server-side entry point used by GameLog.PostTo.
+    public void ServerPostTargeted(ulong clientId, OutputType type, string message)
+    {
+        if (!IsServer) return;
+        oneTarget[0] = clientId;
+        var p = new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = oneTarget } };
+        TargetedLogClientRpc((byte)type, message, p);
+    }
+
     // ---- owner -> server intent (RequireOwnership=false; caller = SenderClientId) ----
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
     public void SubmitInputRpc(Vector2 dir, RpcParams p = default)
@@ -208,7 +245,6 @@ public sealed class ReplicationHub : NetworkBehaviour
     {
         if (!registry.TryGet(p.Receive.SenderClientId, out var sp)) return;
         if (cmd.tick <= sp.lastProcessedTick) return;                   // already simulated; ignore late dup
-        sp.weaponId = cmd.weaponId;
         sp.serverInputs ??= new RingBuffer<InputCommand>(Mathf.Max(8, Mathf.NextPowerOfTwo(
             Game.Instance != null ? Game.Instance.MovementCfg.inputBufferCapacity : 128)));
         sp.serverInputs.Store(cmd);
@@ -261,5 +297,131 @@ public sealed class ReplicationHub : NetworkBehaviour
         var nm = NetworkManager.Singleton;
         if (!IsServer || nm == null) return null;
         return registry.TryGet(nm.LocalClientId, out var sp) ? sp.status : null;
+    }
+
+    // ---- Inventory mutation (host-only give command) ----
+    [ServerRpc(RequireOwnership = false)]
+    public void GiveSelfServerRpc(byte kind, byte id, byte count, ServerRpcParams rpc = default)
+    {
+        if (!IsServer) return;
+        ulong sender = rpc.Receive.SenderClientId;
+        if (sender != NetworkManager.ServerClientId) {
+            GameLog.PostTo(sender, OutputType.System, "give is host-only.");
+            return;
+        }
+        if (!registry.TryGet(sender, out var sp)) return;
+
+        var k = (ItemKind)kind;
+        byte maxStack = ResolveMaxStack(k, id);
+        if (maxStack == 0) {
+            GameLog.PostTo(sender, OutputType.System, "Unknown item.");
+            return;
+        }
+
+        bool ok = sp.inventory.TryGive(k, id, count, maxStack, out byte added, out string reason);
+        string name = ResolveDisplayName(k, id);
+        if (ok && added == count) GameLog.PostTo(sender, OutputType.Inventory, $"Received {name}{(added > 1 ? $" x{added}" : "")}.");
+        else if (ok)               GameLog.PostTo(sender, OutputType.Inventory, $"Inventory full — added {added} of {count} {name}.");
+        else                       GameLog.PostTo(sender, OutputType.System, reason ?? "Couldn't add item.");
+        ServerEmitInventory(sender, sp.inventory.slots);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void UseRequestServerRpc(int slotIndex, ServerRpcParams rpc = default)
+    {
+        if (!IsServer) return;
+        ulong sender = rpc.Receive.SenderClientId;
+        if (!registry.TryGet(sender, out var sp)) return;
+
+        if (slotIndex < 0 || slotIndex >= Inventory.Capacity) {
+            GameLog.PostTo(sender, OutputType.System, "No such slot.");
+            return;
+        }
+        var slot = sp.inventory.slots[slotIndex];   // capture id before TryUse mutates
+        if (!sp.inventory.TryUse(slotIndex, out string reason)) {
+            GameLog.PostTo(sender, OutputType.System, reason);
+            return;
+        }
+
+        var gm = Game.Instance;
+        var def = gm != null && gm.ConsumableCatalog != null ? gm.ConsumableCatalog.Get(slot.id) : null;
+        if (def != null && def.onUseEffect != null && gm.StatusCatalog != null)
+        {
+            var defs = gm.StatusCatalog.Defs;
+            int kindIdx = (int)def.onUseEffect.kind;
+            if (defs != null && kindIdx >= 0 && kindIdx < defs.Length)
+            {
+                StatusLogic.Apply(sp.status, defs[kindIdx], 0u, self: true, durationOverride: -1);
+            }
+        }
+        string name = def != null ? (def.displayName ?? def.name) : $"consumable#{slot.id}";
+        GameLog.PostTo(sender, OutputType.Inventory, $"Used {name}.");
+        ServerEmitInventory(sender, sp.inventory.slots);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DropRequestServerRpc(int slotIndex, byte count, ServerRpcParams rpc = default)
+    {
+        if (!IsServer) return;
+        ulong sender = rpc.Receive.SenderClientId;
+        if (!registry.TryGet(sender, out var sp)) return;
+
+        if (slotIndex < 0 || slotIndex >= Inventory.Capacity) {
+            GameLog.PostTo(sender, OutputType.System, "No such slot.");
+            return;
+        }
+        var slot = sp.inventory.slots[slotIndex];   // capture for name
+        byte dropped = count == 0 || count > slot.count ? slot.count : count;
+        if (!sp.inventory.TryDrop(slotIndex, count, out string reason)) {
+            GameLog.PostTo(sender, OutputType.System, reason);
+            return;
+        }
+        // If dropping the equipped weapon left us unarmed, sync sp.weaponId.
+        if (sp.inventory.equippedSlot < 0) sp.weaponId = Inventory.UnarmedSentinel;
+
+        string name = ResolveDisplayName(slot.kind, slot.id);
+        GameLog.PostTo(sender, OutputType.Inventory, $"Dropped {name}{(dropped > 1 ? $" x{dropped}" : "")}.");
+        ServerEmitInventory(sender, sp.inventory.slots);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void EquipRequestServerRpc(int slotIndex, ServerRpcParams rpc = default)
+    {
+        if (!IsServer) return;
+        ulong sender = rpc.Receive.SenderClientId;
+        if (!registry.TryGet(sender, out var sp)) return;
+
+        if (sp.inInstance) {
+            GameLog.PostTo(sender, OutputType.System, "Can't switch weapons inside an instance.");
+            return;
+        }
+        if (!sp.inventory.TryEquip(slotIndex, out string reason)) {
+            GameLog.PostTo(sender, OutputType.System, reason);
+            return;
+        }
+        sp.weaponId = sp.inventory.equippedWeaponId;
+        string name = ResolveDisplayName(ItemKind.Weapon, sp.weaponId);
+        GameLog.PostTo(sender, OutputType.Inventory, $"Equipped {name}.");
+        ServerEmitInventory(sender, sp.inventory.slots);
+    }
+
+    // Reused by Tasks 13 and 14 (equip/drop commands).
+    byte ResolveMaxStack(ItemKind kind, byte id)
+    {
+        var gm = Game.Instance;
+        if (gm == null) return 0;
+        if (kind == ItemKind.Weapon)     return gm.WeaponCatalog != null && gm.WeaponCatalog.Get(id) != null ? (byte)1 : (byte)0;
+        if (kind == ItemKind.Consumable) return gm.ConsumableCatalog != null && gm.ConsumableCatalog.Get(id) != null ? gm.ConsumableCatalog.Get(id).maxStack : (byte)0;
+        return 0;
+    }
+
+    // Reused by Tasks 13 and 14 (equip/drop commands).
+    string ResolveDisplayName(ItemKind kind, byte id)
+    {
+        var gm = Game.Instance;
+        if (gm == null) return $"item#{id}";
+        if (kind == ItemKind.Weapon)     return gm.WeaponCatalog != null && gm.WeaponCatalog.Get(id) != null ? gm.WeaponCatalog.Get(id).name : $"weapon#{id}";
+        if (kind == ItemKind.Consumable) return gm.ConsumableCatalog != null && gm.ConsumableCatalog.Get(id) != null ? gm.ConsumableCatalog.Get(id).displayName : $"consumable#{id}";
+        return $"item#{id}";
     }
 }

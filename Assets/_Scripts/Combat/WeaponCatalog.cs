@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Shared byte-id <-> AttackDefinition map. The wire carries a 1-byte id; the server resolves timing/lunge and
-// remotes resolve frames from the same ordered list. LocalPlayer.weapons[] becomes a view onto Weapons.
+// remotes resolve frames from the same ordered list.
 [CreateAssetMenu(menuName = "Minifantasy/Weapon Catalog", fileName = "WeaponCatalog")]
 public sealed class WeaponCatalog : ScriptableObject
 {

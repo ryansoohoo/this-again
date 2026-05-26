@@ -7,6 +7,7 @@ using UnityEngine;
 public sealed class ServerPlayer : Combatant
 {
     public readonly PlayerMotion motion = new();
+    public readonly Inventory inventory = new();
     public Vector2Int overworldReturnCell;
     public Vector2 submittedInput;        // latest owner intent (replaces the moveInput NetworkVariable)
     public bool snap;                     // set on teleport; cleared after the next snapshot carries it

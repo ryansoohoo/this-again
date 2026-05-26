@@ -44,8 +44,9 @@ public sealed class Game : MonoBehaviour
     [SerializeField] CombatFxSettings combatFx = new CombatFxSettings();   // tunable weapon attack FX (same for all weapons)
 
     [Header("Combat")]
-    [SerializeField] WeaponCatalog weaponCatalog;   // byte id <-> AttackDefinition; shared by server sim + remote render
-    [SerializeField] StatusCatalog statusCatalog;   // byte id <-> status effect; shared by server sim + owner predict + remote render
+    [SerializeField] WeaponCatalog weaponCatalog;       // byte id <-> AttackDefinition; shared by server sim + remote render
+    [SerializeField] StatusCatalog statusCatalog;       // byte id <-> status effect; shared by server sim + owner predict + remote render
+    [SerializeField] ConsumableCatalog consumableCatalog; // byte id <-> ConsumableDefinition; shared by server sim + owner predict
     [SerializeField] CharacterDef playerCharacter;  // shared player character data (faction + base stats); server reads it on player register
     [SerializeField] CharacterDef goblinCharacter;  // first enemy data; the test-dummy spawner reads it (one goblin per underworld room)
 
@@ -74,6 +75,7 @@ public sealed class Game : MonoBehaviour
     public CombatFxSettings CombatFx => combatFx;
     public WeaponCatalog WeaponCatalog => weaponCatalog;
     public StatusCatalog StatusCatalog => statusCatalog;
+    public ConsumableCatalog ConsumableCatalog => consumableCatalog;
     public CharacterDef PlayerCharacter => playerCharacter;
     public CharacterDef GoblinCharacter => goblinCharacter;
     public ViewSettings ViewCfg => viewSettings;

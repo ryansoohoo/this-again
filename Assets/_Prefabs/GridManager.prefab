@@ -46,9 +46,80 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   pixelsPerUnit: 16
   cellSizePixels: 16
-  gridSize: 30
-  minCellsVisible: 10
-  startCellsVisible: 16
-  zoomStep: 1.2
-  keyboardPanSpeed: 20
-  recenterDuration: 0.25
+  biome:
+    seed: 1337
+    biomeScale: 0.08
+    warpStrength: 8
+    seaLevel: 0.4
+    waterScale: 0.03
+    continentContrast: 2.5
+    minimapBrightness: 1.6
+  ground:
+    scale: 0.05
+    octaves: 3
+    mountainLevel: 0.66
+    rockyLevel: 0.56
+    forestLevel: 0.5
+    grassCoverage: 0.3
+    forestCoverage: 1
+    rockyCoverage: 1
+    mountainCoverage: 1
+  water:
+    animSpeed: 1.5
+    waveFreq: 0.35
+    waveDrift: 0.06
+    calm: 0.5
+    windX: 1
+    windY: 0.35
+    styleRow: 0
+  summerSheet: {fileID: 0}
+  waterSheet: {fileID: 0}
+  grassBiome: {fileID: 0}
+  forestBiome: {fileID: 0}
+  rockyBiome: {fileID: 0}
+  mountainBiome: {fileID: 0}
+  defaultGroundSprite: {fileID: 0}
+  defaultGroundColor: {r: 0.6, g: 0.54, b: 0.42, a: 1}
+  waterMinimapColor: {r: 0.1137, g: 0.1686, b: 0.3255, a: 1}
+  structures: {fileID: 0}
+  structureSettings:
+    blockSize: 14
+    siteChance: 0.6
+    markerColor: {r: 1, g: 0.85, b: 0.2, a: 1}
+  dayNight:
+    cycleSeconds: 480
+    nightColor: {r: 0.2, g: 0.26, b: 0.48, a: 1}
+    dawnColor: {r: 1, g: 0.78, b: 0.58, a: 1}
+    noonColor: {r: 1, g: 1, b: 1, a: 1}
+    duskColor: {r: 1, g: 0.62, b: 0.4, a: 1}
+    dawnTime: 0.25
+    duskTime: 0.75
+  replication:
+    showRadius: 96
+    hideRadius: 128
+    snapshotHz: 30
+  movement:
+    moveSpeed: 4
+    reconcileEpsilon: 0.05
+    correctionSmoothTime: 0.1
+    inputBufferCapacity: 128
+    collisionRadius: 0.21
+    collisionIterations: 3
+  combatFx:
+    hitGlow: 1.5
+    followThroughBright: 0.5
+    followThroughSaturation: 0
+  weaponCatalog: {fileID: 0}
+  statusCatalog: {fileID: 0}
+  consumableCatalog: {fileID: 11400000, guid: 6db8783a4c19d104aa80fc00e043fb61, type: 2}
+  playerCharacter: {fileID: 0}
+  goblinCharacter: {fileID: 0}
+  viewSettings:
+    minimapRadius: {x: 40, y: 40}
+    overworldCellsTall: 30
+    underworldCellsTall: 20
+    minCellsVisible: 10
+    followSmoothTime: 0.12
+    pixelPerfect: 0
+  viewRadius: 80
+  meshRebuildStep: 32

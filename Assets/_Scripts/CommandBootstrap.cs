@@ -73,7 +73,31 @@ public static class CommandBootstrap
         {
             Keyword = "inventory", Aliases = new[] { "inv" }, Scope = CommandScope.Inventory, Arg = ArgMode.None,
             Description = "Show your inventory.",
-            Run = _ => CommandResult.Ok("Your inventory is empty.", keepOpen: true, output: OutputType.Inventory),
+            Run = _ =>
+            {
+                var lp = LocalPlayer.Instance;
+                if (lp == null) return CommandResult.Bad("No player yet.");
+                var mirror = lp.inventoryMirror;
+                var weapons = Game.Instance != null ? Game.Instance.WeaponCatalog : null;
+                var consumables = Game.Instance != null ? Game.Instance.ConsumableCatalog : null;
+                var sb = new StringBuilder();
+                bool any = false;
+                for (int i = 0; i < mirror.Length; i++)
+                {
+                    var s = mirror[i];
+                    if (s.IsEmpty) continue;
+                    any = true;
+                    string name = s.kind == ItemKind.Weapon
+                        ? (weapons != null && weapons.Get(s.id) != null ? weapons.Get(s.id).name : $"weapon#{s.id}")
+                        : (consumables != null && consumables.Get(s.id) != null ? consumables.Get(s.id).displayName : $"consumable#{s.id}");
+                    char tag = s.kind == ItemKind.Weapon ? 'W' : 'C';
+                    if (s.count > 1) sb.AppendLine($"[{i + 1}] {name} x{s.count} ({tag})");
+                    else sb.AppendLine($"[{i + 1}] {name} ({tag})");
+                }
+                if (!any) return CommandResult.Ok("Your inventory is empty.", keepOpen: true, output: OutputType.Inventory);
+                // v1 doesn't surface the equipped marker — the server's last `equip` confirmation log is the signal.
+                return CommandResult.Ok(sb.ToString().TrimEnd(), keepOpen: true, output: OutputType.Inventory);
+            },
         });
 
         // ---- Debug ----
